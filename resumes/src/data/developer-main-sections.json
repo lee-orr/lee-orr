@@ -1,0 +1,97 @@
+[
+    {
+        "title": "Career Highlights",
+        "is_compact": true,
+        "subsections": [
+            {
+                "description": "Designed a system for signing, verifying, encrypting & decrypting emails with customizable controls without storing decryption or signing keys on our central server."
+            },
+            {
+                "description": "Implemented a fully featured, type safe node-based visual logic editor with support for transparent client & server logic separation."
+            },
+            {
+                "description": "Architected the structure, and built the front end, of a system allowing creation of individual tasks with their own front end and back end dependencies and versions, testing them without a server, and deploying them transparently to be used in data-driven combinations within online assessments."
+            },
+            {
+                "description": "Build a proof-of-concept peer-to-peer video conferencing system supporting 18 simultaneous video clients without requiring a central media server - doubling the leading-at-the-time peer-to-peer system which supported 9 clients, and more than quadrupling the normal limit of 3-4 clients."
+            },
+            {
+                "description": "Architected a scalable backend based on AWS Elastic Beanstalk VMs with SailsJS servers - replacing the original VM-per-customer backend with a shared service."
+            }
+        ]
+    },
+    {
+        "title": "Independent Contractor",
+        "subsections": [
+            {
+                "title": "Stealth Contract",
+                "timespan": "Nov 2022 - Mar 2023",
+                "description": "Built a tool for generating complex, interactive site out of a Figma design and CSV data, generating and deploys a static site directly from the browser - allowing them to easily update content without developer input."
+            },
+            {
+                "title": "SafeApp (getsafeapp.com)",
+                "timespan": "Jul 2021 - Jun 2022",
+                "description": "Designed, architected and built a chrome extension for signing & encrypting Gmail emails, along withthe back-end services on Firebase. Establish CI/CD - including automated testing and deployment to a test environment, and a manual release trigger for production. Provided guidance and support to an additional developer who joined near the end of my contract, to allow them to take over the project."
+            },
+            {
+                "title": "Harvard",
+                "timespan": "Dec 2021 - May 2022",
+                "description": "Built Celeri UI - a tool for generating input data used by the an earthquake cycle imaging system. Designed the system to a be easy to maintain and hard to break, to allow non-technical people to maintain the project long term. This involved choosing common tools like React & TypeScript, as well as rigorous automated testing and continuous deployment to production. This project also included parsing & processing custom data formats, and interaction with MapBox to provide an interactive interface for complex georgraphic data."
+            },
+            {
+                "title": "Emile Technologies",
+                "timespan": "Sept 2021 - Oct 2021",
+                "description": "Assisted & Guided the Emile founder with migrating their chatbot from a discontinued service to firebase, as well as replacing missing functionality on top of an open source library."
+            }
+        ]
+    },
+    {
+        "title": "Senior Engineer",
+        "company": "Imbellus",
+        "timespan": "Feb 2019 - Feb 2020 (Contract), Mar 2020 - Dec 2020 (Employee)",
+        "subsections": [{
+            "description": "Architected & Built a visual, WYSIWYG editor for complex game-like assessments. Created an engine for generating Vue components & backend logic from the editor's JSON output. Improved communication between Javascript & Unity - allowing the browser to control the 3D visuals. Designed a server system that can be controlled by the visual editor - allowing for logic to run in-browser during editing, and on the server when deployed with no additional engineering. Assisted in the implementation of legacy assessments when necessary. Implemented LSP support & typing for designer-provided variables to allow for the use of typescript in the editor."
+        }]
+    },
+    {
+        "title": "Full Stack Developer",
+        "company": "Skrumble",
+        "timespan": "Jun 2015 - Mar 2017, Dev 2017 - Dec 2018",
+        "subsections": [{
+            "description": "During downtime while tasked with implementing PSD designs in html, implemented a custom CMS to allow the web designer to update the site directly. Migrated our build tools from Grunt to Gulp. Assisted in migrating VMs to LXD containers, and created scripts to provision and update containers. Lead back-end feature development, deployment processes and crash recovery. Developed a graph-based phone IVR system. Migrated from a Freeswitch + Lua based Voip/Video Conferencing server to a containerized, scalable system based on Kurento & NodeJS."
+        }]
+    },
+    {
+        "title": "Skills",
+        "is_compact": true,
+        "subsections": [
+            {
+                "title": "Languages",
+                "description": "Primary: Typescript, Rust, C#, HTML/CSS, Javascript, Less, Sass. Secondary: Python, PHP, SQL,  Lua, Bash"
+            },
+            {
+                "title": "Frameworks, Libraries & APIs",
+                "description": "React, Vue, Express, Redux, Vuex, Yew, Leptos, Bevy, Axum, Tokio, MapBox, Mailchimp, Tailwind CSS, Bootstrap, jQuery, AlpineJS, Sails, WebSockets, WebRTC, WebGL, Browser Extension development, OpenPGP, Twilio"
+            },
+            {
+                "title": "Tools & Databases",
+                "description": "Unity, NodeJS, Docker, Git, Vite, Webpack, Rollup, Cargo, Mocha, Jest, Jira, Github Actions, Gitlab, Github, Slack, Cypress, Blender, MySQL, Postgres, MongoDB, SurrealDB"
+            },
+            {
+                "title": "Platforms",
+                "description": "Digital Ocean, AWS (Elastic Beanstalk, DynamoDB, Lambda Functions, S3, EC2, ElastiCache), Firebase (Cloud Firestore, Realtime Database, Cloud Functions, Authentication, Cloud Messaging, Hosting, Cloud Storage), Cloudflare Workers, Netlify, WebAssembly, Spin, WasmCloud, Linux, Windows, Mac"
+            }
+        ]
+    },
+    {
+        "title": "Education",
+        "is_compact": true,
+        "subsections": [
+            {
+                "title": "B.Sc. Physics and Cognitive Science",
+                "timespan": "2015",
+                "description": "University of Toronto"
+            }
+        ]
+    }
+]

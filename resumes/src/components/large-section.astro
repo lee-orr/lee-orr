@@ -1,0 +1,29 @@
+---
+import BulletSection from "./bullet-section.astro";
+import SmallSection from "./small-section.astro";
+
+const { title, timespan, company, subsections, is_compact } = Astro.props as { 
+    title: string,
+    timespan?: string,
+    company?: string,
+    is_compact?: boolean,
+    subsections: Array<{ title?: string, timespan?: string, description: string}>
+};
+---
+{ is_compact ? (
+    <div>
+        <h3 class="text-base font-bold pt-2">{title}</h3>
+        <h4 class="text-xs font-normal text-grey-700 gap-2 flex flex-row px-12">{company ? (<span class="font-bold">{company}</span>) : (<></>)}{timespan ? (<span class="text-gray-700 italic">{timespan}</span>) : (<></>)}</h4>
+        {
+            subsections.map(({title, timespan, description}) => (<BulletSection title={title} timespan={timespan} description={description}/>))
+        }
+    </div>
+) : (
+    <div>
+        <h3 class="text-base font-bold pt-2">{title}</h3>
+        <h4 class="text-xs font-normal text-grey-700 gap-2 flex flex-row px-12">{company ? (<span class="font-bold">{company}</span>) : (<></>)}{timespan ? (<span class="text-gray-700 italic">{timespan}</span>) : (<></>)}</h4>
+        {
+            subsections.map(({title, timespan, description}) => (<SmallSection title={title} timespan={timespan} description={description}/>))
+        }
+    </div>
+)}
