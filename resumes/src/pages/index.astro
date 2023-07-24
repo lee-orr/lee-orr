@@ -2,14 +2,44 @@
 ---
 
 <html lang="en">
-	<head>
-		<meta charset="utf-8" />
-		<link rel="icon" type="image/svg+xml" href="/favicon.svg" />
-		<meta name="viewport" content="width=device-width" />
-		<meta name="generator" content={Astro.generator} />
-		<title>Astro</title>
-	</head>
-	<body>
-		<h1>Astro</h1>
-	</body>
+  <head>
+    <meta charset="utf-8" />
+    <link rel="icon" type="image/png" href="/favicon.png" />
+    <meta name="viewport" content="width=device-width" />
+    <meta name="generator" content={Astro.generator} />
+    <title>Lee-Orr</title>
+  </head>
+  <body>
+    <div
+      class="w-screen h-screen absolute flex flex-row justify-stretch items-stretch"
+    >
+      <div
+        class="absolute w-full h-full flex flex-col justify-end pb-52 items-center pt-52 pointer-events-none z-10"
+      >
+        <h1 class="font-bold text-9xl font-serif">Lee-Orr</h1>
+      </div>
+      <div
+        class="flex flex-col justify-start pt-52 items-center flex-grow hover:grow-[10] shrink transition-all duration-500 overflow-hidden"
+        style="clip-path: border-box;"
+      >
+        <div
+          style="background-image: url(/wide-site-bg-test-creative.png);"
+          class="absolute left-0 top-0 right-0 bottom-0 bg-center z-0"
+        >
+        </div>
+        <h2 class="font-bold text-6xl font-sans z-10">Storytelling</h2>
+      </div>
+      <div
+        class="flex flex-col justify-start items-center pt-52 flex-grow bg-blue-500 hover:grow-[10] shrink transition-all duration-500 overflow-hidden"
+        style="clip-path: border-box;"
+      >
+        <div
+          style="background-image: url(/wide-site-bg-test-computing.png);"
+          class="absolute left-0 top-0 right-0 bottom-0 bg-center z-0"
+        >
+        </div>
+        <h2 class="font-bold text-6xl font-mono z-10">Computing</h2>
+      </div>
+    </div>
+  </body>
 </html>
