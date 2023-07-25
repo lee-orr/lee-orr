@@ -11,34 +11,46 @@
   </head>
   <body>
     <div
-      class="w-screen h-screen absolute flex flex-row justify-stretch items-stretch"
+      class="w-screen h-screen absolute flex flex-col md:flex-row justify-stretch items-stretch"
     >
       <div
-        class="absolute w-full h-full flex flex-col justify-end pb-52 items-center pt-52 pointer-events-none z-10"
+        class="absolute w-full h-full flex flex-col justify-center md:justify-end md:pb-52 items-center md:pt-52 pointer-events-none z-10 md:bg-gradient-to-t from-black to-transparent to-20%"
       >
-        <h1 class="font-bold text-9xl font-serif">Lee-Orr</h1>
+        <h1
+          class="font-bold text-9xl font-serif text-center text-white md:backdrop-brightness-90"
+        >
+          Lee-Orr
+        </h1>
       </div>
       <div
-        class="flex flex-col justify-start pt-52 items-center flex-grow hover:grow-[10] shrink transition-all duration-500 overflow-hidden"
+        class="cursor-pointer flex flex-col justify-start items-center flex-grow hover:grow-[10] shrink transition-all duration-500 overflow-hidden"
         style="clip-path: border-box;"
       >
         <div
           style="background-image: url(/wide-site-bg-test-creative.png);"
-          class="absolute left-0 top-0 right-0 bottom-0 bg-center z-0"
+          class="absolute left-0 bg-cover top-0 right-0 bottom-0 bg-center z-0 hover:filter-none grayscale transition-all"
         >
         </div>
-        <h2 class="font-bold text-6xl font-sans z-10">Storytelling</h2>
+        <h2
+          class="font-bold text-6xl font-sans z-10 text-gray-200 backdrop-brightness-90 p-10 pointer-events-none"
+        >
+          Storytelling
+        </h2>
       </div>
       <div
-        class="flex flex-col justify-start items-center pt-52 flex-grow bg-blue-500 hover:grow-[10] shrink transition-all duration-500 overflow-hidden"
+        class="cursor-pointer flex flex-col justify-end md:justify-start items-center flex-grow hover:grow-[10] shrink transition-all duration-500 overflow-hidden"
         style="clip-path: border-box;"
       >
         <div
           style="background-image: url(/wide-site-bg-test-computing.png);"
-          class="absolute left-0 top-0 right-0 bottom-0 bg-center z-0"
+          class="absolute bg-cover left-0 top-0 right-0 bottom-0 bg-center z-0 hover:filter-none grayscale transition-all"
         >
         </div>
-        <h2 class="font-bold text-6xl font-mono z-10">Computing</h2>
+        <h2
+          class="font-bold text-6xl font-mono z-10 text-gray-200 backdrop-brightness-90 p-10 pointer-events-none"
+        >
+          Computing
+        </h2>
       </div>
     </div>
   </body>
