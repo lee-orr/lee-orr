@@ -1,0 +1,23 @@
+body {
+    --color-text: #1f0e34;
+    --color-background: #f3cc7f;
+    --color-primary: #9253db;
+    --color-secondary: #d2cbf6;
+    --color-accent: #26b3cf;
+}
+
+.storytelling {
+    --color-text: #1f0e34;
+    --color-background: #f3cc7f;
+    --color-primary: #9253db;
+    --color-secondary: #d2cbf6;
+    --color-accent: #26b3cf;
+}
+
+.computing {
+    --color-text: #061319;
+    --color-background: #9dd5f2;
+    --color-primary: #9253db;
+    --color-secondary: #d1e9f5;
+    --color-accent: #cd622d;
+}
