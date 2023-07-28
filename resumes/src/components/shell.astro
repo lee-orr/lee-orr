@@ -1,0 +1,64 @@
+---
+const { area, socials, nav } = Astro.props as {
+  area: "storytelling" | "computing";
+  socials: Array<{ type: string; value: string; icon: string }>;
+  nav: Array<{
+    is_active: boolean;
+    name: string;
+    url: string;
+    new_tab?: boolean;
+  }>;
+};
+---
+
+<body class={area}>
+  <div
+    class="w-screen h-screen flex flex-col bg-background justify-stretch items-center"
+  >
+    <div class="grid grid-cols-3 bg-primary w-screen p-5">
+      <span
+        class="flex flex-row justify-start items-center gap-4 justify-self-start"
+      >
+        <a href="/">
+          <img src="/Website Logo.png" class="h-10 aspect-1/1" />
+        </a>
+
+        {
+          socials.map(({ value, icon }) => (
+            <a
+              class="text-white text-xl hover:text-secondary"
+              target="_blank"
+              href={value}
+            >
+              <i class={icon} />
+            </a>
+          ))
+        }
+      </span>
+      <h1 class="text-white text-3xl justify-self-center">Lee-Orr</h1>
+      <span
+        class="justify-self-end text-white text-xl flex flex-row justify-end items-center gap-4"
+      >
+        {
+          nav.map(({ is_active, name, url, new_tab }) => (
+            <a
+              class={
+                (is_active
+                  ? "pointer-events-none text-secondary font-bold underline"
+                  : "") + " hover:text-secondary"
+              }
+              target={new_tab ? "_blank" : ""}
+              href={url}
+            >
+              {name}
+            </a>
+          ))
+        }
+      </span>
+    </div>
+    <div class="flex-grow"><slot /></div>
+    <div class="flex flex-row justify-between bg-primary w-screen p-2">
+      <slot name="footer" />
+    </div>
+  </div>
+</body>

@@ -1,4 +1,32 @@
 ---
+import Shell from "../components/shell.astro";
+
+const socials = [
+  {
+    type: "linkedin",
+    value: "https://www.linkedin.com/in/lee-orr/",
+    icon: "icofont-linkedin",
+  },
+  {
+    type: "github",
+    value: "https://github.com/lee-orr",
+    icon: "icofont-github",
+  },
+];
+
+const nav = [
+  {
+    is_active: false,
+    name: "Resume",
+    url: "developer",
+    new_tab: true,
+  },
+  {
+    is_active: false,
+    name: "Contact",
+    url: "computing_contact",
+  },
+];
 ---
 
 <html lang="en">
@@ -7,7 +35,12 @@
     <link rel="icon" type="image/png" href="/favicon.png" />
     <meta name="viewport" content="width=device-width" />
     <meta name="generator" content={Astro.generator} />
+    <link rel="stylesheet" href="/styles.css" />
+    <link rel="stylesheet" href="icofont.min.css" />
     <title>Lee-Orr</title>
   </head>
-  <body> </body>
+
+  <Shell area="computing" socials={socials} nav={nav}>Computing...</Shell>
+
+
 </html>
