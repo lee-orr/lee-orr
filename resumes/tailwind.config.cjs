@@ -4,13 +4,21 @@ module.exports = {
 	theme: {
 		extend: {
 			colors: {
-				text: "var(--color-text)",
-				background: "var(--color-background)",
-				primary: "var(--color-primary)",
-				secondary: "var(--color-secondary)",
-				accent: "var(--color-accent)",
+				text: colors("text", 900),
+				background: colors("secondary", 200),
+				primary: colors("primary", 500),
+				secondary: colors("secondary", 500),
+				accent: colors("accent", 500),
 			}
 		},
 	},
 	plugins: [],
+}
+
+function colors(name, DEFAULT) {
+	let result = { DEFAULT: `var(--color-${name}-${DEFAULT})` };
+	for (let i = 1; i <= 9; i++) {
+		result[i * 100] = `var(--color-${name}-${i}00)`;
+	}
+	return result
 }

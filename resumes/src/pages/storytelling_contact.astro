@@ -1,8 +1,10 @@
 ---
+import { getCollection } from "astro:content";
+import Contact from "../components/contact.astro";
 import Shell from "../components/shell.astro";
+import { storytelling } from "../data/site-nav-data.json";
 
-import { computing } from "../data/site-nav-data.json";
-const { socials, nav } = computing;
+const { socials, nav } = storytelling;
 ---
 
 <html lang="en">
@@ -16,7 +18,9 @@ const { socials, nav } = computing;
     <title>Lee-Orr</title>
   </head>
 
-  <Shell area="computing" socials={socials} nav={nav}>Computing...</Shell>
+  <Shell area="storytelling" socials={socials} nav={nav}>
+    <Contact area="storytelling" />
+  </Shell>
 
 
 </html>

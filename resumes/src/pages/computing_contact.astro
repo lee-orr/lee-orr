@@ -1,4 +1,5 @@
 ---
+import Contact from "../components/contact.astro";
 import Shell from "../components/shell.astro";
 
 import { computing } from "../data/site-nav-data.json";
@@ -16,7 +17,9 @@ const { socials, nav } = computing;
     <title>Lee-Orr</title>
   </head>
 
-  <Shell area="computing" socials={socials} nav={nav}>Computing...</Shell>
+  <Shell area="computing" socials={socials} nav={nav}>
+    <Contact area="computing" />
+  </Shell>
 
 
 </html>

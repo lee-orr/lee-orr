@@ -1,23 +1,108 @@
-body {
-    --color-text: #1f0e34;
-    --color-background: #f3cc7f;
-    --color-primary: #9253db;
-    --color-secondary: #d2cbf6;
-    --color-accent: #26b3cf;
+:root {
+    --brand-100: #dab0f2;
+    --brand-200: #be6eec;
+    --brand-300: #a53be2;
+    --brand-400: #8f1cd1;
+    --brand-500: #7909b9;
+    --brand-600: #700097;
+    --brand-700: #45006c;
+    --brand-800: #28003e;
+    --brand-900: #0b0012;
+
+    --storytelling-100: #e6e1d6;
+    --storytelling-200: #e0c688;
+    --storytelling-300: #d6ad4d;
+    --storytelling-400: #c79727;
+    --storytelling-500: #b18111;
+    --storytelling-600: #916705;
+    --storytelling-700: #6a4a00;
+    --storytelling-800: #3f2c00;
+    --storytelling-900: #172000;
+
+    --computing-100: #b0e0f2;
+    --computing-200: #6ecaec;
+    --computing-300: #3bb5e2;
+    --computing-400: #1ca1d1;
+    --computing-500: #098ab9;
+    --computing-600: #006f97;
+    --computing-700: #004f6c;
+    --computing-800: #002d3e;
+    --computing-900: #000d12;
+
+    --neutrals-100: #ede5f2;
+    --neutrals-200: #e3d2ec;
+    --neutrals-300: #d5bfe2;
+    --neutrals-400: #c3abd1;
+    --neutrals-500: #ab94b9;
+    --neutrals-600: #8b7797;
+    --neutrals-700: #64556c;
+    --neutrals-800: #39303e;
+    --neutrals-900: #200e12;
+
+    --color-text-100: var(--neutrals-100);
+    --color-text-200: var(--neutrals-200);
+    --color-text-300: var(--neutrals-300);
+    --color-text-400: var(--neutrals-400);
+    --color-text-500: var(--neutrals-500);
+    --color-text-600: var(--neutrals-600);
+    --color-text-700: var(--neutrals-700);
+    --color-text-800: var(--neutrals-800);
+    --color-text-900: var(--neutrals-900);
+
+    --color-primary-100: var(--brand-100);
+    --color-primary-200: var(--brand-200);
+    --color-primary-300: var(--brand-300);
+    --color-primary-400: var(--brand-400);
+    --color-primary-500: var(--brand-500);
+    --color-primary-600: var(--brand-600);
+    --color-primary-700: var(--brand-700);
+    --color-primary-800: var(--brand-800);
+    --color-primary-900: var(--brand-900);
 }
 
-.storytelling {
-    --color-text: #1f0e34;
-    --color-background: #f3cc7f;
-    --color-primary: #9253db;
-    --color-secondary: #d2cbf6;
-    --color-accent: #26b3cf;
+.storytelling,
+:root {
+    --color-secondary-100: var(--storytelling-100);
+    --color-secondary-200: var(--storytelling-200);
+    --color-secondary-300: var(--storytelling-300);
+    --color-secondary-400: var(--storytelling-400);
+    --color-secondary-500: var(--storytelling-500);
+    --color-secondary-600: var(--storytelling-600);
+    --color-secondary-700: var(--storytelling-700);
+    --color-secondary-800: var(--storytelling-800);
+    --color-secondary-900: var(--storytelling-900);
+
+    --color-accent-100: var(--computing-100);
+    --color-accent-200: var(--computing-200);
+    --color-accent-300: var(--computing-300);
+    --color-accent-400: var(--computing-400);
+    --color-accent-500: var(--computing-500);
+    --color-accent-600: var(--computing-600);
+    --color-accent-700: var(--computing-700);
+    --color-accent-800: var(--computing-800);
+    --color-accent-900: var(--computing-900);
 }
 
 .computing {
-    --color-text: #061319;
-    --color-background: #9dd5f2;
-    --color-primary: #9253db;
-    --color-secondary: #d1e9f5;
-    --color-accent: #cd622d;
+
+    --color-accent-100: var(--storytelling-100);
+    --color-accent-200: var(--storytelling-200);
+    --color-accent-300: var(--storytelling-300);
+    --color-accent-400: var(--storytelling-400);
+    --color-accent-500: var(--storytelling-500);
+    --color-accent-600: var(--storytelling-600);
+    --color-accent-700: var(--storytelling-700);
+    --color-accent-800: var(--storytelling-800);
+    --color-accent-900: var(--storytelling-900);
+
+
+    --color-secondary-100: var(--computing-100);
+    --color-secondary-200: var(--computing-200);
+    --color-secondary-300: var(--computing-300);
+    --color-secondary-400: var(--computing-400);
+    --color-secondary-500: var(--computing-500);
+    --color-secondary-600: var(--computing-600);
+    --color-secondary-700: var(--computing-700);
+    --color-secondary-800: var(--computing-800);
+    --color-secondary-900: var(--computing-900);
 }
