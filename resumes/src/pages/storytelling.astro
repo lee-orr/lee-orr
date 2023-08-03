@@ -6,7 +6,13 @@ import { storytelling } from "../data/site-nav-data.json";
 import { generate_shape } from "./generate_shape";
 const { socials, nav } = storytelling;
 
-const timeline = await getCollection("storytelling-timeline");
+const timeline = (await getCollection("storytelling-timeline")).map((v) => ({
+  ...v,
+  data: {
+    ...v.data,
+    tags: v.data.tags.split(/(\s|",")+/g).map((v) => v.trim()).filter((v) => v.length > 0)
+  }
+}));
 timeline.sort((a,b) => b.data.date > a.data.date ? 1 : -1);
 
 let positions = ["center", "start", "end"];
@@ -19,6 +25,68 @@ const get_next_random = () => {
   return position;
 }
 
+const tags : { [key: string]: number }= {};
+
+for (let item of timeline) {
+  for (let tag of item.data.tags) {
+    let t = tag.trim();
+    if (tags[t]) {
+    tags[t]++;
+    } else {
+      tags[t] = 1;
+    }
+  }
+}
+
+const tags_ordered = Object.keys(tags).map((v) => ({ tag: v, count: tags[v] ?? 0}));
+tags_ordered.sort((a,b) => b.count - a.count);
+
+const tag_icons: {[key: string]: string} = {
+  acting: 'icofont-video',
+  singing: 'icofont-radio-mic',
+  "3d": 'icofont-cube',
+  writing: 'icofont-fountain-pen',
+  theatre: 'icofont-street-view',
+  games: 'icofont-game-pad',
+  animation: 'icofont-video-alt'
+};
+
+const tag_colors: {[key: string]: string} = {
+  acting: 'rgb(237, 65, 47)',
+  singing: 'rgb(28, 193, 51)',
+  "3d": 'rgb(252, 164, 0)',
+  writing: 'rgb(86, 71, 93)',
+  theatre: 'rgb(206, 0, 109)',
+  games: 'rgb(9, 106, 160)',
+  animation: 'rgb(50, 54, 191)'
+};
+
+const generate_filters = (tags: string[]) => {
+  let classes = tags.map((tag) => `
+    .filtering.tag-${tag} .timeline-item.tag-${tag} {
+      display: flex;
+    }
+
+    .filtering.tag-${tag} .tag-button.tag-${tag} {
+      filter: grayscale(0);
+    }
+  `);
+
+  let style = `<style>
+  .filtering .timeline-item {
+    display: none;
+  }
+
+  .filtering .tag-button {
+    filter: grayscale(1);
+  }
+
+ 
+  ${classes.join("\n")}
+  </style>`;
+
+  return style;
+}
 
 ---
 
@@ -45,14 +113,18 @@ const get_next_random = () => {
               let shape = generate_shape();
               let style = `clip-path: ${shape}`;
 
-              let class_string = `flex-col w-[60%] m-[3%] p-5 flex gap-5 self-${position}`;
+              let class_string = `flex-col w-[60%] m-[3%] p-5 flex gap-5 self-${position} timeline-item ${data.tags.map((v) => v.trim()).map((v) => `tag-${v}`).join(" ")}`;
 
               let img = data.image ? (<img src={data.image} alt={data.image_alt ?? data.title}/>) : (<></>);
 
               return (
                 <div class={class_string} style={style}>
-                  <div class="bg-primary fixed w-screen h-screen top-0 left-0 right-0 bottom-0 z-[-10]"></div>
-                  <h2 class="text-2xl text-text-200 font-bold underline-offset-8 underline">{data.title}</h2>
+                  <div class="bg-primary fixed w-screen h-screen top-0 left-0 right-0 bottom-0 z-[-10] pointer-events-none"></div>
+                  <h2 class="text-2xl text-text-200 font-bold flex flex-row justify-between items-center"><span class="underline-offset-8 underline">{data.title}</span><span class="flex flex-row justify-end gap-1 items-center">{data.tags.map((tag) => (
+                    <span class="text-xs rounded-full flex flex-row justify-center items-center h-6 w-6" style={`background-color: ${tag_colors[tag] ?? "#000"};`}>
+                      {tag_icons[tag] ? <i class={tag_icons[tag]}/>  : tag}
+                      </span>
+                  ))}</span></h2>
                   {img}
                   <div class="text-md text-text-300">{data.summary}</div>
                 </div>
@@ -62,7 +134,16 @@ const get_next_random = () => {
           </div>
       </div>
     </div>
+    <div slot="footer" class="text-white flex flex-row gap-2 justify-center grow">
+      {
+        tags_ordered.map(({ tag}) => (<button id={"button-" + tag} class={ `p-2 rounded-full hover:underline tag-button tag-${tag}` } style={`background-color: ${tag_colors[tag] ?? "#000"};`}>{tag_icons[tag] ? <i class={tag_icons[tag]}/> : ""} {tag}</button>))
+      }
+    </div>
+    
+    <Fragment set:html={
+      generate_filters(tags_ordered.map(({tag}) => tag))
+    }/>
   </Shell>
 
-
+  <script src="../setup_page.ts"></script>
 </html>
