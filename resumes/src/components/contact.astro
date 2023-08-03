@@ -1,11 +1,24 @@
 ---
+import { generate_shape } from "../pages/generate_shape";
 const { area } = Astro.props as {
   area: "storytelling" | "computing";
 };
+
+let shape = "";
+if (area === "storytelling") {
+  shape = `clip-path: ${generate_shape()}`;
+}
 ---
 
-<div class="flex flex-col w-screen p-20 h-full items-stretch justify-start">
-  <form class="flex flex-col justify-center items-stretch gap-2">
+<div class="flex flex-col w-screen p-2 h-full items-stretch justify-start">
+  <form
+    class="flex flex-col justify-center items-stretch gap-2 m-[5%] p-5"
+    style={shape}
+  >
+    <div
+      class="bg-primary fixed w-screen h-screen top-0 left-0 bottom-0 right-0 z-[-10]"
+    >
+    </div>
     <div class="p-2 w-full grid-cols-4 grid">
       <label
         class="col-start-1 col-span-1 font-bold text-text text-xl self-start"

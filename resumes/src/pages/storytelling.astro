@@ -3,10 +3,23 @@ import { getCollection } from "astro:content";
 import Shell from "../components/shell.astro";
 
 import { storytelling } from "../data/site-nav-data.json";
+import { generate_shape } from "./generate_shape";
 const { socials, nav } = storytelling;
 
 const timeline = await getCollection("storytelling-timeline");
 timeline.sort((a,b) => b.data.date > a.data.date ? 1 : -1);
+
+let positions = ["center", "start", "end"];
+
+const get_next_random = () => {
+  let random = Math.random();
+  let position_index = random < 0.5 ? 0 : 1;
+  let position = positions[position_index];
+  positions = position_index === 0 ? [positions[1], positions[2], positions[0]] : [positions[0], positions[2], positions[1]];
+  return position;
+}
+
+
 ---
 
 <html lang="en">
@@ -23,30 +36,31 @@ timeline.sort((a,b) => b.data.date > a.data.date ? 1 : -1);
     <div
       class="w-screen h-full relative"
     >
-    <div class="absolute top-0 left-0 bottom-0 right-0 overflow-y-auto">
-    <div class="flex flex-col justify-start items-start gap-10 w-full p-20">
-      <div class="w-10 h-10"></div>
-      {
-        timeline.map(({ slug, data, body }) => {
-          let random = Math.random();
-          let position =
-            random < 0.3 ? "start" : random < 0.7 ? "center" : "end";
+      <div class="absolute top-0 left-0 bottom-0 right-0 overflow-y-auto overflow-x-hidden">
+        <div class="flex flex-col justify-start items-start gap-5 w-full p-10">
+          {
+            timeline.map(({ slug, data }) => {
+              let position =get_next_random();
 
-          let class_string = `bg-primary-200 flex-col w-[60%] p-5 flex gap-5 self-${position}`;
+              let shape = generate_shape();
+              let style = `clip-path: ${shape}`;
 
-          let img = data.image ? (<img src={data.image} alt={data.image_alt ?? data.title}/>) : (<></>);
+              let class_string = `flex-col w-[60%] m-[3%] p-5 flex gap-5 self-${position}`;
 
-          return (
-            <div class={class_string}>
-              <h2 class="text-2xl text-text font-bold underline-offset-8 underline">{data.title}</h2>
-              {img}
-              <div class="text-md text-text-800">{data.summary}</div>
-            </div>
-          );
-        })
-      }
+              let img = data.image ? (<img src={data.image} alt={data.image_alt ?? data.title}/>) : (<></>);
+
+              return (
+                <div class={class_string} style={style}>
+                  <div class="bg-primary fixed w-screen h-screen top-0 left-0 right-0 bottom-0 z-[-10]"></div>
+                  <h2 class="text-2xl text-text-200 font-bold underline-offset-8 underline">{data.title}</h2>
+                  {img}
+                  <div class="text-md text-text-300">{data.summary}</div>
+                </div>
+              );
+            })
+          }
+          </div>
       </div>
-    </div>
     </div>
   </Shell>
 
