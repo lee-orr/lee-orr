@@ -13,6 +13,21 @@ const storytelling_timeline = defineCollection({
     }),
 });
 
+const computing_timeline = defineCollection({
+    type: "content",
+    schema: z.object({
+        info: z.union([z.object({
+            company: z.string(),
+            role: z.string(),
+        }), z.object({ project: z.string() })]),
+        summary: z.string(),
+        start_date: z.date(),
+        end_date: z.date(),
+        tags: z.string()
+    }),
+});
+
 export const collections = {
-    'storytelling-timeline': storytelling_timeline
+    'storytelling-timeline': storytelling_timeline,
+    'computing-timeline': computing_timeline
 };

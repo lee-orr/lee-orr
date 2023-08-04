@@ -1,8 +1,46 @@
 ---
+import { getCollection } from "astro:content";
 import Shell from "../components/shell.astro";
 
 import { computing } from "../data/site-nav-data.json";
 const { socials, nav } = computing;
+import { generate_filters } from "./generate_filters";
+
+const timeline = (await getCollection("computing-timeline")).map((v) => ({
+  ...v,
+  data: {
+    ...v.data,
+    tags: v.data.tags
+      .split(/(\s|",")+/g)
+      .map((v) => v.trim())
+      .filter((v) => v.length > 0),
+  },
+}));
+timeline.sort((a, b) => (b.data.end_date > a.data.end_date ? 1 : -1));
+
+const tags: { [key: string]: number } = {};
+
+for (let item of timeline) {
+  for (let tag of item.data.tags) {
+    let t = tag.trim();
+    if (tags[t]) {
+      tags[t]++;
+    } else {
+      tags[t] = 1;
+    }
+  }
+}
+
+const tags_ordered = Object.keys(tags).map((v) => ({
+  tag: v,
+  count: tags[v] ?? 0,
+}));
+tags_ordered.sort((a, b) => b.count - a.count);
+
+const tag_icons: { [key: string]: string } = {};
+const tag_colors: { [key: string]: string } = {};
+
+const months = ["January", "February", "March", "April", "May", "June", "July", "August", "September", "October", "November", "December"];
 ---
 
 <html lang="en">
@@ -16,7 +54,82 @@ const { socials, nav } = computing;
     <title>Lee-Orr</title>
   </head>
 
-  <Shell area="computing" socials={socials} nav={nav}>Computing...</Shell>
+  <Shell area="computing" socials={socials} nav={nav}>
+    <div class="w-screen h-full relative">
+      <div
+        class="absolute top-0 left-0 bottom-0 right-0 overflow-y-auto overflow-x-hidden"
+      >
+        <div
+          class="grid grid-cols-7 justify-start items-start gap-3 w-full p-10"
+        >
+          {
+            timeline.map(({ slug, data }, index) => {
+              let class_string = `bg-primary-800 flex-col p-5 flex gap-5 timeline-item col-span-2 ${data.tags
+                .map((v) => v.trim())
+                .map((v) => `tag-${v}`)
+                .join(" ")}`;
 
+              let title =
+                data.info.project ||
+                data.info.role + " at " + data.info.company;
 
+              return (
+                <>
+                  {index % 6 === 3 ? <div class="col-span-1" /><div class="col-span-1" /> : ""}
+                  <div class={class_string}>
+                    <h2 class="text-2xl text-text-200 font-bold flex flex-row justify-between items-center">
+                      <>
+                        <span class="underline-offset-8 underline">
+                          {title}
+                        </span>
+                      </>
+                    </h2>
+                    <h3 class="text-sm text-text-500">{months[data.start_date.getMonth()]}, {data.start_date.getFullYear()} - {months[data.end_date.getMonth()]}, {data.end_date.getFullYear()}</h3>
+                    <div class="text-md text-text-300">{data.summary}</div>
+                    
+                    <span class="flex flex-row justify-center gap-1 items-center flex-wrap">
+                          {data.tags.map((tag) => (
+                            <span
+                              class="text-xs rounded-full flex flex-row justify-center items-center h-6 p-2"
+                              style={`background-color: ${
+                                tag_colors[tag] ?? "var(--color-secondary-100)"
+                              };`}
+                            >
+                              {tag_icons[tag] ? (
+                                <i class={tag_icons[tag]} />
+                              ) : (
+                                tag
+                              )}
+                            </span>
+                          ))}
+                        </span>
+                  </div>
+                </>
+              );
+            })
+          }
+        </div>
+      </div>
+    </div>
+    <div
+      slot="footer"
+      class="text-text flex flex-row gap-2 justify-center grow flex-wrap"
+    >
+      {
+        tags_ordered.map(({ tag }) => (
+          <button
+            id={"button-" + tag}
+            class={`p-2 rounded-full hover:underline tag-button tag-${tag}`}
+            style={`background-color: ${tag_colors[tag] ?? "var(--color-secondary-100)"};`}
+          >
+            {tag_icons[tag] ? <i class={tag_icons[tag]} /> : ""} {tag}
+          </button>
+        ))
+      }
+    </div>
+
+    <Fragment set:html={generate_filters(tags_ordered.map(({ tag }) => tag))} />
+  </Shell>
+
+  <script src="../setup_page.ts"></script>
 </html>
