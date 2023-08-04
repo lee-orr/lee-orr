@@ -4,6 +4,7 @@ import Shell from "../components/shell.astro";
 
 import { storytelling } from "../data/site-nav-data.json";
 import { generate_shape } from "./generate_shape";
+import { generate_filters } from "./generate_filters";
 const { socials, nav } = storytelling;
 
 const timeline = (await getCollection("storytelling-timeline")).map((v) => ({
@@ -60,33 +61,6 @@ const tag_colors: {[key: string]: string} = {
   games: 'rgb(9, 106, 160)',
   animation: 'rgb(50, 54, 191)'
 };
-
-const generate_filters = (tags: string[]) => {
-  let classes = tags.map((tag) => `
-    .filtering.tag-${tag} .timeline-item.tag-${tag} {
-      display: flex;
-    }
-
-    .filtering.tag-${tag} .tag-button.tag-${tag} {
-      filter: grayscale(0);
-    }
-  `);
-
-  let style = `<style>
-  .filtering .timeline-item {
-    display: none;
-  }
-
-  .filtering .tag-button {
-    filter: grayscale(1);
-  }
-
- 
-  ${classes.join("\n")}
-  </style>`;
-
-  return style;
-}
 
 ---
 

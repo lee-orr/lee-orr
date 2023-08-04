@@ -1,0 +1,75 @@
+---
+import { getCollection } from "astro:content";
+import Shell from "../components/shell.astro";
+
+import { storytelling } from "../data/site-nav-data.json";
+import { generate_shape } from "./generate_shape";
+const { socials, nav } = storytelling;
+
+const images = [
+  "DSC00084.JPG",
+  "DSC00087.JPG",
+  "DSC00091.JPG",
+  "DSC00105.JPG",
+  "DSC00159.JPG",
+  "DSC00189.JPG",
+  "DSC00197.JPG",
+  "DSC00227.JPG",
+  "DSC00241.JPG",
+  "DSC00247.JPG",
+];
+
+const get_next_random = (): [number, number] => {
+  let gap_size_row = Math.random() * 4 + 1;
+  let gap_size_col = Math.random() * 2;
+
+  return [Math.floor(gap_size_row), Math.floor(gap_size_col)];
+};
+---
+
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <link rel="icon" type="image/png" href="/favicon.png" />
+    <meta name="viewport" content="width=device-width" />
+    <meta name="generator" content={Astro.generator} />
+    <link rel="stylesheet" href="/styles.css" />
+    <link rel="stylesheet" href="icofont.min.css" />
+    <title>Lee-Orr</title>
+  </head>
+  <Shell area="storytelling" socials={socials} nav={nav}>
+    <div class="w-screen h-full relative">
+      <div
+        class="absolute top-0 left-0 bottom-0 right-0 overflow-y-auto overflow-x-hidden"
+      >
+        <div
+          class="grid grid-cols-10 justify-center items-center gap-5 w-full p-10 grid-flow-row-dense"
+        >
+          {
+            images.map((img) => {
+              let shape = generate_shape();
+              let style = `clip-path: ${shape}`;
+
+              let class_string = `flex-col m-[3%] p-5 flex gap-5 col-span-2 row-span-4`;
+              let gap = get_next_random();
+
+              return (
+                <>
+                  <div
+                    style={`grid-column-end: span ${gap[0]}; grid-row-end: span ${gap[1]};`}
+                  />
+                  <div class={class_string} style={style}>
+                    <div class="bg-primary fixed w-screen h-screen top-0 left-0 right-0 bottom-0 z-[-10] pointer-events-none row-span-2" />
+                    <img src={`headshots/${img}`} />
+                  </div>
+                </>
+              );
+            })
+          }
+        </div>
+      </div>
+    </div>
+  </Shell>
+
+
+</html>
