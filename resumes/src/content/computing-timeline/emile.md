@@ -5,7 +5,7 @@ info:
 summary: Assisted & Guided the Emile founder with migrating their chatbot from a discontinued service to firebase, as well as replacing missing functionality on top of an open source library.
 start_date: 2021-09-01
 end_date: 2021-10-01
-tags: Javascript Typescript NodeJS TDD Mocha RiveScript Firebase
+tags: Javascript Typescript NodeJS TDD Mocha RiveScript Firebase Twilio
 ---
 
 # Project Content

@@ -1,10 +1,13 @@
 ---
 import { getCollection } from "astro:content";
+import slugify from "slugify";
 import Shell from "../components/shell.astro";
 
 import { computing } from "../data/site-nav-data.json";
 const { socials, nav } = computing;
 import { generate_filters } from "./generate_filters";
+
+slugify.extend({'/': '-', '\\': '-'});
 
 const timeline = (await getCollection("computing-timeline")).map((v) => ({
   ...v,
@@ -13,10 +16,15 @@ const timeline = (await getCollection("computing-timeline")).map((v) => ({
     tags: v.data.tags
       .split(/(\s|",")+/g)
       .map((v) => v.trim())
+      .map((v) => slugify(v, { lower: true, strict: true}))
       .filter((v) => v.length > 0),
   },
 }));
-timeline.sort((a, b) => (b.data.end_date > a.data.end_date ? 1 : -1));
+timeline.sort((a, b) => {
+  let a_date = a.data.end_date ?? new Date();
+  let b_date = b.data.end_date ?? new Date();
+  return (b_date > a_date ? 1 : -1);
+});
 
 const tags: { [key: string]: number } = {};
 
@@ -64,7 +72,7 @@ const months = ["January", "February", "March", "April", "May", "June", "July", 
         >
           {
             timeline.map(({ slug, data }, index) => {
-              let class_string = `bg-primary-800 flex-col p-5 flex gap-5 timeline-item col-span-2 ${data.tags
+              let class_string = `bg-primary-800 flex-col overflow-y-auto p-5 h-[25vh] flex gap-3 timeline-item col-span-2 ${data.tags
                 .map((v) => v.trim())
                 .map((v) => `tag-${v}`)
                 .join(" ")}`;
@@ -78,19 +86,16 @@ const months = ["January", "February", "March", "April", "May", "June", "July", 
                   {index % 6 === 3 ? <div class="col-span-1" /><div class="col-span-1" /> : ""}
                   <div class={class_string}>
                     <h2 class="text-2xl text-text-200 font-bold flex flex-row justify-between items-center">
-                      <>
-                        <span class="underline-offset-8 underline">
+                        <span class="underline-offset-8 underline text-center">
                           {title}
                         </span>
-                      </>
                     </h2>
-                    <h3 class="text-sm text-text-500">{months[data.start_date.getMonth()]}, {data.start_date.getFullYear()} - {months[data.end_date.getMonth()]}, {data.end_date.getFullYear()}</h3>
-                    <div class="text-md text-text-300">{data.summary}</div>
+                    <h3 class="text-xs text-text-500 text-center">{months[data.start_date.getMonth()]}, {data.start_date.getFullYear()} - {data.end_date ? months[data.end_date.getMonth()] + ', ' + data.end_date.getFullYear() : 'present'}</h3>
                     
                     <span class="flex flex-row justify-center gap-1 items-center flex-wrap">
                           {data.tags.map((tag) => (
                             <span
-                              class="text-xs rounded-full flex flex-row justify-center items-center h-6 p-2"
+                              class="text-[0.65rem] rounded-full flex flex-row justify-center items-center p-[0.05rem] pr-2 pl-2"
                               style={`background-color: ${
                                 tag_colors[tag] ?? "var(--color-secondary-100)"
                               };`}
@@ -103,6 +108,7 @@ const months = ["January", "February", "March", "April", "May", "June", "July", 
                             </span>
                           ))}
                         </span>
+                    <div class="text-sm text-center text-text-300">{data.summary}</div>
                   </div>
                 </>
               );
@@ -113,7 +119,7 @@ const months = ["January", "February", "March", "April", "May", "June", "July", 
     </div>
     <div
       slot="footer"
-      class="text-text flex flex-row gap-2 justify-center grow flex-wrap"
+      class="text-text text-sm flex flex-row gap-2 justify-center grow flex-wrap"
     >
       {
         tags_ordered.map(({ tag }) => (

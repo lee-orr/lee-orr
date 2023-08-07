@@ -4,7 +4,7 @@ const { area } = Astro.props as {
   area: "storytelling" | "computing";
 };
 
-let shape = "";
+let shape = "clip-path: fill-box;";
 if (area === "storytelling") {
   shape = `clip-path: ${generate_shape()}`;
 }
@@ -51,7 +51,7 @@ if (area === "storytelling") {
     </div>
     <div class="p-2 self-end">
       <button
-        class="p-3 bg-accent rounded text-text-100 font-bold hover:bg-accent-600"
+        class="p-3 bg-secondary rounded text-text-100 font-bold hover:bg-secondary-600"
         >Send</button
       >
     </div>

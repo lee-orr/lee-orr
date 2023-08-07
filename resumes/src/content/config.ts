@@ -21,8 +21,8 @@ const computing_timeline = defineCollection({
             role: z.string(),
         }), z.object({ project: z.string() })]),
         summary: z.string(),
+        end_date: z.optional(z.date()),
         start_date: z.date(),
-        end_date: z.date(),
         tags: z.string()
     }),
 });
