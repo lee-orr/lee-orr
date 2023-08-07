@@ -4,6 +4,7 @@ info:
 summary: A bevy plugin for replacement grammars, with built in support for Tracery.
 start_date: 2022-12-26
 tags: rust bevy procedural-generation
+github: https://github.com/lee-orr/bevy-generative-grammars
 ---
 
 # Project Content

@@ -23,7 +23,8 @@ const computing_timeline = defineCollection({
         summary: z.string(),
         end_date: z.optional(z.date()),
         start_date: z.date(),
-        tags: z.string()
+        tags: z.string(),
+        github: z.optional(z.string()),
     }),
 });
 

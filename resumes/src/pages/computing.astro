@@ -7,7 +7,7 @@ import { computing } from "../data/site-nav-data.json";
 const { socials, nav } = computing;
 import { generate_filters } from "./generate_filters";
 
-slugify.extend({'/': '-', '\\': '-'});
+slugify.extend({ "/": "-", "\\": "-" });
 
 const timeline = (await getCollection("computing-timeline")).map((v) => ({
   ...v,
@@ -16,14 +16,14 @@ const timeline = (await getCollection("computing-timeline")).map((v) => ({
     tags: v.data.tags
       .split(/(\s|",")+/g)
       .map((v) => v.trim())
-      .map((v) => slugify(v, { lower: true, strict: true}))
+      .map((v) => slugify(v, { lower: true, strict: true }))
       .filter((v) => v.length > 0),
   },
 }));
 timeline.sort((a, b) => {
   let a_date = a.data.end_date ?? new Date();
   let b_date = b.data.end_date ?? new Date();
-  return (b_date > a_date ? 1 : -1);
+  return b_date > a_date ? 1 : -1;
 });
 
 const tags: { [key: string]: number } = {};
@@ -38,6 +38,11 @@ for (let item of timeline) {
     }
   }
 }
+let divided = timeline.length / 3;
+let gaps = [];
+for (let i = 1; i < divided; i += 2) {
+  gaps.push(i);
+}
 
 const tags_ordered = Object.keys(tags).map((v) => ({
   tag: v,
@@ -48,7 +53,20 @@ tags_ordered.sort((a, b) => b.count - a.count);
 const tag_icons: { [key: string]: string } = {};
 const tag_colors: { [key: string]: string } = {};
 
-const months = ["January", "February", "March", "April", "May", "June", "July", "August", "September", "October", "November", "December"];
+const months = [
+  "January",
+  "February",
+  "March",
+  "April",
+  "May",
+  "June",
+  "July",
+  "August",
+  "September",
+  "October",
+  "November",
+  "December",
+];
 ---
 
 <html lang="en">
@@ -71,8 +89,17 @@ const months = ["January", "February", "March", "April", "May", "June", "July", 
           class="grid grid-cols-7 justify-start items-start gap-3 w-full p-10"
         >
           {
+            gaps.map((row) => (
+              <span
+                style={`grid-row-start: ${
+                  row + 1
+                }; grid-row-end: span 1; grid-column-start: 1; grid-column-end: 2;`}
+              />
+            ))
+          }
+          {
             timeline.map(({ slug, data }, index) => {
-              let class_string = `bg-primary-800 flex-col overflow-y-auto p-5 h-[25vh] flex gap-3 timeline-item col-span-2 ${data.tags
+              let class_string = `timeline-item bg-primary-800 flex-col overflow-y-auto p-5 h-[25vh] flex gap-3 timeline-item col-span-2 ${data.tags
                 .map((v) => v.trim())
                 .map((v) => `tag-${v}`)
                 .join(" ")}`;
@@ -83,32 +110,50 @@ const months = ["January", "February", "March", "April", "May", "June", "July", 
 
               return (
                 <>
-                  {index % 6 === 3 ? <div class="col-span-1" /><div class="col-span-1" /> : ""}
                   <div class={class_string}>
-                    <h2 class="text-2xl text-text-200 font-bold flex flex-row justify-between items-center">
-                        <span class="underline-offset-8 underline text-center">
-                          {title}
-                        </span>
+                    <h3 class="text-xs text-text-500 text-center flex flex-row justify-between items-center gap-3">
+                      <span>
+                        {months[data.start_date.getMonth()]},{" "}
+                        {data.start_date.getFullYear()} -{" "}
+                        {data.end_date
+                          ? months[data.end_date.getMonth()] +
+                            ", " +
+                            data.end_date.getFullYear()
+                          : "present"}
+                      </span>
+                      {data.github ? (
+                        <a
+                          class="text-sm flex items-center flex-row justify-center"
+                          href={data.github}
+                          target="_blank"
+                        >
+                          <i class="icofont-github" />
+                        </a>
+                      ) : (
+                        ""
+                      )}
+                    </h3>
+                    <h2 class="text-2xl text-text-200 font-bold flex flex-row justify-center items-center pb-2">
+                      <span class="underline-offset-8 underline text-center">
+                        {title}
+                      </span>
                     </h2>
-                    <h3 class="text-xs text-text-500 text-center">{months[data.start_date.getMonth()]}, {data.start_date.getFullYear()} - {data.end_date ? months[data.end_date.getMonth()] + ', ' + data.end_date.getFullYear() : 'present'}</h3>
-                    
+
                     <span class="flex flex-row justify-center gap-1 items-center flex-wrap">
-                          {data.tags.map((tag) => (
-                            <span
-                              class="text-[0.65rem] rounded-full flex flex-row justify-center items-center p-[0.05rem] pr-2 pl-2"
-                              style={`background-color: ${
-                                tag_colors[tag] ?? "var(--color-secondary-100)"
-                              };`}
-                            >
-                              {tag_icons[tag] ? (
-                                <i class={tag_icons[tag]} />
-                              ) : (
-                                tag
-                              )}
-                            </span>
-                          ))}
+                      {data.tags.map((tag) => (
+                        <span
+                          class="text-[0.65rem] rounded-full flex flex-row justify-center items-center p-[0.05rem] pr-2 pl-2"
+                          style={`background-color: ${
+                            tag_colors[tag] ?? "var(--color-secondary-100)"
+                          };`}
+                        >
+                          {tag_icons[tag] ? <i class={tag_icons[tag]} /> : tag}
                         </span>
-                    <div class="text-sm text-center text-text-300">{data.summary}</div>
+                      ))}
+                    </span>
+                    <div class="text-sm text-center text-text-300">
+                      {data.summary}
+                    </div>
                   </div>
                 </>
               );
@@ -126,7 +171,9 @@ const months = ["January", "February", "March", "April", "May", "June", "July", 
           <button
             id={"button-" + tag}
             class={`p-2 rounded-full hover:underline tag-button tag-${tag}`}
-            style={`background-color: ${tag_colors[tag] ?? "var(--color-secondary-100)"};`}
+            style={`background-color: ${
+              tag_colors[tag] ?? "var(--color-secondary-100)"
+            };`}
           >
             {tag_icons[tag] ? <i class={tag_icons[tag]} /> : ""} {tag}
           </button>

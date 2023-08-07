@@ -6,6 +6,7 @@ summary: Built a visual tool for generating input data used by the an earthquake
 start_date: 2021-12-01
 end_date: 2022-05-01
 tags: Architecture React Typescript Mocha Cypress MapBox TDD CI/CD DevOps
+github: https://github.com/brendanjmeade/celeri_ui
 ---
 
 # Project Content
