@@ -5,7 +5,7 @@ info:
 summary: Built a prototype student portal.
 start_date: 2012-09-01
 end_date: 2013-01-01
-tags: Javascript jQuery jQueryMobile HTML CSS PHP SQL
+tags: Javascript jQuery jQueryMobile HTML CSS PHP SQL front-end back-end full-stack
 ---
 
 # Project Content
