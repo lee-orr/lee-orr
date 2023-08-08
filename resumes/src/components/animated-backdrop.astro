@@ -1,0 +1,57 @@
+---
+const { area, num_elements } = Astro.props as {
+  area: "storytelling" | "computing";
+  num_elements: number;
+};
+
+let elements = [];
+for (let i = 0; i < num_elements; i++) {
+    let angle = i * 360/num_elements;
+    let delay = Math.random() * 5;
+  elements.push({angle, delay});
+}
+---
+
+<div class="absolute top-0 left-0 right-0 bottom-0 overflow-hidden">
+  {
+    elements.map(({angle, delay}) => {
+      return <div class="absolute top-0 left-0 right-0 bottom-0 bg-spec" style={`animation-delay: ${delay}s; animation-duration: 1s;`}>
+        <div class="absolute top-0 left-[50%] bottom-0" style={`transform: rotate(${angle}deg); `}>
+            <div class="bg-red-100 w-2 h-2 rounded-full"></div>
+            </div>
+        </div>;
+    })
+  }
+</div>
+<style>
+  @keyframes fly_out {
+    0% {
+      opacity: 0;
+      transform: rotate(0) scale(0);
+    }
+
+    5% {
+        opacity: 0.5;
+        transform: scale(0.2);
+    }
+
+    50% {
+      opacity: 1;
+      transform: rotate(30deg) scale(.8);
+    }
+
+    80% {
+        opacity: 1;
+    }
+
+    100% {
+      opacity: 0;
+      transform: rotate(60deg) scale(1.5);
+    }
+  }
+
+  .bg-spec {
+    opacity: 0;
+    animation: fly_out linear infinite normal forwards;
+  }
+</style>
