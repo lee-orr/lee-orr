@@ -106,7 +106,7 @@ const demos: {
                       {audio ? (
                         <audio
                           controls
-                          class="bg-primary-200 rounded-full text-text-700 border-solid border-black border-4 focus:border-primary-100"
+                          class="bg-primary-200 rounded-full text-text-700 border-solid border-black border-2 focus:border-primary-100"
                         >
                           <source src={audio} type="audio/mpeg" />
                         </audio>
@@ -116,7 +116,7 @@ const demos: {
                       {links
                         ? Object.keys(links).map((link) => (
                             <a
-                              class="rounded-full bg-text-800 text-text-100 p-3 text-sm border-solid border-black border-4 hover:border-primary-100 flex justify-center items-center"
+                              class="rounded-full bg-text-800 text-text-100 p-3 text-sm border-solid border-black border-2 hover:border-primary-100 flex justify-center items-center"
                               target="_blank"
                               href={link}
                             >
