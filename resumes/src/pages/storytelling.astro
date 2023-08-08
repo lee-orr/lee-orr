@@ -87,7 +87,7 @@ const tag_colors: {[key: string]: string} = {
       class="w-screen h-full relative"
     >
       <div class="absolute top-0 left-0 bottom-0 right-0 overflow-y-auto overflow-x-hidden">
-        <div class="flex flex-col justify-start items-start gap-5 w-full p-10">
+        <div class="flex flex-col justify-start items-start w-full p-10">
           {
             timeline.map(({ slug, data, rendered }, index) => {
               let position =get_next_random();
@@ -95,13 +95,16 @@ const tag_colors: {[key: string]: string} = {
               let shape = generate_shape();
               let style = `clip-path: ${shape}`;
 
-              let class_string = `flex-col w-[60%] m-[3%] p-5 flex gap-5 self-${position} timeline-item ${data.tags.map((v) => v.trim()).map((v) => `tag-${v}`).join(" ")}`;
+              let class_string = `flex-col p-5 flex gap-5`;
+
+              let container_class = `justify-center items-center flex-col w-[65%] p-[3%] flex self-${position} timeline-item ${data.tags.map((v) => v.trim()).map((v) => `tag-${v}`).join(" ")}`;
 
               let img = data.image ? (<img src={data.image} alt={data.image_alt ?? data.title}/>) : (<></>);
 
               const { Content } = rendered;
 
               return (
+                <div class={container_class}>
                 <div class={class_string} style={style}>
                   <div class="bg-primary fixed w-screen h-screen top-0 left-0 right-0 bottom-0 z-[-10] pointer-events-none"></div>
                   <h2 class="text-2xl text-text-200 font-bold flex flex-row justify-between items-center"><button class="underline-offset-8 underline timeline-item-button" id={`item-${index}`}>{data.title}</button><span class="flex flex-row justify-end gap-1 items-center">{data.tags.map((tag) => (
@@ -148,7 +151,7 @@ const tag_colors: {[key: string]: string} = {
                         </form>
                       </div>
                     </dialog>
-                </div>
+                </div></div>
               );
             })
           }
