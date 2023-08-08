@@ -9,17 +9,32 @@ import { generate_filters } from "./generate_filters";
 
 slugify.extend({ "/": "-", "\\": "-" });
 
-const timeline = (await getCollection("computing-timeline")).map((v) => ({
-  ...v,
-  data: {
-    ...v.data,
-    tags: v.data.tags
-      .split(/(\s|",")+/g)
-      .map((v) => v.trim())
-      .map((v) => slugify(v, { lower: true, strict: true }))
-      .filter((v) => v.length > 0),
-  },
-}));
+const timeline = await Promise.all(
+  (
+    await getCollection("computing-timeline")
+  )
+    .map((v) => ({
+      ...v,
+      data: {
+        ...v.data,
+        tags: v.data.tags
+          .split(/(\s|",")+/g)
+          .map((v) => v.trim())
+          .map((v) => slugify(v, { lower: true, strict: true }))
+          .filter((v) => v.length > 0),
+      },
+    }))
+    .map((v) => {
+      const render = async () => {
+        return {
+          ...v,
+          rendered: await v.render(),
+        };
+      };
+      return render();
+    })
+);
+
 timeline.sort((a, b) => {
   let a_date = a.data.end_date ?? new Date();
   let b_date = b.data.end_date ?? new Date();
@@ -98,7 +113,7 @@ const months = [
             ))
           }
           {
-            timeline.map(({ slug, data }, index) => {
+            timeline.map(({ slug, data, body, rendered }, index) => {
               let class_string = `timeline-item bg-primary-800 flex-col overflow-y-auto p-5 h-[25vh] flex gap-3 timeline-item col-span-2 ${data.tags
                 .map((v) => v.trim())
                 .map((v) => `tag-${v}`)
@@ -107,6 +122,8 @@ const months = [
               let title =
                 data.info.project ||
                 data.info.role + " at " + data.info.company;
+
+              const { Content } = rendered;
 
               return (
                 <>
@@ -134,9 +151,12 @@ const months = [
                       )}
                     </h3>
                     <h2 class="text-2xl text-text-200 font-bold flex flex-row justify-center items-center pb-2">
-                      <span class="underline-offset-8 underline text-center">
+                      <button
+                        class="underline-offset-8 text-center hover:underline timeline-item-button"
+                        id={`item-${index}`}
+                      >
                         {title}
-                      </span>
+                      </button>
                     </h2>
 
                     <span class="flex flex-row justify-center gap-1 items-center flex-wrap">
@@ -154,6 +174,66 @@ const months = [
                     <div class="text-sm text-center text-text-300">
                       {data.summary}
                     </div>
+
+                    <dialog
+                      class="timeline-item-dialog bg-secondary-800 p-0"
+                      id={`dialog-${index}`}
+                    >
+                      <div class="relative p-10 w-full h-full flex flex-col gap-2">
+                        <h1 class="text-2xl text-text-200 font-bold flex flex-row justify-start items-center">
+                          {title}
+                        </h1>
+                        <h3 class="text-xs text-text-500 text-center flex flex-row justify-between items-center gap-3">
+                          <span>
+                            {months[data.start_date.getMonth()]},{" "}
+                            {data.start_date.getFullYear()} -{" "}
+                            {data.end_date
+                              ? months[data.end_date.getMonth()] +
+                                ", " +
+                                data.end_date.getFullYear()
+                              : "present"}
+                          </span>
+                          {data.github ? (
+                            <a
+                              class="text-sm flex items-center flex-row justify-center"
+                              href={data.github}
+                              target="_blank"
+                            >
+                              <i class="icofont-github" />
+                            </a>
+                          ) : (
+                            ""
+                          )}
+                        </h3>
+                        <div class="prose prose-content">
+                          <Content />
+                        </div>
+                        <span class="flex flex-row justify-center gap-1 items-center flex-wrap">
+                          {data.tags.map((tag) => (
+                            <span
+                              class="text-[0.65rem] rounded-full flex flex-row justify-center items-center p-[0.05rem] pr-2 pl-2"
+                              style={`background-color: ${
+                                tag_colors[tag] ?? "var(--color-secondary-100)"
+                              };`}
+                            >
+                              {tag_icons[tag] ? (
+                                <i class={tag_icons[tag]} />
+                              ) : (
+                                tag
+                              )}
+                            </span>
+                          ))}
+                        </span>
+                        <form class="absolute top-2 right-2">
+                          <button
+                            formmethod="dialog"
+                            class="rounded-full flex justify-center items-center bg-accent-100  w-5 h-5 text-center text-text"
+                          >
+                            X
+                          </button>
+                        </form>
+                      </div>
+                    </dialog>
                   </div>
                 </>
               );

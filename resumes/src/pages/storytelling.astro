@@ -7,13 +7,21 @@ import { generate_shape } from "./generate_shape";
 import { generate_filters } from "./generate_filters";
 const { socials, nav } = storytelling;
 
-const timeline = (await getCollection("storytelling-timeline")).map((v) => ({
+const timeline = await Promise.all((await getCollection("storytelling-timeline")).map((v) => ({
   ...v,
   data: {
     ...v.data,
     tags: v.data.tags.split(/(\s|",")+/g).map((v) => v.trim()).filter((v) => v.length > 0)
   }
-}));
+})).map((v) => {
+      const render = async () => {
+        return {
+          ...v,
+          rendered: await v.render(),
+        };
+      };
+      return render();
+    }));
 timeline.sort((a,b) => b.data.date > a.data.date ? 1 : -1);
 
 let positions = ["center", "start", "end"];
@@ -81,7 +89,7 @@ const tag_colors: {[key: string]: string} = {
       <div class="absolute top-0 left-0 bottom-0 right-0 overflow-y-auto overflow-x-hidden">
         <div class="flex flex-col justify-start items-start gap-5 w-full p-10">
           {
-            timeline.map(({ slug, data }) => {
+            timeline.map(({ slug, data, rendered }, index) => {
               let position =get_next_random();
 
               let shape = generate_shape();
@@ -91,16 +99,55 @@ const tag_colors: {[key: string]: string} = {
 
               let img = data.image ? (<img src={data.image} alt={data.image_alt ?? data.title}/>) : (<></>);
 
+              const { Content } = rendered;
+
               return (
                 <div class={class_string} style={style}>
                   <div class="bg-primary fixed w-screen h-screen top-0 left-0 right-0 bottom-0 z-[-10] pointer-events-none"></div>
-                  <h2 class="text-2xl text-text-200 font-bold flex flex-row justify-between items-center"><span class="underline-offset-8 underline">{data.title}</span><span class="flex flex-row justify-end gap-1 items-center">{data.tags.map((tag) => (
+                  <h2 class="text-2xl text-text-200 font-bold flex flex-row justify-between items-center"><button class="underline-offset-8 underline timeline-item-button" id={`item-${index}`}>{data.title}</button><span class="flex flex-row justify-end gap-1 items-center">{data.tags.map((tag) => (
                     <span class="text-xs rounded-full flex flex-row justify-center items-center h-6 w-6" style={`background-color: ${tag_colors[tag] ?? "#000"};`}>
                       {tag_icons[tag] ? <i class={tag_icons[tag]}/>  : tag}
                       </span>
                   ))}</span></h2>
                   {img}
                   <div class="text-md text-text-300">{data.summary}</div>
+                  <dialog
+                      class="timeline-item-dialog bg-secondary-800 p-0"
+                      id={`dialog-${index}`}
+                    >
+                      <div class="relative p-10 w-full h-full flex flex-col gap-2">
+                        <h1 class="text-2xl text-text-200 font-bold flex flex-row justify-start items-center">
+                          {data.title}
+                        </h1>
+                        <span class="absolute top-2 left-2 flex flex-row justify-center gap-1 items-center flex-wrap">
+                          {data.tags.map((tag) => (
+                            <span
+                              class="text-xs text-text-200 rounded-full flex flex-row justify-center items-center h-6 w-6"
+                              style={`background-color: ${
+                                tag_colors[tag] ?? "var(--color-secondary-100)"
+                              };`}
+                            >
+                              {tag_icons[tag] ? (
+                                <i class={tag_icons[tag]} />
+                              ) : (
+                                tag
+                              )}
+                            </span>
+                          ))}
+                        </span>
+                        <div class="prose prose-content">
+                          <Content />
+                        </div>
+                        <form class="absolute top-2 right-2">
+                          <button
+                            formmethod="dialog"
+                            class="rounded-full flex justify-center items-center bg-accent-100  w-6 h-6 text-center text-text"
+                          >
+                            X
+                          </button>
+                        </form>
+                      </div>
+                    </dialog>
                 </div>
               );
             })

@@ -106,3 +106,14 @@
     --color-secondary-800: var(--computing-800);
     --color-secondary-900: var(--computing-900);
 }
+
+dialog::backdrop {
+    background-color: black;
+    opacity: 0.5;
+}
+
+.prose.prose-content {
+    --tw-prose-body: var(--color-text-200);
+    --tw-prose-links: var(--color-accent-200);
+    --tw-prose-headings: var(--color-text-100);
+}

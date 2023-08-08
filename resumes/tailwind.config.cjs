@@ -9,10 +9,12 @@ module.exports = {
 				primary: colors("primary", 500),
 				secondary: colors("secondary", 500),
 				accent: colors("accent", 500),
-			}
+			},
 		},
 	},
-	plugins: [],
+	plugins: [
+		require('@tailwindcss/typography'),
+	],
 }
 
 function colors(name, DEFAULT) {
