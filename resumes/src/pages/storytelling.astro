@@ -4,7 +4,7 @@ import Shell from "../components/shell.astro";
 
 import { storytelling } from "../data/site-nav-data.json";
 import { generate_shape } from "./generate_shape";
-import { generate_filters } from "./generate_filters";
+import { generate_storytelling_filters } from "./generate_filters";
 const { socials, nav } = storytelling;
 
 const timeline = await Promise.all((await getCollection("storytelling-timeline")).map((v) => ({
@@ -165,7 +165,7 @@ const tag_colors: {[key: string]: string} = {
     </div>
     
     <Fragment set:html={
-      generate_filters(tags_ordered.map(({tag}) => tag))
+      generate_storytelling_filters(tags_ordered.map(({tag}) => tag))
     }/>
   </Shell>
 

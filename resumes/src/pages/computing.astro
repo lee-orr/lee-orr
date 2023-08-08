@@ -5,7 +5,7 @@ import Shell from "../components/shell.astro";
 
 import { computing } from "../data/site-nav-data.json";
 const { socials, nav } = computing;
-import { generate_filters } from "./generate_filters";
+import { generate_computing_filters } from "./generate_filters";
 
 slugify.extend({ "/": "-", "\\": "-" });
 
@@ -261,7 +261,9 @@ const months = [
       }
     </div>
 
-    <Fragment set:html={generate_filters(tags_ordered.map(({ tag }) => tag))} />
+    <Fragment
+      set:html={generate_computing_filters(tags_ordered.map(({ tag }) => tag))}
+    />
   </Shell>
 
   <script src="../setup_page.ts"></script>
