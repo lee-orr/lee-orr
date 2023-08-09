@@ -1,27 +1,67 @@
 ---
-const { area, num_elements } = Astro.props as {
+import { generate_splat } from "../pages/generate_shape";
+const { area } = Astro.props as {
   area: "storytelling" | "computing";
-  num_elements: number;
 };
+
+const colors = [
+  "rgb(237, 65, 47)",
+  "rgb(28, 193, 51)",
+  "rgb(252, 164, 0)",
+  "rgb(86, 71, 93)",
+  "rgb(206, 0, 109)",
+  "rgb(9, 106, 160)",
+  "rgb(50, 54, 191)",
+];
+
+const num_elements = area === "computing" ? 40 : 10;
+const duration = area === "computing" ? 1 : 3;
+
+const get_shape = area === "computing" ? () => "circle(45%);" : generate_splat;
+const get_size = area === "computing" ? () => 1 : () => Math.random() * 3 + 7;
+const get_colors =
+  area === "computing"
+    ? () => "white"
+    : () => colors[Math.floor(Math.random() * colors.length)];
 
 let elements = [];
 for (let i = 0; i < num_elements; i++) {
-    let angle = i * 360/num_elements;
-    let delay = Math.random() * 5;
-  elements.push({angle, delay});
+  let angle = (i * 360) / num_elements;
+  let delay = Math.random() * 5;
+  let shape = get_shape();
+  let size = get_size();
+  let color = get_colors();
+  elements.push({ angle, delay, shape, size, color });
 }
 ---
 
-<div class="absolute top-0 left-0 right-0 bottom-0 overflow-hidden">
+<div
+  class=`absolute top-0 left-0 right-0 bottom-0 overflow-hidden animate-${area}`
+>
   {
-    elements.map(({angle, delay}) => {
-      return <div class="absolute top-0 left-0 right-0 bottom-0 bg-spec" style={`animation-delay: ${delay}s; animation-duration: 1s;`}>
-        <div class="absolute top-0 left-[50%] bottom-0" style={`transform: rotate(${angle}deg); `}>
-            <div class="bg-red-100 w-2 h-2 rounded-full"></div>
-            </div>
-        </div>;
+    elements.map(({ angle, delay, shape, size, color }) => {
+      return (
+        <div
+          class="absolute top-0 left-0 right-0 bottom-0 bg-spec overflow-visible"
+          style={`animation-delay: ${delay}s; animation-duration: ${duration}s;`}
+        >
+          <div
+            class="absolute top-0 left-[50%] bottom-0 overflow-visible"
+            style={`transform: rotate(${angle}deg);`}
+          >
+            <div
+              class="overflow-visible"
+              style={`background-color: ${color}; clip-path: ${shape}; width: ${size}rem; height: ${size}rem;`}
+            />
+          </div>
+        </div>
+      );
     })
   }
+  <div
+    class="absolute top-0 left-0 right-0 bottom-0 bg-gradient-radial from-accent-100 via-transparent to-primary-900 from-0% via-30% to-100%"
+  >
+  </div>
 </div>
 <style>
   @keyframes fly_out {
@@ -31,27 +71,43 @@ for (let i = 0; i < num_elements; i++) {
     }
 
     5% {
-        opacity: 0.5;
-        transform: scale(0.2);
+      opacity: 0.5;
+      transform: scale(0.2);
     }
 
     50% {
       opacity: 1;
-      transform: rotate(30deg) scale(.8);
+      transform: rotate(var(--half-rotation)) scale(0.8);
     }
 
     80% {
-        opacity: 1;
+      opacity: 1;
     }
 
     100% {
       opacity: 0;
-      transform: rotate(60deg) scale(1.5);
+      transform: rotate(var(--full-rotation)) scale(1.5);
     }
+  }
+
+  .animate-computing {
+    --half-rotation: 40deg;
+    --full-rotation: 90deg;
+  }
+
+  .animate-storytelling {
+    --half-rotation: 5deg;
+    --full-rotation: 0deg;
   }
 
   .bg-spec {
     opacity: 0;
     animation: fly_out linear infinite normal forwards;
+  }
+
+  @media (prefers-reduced-motion) {
+    .bg-spec {
+      animation: none;
+    }
   }
 </style>
