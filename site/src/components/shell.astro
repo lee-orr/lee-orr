@@ -1,4 +1,6 @@
 ---
+import AnimatedBackdrop from "./animated-backdrop.astro";
+
 const { area, socials, nav } = Astro.props as {
   area: "storytelling" | "computing";
   socials: Array<{ type: string; value: string; icon: string }>;
@@ -66,7 +68,10 @@ let navigation = process_nav(nav);
         }
       </span>
     </div>
-    <div class="flex-grow"><slot /></div>
+    <div class="flex-grow relative">
+      <AnimatedBackdrop area={area} />
+      <slot />
+    </div>
     <div class="flex flex-row justify-between bg-primary-800 w-screen p-2">
       <slot name="footer" />
     </div>
