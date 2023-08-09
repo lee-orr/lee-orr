@@ -1,15 +1,12 @@
 ---
 info:
     project: Spin Message Trigger
-summary: A plugin for Fermyon Spin - allowing it to use message brokers as triggers for wasm modules, and to publish the results from these modules to message brokers. At the moment, it supports an In-Memory broker, Redis, and NATS, as well as creating an HTTP gateway for publishing to the broker & WebSocket connection for subscribing to messages on specific subjects.
+summary: A plugin for using message brokers with Fermyon Spin.
 start_date: 2023-05-13
 tags: rust wasm wasi nats redis messaging websocket mqtt fermyon-spin tdd architecture dev-containers back-end
 github: https://github.com/lee-orr/spin-message-trigger
 ---
 
-# Project Content
+Fermyon Spin is one of two WASM server platforms I've been experimenting with, and I felt limited by it's restriction to using either HTTP or Redis to trigger the WASM components.
 
-something to say really and here I can keep going on for a while...
-Oh wow I have more to say? Yes apparently I do...
-
-and I keep going!
+This plugin allows you to use a variety of message brokers as triggers - an in-memory broker, reds, NATs & MQTT. But beyond that, it also provides an HTTP gateway & WebSocket connectivity, allowing it to be used with those protocols as well.

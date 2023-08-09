@@ -113,7 +113,12 @@ dialog::backdrop {
 }
 
 .prose.prose-content {
+    max-width: none;
     --tw-prose-body: var(--color-text-200);
     --tw-prose-links: var(--color-accent-200);
     --tw-prose-headings: var(--color-text-100);
+}
+
+dialog>div {
+    max-width: 75vw;
 }

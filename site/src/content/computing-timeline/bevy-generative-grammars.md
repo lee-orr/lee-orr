@@ -7,9 +7,4 @@ tags: rust bevy procedural-generation dev-containers tdd ci-cd
 github: https://github.com/lee-orr/bevy-generative-grammars
 ---
 
-# Project Content
-
-something to say really and here I can keep going on for a while...
-Oh wow I have more to say? Yes apparently I do...
-
-and I keep going!
+This is a small side-project I built as part of a game jam, and spun off into a separate library. It's meant to provide the structures needed to create L-Systems and other linear replacement grammars in rust, with included support for Tracery & Bevy.
