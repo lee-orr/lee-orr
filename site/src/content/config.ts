@@ -9,7 +9,9 @@ const storytelling_timeline = defineCollection({
         image: z.string().optional(),
         image_alt: z.string().optional(),
         date: z.date(),
-        tags: z.string()
+        tags: z.string(),
+        itch: z.optional(z.string()),
+        youtube: z.optional(z.string()),
     }),
 });
 
