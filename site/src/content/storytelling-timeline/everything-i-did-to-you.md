@@ -7,9 +7,4 @@ image: storytelling_images/everything_i_did_to_you.jpg
 image_alt: Everything I Did To You Thumbnail
 ---
 
-# Project Content
-
-something to say really and here I can keep going on for a while...
-Oh wow I have more to say? Yes apparently I do...
-
-and I keep going!
+This was my second fantasy-themed song, this time an apology after betrayal.

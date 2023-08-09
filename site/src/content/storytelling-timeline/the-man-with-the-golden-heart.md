@@ -7,9 +7,4 @@ date: 2023-07-05
 tags: acting singing theatre
 ---
 
-# Project Content
-
-something to say really and here I can keep going on for a while...
-Oh wow I have more to say? Yes apparently I do...
-
-and I keep going!
+Featuring star-studded cast and magical score, this show by Andrew Seok was a privilage to participate in. I featured as the Foreman, as well as being part of the ensemble, and particularly enjoyed the chance to bring out my gruff villain voice and work with so many phenomenal performers.

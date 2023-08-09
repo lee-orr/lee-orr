@@ -7,9 +7,4 @@ image: storytelling_images/the_train.jpg
 image_alt: The Train Thumbnail
 ---
 
-# Project Content
-
-something to say really and here I can keep going on for a while...
-Oh wow I have more to say? Yes apparently I do...
-
-and I keep going!
+My third animated song, and my first attempt at adding choreography to one of these animated pieces. Enjoy the song about leaving a place that doesn't fit you, and finding your own way!

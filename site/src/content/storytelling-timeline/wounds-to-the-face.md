@@ -7,9 +7,4 @@ date: 2018-07-01
 tags: acting singing theatre
 ---
 
-# Project Content
-
-something to say really and here I can keep going on for a while...
-Oh wow I have more to say? Yes apparently I do...
-
-and I keep going!
+This show was part of my theatre school experience at Randolph, appearing at the Fringe Festival in 2018.

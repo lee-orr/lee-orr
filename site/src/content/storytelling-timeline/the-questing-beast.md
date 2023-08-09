@@ -7,9 +7,4 @@ date: 2022-07-05
 tags: acting theatre
 ---
 
-# Project Content
-
-something to say really and here I can keep going on for a while...
-Oh wow I have more to say? Yes apparently I do...
-
-and I keep going!
+This show was a joy to work on - featuring some amazing performers, funny writing, and a giant giraffe puppet, this monty python inspired show enchanted the kids and delighted their parents!

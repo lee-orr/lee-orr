@@ -5,9 +5,4 @@ date: 2021-02-19
 tags: acting writing singing games
 ---
 
-# Project Content
-
-something to say really and here I can keep going on for a while...
-Oh wow I have more to say? Yes apparently I do...
-
-and I keep going!
+Written with Jackson Seib, and featuring the voice of Rob Russo as Teddy and myself as Drew, this was an experiment in writing an interactive musical. It's a choose-your-own-adventure song telling the story of a pivot point in a relationship. Is it the end or a new beginning? That depends on you.

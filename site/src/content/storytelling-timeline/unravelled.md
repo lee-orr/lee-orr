@@ -7,9 +7,4 @@ date: 2019-07-05
 tags: acting singing theatre
 ---
 
-# Project Content
-
-something to say really and here I can keep going on for a while...
-Oh wow I have more to say? Yes apparently I do...
-
-and I keep going!
+This was my first post-theatre school show. With a great score by Andrew Seok and some marvellous performances, this show unleashed 3 tragic love stories in a cathartic, empowering burst of song.

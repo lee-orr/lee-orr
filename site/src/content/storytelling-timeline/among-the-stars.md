@@ -7,9 +7,4 @@ image: storytelling_images/among_the_stars.webp
 image_alt: Among The Stars Thumbnail
 ---
 
-# Project Content
-
-something to say really and here I can keep going on for a while...
-Oh wow I have more to say? Yes apparently I do...
-
-and I keep going!
+This was my first animated song - written after rehearsals for "The Questing Beast", it was the first time I had successfully completed a full animation project after many attempts.

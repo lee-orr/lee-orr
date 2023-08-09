@@ -7,9 +7,4 @@ image: storytelling_images/my_life_wont_be_in_vain.webp
 image_alt: My Life Won't Be In Vain Thumbnail
 ---
 
-# Project Content
-
-something to say really and here I can keep going on for a while...
-Oh wow I have more to say? Yes apparently I do...
-
-and I keep going!
+My second animated song, this was a tale of revenge and desperation.
