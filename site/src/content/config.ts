@@ -8,6 +8,7 @@ const storytelling_timeline = defineCollection({
         summary: z.string(),
         image: z.string().optional(),
         image_alt: z.string().optional(),
+        dialogue_bg: z.string().optional(),
         date: z.date(),
         tags: z.string(),
         itch: z.optional(z.string()),

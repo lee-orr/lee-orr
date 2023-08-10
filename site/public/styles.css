@@ -58,6 +58,18 @@
     --color-primary-700: var(--brand-700);
     --color-primary-800: var(--brand-800);
     --color-primary-900: var(--brand-900);
+
+    --category-1: rgb(237, 65, 47);
+    --category-2: rgb(28, 193, 51);
+    --category-3: rgb(252, 164, 0);
+    --category-4: rgb(86, 71, 93);
+    --category-5: rgb(206, 0, 109);
+    --category-6: rgb(9, 106, 160);
+    --category-7: rgb(50, 54, 191);
+    --category-8: rgb(221, 28, 208);
+    --category-9: rgb(47, 237, 234);
+    --category-10: rgb(21, 245, 36);
+    --category-11: rgb(246, 37, 14);
 }
 
 .storytelling,
@@ -81,6 +93,9 @@
     --color-accent-700: var(--computing-700);
     --color-accent-800: var(--computing-800);
     --color-accent-900: var(--computing-900);
+
+    --color-background: var(--storytelling-300);
+    --color-background-dark: var(--storytelling-600);
 }
 
 .computing {
@@ -105,6 +120,9 @@
     --color-secondary-700: var(--computing-700);
     --color-secondary-800: var(--computing-800);
     --color-secondary-900: var(--computing-900);
+
+    --color-background: var(--computing-700);
+    --color-background-dark: var(--storytelling-800);
 }
 
 dialog::backdrop {
@@ -120,5 +138,9 @@ dialog::backdrop {
 }
 
 dialog>div {
-    max-width: 75vw;
+    width: min(50vw, 50vh);
+    height: min(50vw, 50vh);
+    max-width: 50vw;
+    max-height: 50vh;
+    aspect-ratio: 1 / 1;
 }
