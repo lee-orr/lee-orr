@@ -6,44 +6,57 @@ import { description } from "../data/description.json";
 import sections_in from "../data/developer-main-sections.json";
 import LargeSection from "../components/large-section.astro";
 
-const sections = sections_in as Array<{ 
-    title: string,
-    timespan?: string,
-    company?: string,
-    is_compact?: boolean,
-    subsections: Array<{ title?: string, timespan?: string, description: string}>
-}>
+const sections = sections_in as Array<{
+  title: string;
+  timespan?: string;
+  company?: string;
+  is_compact?: boolean;
+  subsections: Array<{
+    title?: string;
+    timespan?: string;
+    description: string;
+  }>;
+}>;
 ---
 
 <html lang="en">
-	<head>
-		<meta charset="utf-8" />
-		<link rel="icon" type="image/svg+xml" href="/favicon.svg" />
-		<meta name="viewport" content="width=device-width" />
-		<meta name="generator" content={Astro.generator} />
-		<title>Astro</title>
-        <link rel="stylesheet" href="icofont.min.css"/>
-	</head>
-	<body>
-		<Name title="Software Developer" contacts={contacts}/>
-        <Descriptor content={description}/>
-        {
-            sections.map(({title, timespan, company, is_compact, subsections}) => (<LargeSection title={title} timespan={timespan} company={company} is_compact={is_compact} subsections={subsections}/>))
-        }
-	</body>
+  <head>
+    <meta charset="utf-8" />
+    <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+    <meta name="viewport" content="width=device-width" />
+    <meta name="generator" content={Astro.generator} />
+    <title>Astro</title>
+    <link rel="stylesheet" href="icofont.min.css" />
+    <base href="/" />
+  </head>
+  <body>
+    <Name title="Software Developer" contacts={contacts} />
+    <Descriptor content={description} />
+    {
+      sections.map(({ title, timespan, company, is_compact, subsections }) => (
+        <LargeSection
+          title={title}
+          timespan={timespan}
+          company={company}
+          is_compact={is_compact}
+          subsections={subsections}
+        />
+      ))
+    }
+  </body>
 </html>
 
 <style is:global>
-    @media print {
-        @page {
-            size: letter;
-        }
-
-        body {
-            font-size: 10px;
-            color: black;
-            background: white;
-            margin: 0;
-        }
+  @media print {
+    @page {
+      size: letter;
     }
+
+    body {
+      font-size: 10px;
+      color: black;
+      background: white;
+      margin: 0;
+    }
+  }
 </style>
