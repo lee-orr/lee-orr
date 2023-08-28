@@ -27,6 +27,9 @@ Built for [Random Jam](https://itch.io/jam/8bits-random-jam), in this game you g
 Other game jam games can be found here: https://lee-orr.itch.io/
 
 ### Game Development Libraries
+#### [Dexterous Developer](https://github.com/lee-orr/dexterous_developer)
+Dexterous Developer is a hot-reload system for Bevy.
+
 #### [Bevy Generative Grammars](https://github.com/lee-orr/bevy-generative-grammars)
 This is a rust library for procedural generation using Grammars, with built in support for Tracery - as well as room to expand to other grammars. 
 
