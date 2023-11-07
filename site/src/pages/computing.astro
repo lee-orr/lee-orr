@@ -170,7 +170,7 @@ const months = [
                     <form class="flex justify-center items-center">
                       <button
                         formmethod="dialog"
-                        class="rounded-full flex justify-center items-center bg-category-1  w-5 h-5 text-center text-text hover:brightness-75"
+                        class="rounded-full flex justify-center items-center bg-category-1  w-5 h-5 text-center text-text hover:brightness-75 grayscale-[0.5] hover:grayscale-[0.2]"
                       >
                         X
                       </button>
@@ -188,10 +188,11 @@ const months = [
                     </span>
                     {data.github ? (
                       <a
-                        class="text-sm flex items-center flex-row justify-center"
+                        class="text-sm flex items-center flex-row gap-1 justify-center"
                         href={data.github}
                         target="_blank"
                       >
+                        <span>{data.github}</span>
                         <i class="icofont-github" />
                       </a>
                     ) : (
