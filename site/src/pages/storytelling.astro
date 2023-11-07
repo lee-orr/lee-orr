@@ -216,7 +216,7 @@ const tag_colors: {[key: string]: string} = {
           </div>
       </div>
     </div>
-    <div slot="footer" class="text-white flex flex-row gap-2 justify-center grow">
+    <div slot="filters" class="text-white">
       {
         tags_ordered.map(({ tag}) => (<button id={"button-" + tag} class={ `p-2 rounded-full hover:underline tag-button tag-${tag}` } style={`background-color: ${tag_colors[tag] ?? "#000"};`}>{tag_icons[tag] ? <i class={tag_icons[tag]}/> : ""} {tag}</button>))
       }

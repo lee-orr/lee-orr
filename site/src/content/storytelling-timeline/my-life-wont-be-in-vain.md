@@ -1,6 +1,6 @@
 ---
 title: My Life Won't Be In Vain
-summary: An animated song
+summary: A song of desperate vengence
 date: 2022-07-23
 tags: acting singing 3d writing animation
 image: storytelling_images/my_life_wont_be_in_vain.webp

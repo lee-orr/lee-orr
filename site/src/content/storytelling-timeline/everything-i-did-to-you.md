@@ -1,6 +1,6 @@
 ---
 title: Everything I Did To You
-summary: An animated song
+summary: An animated song about guilt, betrayal and regret
 date: 2022-09-16
 tags: acting singing 3d writing animation
 image: storytelling_images/everything_i_did_to_you.jpg

@@ -11,9 +11,7 @@ import AnimatedBackdrop from "../components/animated-backdrop.astro";
 slugify.extend({ "/": "-", "\\": "-" });
 
 const timeline = await Promise.all(
-  (
-    await getCollection("computing-timeline")
-  )
+  (await getCollection("computing-timeline"))
     .map((v) => ({
       ...v,
       data: {
@@ -33,7 +31,7 @@ const timeline = await Promise.all(
         };
       };
       return render();
-    })
+    }),
 );
 
 timeline.sort((a, b) => {
@@ -98,158 +96,131 @@ const months = [
   </head>
 
   <Shell area="computing" socials={socials} nav={nav}>
-    <div class="w-screen h-full relative">
-      <div
-        class="absolute top-0 left-0 bottom-0 right-0 overflow-y-auto overflow-x-hidden"
-      >
-        <div
-          class="grid grid-cols-7 justify-start items-start gap-3 w-full p-10"
-        >
-          {
-            gaps.map((row) => (
-              <span
-                style={`grid-row-start: ${
-                  row + 1
-                }; grid-row-end: span 1; grid-column-start: 1; grid-column-end: 2;`}
-              />
-            ))
-          }
-          {
-            timeline.map(({ slug, data, body, rendered }, index) => {
-              let class_string = `timeline-item bg-primary-800 flex-col overflow-y-auto p-5 h-[25vh] flex gap-3 timeline-item col-span-2 ${data.tags
-                .map((v) => v.trim())
-                .map((v) => `tag-${v}`)
-                .join(" ")}`;
+    {
+      timeline.map(({ slug, data, body, rendered }, index) => {
+        let class_string = `timeline-item bg-primary-800 flex-col overflow-y-auto p-5 h-[25vh] flex gap-3 timeline-item col-span-2 ${data.tags
+          .map((v) => v.trim())
+          .map((v) => `tag-${v}`)
+          .join(" ")}`;
 
-              let title =
-                data.info.project ||
-                data.info.role + " at " + data.info.company;
+        let title =
+          data.info.project || data.info.role + " at " + data.info.company;
 
-              const { Content } = rendered;
+        const { Content } = rendered;
 
-              return (
-                <>
-                  <div class={class_string}>
-                    <h3 class="text-xs text-text-500 text-center flex flex-row justify-between items-center gap-3">
-                      <span>
-                        {months[data.start_date.getMonth()]},{" "}
-                        {data.start_date.getFullYear()} -{" "}
-                        {data.end_date
-                          ? months[data.end_date.getMonth()] +
-                            ", " +
-                            data.end_date.getFullYear()
-                          : "present"}
-                      </span>
-                      {data.github ? (
-                        <a
-                          class="text-sm flex items-center flex-row justify-center"
-                          href={data.github}
-                          target="_blank"
-                        >
-                          <i class="icofont-github" />
-                        </a>
-                      ) : (
-                        ""
-                      )}
-                    </h3>
-                    <h2 class="text-2xl text-text-200 font-bold flex flex-row justify-center items-center pb-2">
+        return (
+          <>
+            <div class={class_string}>
+              <h3 class="text-xs text-text-500 text-center flex flex-row justify-between items-center gap-3">
+                <span>
+                  {months[data.start_date.getMonth()]},{" "}
+                  {data.start_date.getFullYear()} -{" "}
+                  {data.end_date
+                    ? months[data.end_date.getMonth()] +
+                      ", " +
+                      data.end_date.getFullYear()
+                    : "present"}
+                </span>
+                {data.github ? (
+                  <a
+                    class="text-sm flex items-center flex-row justify-center"
+                    href={data.github}
+                    target="_blank"
+                  >
+                    <i class="icofont-github" />
+                  </a>
+                ) : (
+                  ""
+                )}
+              </h3>
+              <h2 class="text-2xl text-text-200 font-bold flex flex-row justify-center items-center pb-2">
+                <button
+                  class="underline-offset-8 text-center hover:underline timeline-item-button"
+                  id={`item-${index}`}
+                >
+                  {title}
+                </button>
+              </h2>
+
+              <span class="flex flex-row justify-center gap-1 items-center flex-wrap">
+                {data.tags.map((tag) => (
+                  <span
+                    class="text-[0.65rem] rounded-full flex flex-row justify-center items-center p-[0.05rem] pr-2 pl-2"
+                    style={`background-color: ${
+                      tag_colors[tag] ?? "var(--color-secondary-100)"
+                    };`}
+                  >
+                    {tag_icons[tag] ? <i class={tag_icons[tag]} /> : tag}
+                  </span>
+                ))}
+              </span>
+              <div class="text-sm text-center text-text-300">
+                {data.summary}
+              </div>
+
+              <dialog
+                class="timeline-item-dialog bg-secondary-800 p-0"
+                id={`dialog-${index}`}
+              >
+                <div class="relative p-10 w-full h-full flex flex-col gap-2">
+                  <div class="flex flex-row justify-between items-center pb-2">
+                    <h1 class="text-2xl text-text-200 font-bold flex flex-row justify-start items-center">
+                      {title}
+                    </h1>
+                    <form class="flex justify-center items-center">
                       <button
-                        class="underline-offset-8 text-center hover:underline timeline-item-button"
-                        id={`item-${index}`}
+                        formmethod="dialog"
+                        class="rounded-full flex justify-center items-center bg-category-1  w-5 h-5 text-center text-text hover:brightness-75"
                       >
-                        {title}
+                        X
                       </button>
-                    </h2>
-
-                    <span class="flex flex-row justify-center gap-1 items-center flex-wrap">
-                      {data.tags.map((tag) => (
-                        <span
-                          class="text-[0.65rem] rounded-full flex flex-row justify-center items-center p-[0.05rem] pr-2 pl-2"
-                          style={`background-color: ${
-                            tag_colors[tag] ?? "var(--color-secondary-100)"
-                          };`}
-                        >
-                          {tag_icons[tag] ? <i class={tag_icons[tag]} /> : tag}
-                        </span>
-                      ))}
-                    </span>
-                    <div class="text-sm text-center text-text-300">
-                      {data.summary}
-                    </div>
-
-                    <dialog
-                      class="timeline-item-dialog bg-secondary-800 p-0"
-                      id={`dialog-${index}`}
-                    >
-                      <div class="relative p-10 w-full h-full flex flex-col gap-2">
-                        <div class="flex flex-row justify-between items-center pb-2">
-                          <h1 class="text-2xl text-text-200 font-bold flex flex-row justify-start items-center">
-                            {title}
-                          </h1>
-                          <form class="flex justify-center items-center">
-                            <button
-                              formmethod="dialog"
-                              class="rounded-full flex justify-center items-center bg-category-1  w-5 h-5 text-center text-text hover:brightness-75"
-                            >
-                              X
-                            </button>
-                          </form>
-                        </div>
-                        <h3 class="text-xs text-text-500 text-center flex flex-row justify-between items-center gap-3">
-                          <span>
-                            {months[data.start_date.getMonth()]},{" "}
-                            {data.start_date.getFullYear()} -{" "}
-                            {data.end_date
-                              ? months[data.end_date.getMonth()] +
-                                ", " +
-                                data.end_date.getFullYear()
-                              : "present"}
-                          </span>
-                          {data.github ? (
-                            <a
-                              class="text-sm flex items-center flex-row justify-center"
-                              href={data.github}
-                              target="_blank"
-                            >
-                              <i class="icofont-github" />
-                            </a>
-                          ) : (
-                            ""
-                          )}
-                        </h3>
-                        <div class="prose prose-content">
-                          <Content />
-                        </div>
-                        <span class="flex flex-row justify-center gap-1 items-center flex-wrap">
-                          {data.tags.map((tag) => (
-                            <span
-                              class="text-[0.65rem] rounded-full flex flex-row justify-center items-center p-[0.05rem] pr-2 pl-2"
-                              style={`background-color: ${
-                                tag_colors[tag] ?? "var(--color-secondary-100)"
-                              };`}
-                            >
-                              {tag_icons[tag] ? (
-                                <i class={tag_icons[tag]} />
-                              ) : (
-                                tag
-                              )}
-                            </span>
-                          ))}
-                        </span>
-                      </div>
-                    </dialog>
+                    </form>
                   </div>
-                </>
-              );
-            })
-          }
-        </div>
-      </div>
-    </div>
-    <div
-      slot="footer"
-      class="text-text text-sm flex flex-row gap-2 justify-center grow flex-wrap"
-    >
+                  <h3 class="text-xs text-text-500 text-center flex flex-row justify-between items-center gap-3">
+                    <span>
+                      {months[data.start_date.getMonth()]},{" "}
+                      {data.start_date.getFullYear()} -{" "}
+                      {data.end_date
+                        ? months[data.end_date.getMonth()] +
+                          ", " +
+                          data.end_date.getFullYear()
+                        : "present"}
+                    </span>
+                    {data.github ? (
+                      <a
+                        class="text-sm flex items-center flex-row justify-center"
+                        href={data.github}
+                        target="_blank"
+                      >
+                        <i class="icofont-github" />
+                      </a>
+                    ) : (
+                      ""
+                    )}
+                  </h3>
+                  <div class="prose prose-content">
+                    <Content />
+                  </div>
+                  <span class="flex flex-row justify-center gap-1 items-center flex-wrap">
+                    {data.tags.map((tag) => (
+                      <span
+                        class="text-[0.65rem] rounded-full flex flex-row justify-center items-center p-[0.05rem] pr-2 pl-2"
+                        style={`background-color: ${
+                          tag_colors[tag] ?? "var(--color-secondary-100)"
+                        };`}
+                      >
+                        {tag_icons[tag] ? <i class={tag_icons[tag]} /> : tag}
+                      </span>
+                    ))}
+                  </span>
+                </div>
+              </dialog>
+            </div>
+          </>
+        );
+      })
+    }
+    <div slot="filters">
       {
         tags_ordered.map(({ tag }) => (
           <button

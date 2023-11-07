@@ -12,7 +12,7 @@ const { area, socials, nav } = Astro.props as {
 };
 
 function process_nav(
-  input: { name: string; url: string; new_tab?: boolean }[]
+  input: { name: string; url: string; new_tab?: boolean }[],
 ): { name: string; url: string; new_tab?: boolean; is_active: boolean }[] {
   let path = Astro.url.pathname.substring(1);
   return input.map((v) => {
@@ -24,13 +24,9 @@ let navigation = process_nav(nav);
 ---
 
 <body class={area}>
-  <div
-    class="w-screen h-screen flex flex-col bg-background justify-stretch items-center overflow-hidden"
-  >
-    <div class="grid grid-cols-3 bg-primary-700 w-screen p-5">
-      <span
-        class="flex flex-row justify-start items-center gap-4 justify-self-start"
-      >
+  <div class="shell-root bg-background">
+    <div class="header bg-primary-700">
+      <span class="links">
         <a href="/">
           <img src="/Website Logo.png" class="h-10 aspect-1/1" />
         </a>
@@ -47,10 +43,8 @@ let navigation = process_nav(nav);
           ))
         }
       </span>
-      <a class="text-white text-3xl justify-self-center" href={area}>Lee-Orr</a>
-      <span
-        class="justify-self-end text-white text-xl flex flex-row justify-end items-center gap-4"
-      >
+      <a class="text-white text-3xl title" href={area}>Lee-Orr</a>
+      <span class="navigation text-white text-xl">
         {
           navigation.map(({ is_active, name, url, new_tab }) => (
             <a
@@ -68,12 +62,127 @@ let navigation = process_nav(nav);
         }
       </span>
     </div>
-    <div class="flex-grow relative">
+    <div class="body">
       <AnimatedBackdrop area={area} />
-      <slot />
-    </div>
-    <div class="flex flex-row justify-between bg-primary-800 w-screen p-2">
-      <slot name="footer" />
+      <div class="content">
+        <slot />
+      </div>
+      <div class="tags bg-primary-800">
+        <slot name="filters" />
+      </div>
     </div>
   </div>
 </body>
+
+<style>
+  .shell-root {
+    width: 100dvw;
+    height: 100dvh;
+    display: grid;
+    grid-template-columns: 1fr;
+    grid-template-rows: minmax(min-content, 1fr) minmax(30rem, 100fr);
+    justify-content: center;
+    position: relative;
+    container-type: inline-size;
+  }
+
+  .header {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(10rem, 1fr));
+    padding: 1rem;
+    container-type: inline-size;
+  }
+
+  .navigation {
+    display: flex;
+    flex-direction: row;
+    justify-content: flex-end;
+    align-items: center;
+    gap: 1rem;
+    @container (max-width: 29.999rem) {
+      grid-column: span 2;
+      width: 100%;
+      justify-content: space-between;
+    }
+  }
+
+  .title {
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    align-items: center;
+    @container (max-width: 29.999rem) {
+      justify-content: flex-start;
+      padding-left: 0.5rem;
+    }
+  }
+
+  .links {
+    display: flex;
+    flex-direction: row;
+    justify-content: flex-start;
+    align-items: center;
+    gap: 1rem;
+    @container (max-width: 29.999rem) {
+      justify-content: flex-end;
+      grid-column: span 1;
+      padding-right: 0.5rem;
+    }
+  }
+
+  .body {
+    flex-grow: 1;
+    position: relative;
+    display: grid;
+    grid-template-columns: minmax(10rem, 1fr) minmax(20rem, 5fr);
+    grid-template-rows: 1fr;
+    grid-template-areas: "nav content";
+    flex-direction: row-reverse;
+    justify-content: center;
+    flex-wrap: wrap-reverse;
+    align-items: stretch;
+    padding: 1rem;
+    gap: 1rem;
+
+    grid-auto-flow: dense;
+
+    @container (max-width: 39.9999rem) {
+      background: green !important;
+      grid-template-columns: 1fr;
+      grid-template-rows: minmax(10rem, min-content) minmax(20rem, 3fr);
+      grid-template-areas: "nav" "content";
+    }
+  }
+
+  .tags {
+    z-index: 10;
+    padding: 1rem;
+    overflow-y: auto;
+    display: flex;
+    grid-area: nav;
+    flex-direction: row;
+    justify-content: flex-start;
+    align-items: flex-start;
+
+    > div {
+      display: flex;
+      flex-direction: row;
+      flex-wrap: wrap;
+      align-items: center;
+      justify-content: flex-start;
+      gap: 0.3rem;
+    }
+  }
+
+  .content {
+    z-index: 10;
+    grid-area: content;
+
+    display: grid;
+
+    grid-template-columns: repeat(auto-fit, minmax(10rem, 1fr));
+    gap: 0.5rem;
+
+    overflow-y: auto;
+  }
+</style>
