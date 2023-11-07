@@ -24,6 +24,11 @@
         "title": "Independent Contractor",
         "subsections": [
             {
+                "title": "Subject Matter Expert - McMaster Continuing Education",
+                "timespan": "Oct 2023 - Present",
+                "description": "Design and write a course on backend development for McMaster's Full-Stack Development program."
+            },
+            {
                 "title": "Stealth Contract",
                 "timespan": "Nov 2022 - Mar 2023, July 2023",
                 "description": "Built a tool for generating complex, interactive site out of a Figma design and CSV data, generating and deploys a static site directly from the browser - allowing them to easily update content without developer input."
