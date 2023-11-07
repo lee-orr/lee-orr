@@ -180,9 +180,14 @@ let navigation = process_nav(nav);
 
     display: grid;
 
-    grid-template-columns: repeat(auto-fit, minmax(10rem, 1fr));
-    gap: 0.5rem;
+    grid-template-columns: var(--content-template-columns);
+    gap: var(--content-template-gap);
+    grid-auto-flow: row;
 
     overflow-y: auto;
+    overflow-x: hidden;
+    padding-top: 1rem;
+    padding-right: 2rem;
+    padding-left: 1rem;
   }
 </style>

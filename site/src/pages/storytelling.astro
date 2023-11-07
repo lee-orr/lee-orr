@@ -24,14 +24,14 @@ const timeline = await Promise.all((await getCollection("storytelling-timeline")
     }));
 timeline.sort((a,b) => b.data.date > a.data.date ? 1 : -1);
 
-let positions = ["center", "start", "end"];
 
 const get_next_random = () => {
   let random = Math.random();
-  let position_index = random < 0.5 ? 0 : 1;
-  let position = positions[position_index];
-  positions = position_index === 0 ? [positions[1], positions[2], positions[0]] : [positions[0], positions[2], positions[1]];
-  return position;
+  let size_index = random < 0.5 ? 0 : random < 0.75 ? 1 : 2;
+  let offset_x = Math.random() * 2.5 - 1.25;
+  let offset_y = Math.random() * 2.5 - 1.25;
+
+  return [size_index, offset_x, offset_y];
 }
 
 const tags : { [key: string]: number }= {};
@@ -84,23 +84,19 @@ const tag_colors: {[key: string]: string} = {
     <title>Lee-Orr</title>
   </head>
   <Shell area="storytelling" socials={socials} nav={nav}>
-    <div
-      class="w-screen h-full relative"
-    >
-      <div class="absolute top-0 left-0 bottom-0 right-0 overflow-y-auto overflow-x-hidden flex flex-col justify-start items-center">
-        <div class="flex flex-col justify-center items-start w-full p-10 max-w-7xl">
           {
             timeline.map(({ slug, data, rendered }, index) => {
-              let position =get_next_random();
+              let [size, offset_x, offset_y] = get_next_random();
 
               let shape = generate_shape();
-              let style = `clip-path: ${shape}`;
+              let style = `clip-path: ${shape}; position: relative; top: ${offset_y}rem; left: ${offset_x}rem;`;
+
 
               let class_string = `flex-col p-5 flex gap-5 w-full`;
 
-              let container_class = `justify-center items-center flex-col w-[65%] p-[3%] flex self-${position} timeline-item ${data.tags.map((v) => v.trim()).map((v) => `tag-${v}`).join(" ")}`;
+              let container_class = `timeline-item ${data.tags.map((v) => v.trim()).map((v) => `tag-${v}`).join(" ")}`;
 
-              let img = data.image ? (<div class="flex-shrink flex-grow max-w-full h-full aspect-square bg-center bg-cover" style={`background-image: url(${data.image});`}/>) : (<></>);
+              let img = data.image ? (<div class="w-full h-[30vh] flex flex-row justify-center items-center"><div class="flex-shrink flex-grow max-w-full h-full aspect-square bg-center bg-cover" style={`background-image: url(${data.image});`}/></div>) : (<></>);
 
               let bg =data.dialogue_bg || data.image;
 
@@ -109,7 +105,7 @@ const tag_colors: {[key: string]: string} = {
               const { Content } = rendered;
 
               return (
-                <div class={container_class}>
+                <div class={container_class} style="filter: drop-shadow(4px 6px 2px rgba(0, 0, 0, 0.6))">
                 <div class={class_string} style={style}>
                   <div class="bg-primary fixed w-screen h-screen top-0 left-0 right-0 bottom-0 z-[-10] pointer-events-none"></div>
                   <h2 class="text-2xl text-text-200 font-bold flex flex-row justify-between items-center"><span class="flex flex-row justify-center gap-2 items-center">{data.youtube ? (
@@ -140,9 +136,7 @@ const tag_colors: {[key: string]: string} = {
                       </span>
                   ))}
                       </span></h2>
-                      <div class="w-full h-[30vh] flex flex-row justify-center items-center">
                   {img}
-                </div>
                   <div class="text-md text-text-300">{data.summary}</div>
                   <dialog
                       class="timeline-item-dialog bg-background-dark p-0"
@@ -213,9 +207,6 @@ const tag_colors: {[key: string]: string} = {
               );
             })
           }
-          </div>
-      </div>
-    </div>
     <div slot="filters" class="text-white">
       {
         tags_ordered.map(({ tag}) => (<button id={"button-" + tag} class={ `p-2 rounded-full hover:underline tag-button tag-${tag}` } style={`background-color: ${tag_colors[tag] ?? "#000"};`}>{tag_icons[tag] ? <i class={tag_icons[tag]}/> : ""} {tag}</button>))
@@ -229,3 +220,15 @@ const tag_colors: {[key: string]: string} = {
 
   <script src="../setup_page.ts"></script>
 </html>
+
+<style>
+  body {
+    --content-template-columns: repeat(auto-fit, minmax(25rem, 1fr));
+    --content-template-gap: 1.2rem;
+  }
+
+  .timeline-item {
+    padding: 1rem;
+    position: relative;
+  }
+</style>

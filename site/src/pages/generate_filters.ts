@@ -21,22 +21,17 @@ export const generate_storytelling_filters = (tags: string[]) => {
     margin: 0.3rem;
     max-height: 100vh;
     max-width: 100vw;
-    transition: scale 1s, opacity 1s, max-height 1s, max-width 1s;
+    transition: scale 1s, opacity 1s;
   }
 
   .filtering .timeline-item {
-    scale: 0;
-    opacity: 0;
-    max-height: 0;
-    max-width: 0;
-    margin: 0;
-    flex-grow: 0;
-    flex-shrink:
+    scale: 0.8;
+    opacity: 0.2;
   }
 
   .filtering .tag-button {
     filter: grayscale(1);
-    transition: scale 1s, opacity 1s, max-height 1s, max-width 1s, filter 1s;
+    transition: scale 1s, opacity 1s, filter 1s;
   }
 
  
