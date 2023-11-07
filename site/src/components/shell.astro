@@ -67,7 +67,7 @@ let navigation = process_nav(nav);
       <div class="content">
         <slot />
       </div>
-      <details class="tags bg-primary-800" open>
+      <details class="tags bg-primary-800">
         <summary class="text-white text-xl underline underline-offset-2"
           >Filters</summary
         >
@@ -151,9 +151,8 @@ let navigation = process_nav(nav);
     grid-auto-flow: dense;
 
     @container (max-width: 46.9999rem) {
-      background: green !important;
       grid-template-columns: 1fr;
-      grid-template-rows: minmax(10rem, min-content) minmax(20rem, 3fr);
+      grid-template-rows: minmax(1rem, min-content) minmax(20rem, 3fr);
       grid-template-areas: "nav" "content";
     }
   }
