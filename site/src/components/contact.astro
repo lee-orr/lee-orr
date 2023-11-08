@@ -14,6 +14,8 @@ if (area === "storytelling") {
   <form
     class="flex flex-col justify-center items-stretch gap-2 m-[5%] p-5"
     style={shape}
+    name={"contact-" + area}
+    netlify
   >
     <div
       class="bg-primary fixed w-screen h-screen top-0 left-0 bottom-0 right-0 z-[-10]"
@@ -24,21 +26,33 @@ if (area === "storytelling") {
         class="col-start-1 col-span-1 font-bold text-text-200 text-xl self-start"
         >Name</label
       >
-      <input class="col-start-2 col-span-3 rounded text-xl p-2 self-center" />
+      <input
+        class="col-start-2 col-span-3 rounded text-xl p-2 self-center"
+        type="text"
+        name="name"
+      />
     </div>
     <div class="p-2 w-full grid-cols-4 grid">
       <label
         class="col-start-1 col-span-1 font-bold text-text-200 text-xl self-start"
         >Email</label
       >
-      <input class="col-start-2 col-span-3 rounded text-xl p-2 self-center" />
+      <input
+        class="col-start-2 col-span-3 rounded text-xl p-2 self-center"
+        type="text"
+        name="email"
+      />
     </div>
     <div class="p-2 w-full grid-cols-4 grid">
       <label
         class="col-start-1 col-span-1 font-bold text-text-200 text-xl self-start"
         >Subject</label
       >
-      <input class="col-start-2 col-span-3 rounded text-xl p-2 self-center" />
+      <input
+        class="col-start-2 col-span-3 rounded text-xl p-2 self-center"
+        type="text"
+        name="subject"
+      />
     </div>
     <div class="p-2 w-full grid-cols-4 grid flex-grow">
       <label
@@ -47,12 +61,12 @@ if (area === "storytelling") {
       >
       <textarea
         class="col-start-2 col-span-3 rounded text-xl p-2 self-center flex-grow min-h-[30vh]"
-      ></textarea>
+        name="content"></textarea>
     </div>
     <div class="p-2 self-end">
       <button
         class="p-3 bg-secondary rounded text-text-100 font-bold hover:bg-secondary-600"
-        >Send</button
+        type="submit">Send</button
       >
     </div>
   </form>
