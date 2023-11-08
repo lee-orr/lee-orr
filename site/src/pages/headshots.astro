@@ -18,13 +18,6 @@ const images = [
   "DSC00241.JPG",
   "DSC00247.JPG",
 ];
-
-const get_next_random = (): [number, number] => {
-  let gap_size_row = Math.random() * 4 + 1;
-  let gap_size_col = Math.random() * 2;
-
-  return [Math.floor(gap_size_row), Math.floor(gap_size_col)];
-};
 ---
 
 <html lang="en">
@@ -39,38 +32,34 @@ const get_next_random = (): [number, number] => {
     <title>Lee-Orr</title>
   </head>
   <Shell area="storytelling" socials={socials} nav={nav}>
-    <div class="w-screen h-full relative">
-      <div
-        class="absolute top-0 left-0 bottom-0 right-0 overflow-y-auto overflow-x-hidden"
-      >
-        <div
-          class="grid grid-cols-10 justify-center items-center gap-5 w-full p-10 grid-flow-row-dense"
-        >
-          {
-            images.map((img) => {
-              let shape = generate_shape();
-              let style = `clip-path: ${shape}`;
+    {
+      images.map((img) => {
+        let shape = generate_shape();
+        let style = `clip-path: ${shape}`;
 
-              let class_string = `flex-col m-[3%] p-5 flex gap-5 col-span-2 row-span-4`;
-              let gap = get_next_random();
+        let class_string = `flex-col m-[3%] p-5 flex gap-5 headshot`;
 
-              return (
-                <>
-                  <div
-                    style={`grid-column-end: span ${gap[0]}; grid-row-end: span ${gap[1]};`}
-                  />
-                  <div class={class_string} style={style}>
-                    <div class="bg-primary fixed w-screen h-screen top-0 left-0 right-0 bottom-0 z-[-10] pointer-events-none row-span-2" />
-                    <img src={`headshots/${img}`} />
-                  </div>
-                </>
-              );
-            })
-          }
-        </div>
-      </div>
-    </div>
+        return (
+          <>
+            <div class={class_string} style={style}>
+              <div class="bg-primary absolute w-screen h-screen top-0 left-0 right-0 bottom-0 z-[-10] pointer-events-none row-span-2" />
+              <img src={`headshots/${img}`} />
+            </div>
+          </>
+        );
+      })
+    }
   </Shell>
 
+  <style>
+    body {
+      --content-template-columns: repeat(auto-fit, minmax(35rem, 1fr));
+      --content-template-gap: 4rem;
+    }
 
+    .headshot {
+      padding: 1rem;
+      position: relative;
+    }
+  </style>
 </html>
