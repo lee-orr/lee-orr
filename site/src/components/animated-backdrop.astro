@@ -14,8 +14,8 @@ const colors = [
   "var(--category-7)",
 ];
 
-const num_elements = area === "computing" ? 20 : 10;
-const duration = area === "computing" ? 1 : 3;
+const num_elements = area === "computing" ? 15 : 10;
+const duration = area === "computing" ? 1.5 : 3;
 
 const get_shape = area === "computing" ? () => "circle(45%);" : generate_splat;
 const get_size = area === "computing" ? () => 1 : () => Math.random() * 3 + 7;
@@ -104,17 +104,17 @@ for (let i = 0; i < num_elements; i++) {
       bottom: 0;
       right: 0;
       background: linear-gradient(
-          rgba(18, 16, 16, 0) 50%,
-          rgba(0, 0, 0, 0.25) 50%
+          rgba(18, 16, 16, 0) 66%,
+          rgba(0, 0, 0, 0.25) 33%
         ),
         linear-gradient(
           90deg,
-          rgba(255, 0, 0, 0.06),
+          rgba(255, 0, 0, 0.06) 50%,
           rgba(0, 255, 0, 0.02),
           rgba(0, 0, 255, 0.06)
         );
-      z-index: 1;
-      background-size: 100% 3px, 4px 100%;
+      z-index: 1000;
+      background-size: 100% 15px, 12px 100%;
       pointer-events: none;
     }
   }
