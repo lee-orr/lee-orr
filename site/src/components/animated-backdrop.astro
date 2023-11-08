@@ -14,7 +14,7 @@ const colors = [
   "var(--category-7)",
 ];
 
-const num_elements = area === "computing" ? 40 : 10;
+const num_elements = area === "computing" ? 20 : 10;
 const duration = area === "computing" ? 1 : 3;
 
 const get_shape = area === "computing" ? () => "circle(45%);" : generate_splat;
@@ -50,7 +50,7 @@ for (let i = 0; i < num_elements; i++) {
             style={`transform: rotate(${angle}deg);`}
           >
             <div
-              class="overflow-visible"
+              class="overflow-visible shape"
               style={`background-color: ${color}; clip-path: ${shape}; width: ${size}rem; height: ${size}rem;`}
             />
           </div>
@@ -93,11 +93,45 @@ for (let i = 0; i < num_elements; i++) {
   .animate-computing {
     --half-rotation: 40deg;
     --full-rotation: 90deg;
+    z-index: -1;
+
+    &::before {
+      content: " ";
+      display: block;
+      position: absolute;
+      top: 0;
+      left: 0;
+      bottom: 0;
+      right: 0;
+      background: linear-gradient(
+          rgba(18, 16, 16, 0) 50%,
+          rgba(0, 0, 0, 0.25) 50%
+        ),
+        linear-gradient(
+          90deg,
+          rgba(255, 0, 0, 0.06),
+          rgba(0, 255, 0, 0.02),
+          rgba(0, 0, 255, 0.06)
+        );
+      z-index: 1;
+      background-size: 100% 3px, 4px 100%;
+      pointer-events: none;
+    }
   }
 
-  .animate-storytelling {
+  .animate-storytelling.top-0.left-0 {
     --half-rotation: 5deg;
     --full-rotation: 0deg;
+
+    top: -10rem;
+    left: -10rem;
+    right: -10rem;
+
+    bottom: -10rem;
+
+    z-index: -1;
+    filter: drop-shadow(-3px -4px 0px rgba(244, 215, 215, 0.3))
+      drop-shadow(12px 21px 1px rgba(58, 34, 15, 0.8));
   }
 
   .bg-spec {

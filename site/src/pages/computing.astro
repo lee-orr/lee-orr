@@ -11,7 +11,9 @@ import AnimatedBackdrop from "../components/animated-backdrop.astro";
 slugify.extend({ "/": "-", "\\": "-" });
 
 const timeline = await Promise.all(
-  (await getCollection("computing-timeline"))
+  (
+    await getCollection("computing-timeline")
+  )
     .map((v) => ({
       ...v,
       data: {
@@ -31,7 +33,7 @@ const timeline = await Promise.all(
         };
       };
       return render();
-    }),
+    })
 );
 
 timeline.sort((a, b) => {
@@ -111,7 +113,7 @@ const months = [
         return (
           <>
             <div class={class_string}>
-              <h3 class="text-xs text-text-500 text-center flex flex-row justify-between items-center gap-3">
+              <h3 class="text-xs text-text-400 text-center flex flex-row justify-between items-center gap-3">
                 <span>
                   {months[data.start_date.getMonth()]},{" "}
                   {data.start_date.getFullYear()} -{" "}
@@ -123,7 +125,7 @@ const months = [
                 </span>
                 {data.github ? (
                   <a
-                    class="text-sm flex items-center flex-row justify-center"
+                    class="text-sm flex items-center flex-row justify-center hover:text-secondary-200"
                     href={data.github}
                     target="_blank"
                   >
@@ -135,7 +137,7 @@ const months = [
               </h3>
               <h2 class="text-2xl text-text-200 font-bold flex flex-row justify-center items-center pb-2">
                 <button
-                  class="underline-offset-8 text-center hover:underline timeline-item-button"
+                  class="underline-offset-8 text-center hover:underline timeline-item-button hover:text-secondary-200"
                   id={`item-${index}`}
                 >
                   {title}
@@ -145,16 +147,16 @@ const months = [
               <span class="flex flex-row justify-center gap-1 items-center flex-wrap">
                 {data.tags.map((tag) => (
                   <span
-                    class="text-[0.65rem] rounded-full flex flex-row justify-center items-center p-[0.05rem] pr-2 pl-2"
+                    class="text-[0.65rem] rounded-full flex flex-row justify-center items-center p-[0.05rem] pr-2 pl-2 text-text-100"
                     style={`background-color: ${
-                      tag_colors[tag] ?? "var(--color-secondary-100)"
+                      tag_colors[tag] ?? "var(--color-secondary-700)"
                     };`}
                   >
                     {tag_icons[tag] ? <i class={tag_icons[tag]} /> : tag}
                   </span>
                 ))}
               </span>
-              <div class="text-sm text-center text-text-300">
+              <div class="text-sm text-center text-text-200">
                 {data.summary}
               </div>
 
@@ -188,7 +190,7 @@ const months = [
                     </span>
                     {data.github ? (
                       <a
-                        class="text-sm flex items-center flex-row gap-1 justify-center"
+                        class="text-sm flex items-center flex-row gap-1 justify-center hover:text-secondary-200"
                         href={data.github}
                         target="_blank"
                       >
@@ -205,9 +207,9 @@ const months = [
                   <span class="flex flex-row justify-center gap-1 items-center flex-wrap">
                     {data.tags.map((tag) => (
                       <span
-                        class="text-[0.65rem] rounded-full flex flex-row justify-center items-center p-[0.05rem] pr-2 pl-2"
+                        class="text-[0.65rem] rounded-full flex flex-row justify-center items-center p-[0.05rem] pr-2 pl-2 text-text-100"
                         style={`background-color: ${
-                          tag_colors[tag] ?? "var(--color-secondary-100)"
+                          tag_colors[tag] ?? "var(--color-secondary-700)"
                         };`}
                       >
                         {tag_icons[tag] ? <i class={tag_icons[tag]} /> : tag}
@@ -221,14 +223,14 @@ const months = [
         );
       })
     }
-    <div slot="filters">
+    <div slot="filters" class="text-text-100">
       {
         tags_ordered.map(({ tag }) => (
           <button
             id={"button-" + tag}
-            class={`p-2 rounded-full hover:underline tag-button tag-${tag}`}
+            class={`p-2 rounded-full hover:underline tag-button tag-${tag} text-text-100`}
             style={`background-color: ${
-              tag_colors[tag] ?? "var(--color-secondary-100)"
+              tag_colors[tag] ?? "var(--color-secondary-700)"
             };`}
           >
             {tag_icons[tag] ? <i class={tag_icons[tag]} /> : ""} {tag}
