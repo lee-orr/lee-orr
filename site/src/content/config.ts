@@ -22,6 +22,7 @@ const computing_timeline = defineCollection({
         info: z.union([z.object({
             company: z.string(),
             role: z.string(),
+            is_contract: z.boolean().optional(),
         }), z.object({ project: z.string() })]),
         summary: z.string(),
         end_date: z.optional(z.date()),
