@@ -1,0 +1,234 @@
+---
+import { getCollection } from "astro:content";
+import Shell from "../components/shell.astro";
+
+import { storytelling } from "../data/site-nav-data.json";
+import { generate_shape } from "./generate_shape";
+import { generate_storytelling_filters } from "./generate_filters";
+const { socials, nav } = storytelling;
+
+const timeline = await Promise.all((await getCollection("storytelling-timeline")).map((v) => ({
+  ...v,
+  data: {
+    ...v.data,
+    tags: v.data.tags.split(/(\s|",")+/g).map((v) => v.trim()).filter((v) => v.length > 0)
+  }
+})).map((v) => {
+      const render = async () => {
+        return {
+          ...v,
+          rendered: await v.render(),
+        };
+      };
+      return render();
+    }));
+timeline.sort((a,b) => b.data.date > a.data.date ? 1 : -1);
+
+
+const get_next_random = () => {
+  let random = Math.random();
+  let size_index = random < 0.5 ? 0 : random < 0.75 ? 1 : 2;
+  let offset_x = Math.random() * 2.5 - 1.25;
+  let offset_y = Math.random() * 2.5 - 1.25;
+
+  return [size_index, offset_x, offset_y];
+}
+
+const tags : { [key: string]: number }= {};
+
+for (let item of timeline) {
+  for (let tag of item.data.tags) {
+    let t = tag.trim();
+    if (tags[t]) {
+    tags[t]++;
+    } else {
+      tags[t] = 1;
+    }
+  }
+}
+
+const tags_ordered = Object.keys(tags).map((v) => ({ tag: v, count: tags[v] ?? 0}));
+tags_ordered.sort((a,b) => b.count - a.count);
+
+const tag_icons: {[key: string]: string} = {
+  acting: 'icofont-video',
+  singing: 'icofont-radio-mic',
+  "3d": 'icofont-cube',
+  writing: 'icofont-fountain-pen',
+  theatre: 'icofont-street-view',
+  games: 'icofont-game-pad',
+  animation: 'icofont-video-alt'
+};
+
+const tag_colors: {[key: string]: string} = {
+  acting: 'var(--category-1)',
+  singing: 'var(--category-2)',
+  "3d": 'var(--category-3)',
+  writing: 'var(--category-4)',
+  theatre: 'var(--category-5)',
+  games: 'var(--category-6)',
+  animation: 'var(--category-7)'
+};
+
+---
+
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <link rel="icon" type="image/png" href="/favicon.png" />
+    <meta name="viewport" content="width=device-width" />
+    <meta name="generator" content={Astro.generator} />
+    <link rel="stylesheet" href="/styles.css" />
+    <link rel="stylesheet" href="/icofont.min.css" />
+    <base href="/" />
+    <title>Lee-Orr</title>
+  </head>
+  <Shell area="storytelling" socials={socials} nav={nav}>
+          {
+            timeline.map(({ slug, data, rendered }, index) => {
+              let [size, offset_x, offset_y] = get_next_random();
+
+              let shape = generate_shape();
+              let style = `clip-path: ${shape}; position: relative; top: ${offset_y}rem; left: ${offset_x}rem;`;
+
+
+              let class_string = `flex-col p-5 flex gap-5 w-full`;
+
+              let container_class = `timeline-item ${data.tags.map((v) => v.trim()).map((v) => `tag-${v}`).join(" ")}`;
+
+              let img = data.image ? (<div class="w-full h-[30vh] flex flex-row justify-center items-center"><div class="flex-shrink flex-grow max-w-full h-full aspect-square bg-center bg-cover" style={`background-image: url(${data.image});`}/></div>) : (<></>);
+
+              let bg =data.dialogue_bg || data.image;
+
+              let imgbg = bg ? `background-image: url(${bg});` : ``;
+
+              const { Content } = rendered;
+
+              return (
+                <div class={container_class} >
+                <div class={class_string} style={style}>
+                  <div class="bg-primary fixed w-screen h-screen top-0 left-0 right-0 bottom-0 z-[-10] pointer-events-none"></div>
+                  <h2 class="text-2xl text-text-200 font-bold flex flex-row justify-between items-center"><span class="flex flex-row justify-center gap-2 items-center">{data.youtube ? (
+                        <a
+                          class="flex items-center flex-row justify-center hover:text-secondary-200"
+                          href={data.youtube}
+                          target="_blank"
+                        >
+                          <i class="icofont-youtube" />
+                        </a>
+                      ) : (
+                        ""
+                      )}
+                      {data.itch ? (
+                        <a
+                          class="flex items-center flex-row justify-center hover:text-secondary-200"
+                          href={data.itch}
+                          target="_blank"
+                        >
+                          <i class="icofont-game-console" />
+                        </a>
+                      ) : (
+                        ""
+                      )}<button class="underline-offset-8 underline timeline-item-button flex flex-row justify-center gap-2 hover:text-secondary-200" id={`item-${index}`}>
+                      {data.title}</button></span><span class="flex flex-row justify-end gap-1 items-center">{data.tags.map((tag) => (
+                    <span class="text-xs rounded-full flex flex-row justify-center items-center h-6 w-6" style={`background-color: ${tag_colors[tag] ?? "#000"};`}>
+                      {tag_icons[tag] ? <i class={tag_icons[tag]}/>  : tag}
+                      </span>
+                  ))}
+                      </span></h2>
+                  {img}
+                  <div class="text-md text-text-300">{data.summary}</div>
+                  <dialog
+                      class="timeline-item-dialog bg-background-dark p-0"
+                      id={`dialog-${index}`}
+                    >
+                     <div class="relative p-10 bg-fixed bg-center bg-cover " 
+                      style={imgbg}>
+                      { data.image ? (<div class="absolute top-0 left-0 right-0 bottom-0 backdrop-grayscale backdrop-brightness-[0.2]"></div>) : "" }
+                      <div class="absolute top-0 left-0 right-0 bottom-0 p-10 flex flex-col gap-2">
+                        <div class="flex flex-row justify-end items-center">
+                          
+                        <span class="flex flex-row justify-center gap-1 items-center flex-wrap">
+                          {data.tags.map((tag) => (
+                            <span
+                              class="text-xs text-text-200 rounded-full flex flex-row justify-center items-center h-6 w-6"
+                              style={`background-color: ${
+                                tag_colors[tag] ?? "var(--color-secondary-100)"
+                              };`}
+                            >
+                              {tag_icons[tag] ? (
+                                <i class={tag_icons[tag]} />
+                              ) : (
+                                tag
+                              )}
+                            </span>
+                          ))}
+                        </span>
+                        <span class="flex-grow"></span>
+                        <form class="flex justify-center items-center">
+                          <button
+                            formmethod="dialog"
+                            class="rounded-full flex justify-center items-center bg-category-1  w-6 h-6 text-center text-text hover:brightness-75"
+                          >
+                            X
+                          </button>
+                        </form>
+                        </div>
+                        <h1 class="text-2xl text-text-200 font-bold flex flex-row justify-center items-center gap-2">{data.youtube ? (
+                        <a
+                          class="flex items-center flex-row justify-center hover:text-secondary-200"
+                          href={data.youtube}
+                          target="_blank"
+                        >
+                          <i class="icofont-youtube" />
+                        </a>
+                      ) : (
+                        ""
+                      )}
+                      {data.itch ? (
+                        <a
+                          class="flex items-center flex-row justify-center hover:text-secondary-200"
+                          href={data.itch}
+                          target="_blank"
+                        >
+                          <i class="icofont-game-console" />
+                        </a>
+                      ) : (
+                        ""
+                      )}
+                          {data.title}
+                        </h1>
+                        <div class="prose prose-content">
+                          <Content />
+                        </div>
+                      </div></div>
+                    </dialog>
+                </div></div>
+              );
+            })
+          }
+    <div slot="filters" class="text-white">
+      {
+        tags_ordered.map(({ tag}) => (<button id={"button-" + tag} class={ `p-2 rounded-full hover:underline tag-button tag-${tag}` } style={`background-color: ${tag_colors[tag] ?? "#000"};`}>{tag_icons[tag] ? <i class={tag_icons[tag]}/> : ""} {tag}</button>))
+      }
+    </div>
+    
+    <Fragment set:html={
+      generate_storytelling_filters(tags_ordered.map(({tag}) => tag))
+    }/>
+  </Shell>
+
+  <script src="../setup_page.ts"></script>
+</html>
+
+<style>
+  body {
+    --content-template-columns: repeat(auto-fit, minmax(25rem, 1fr));
+    --content-template-gap: 1.2rem;
+  }
+
+  .timeline-item {
+    padding: 1rem;
+    position: relative;
+  }
+</style>

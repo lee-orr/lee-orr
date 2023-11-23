@@ -1,0 +1,55 @@
+---
+---
+
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <link rel="icon" type="image/png" href="/favicon.png" />
+    <meta name="viewport" content="width=device-width" />
+    <meta name="generator" content={Astro.generator} />
+    <link rel="stylesheet" href="/styles.css" />
+    <base href="/" />
+    <title>Lee-Orr</title>
+  </head>
+  <body>
+    <div
+      class="w-screen h-screen absolute flex flex-col gap-1 md:flex-row justify-stretch items-stretch bg-black"
+    >
+      <div
+        class="absolute w-full h-full flex flex-col justify-center md:justify-end md:pb-52 items-center md:pt-52 pointer-events-none z-10 md:bg-gradient-to-t from-black to-transparent to-20%"
+      >
+        <h1 class="font-bold text-9xl font-serif text-center text-white">
+          Lee-Orr
+        </h1>
+      </div>
+      <a
+        class="cursor-pointer flex flex-col justify-start items-center flex-grow hover:grow-[10] shrink transition-all duration-500 overflow-hidden storytelling text-white hover:text-secondary-200"
+        style="clip-path: border-box;"
+        href="/storytelling"
+      >
+        <div
+          style="background-image: url(/wide-site-bg-test-creative.png);"
+          class="absolute left-0 bg-cover top-0 right-0 bottom-0 bg-center z-0 hover:filter-none grayscale-[50%] transition-all"
+        >
+        </div>
+        <h2 class="font-bold text-6xl font-sans z-10 p-10 pointer-events-none">
+          Storytelling
+        </h2>
+      </a>
+      <a
+        class="cursor-pointer flex flex-col justify-end md:justify-start items-center flex-grow hover:grow-[10] shrink transition-all duration-500 overflow-hidden computing text-white hover:text-secondary-200"
+        style="clip-path: border-box;"
+        href="/computing"
+      >
+        <div
+          style="background-image: url(/wide-site-bg-test-computing.png);"
+          class="absolute bg-cover left-0 top-0 right-0 bottom-0 bg-center z-0 hover:filter-none grayscale-[50%] transition-all"
+        >
+        </div>
+        <h2 class="font-bold text-6xl font-mono z-10 p-10 pointer-events-none">
+          Computing
+        </h2>
+      </a>
+    </div>
+  </body>
+</html>

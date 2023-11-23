@@ -1,0 +1,266 @@
+---
+import AnimatedBackdrop from "./animated-backdrop.astro";
+
+const { area, socials, nav } = Astro.props as {
+  area: "storytelling" | "computing";
+  socials: Array<{ type: string; value: string; icon: string }>;
+  nav: Array<{
+    name: string;
+    url: string;
+    new_tab?: boolean;
+  }>;
+};
+
+function process_nav(
+  input: { name: string; url: string; new_tab?: boolean }[]
+): { name: string; url: string; new_tab?: boolean; is_active: boolean }[] {
+  let path = Astro.url.pathname.substring(1);
+  return input.map((v) => {
+    return { ...v, is_active: path == v.url };
+  });
+}
+
+let navigation = process_nav(nav);
+---
+
+<body class={area}>
+  <div class="shell-root bg-background">
+    <div class="header bg-primary-700 text-text-100">
+      <span class="links">
+        <a href="/">
+          <div class="aspect-1/1 logo"></div>
+        </a>
+
+        {
+          socials.map(({ value, icon }) => (
+            <a
+              class="text-text-100 text-xl hover:text-secondary-200"
+              target="_blank"
+              href={value}
+            >
+              <i class={icon} />
+            </a>
+          ))
+        }
+      </span>
+      <a class="text-3xl title hover:text-secondary-200" href={area}>Lee-Orr</a>
+      <span class="navigation text-xl">
+        {
+          navigation.map(({ is_active, name, url, new_tab }) => (
+            <a
+              class={
+                (is_active
+                  ? "pointer-events-none text-secondary-200 font-bold underline"
+                  : "") + " hover:text-secondary-200"
+              }
+              target={new_tab ? "_blank" : ""}
+              href={url}
+            >
+              {name}
+            </a>
+          ))
+        }
+      </span>
+    </div>
+    <div class={"body " + (Astro.slots.has("filters") ? "nav" : "")}>
+      <AnimatedBackdrop area={area} />
+      <div class="content">
+        <div class="content-parent">
+          <slot />
+        </div>
+      </div>
+      <details class="tags bg-primary-800">
+        <summary class="text-text-100 text-xl underline underline-offset-2">
+          Filters
+        </summary>
+        <slot name="filters" />
+      </details>
+    </div>
+  </div>
+</body>
+
+<style>
+  .shell-root {
+    width: 100dvw;
+    height: 100dvh;
+    display: grid;
+    grid-template-columns: 1fr;
+    grid-template-rows: minmax(min-content, 1fr) minmax(30rem, 100fr);
+    justify-content: center;
+    position: relative;
+    container-type: inline-size;
+  }
+
+  .header {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(10rem, 1fr));
+    padding: 1rem;
+    container-type: inline-size;
+  }
+
+  .navigation {
+    display: flex;
+    flex-direction: row;
+    justify-content: flex-end;
+    align-items: center;
+    gap: 1rem;
+    @container (max-width: 29.999rem) {
+      grid-column: span 2;
+      width: 100%;
+      justify-content: space-between;
+    }
+  }
+
+  .title {
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    align-items: center;
+    @container (max-width: 29.999rem) {
+      justify-content: flex-start;
+      padding-left: 0.5rem;
+    }
+  }
+
+  .links {
+    display: flex;
+    flex-direction: row;
+    justify-content: flex-start;
+    align-items: center;
+    gap: 1rem;
+    @container (max-width: 29.999rem) {
+      justify-content: flex-end;
+      grid-column: span 1;
+      padding-right: 0.5rem;
+    }
+  }
+
+  .body {
+    flex-grow: 1;
+    position: relative;
+    display: grid;
+    flex-direction: row-reverse;
+    justify-content: center;
+    flex-wrap: wrap-reverse;
+    align-items: stretch;
+    padding: 1rem;
+    gap: 1rem;
+
+    grid-template-columns: 1fr;
+    grid-template-areas: "content";
+    grid-template-rows: 1fr;
+
+    grid-auto-flow: dense;
+  }
+
+  .body.nav {
+    grid-template-columns: minmax(15rem, 1fr) minmax(20rem, 5fr);
+    grid-template-rows: 1fr;
+    grid-template-areas: "nav content";
+
+    @container (max-width: 46.9999rem) {
+      grid-template-columns: 1fr;
+      grid-template-rows: minmax(1rem, min-content) minmax(20rem, 3fr);
+      grid-template-areas: "nav" "content";
+    }
+  }
+
+  .nav .tags {
+    display: flex;
+  }
+
+  .tags {
+    z-index: 10;
+    padding: 1rem;
+    overflow-y: auto;
+    display: none;
+    grid-area: nav;
+    flex-direction: column;
+    justify-content: flex-start;
+    align-items: flex-start;
+    gap: 1rem;
+
+    > summary {
+      width: 100%;
+      flex-grow: 0;
+      flex-shrink: 0;
+
+      &:hover {
+        color: var(--color-secondary-200);
+      }
+    }
+
+    > div {
+      padding-top: 0.5rem;
+      display: flex;
+      flex-direction: row;
+      flex-wrap: wrap;
+      align-items: center;
+      justify-content: flex-start;
+      gap: 0.3rem;
+    }
+  }
+
+  .storytelling {
+    .header,
+    .tags,
+    .content-parent {
+      filter: drop-shadow(-3px -4px 0px rgba(244, 215, 215, 0.3))
+        drop-shadow(12px 21px 1px rgba(58, 34, 15, 0.8));
+    }
+  }
+
+  .computing {
+    .body {
+    }
+  }
+
+  .content {
+    z-index: 10;
+    grid-area: content;
+
+    display: flex;
+    flex-direction: column;
+    justify-content: stretch;
+    align-items: stretch;
+
+    overflow-y: auto;
+    overflow-x: hidden;
+    padding-top: 1rem;
+    padding-right: 2rem;
+    padding-left: 1rem;
+
+    .content-parent {
+      display: grid;
+
+      grid-template-columns: var(--content-template-columns);
+      gap: var(--content-template-gap);
+      grid-auto-flow: row;
+    }
+  }
+
+  .logo {
+    position: relative;
+    background: url("/Website Logo.png");
+    width: 2.5rem;
+    height: 2.5rem;
+    background-position: center;
+    background-size: contain;
+  }
+
+  .logo::after {
+    content: " ";
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background: var(--color-text-100);
+    mix-blend-mode: multiply;
+    border-radius: 100%;
+  }
+
+  .logo:hover::after {
+    background: var(--color-secondary-200);
+  }
+</style>

@@ -14,6 +14,11 @@ Here are some of my public projects & repositories, in case you'd like a look
 
 This is a game I build for the Historically Accurate Game Jam, where you try to build canals at as low a cost as possible. If you want to play, you can try it here: https://lee-orr.itch.io/canal-mania
 
+### [Crossroad Blues](https://github.com/lee-orr/crossroad-blues)
+![Screenshot from Terra and Caelus](site/public/storytelling_images/crossroad_blues.png)
+
+This is a game build for [VimJam4](https://itch.io/jam/vimjam4) - play as a devil rushing to the crossroads for a deal with a human. The jam version is available here: https://lee-orr.itch.io/crossroad-blues
+
 ### [Terra and Caelus](https://github.com/lee-orr/terra-and-caelus)
 ![Screenshot from Terra and Caelus](image.png)
 
@@ -27,6 +32,9 @@ Built for [Random Jam](https://itch.io/jam/8bits-random-jam), in this game you g
 Other game jam games can be found here: https://lee-orr.itch.io/
 
 ### Game Development Libraries
+#### [Dexterous Developer](https://github.com/lee-orr/dexterous_developer)
+Dexterous Developer is a hot-reload system for Bevy.
+
 #### [Bevy Generative Grammars](https://github.com/lee-orr/bevy-generative-grammars)
 This is a rust library for procedural generation using Grammars, with built in support for Tracery - as well as room to expand to other grammars. 
 

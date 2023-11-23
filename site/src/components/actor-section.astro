@@ -1,0 +1,36 @@
+---
+const { title, subsections } = Astro.props as {
+    title: string;
+    subsections: Array<{
+        title: string;
+        company_info: string;
+        director?: string;
+        role: string;
+    }>;
+};
+---
+
+<h3 class="font-bold">{title}</h3>
+<div class="flex flex-col gap-1 text-xs">
+    <div class="font-bold border-b-2 border-black grid grid-cols-4">
+        <div class="col-span-1 col-start-1">Production</div><div
+            class="col-span-1 col-start-2"
+        >
+            Company
+        </div><div class="col-span-1 col-start-3">Director</div><div
+            class="col-span-1 col-start-4"
+        >
+            Role
+        </div>
+    </div>
+    {
+        subsections.map(({ title, company_info, role, director }) => (
+            <div class="border-b-2 grid grid-cols-4">
+                <div class="col-span-1 col-start-1">{title}</div>
+                <div class="col-span-1 col-start-2">{company_info}</div>
+                <div class="col-span-1 col-start-3">{director}</div>
+                <div class="col-span-1 col-start-4">{role}</div>
+            </div>
+        ))
+    }
+</div>

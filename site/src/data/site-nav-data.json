@@ -1,0 +1,56 @@
+{
+    "computing": {
+        "socials": [
+            {
+                "type": "linkedin",
+                "value": "https://www.linkedin.com/in/lee-orr/",
+                "icon": "icofont-linkedin"
+            },
+            {
+                "type": "github",
+                "value": "https://github.com/lee-orr",
+                "icon": "icofont-github"
+            }
+        ],
+        "nav": [
+            {
+                "name": "Resume",
+                "url": "developer",
+                "new_tab": true
+            },
+            {
+                "name": "Contact",
+                "url": "computing_contact"
+            }
+        ]
+    },
+    "storytelling": {
+        "socials": [
+            {
+                "type": "youtube",
+                "value": "https://youtube.com/@lee-orr",
+                "icon": "icofont-youtube"
+            },
+            {
+                "type": "facebook",
+                "value": "https://www.facebook.com/theleeorr",
+                "icon": "icofont-facebook"
+            },
+            {
+                "type": "itch",
+                "value": "https://lee-orr.itch.io/",
+                "icon": "icofont-game-console"
+            }
+        ],
+        "nav": [
+            {
+                "name": "Materials",
+                "url": "materials"
+            },
+            {
+                "name": "Contact",
+                "url": "storytelling_contact"
+            }
+        ]
+    }
+}

@@ -1,0 +1,65 @@
+---
+import { getCollection } from "astro:content";
+import Shell from "../components/shell.astro";
+
+import { storytelling } from "../data/site-nav-data.json";
+import { generate_shape } from "./generate_shape";
+const { socials, nav } = storytelling;
+
+const images = [
+  "DSC00084.JPG",
+  "DSC00087.JPG",
+  "DSC00091.JPG",
+  "DSC00105.JPG",
+  "DSC00159.JPG",
+  "DSC00189.JPG",
+  "DSC00197.JPG",
+  "DSC00227.JPG",
+  "DSC00241.JPG",
+  "DSC00247.JPG",
+];
+---
+
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <link rel="icon" type="image/png" href="/favicon.png" />
+    <meta name="viewport" content="width=device-width" />
+    <meta name="generator" content={Astro.generator} />
+    <link rel="stylesheet" href="/styles.css" />
+    <link rel="stylesheet" href="/icofont.min.css" />
+    <base href="/" />
+    <title>Lee-Orr</title>
+  </head>
+  <Shell area="storytelling" socials={socials} nav={nav}>
+    {
+      images.map((img) => {
+        let shape = generate_shape();
+        let style = `clip-path: ${shape}`;
+
+        let class_string = `flex-col m-[3%] p-5 flex gap-5 headshot`;
+
+        return (
+          <>
+            <div class={class_string} style={style}>
+              <div class="bg-primary absolute w-screen h-screen top-0 left-0 right-0 bottom-0 z-[-10] pointer-events-none row-span-2" />
+              <img src={`headshots/${img}`} />
+            </div>
+          </>
+        );
+      })
+    }
+  </Shell>
+
+  <style>
+    body {
+      --content-template-columns: repeat(auto-fit, minmax(35rem, 1fr));
+      --content-template-gap: 4rem;
+    }
+
+    .headshot {
+      padding: 1rem;
+      position: relative;
+    }
+  </style>
+</html>

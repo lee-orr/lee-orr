@@ -1,0 +1,168 @@
+{
+    "skills": [
+        "Martial Arts, Basic Stage Combat, Piano/Keyboard, Guitar, Musical Improv, Songwriting, Basic Dance (Jazz, Tap, Ballet)"
+    ],
+    "education": [
+        {
+            "institution": "",
+            "classes": [
+                {
+                    "teachers": [
+                        "Adrian Griffin"
+                    ],
+                    "course": "Meisner"
+                }
+            ]
+        },
+        {
+            "institution": "",
+            "classes": [
+                {
+                    "teachers": [
+                        "Elley Ray"
+                    ],
+                    "course": "Voice Over"
+                }
+            ]
+        },
+        {
+            "institution": "Fraser Studios",
+            "classes": [
+                {
+                    "teachers": [
+                        "Adrian Griffin",
+                        "Chad Allen",
+                        "Jason Frraser"
+                    ],
+                    "course": "Meisner"
+                }
+            ]
+        },
+        {
+            "institution": "Randolph College for the Performing Arts",
+            "classes": [
+                {
+                    "teachers": [
+                        "Tamara Bernier Evans",
+                        "Rosanna Saracino",
+                        "Dylan Roberts",
+                        "M. John Kennedy",
+                        "John Beale",
+                        "John Cleland",
+                        "Peter Van Wart",
+                        "Peggy Jane Hope",
+                        "L.J. Nells"
+                    ],
+                    "course": "Acting"
+                },
+                {
+                    "teachers": [
+                        "Adam White",
+                        "Donavon LeNabat",
+                        "Jacqueline Sadler",
+                        "Robert Longo",
+                        "Allison Grant",
+                        "Bruce Harvey",
+                        "Guistin MacLean",
+                        "John Hughes",
+                        "Lisa Atkinson",
+                        "Louisa Burgess-Corbett",
+                        "Mark Wilson",
+                        "Jeannie Wyse"
+                    ],
+                    "course": "Singing"
+                },
+                {
+                    "course": "Dance",
+                    "teachers": [
+                        "Candice Helm",
+                        "Dana Bondy",
+                        "Debbie Wilson",
+                        "Sandra Long",
+                        "Stephanie Galpern",
+                        "Kelly"
+                    ]
+                },
+                {
+                    "course": "Other",
+                    "teachers": [
+                        "Todd Campbell",
+                        "Robert Allan",
+                        "Robert McQueen",
+                        "Adam Sakiyama",
+                        "Michael Reinhart",
+                        "Kevin Rees",
+                        "Allison Beula"
+                    ]
+                }
+            ]
+        },
+        {
+            "institution": "",
+            "classes": [
+                {
+                    "teachers": [
+                        "Deborah Joy"
+                    ],
+                    "course": "Voice"
+                }
+            ]
+        },
+        {
+            "institution": "Joy of Dance",
+            "classes": [
+                {
+                    "teachers": [
+                        "Arpad Raymond"
+                    ],
+                    "course": "Jazz & Tapp"
+                }
+            ]
+        },
+        {
+            "institution": "",
+            "classes": [
+                {
+                    "teachers": [
+                        "Louisa Burgess-Corbett"
+                    ],
+                    "course": "Voice"
+                }
+            ]
+        },
+        {
+            "institution": "The Second City Training Centre",
+            "classes": [
+                {
+                    "teachers": [
+                        ""
+                    ],
+                    "course": "The Improvisation Program"
+                },
+                {
+                    "teachers": [
+                        ""
+                    ],
+                    "course": "Stagecraft 101 & 102"
+                },
+                {
+                    "teachers": [
+                        ""
+                    ],
+                    "course": "Voice Over for Improvisors"
+                }
+            ]
+        },
+        {
+            "institution": "Complete Vocal Institute",
+            "classes": [
+                {
+                    "teachers": [
+                        ""
+                    ],
+                    "course": "Complete Vocal Academy"
+                }
+            ]
+        }
+    ]
+}
