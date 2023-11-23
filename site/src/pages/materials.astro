@@ -66,14 +66,14 @@ const demos: {
       demos.map(({ title, audio, icon, color, shape, links }) => {
         let style = `clip-path: ${shape};`;
         let class_string = `flex-col m-[3%] p-5 flex gap-5 col-span-2 row-span-2`;
-        let bg = `background-color: ${color};`;
+        let bg = `background-color: var(--color-panel-bg);`;
         return (
           <div class={class_string} style={style}>
             <div
               class="fixed w-screen h-screen top-0 left-0 right-0 bottom-0 z-[-10] pointer-events-none"
               style={bg}
             />
-            <h2 class="text-2xl text-text-200 font-bold flex flex-row justify-between items-center">
+            <h2 class="text-2xl text-main-txt font-bold flex flex-row justify-between items-center">
               <>
                 <span class="underline-offset-8 underline">{title}</span>
                 <span class="flex flex-row justify-end gap-1 items-center">
@@ -87,7 +87,7 @@ const demos: {
               {audio ? (
                 <audio
                   controls
-                  class="bg-primary-200 rounded-full text-text-700 border-solid border-black border-2 focus:border-primary-100"
+                  class="bg-accent rounded-full text-main-txt border-solid border-accent border-2 focus:border-accent-hover"
                 >
                   <source src={audio} type="audio/mpeg" />
                 </audio>
@@ -97,7 +97,7 @@ const demos: {
               {links
                 ? Object.keys(links).map((link) => (
                     <a
-                      class="rounded-full bg-text-800 text-text-100 p-3 text-sm border-solid border-black border-2 hover:border-primary-100 flex justify-center items-center"
+                      class="fake-audio rounded-full text-white p-3 text-sm border-solid border-accent border-2 flex justify-center items-center hover:text-accent font-bold"
                       target="_blank"
                       href={link}
                     >
@@ -120,6 +120,11 @@ const demos: {
     .timeline-item {
       padding: 1rem;
       position: relative;
+    }
+    .fake-audio {
+      position: relative;
+      
+     background-color: #17313A;
     }
   </style>
 </html>

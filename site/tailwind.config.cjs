@@ -8,6 +8,13 @@ module.exports = {
 				'gradient-radial': 'radial-gradient(var(--tw-gradient-stops))',
 			},
 			colors: {
+				'main-bg': 'var(--color-main-background)',
+				'main-txt': 'var(--color-main-text)',
+				'panel-bg': 'var(--color-panel-bg)',
+				'hover-txt': 'var(--color-hover-text)',
+				'accent': 'var(--color-accent)',
+				'accent-hover': 'var(--color-accent-hover)',
+				'off-text': 'var(--off-text)',
 				text: colors("text", 900),
 				background: 'var(--color-background)',
 				'background-dark': 'var(--color-background-dark)',

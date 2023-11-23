@@ -100,7 +100,7 @@ const months = [
   <Shell area="computing" socials={socials} nav={nav}>
     {
       timeline.map(({ slug, data, body, rendered }, index) => {
-        let class_string = `timeline-item bg-primary-800 flex-col overflow-y-auto p-5 h-[25vh] flex gap-3 timeline-item col-span-2 ${data.tags
+        let class_string = `timeline-item bg-panel-bg flex-col overflow-y-auto p-5 h-[25vh] flex gap-3 timeline-item col-span-2 ${data.tags
           .map((v) => v.trim())
           .map((v) => `tag-${v}`)
           .join(" ")}`;
@@ -120,7 +120,7 @@ const months = [
         return (
           <>
             <div class={class_string}>
-              <h3 class="text-xs text-text-400 text-center justify-between items-center gap-3 flex flex-row">
+              <h3 class="text-xs text-main-txt text-center justify-between items-center gap-3 flex flex-row">
                 <span>
                   {months[data.start_date.getMonth()]},{" "}
                   {data.start_date.getFullYear()} -{" "}
@@ -133,7 +133,7 @@ const months = [
 
                 {data.github ? (
                   <a
-                    class="text-sm flex items-center flex-row justify-center hover:text-secondary-200"
+                    class="text-sm flex items-center flex-row justify-center hover:text-hover-txt"
                     href={data.github}
                     target="_blank"
                   >
@@ -143,36 +143,36 @@ const months = [
                   <span />
                 )}
               </h3>
-              <h2 class="text-2xl text-text-200 font-bold flex flex-row justify-center items-center">
+              <h2 class="text-2xl text-main-txt font-bold flex flex-row justify-center items-center">
                 <button
-                  class="underline-offset-8 text-center hover:underline timeline-item-button hover:text-secondary-200"
+                  class="underline-offset-8 text-center hover:underline timeline-item-button hover:text-hover-txt"
                   id={`item-${index}`}
                 >
                   {title}
                 </button>
               </h2>
-              <h3 class="text-xs text-text-400 flex flex-row justify-center items-center">
+              <h3 class="text-xs text-off-text flex flex-row justify-center items-center">
                 {context}
               </h3>
 
               <span class="flex flex-row justify-center gap-1 items-center flex-wrap">
                 {data.tags.map((tag) => (
                   <span
-                    class="text-[0.65rem] rounded-full flex flex-row justify-center items-center p-[0.05rem] pr-2 pl-2 text-text-100"
+                    class="text-[0.65rem] rounded-full flex flex-row justify-center items-center p-[0.05rem] pr-2 pl-2 text-main-txt"
                     style={`background-color: ${
-                      tag_colors[tag] ?? "var(--color-secondary-700)"
+                      tag_colors[tag] ?? "var(--color-accent)"
                     };`}
                   >
                     {tag_icons[tag] ? <i class={tag_icons[tag]} /> : tag}
                   </span>
                 ))}
               </span>
-              <div class="text-sm text-center text-text-200">
+              <div class="text-sm text-center text-off-text">
                 {data.summary}
               </div>
 
               <dialog
-                class="timeline-item-dialog bg-secondary-800 p-0"
+                class="timeline-item-dialog bg-panel-bg p-0"
                 id={`dialog-${index}`}
               >
                 <div class="relative p-10 w-full h-full flex flex-col gap-2">
@@ -183,13 +183,13 @@ const months = [
                     <form class="flex justify-center items-center">
                       <button
                         formmethod="dialog"
-                        class="rounded-full flex justify-center items-center bg-category-1  w-5 h-5 text-center text-text hover:brightness-75 grayscale-[0.5] hover:grayscale-[0.2]"
+                        class="rounded-full flex justify-center items-center bg-accent  w-5 h-5 text-center text-main-txt hover:bg-accent-hover"
                       >
                         X
                       </button>
                     </form>
                   </div>
-                  <h3 class="text-xs text-text-500 text-center flex flex-row justify-between items-center gap-3">
+                  <h3 class="text-xs text-off-text text-center flex flex-row justify-between items-center gap-3">
                     <span>
                       {months[data.start_date.getMonth()]},{" "}
                       {data.start_date.getFullYear()} -{" "}
@@ -201,7 +201,7 @@ const months = [
                     </span>
                     {data.github ? (
                       <a
-                        class="text-sm flex items-center flex-row gap-1 justify-center hover:text-secondary-200"
+                        class="text-sm flex items-center flex-row gap-1 justify-center hover:text-hover-txt"
                         href={data.github}
                         target="_blank"
                       >
@@ -218,9 +218,9 @@ const months = [
                   <span class="flex flex-row justify-center gap-1 items-center flex-wrap">
                     {data.tags.map((tag) => (
                       <span
-                        class="text-[0.65rem] rounded-full flex flex-row justify-center items-center p-[0.05rem] pr-2 pl-2 text-text-100"
+                        class="text-[0.65rem] rounded-full flex flex-row justify-center items-center p-[0.05rem] pr-2 pl-2 text-main-txt"
                         style={`background-color: ${
-                          tag_colors[tag] ?? "var(--color-secondary-700)"
+                          tag_colors[tag] ?? "var(--color-accent)"
                         };`}
                       >
                         {tag_icons[tag] ? <i class={tag_icons[tag]} /> : tag}
@@ -234,14 +234,14 @@ const months = [
         );
       })
     }
-    <div slot="filters" class="text-text-100">
+    <div slot="filters" class="text-main-txt">
       {
         tags_ordered.map(({ tag }) => (
           <button
             id={"button-" + tag}
-            class={`p-2 rounded-full hover:underline tag-button tag-${tag} text-text-100`}
+            class={`p-2 rounded-full hover:underline tag-button tag-${tag} text-main-txt`}
             style={`background-color: ${
-              tag_colors[tag] ?? "var(--color-secondary-700)"
+              tag_colors[tag] ?? "var(--color-accent)"
             };`}
           >
             {tag_icons[tag] ? <i class={tag_icons[tag]} /> : ""} {tag}

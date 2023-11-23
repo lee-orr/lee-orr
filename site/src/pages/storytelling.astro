@@ -107,10 +107,10 @@ const tag_colors: {[key: string]: string} = {
               return (
                 <div class={container_class} >
                 <div class={class_string} style={style}>
-                  <div class="bg-primary fixed w-screen h-screen top-0 left-0 right-0 bottom-0 z-[-10] pointer-events-none"></div>
-                  <h2 class="text-2xl text-text-200 font-bold flex flex-row justify-between items-center"><span class="flex flex-row justify-center gap-2 items-center">{data.youtube ? (
+                  <div class="bg-panel-bg fixed w-screen h-screen top-0 left-0 right-0 bottom-0 z-[-10] pointer-events-none"></div>
+                  <h2 class="text-2xl text-main-txt font-bold flex flex-row justify-between items-center"><span class="flex flex-row justify-center gap-2 items-center">{data.youtube ? (
                         <a
-                          class="flex items-center flex-row justify-center hover:text-secondary-200"
+                          class="flex items-center flex-row justify-center hover:text-hover-txt"
                           href={data.youtube}
                           target="_blank"
                         >
@@ -121,7 +121,7 @@ const tag_colors: {[key: string]: string} = {
                       )}
                       {data.itch ? (
                         <a
-                          class="flex items-center flex-row justify-center hover:text-secondary-200"
+                          class="flex items-center flex-row justify-center hover:text-hover-txt"
                           href={data.itch}
                           target="_blank"
                         >
@@ -129,7 +129,7 @@ const tag_colors: {[key: string]: string} = {
                         </a>
                       ) : (
                         ""
-                      )}<button class="underline-offset-8 underline timeline-item-button flex flex-row justify-center gap-2 hover:text-secondary-200" id={`item-${index}`}>
+                      )}<button class="underline-offset-8 underline timeline-item-button flex flex-row justify-center gap-2 hover:text-hover-txt" id={`item-${index}`}>
                       {data.title}</button></span><span class="flex flex-row justify-end gap-1 items-center">{data.tags.map((tag) => (
                     <span class="text-xs rounded-full flex flex-row justify-center items-center h-6 w-6" style={`background-color: ${tag_colors[tag] ?? "#000"};`}>
                       {tag_icons[tag] ? <i class={tag_icons[tag]}/>  : tag}
@@ -137,9 +137,9 @@ const tag_colors: {[key: string]: string} = {
                   ))}
                       </span></h2>
                   {img}
-                  <div class="text-md text-text-300">{data.summary}</div>
+                  <div class="text-md text-off-text">{data.summary}</div>
                   <dialog
-                      class="timeline-item-dialog bg-background-dark p-0"
+                      class="timeline-item-dialog bg-panel-bg p-0"
                       id={`dialog-${index}`}
                     >
                      <div class="relative p-10 bg-fixed bg-center bg-cover " 
@@ -168,15 +168,15 @@ const tag_colors: {[key: string]: string} = {
                         <form class="flex justify-center items-center">
                           <button
                             formmethod="dialog"
-                            class="rounded-full flex justify-center items-center bg-category-1  w-6 h-6 text-center text-text hover:brightness-75"
+                            class="rounded-full flex justify-center items-center bg-accent  w-6 h-6 text-center text-main-txt hover:bg-accent-hover"
                           >
                             X
                           </button>
                         </form>
                         </div>
-                        <h1 class="text-2xl text-text-200 font-bold flex flex-row justify-center items-center gap-2">{data.youtube ? (
+                        <h1 class="text-2xl text-main-txt font-bold flex flex-row justify-center items-center gap-2">{data.youtube ? (
                         <a
-                          class="flex items-center flex-row justify-center hover:text-secondary-200"
+                          class="flex items-center flex-row justify-center hover:text-hover-txt"
                           href={data.youtube}
                           target="_blank"
                         >
@@ -187,7 +187,7 @@ const tag_colors: {[key: string]: string} = {
                       )}
                       {data.itch ? (
                         <a
-                          class="flex items-center flex-row justify-center hover:text-secondary-200"
+                          class="flex items-center flex-row justify-center hover:text-hover-txt"
                           href={data.itch}
                           target="_blank"
                         >
@@ -207,7 +207,7 @@ const tag_colors: {[key: string]: string} = {
               );
             })
           }
-    <div slot="filters" class="text-white">
+    <div slot="filters" class="text-main-txt">
       {
         tags_ordered.map(({ tag}) => (<button id={"button-" + tag} class={ `p-2 rounded-full hover:underline tag-button tag-${tag}` } style={`background-color: ${tag_colors[tag] ?? "#000"};`}>{tag_icons[tag] ? <i class={tag_icons[tag]}/> : ""} {tag}</button>))
       }

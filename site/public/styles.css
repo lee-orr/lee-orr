@@ -80,10 +80,26 @@
     --category-9: rgb(47, 237, 234);
     --category-10: rgb(21, 245, 36);
     --category-11: rgb(246, 37, 14);
-}
+
+    --light-blue: #6da4cf;
+    --light-pink: #cf6da4;
+    --light-green: #a4cf6d;
+    --dark-green: #002e2c;
+    --dark-pink: #501537;
+    --dark-purple: #48284a;
+    --main-text: white;
+    }
 
 .storytelling,
 :root {
+    --color-main-bg: var(--light-pink);
+    --color-main-text: var(--main-text);
+    --color-panel-bg: var(--light-pink);
+    --color-hover-text: var(--light-blue);
+    --color-accent: var(--light-blue);
+    --color-accent-hover: var(--light-green);
+    --off-text: var(--dark-pink);
+
     --color-secondary-100: var(--storytelling-100);
     --color-secondary-200: var(--storytelling-200);
     --color-secondary-300: var(--storytelling-300);
@@ -109,6 +125,14 @@
 }
 
 .computing {
+
+    --color-main-bg: var(--light-green);
+    --color-main-text: var(--main-text);
+    --color-panel-bg: var(--dark-green);
+    --color-hover-text: var(--light-green);
+    --color-accent: var(--light-blue);
+    --color-accent-hover: var(--light-pink);
+    --off-text: var(--light-blue);
 
     --color-text-100: var(--computing-neutrals-100);
     --color-text-200: var(--computing-neutrals-200);

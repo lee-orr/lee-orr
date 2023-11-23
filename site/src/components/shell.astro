@@ -24,8 +24,8 @@ let navigation = process_nav(nav);
 ---
 
 <body class={area}>
-  <div class="shell-root bg-background">
-    <div class="header bg-primary-700 text-text-100">
+  <div class="shell-root bg-main-bg">
+    <div class="header bg-panel-bg text-main-txt">
       <span class="links">
         <a href="/">
           <div class="aspect-1/1 logo"></div>
@@ -34,7 +34,7 @@ let navigation = process_nav(nav);
         {
           socials.map(({ value, icon }) => (
             <a
-              class="text-text-100 text-xl hover:text-secondary-200"
+              class="text-xl hover:text-hover-txt"
               target="_blank"
               href={value}
             >
@@ -43,15 +43,15 @@ let navigation = process_nav(nav);
           ))
         }
       </span>
-      <a class="text-3xl title hover:text-secondary-200" href={area}>Lee-Orr</a>
+      <a class="text-3xl title hover:text-hover-txt" href={area}>Lee-Orr</a>
       <span class="navigation text-xl">
         {
           navigation.map(({ is_active, name, url, new_tab }) => (
             <a
               class={
                 (is_active
-                  ? "pointer-events-none text-secondary-200 font-bold underline"
-                  : "") + " hover:text-secondary-200"
+                  ? "pointer-events-none text-accent font-bold underline"
+                  : "") + " hover:text-hover-txt"
               }
               target={new_tab ? "_blank" : ""}
               href={url}
@@ -69,8 +69,8 @@ let navigation = process_nav(nav);
           <slot />
         </div>
       </div>
-      <details class="tags bg-primary-800">
-        <summary class="text-text-100 text-xl underline underline-offset-2">
+      <details class="tags bg-panel-bg">
+        <summary class="text-main-txt text-xl underline underline-offset-2">
           Filters
         </summary>
         <slot name="filters" />
@@ -186,7 +186,7 @@ let navigation = process_nav(nav);
       flex-shrink: 0;
 
       &:hover {
-        color: var(--color-secondary-200);
+        color: var(--color-hover-text);
       }
     }
 
@@ -255,12 +255,12 @@ let navigation = process_nav(nav);
     left: 0;
     right: 0;
     bottom: 0;
-    background: var(--color-text-100);
+    background: var(--color-main-text);
     mix-blend-mode: multiply;
     border-radius: 100%;
   }
 
   .logo:hover::after {
-    background: var(--color-secondary-200);
+    background: var(--color-hover-text);
   }
 </style>
