@@ -5,13 +5,11 @@ const { area } = Astro.props as {
 };
 
 const colors = [
-  "var(--category-1)",
-  "var(--category-2)",
-  "var(--category-3)",
-  "var(--category-4)",
-  "var(--category-5)",
-  "var(--category-6)",
-  "var(--category-7)",
+  "var(--color-main-text)",
+  "var(--color-hover-text)",
+  "var(--color-accent)",
+  "var(--color-accent-hover)",
+  "var(--off-text)",
 ];
 
 const num_elements = area === "computing" ? 15 : 10;
@@ -19,10 +17,7 @@ const duration = area === "computing" ? 1.5 : 3;
 
 const get_shape = area === "computing" ? () => "circle(45%);" : generate_splat;
 const get_size = area === "computing" ? () => 1 : () => Math.random() * 3 + 7;
-const get_colors =
-  area === "computing"
-    ? () => "white"
-    : () => colors[Math.floor(Math.random() * colors.length)];
+const get_colors = () => colors[Math.floor(Math.random() * colors.length)];
 
 let elements = [];
 for (let i = 0; i < num_elements; i++) {
@@ -59,7 +54,7 @@ for (let i = 0; i < num_elements; i++) {
     })
   }
   <div
-    class="absolute top-0 left-0 right-0 bottom-0 bg-gradient-radial from-accent-100 via-transparent to-primary-900 from-0% via-30% to-100% z-0"
+    class="absolute top-0 left-0 right-0 bottom-0 bg-gradient-radial from-main-bg via-transparent to-accent from-0% via-70% to-100% z-0"
   >
   </div>
 </div>

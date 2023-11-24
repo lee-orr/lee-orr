@@ -8,7 +8,7 @@ module.exports = {
 				'gradient-radial': 'radial-gradient(var(--tw-gradient-stops))',
 			},
 			colors: {
-				'main-bg': 'var(--color-main-background)',
+				'main-bg': 'var(--color-main-bg)',
 				'main-txt': 'var(--color-main-text)',
 				'panel-bg': 'var(--color-panel-bg)',
 				'hover-txt': 'var(--color-hover-text)',

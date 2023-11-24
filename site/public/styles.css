@@ -81,12 +81,12 @@
     --category-10: rgb(21, 245, 36);
     --category-11: rgb(246, 37, 14);
 
-    --light-blue: #6da4cf;
-    --light-pink: #cf6da4;
-    --light-green: #a4cf6d;
-    --dark-green: #002e2c;
-    --dark-pink: #501537;
-    --dark-purple: #48284a;
+    --light-blue: #78b3d6;
+    --light-pink: #fccbcb;
+    --light-green: #dee3e2;
+    --dark-green: #4f7969;
+    --dark-pink: #d86969;
+    --dark-blue: #243640;
     --main-text: white;
     }
 
@@ -94,11 +94,11 @@
 :root {
     --color-main-bg: var(--light-pink);
     --color-main-text: var(--main-text);
-    --color-panel-bg: var(--light-pink);
-    --color-hover-text: var(--light-blue);
+    --color-panel-bg: var(--dark-pink);
+    --color-hover-text: var(--light-pink);
     --color-accent: var(--light-blue);
-    --color-accent-hover: var(--light-green);
-    --off-text: var(--dark-pink);
+    --color-accent-hover: var(--dark-green);
+    --off-text: var(--light-green);
 
     --color-secondary-100: var(--storytelling-100);
     --color-secondary-200: var(--storytelling-200);
@@ -128,10 +128,10 @@
 
     --color-main-bg: var(--light-green);
     --color-main-text: var(--main-text);
-    --color-panel-bg: var(--dark-green);
-    --color-hover-text: var(--light-green);
-    --color-accent: var(--light-blue);
-    --color-accent-hover: var(--light-pink);
+    --color-panel-bg: var(--dark-blue);
+    --color-hover-text: var(--light-blue);
+    --color-accent: var(--dark-green);
+    --color-accent-hover: var(--dark-pink);
     --off-text: var(--light-blue);
 
     --color-text-100: var(--computing-neutrals-100);
