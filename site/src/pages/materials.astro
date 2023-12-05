@@ -2,6 +2,7 @@
 import { getCollection } from "astro:content";
 import Shell from "../components/shell.astro";
 
+import Html from "../components/html.astro";
 import { storytelling } from "../data/site-nav-data.json";
 import { generate_shape } from "./generate_shape";
 const { socials, nav } = storytelling;
@@ -50,17 +51,8 @@ const demos: {
 ];
 ---
 
-<html lang="en">
-  <head>
-    <meta charset="utf-8" />
-    <link rel="icon" type="image/png" href="/favicon.png" />
-    <meta name="viewport" content="width=device-width" />
-    <meta name="generator" content={Astro.generator} />
-    <link rel="stylesheet" href="/styles.css" />
-    <link rel="stylesheet" href="/icofont.min.css" />
-    <base href="/" />
-    <title>Lee-Orr</title>
-  </head>
+
+<Html>
   <Shell area="storytelling" socials={socials} nav={nav}>
     {
       demos.map(({ title, audio, icon, color, shape, links }) => {
@@ -127,4 +119,4 @@ const demos: {
      background-color: #17313A;
     }
   </style>
-</html>
+</Html>

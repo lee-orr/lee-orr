@@ -1,6 +1,7 @@
 ---
 import { getCollection } from "astro:content";
 import Shell from "../components/shell.astro";
+import Html from "../components/html.astro";
 
 import { storytelling } from "../data/site-nav-data.json";
 import { generate_shape } from "./generate_shape";
@@ -72,17 +73,8 @@ const tag_colors: {[key: string]: string} = {
 
 ---
 
-<html lang="en">
-  <head>
-    <meta charset="utf-8" />
-    <link rel="icon" type="image/png" href="/favicon.png" />
-    <meta name="viewport" content="width=device-width" />
-    <meta name="generator" content={Astro.generator} />
-    <link rel="stylesheet" href="/styles.css" />
-    <link rel="stylesheet" href="/icofont.min.css" />
-    <base href="/" />
-    <title>Lee-Orr</title>
-  </head>
+
+<Html>
   <Shell area="storytelling" socials={socials} nav={nav}>
           {
             timeline.map(({ slug, data, rendered }, index) => {
@@ -219,7 +211,7 @@ const tag_colors: {[key: string]: string} = {
   </Shell>
 
   <script src="../setup_page.ts"></script>
-</html>
+</Html>
 
 <style>
   body {
