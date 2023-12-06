@@ -3,10 +3,12 @@ import { getCollection } from "astro:content";
 import Shell from "../components/shell.astro";
 import Html from "../components/html.astro";
 
-import { storytelling } from "../data/site-nav-data.json";
+import { storytelling, link_types } from "../data/site-nav-data.json";
 import { generate_shape } from "./generate_shape";
 import { generate_storytelling_filters } from "./generate_filters";
 const { socials, nav } = storytelling;
+
+const link_icons: {[key: string]: string | undefined} = link_types;
 
 const timeline = await Promise.all((await getCollection("storytelling-timeline")).map((v) => ({
   ...v,
@@ -29,8 +31,8 @@ timeline.sort((a,b) => b.data.date > a.data.date ? 1 : -1);
 const get_next_random = () => {
   let random = Math.random();
   let size_index = random < 0.5 ? 0 : random < 0.75 ? 1 : 2;
-  let offset_x = Math.random() * 2.5 - 1.25;
-  let offset_y = Math.random() * 2.5 - 1.25;
+  let offset_x = Math.random() * 1.8 - 0.9;
+  let offset_y = Math.random() * 1.8 - 0.9;
 
   return [size_index, offset_x, offset_y];
 }
@@ -84,9 +86,6 @@ const tag_colors: {[key: string]: string} = {
               let shape = generate_shape();
               let style = `clip-path: ${shape}; position: relative; top: ${offset_y}rem; left: ${offset_x}rem;`;
 
-
-              let class_string = `flex-col p-5 flex gap-5 w-full`;
-
               let container_class = `timeline-item ${data.tags.map((v) => v.trim()).map((v) => `tag-${v}`).join(" ")}`;
 
               let img = data.image ? (<div class="w-full h-[30vh] flex flex-row justify-center items-center"><div class="flex-shrink flex-grow max-w-full h-full aspect-square bg-center bg-cover" style={`background-image: url(${data.image});`}/></div>) : (<></>);
@@ -98,105 +97,40 @@ const tag_colors: {[key: string]: string} = {
               const { Content } = rendered;
 
               return (
-                <ul class={container_class} >
-                <div class={class_string} style={style}>
-                  <div class="bg-panel-bg fixed w-screen h-screen top-0 left-0 right-0 bottom-0 z-[-10] pointer-events-none"></div>
-                  <h2 class="text-2xl text-main-txt font-bold flex flex-row justify-between items-center"><span class="flex flex-row justify-center gap-2 items-center">{data.youtube ? (
-                        <a
-                          class="flex items-center flex-row justify-center hover:text-hover-txt"
-                          href={data.youtube}
-                          target="_blank"
-                        >
-                          <i class="icofont-youtube" />
-                        </a>
-                      ) : (
-                        ""
-                      )}
-                      {data.itch ? (
-                        <a
-                          class="flex items-center flex-row justify-center hover:text-hover-txt"
-                          href={data.itch}
-                          target="_blank"
-                        >
-                          <i class="icofont-game-console" />
-                        </a>
-                      ) : (
-                        ""
-                      )}<button class="underline-offset-8 underline timeline-item-button flex flex-row justify-center gap-2 hover:text-hover-txt" id={`item-${index}`}>
-                      {data.title}</button></span><span class="flex flex-row justify-end gap-1 items-center">{data.tags.map((tag) => (
-                    <span class="text-xs rounded-full flex flex-row justify-center items-center h-6 w-6" style={`background-color: ${tag_colors[tag] ?? "#000"};`}>
-                      {tag_icons[tag] ? <i class={tag_icons[tag]}/>  : tag}
-                      </span>
-                  ))}
-                      </span></h2>
-                  {img}
-                  <div class="text-md text-off-text">{data.summary}</div>
-                  <dialog
-                      class="timeline-item-dialog bg-panel-bg p-0"
-                      id={`dialog-${index}`}
-                    >
-                     <div class="relative p-10 bg-fixed bg-center bg-cover " 
-                      style={imgbg}>
-                      { data.image ? (<div class="absolute top-0 left-0 right-0 bottom-0 backdrop-grayscale backdrop-brightness-[0.2]"></div>) : "" }
-                      <div class="absolute top-0 left-0 right-0 bottom-0 p-10 flex flex-col gap-2">
-                        <div class="flex flex-row justify-end items-center">
-                          
-                        <span class="flex flex-row justify-center gap-1 items-center flex-wrap">
-                          {data.tags.map((tag) => (
-                            <span
-                              class="text-xs text-text-200 rounded-full flex flex-row justify-center items-center h-6 w-6"
-                              style={`background-color: ${
-                                tag_colors[tag] ?? "var(--color-secondary-100)"
-                              };`}
-                            >
-                              {tag_icons[tag] ? (
-                                <i class={tag_icons[tag]} />
-                              ) : (
-                                tag
-                              )}
-                            </span>
-                          ))}
-                        </span>
-                        <span class="flex-grow"></span>
-                        <form class="flex justify-center items-center">
-                          <button
-                            formmethod="dialog"
-                            class="rounded-full flex justify-center items-center bg-accent  w-6 h-6 text-center text-main-txt hover:bg-accent-hover"
-                          >
-                            X
-                          </button>
-                        </form>
-                        </div>
-                        <h1 class="text-2xl text-main-txt font-bold flex flex-row justify-center items-center gap-2">{data.youtube ? (
-                        <a
-                          class="flex items-center flex-row justify-center hover:text-hover-txt"
-                          href={data.youtube}
-                          target="_blank"
-                        >
-                          <i class="icofont-youtube" />
-                        </a>
-                      ) : (
-                        ""
-                      )}
-                      {data.itch ? (
-                        <a
-                          class="flex items-center flex-row justify-center hover:text-hover-txt"
-                          href={data.itch}
-                          target="_blank"
-                        >
-                          <i class="icofont-game-console" />
-                        </a>
-                      ) : (
-                        ""
-                      )}
-                          {data.title}
-                        </h1>
-                        <div class="prose prose-content">
-                          <Content />
-                        </div>
-                      </div></div>
-                    </dialog>
-                </div></ul>
+                <li class={container_class} >
+                  <div style={style}>
+                    <div class="bg" />
+                    <h2><a href="#">{data.title}</a></h2>
+                    <h3>
+                      <time datetime={data.date.toDateString()} aria-label="from">{data.date.toLocaleDateString('default', { month: "short", year: 'numeric' })}</time>
+                    </h3>
+                    <ul aria-label="area" class="tags">
+                      {
+                        data.tags.map((tag) => <li style={`background-color: ${tag_colors[tag] ?? "#000"};`}>{tag_icons[tag] ? <><i class={tag_icons[tag]}/>&nbsp;</> : ""}{tag}</li>)
+                      }
+                    </ul>
+                    {
+                      data.image ? 
+                      <div class="image"><img src={data.image} alt={data.image_alt}/></div>
+                      : <></>
+                    }
+                    <p>{data.summary}</p>
+                    
+            {
+              data.links ? (<ul class="links" aria-label="links">{
+                Object.keys(data.links).map((type) => {
+                  let target = data.links && data.links[type];
+                  if (!target) {
+                    return <></>
+                  }
+                  let icon = link_icons[type];
+                  let icon_element = icon ? <><i class={icon} /> &nbsp;</> : <></>;
+                  return <a href={target}>{icon_element}{target}</a>;
+                })}</ul>
+              ) : <></>
+            }
+                  </div>
+                </li>
               );
             })
           }
@@ -214,6 +148,147 @@ const tag_colors: {[key: string]: string} = {
 </Html>
 
 <style>
+
+.timeline {
+    display: grid;
+    gap: 0.3rem;
+    grid-template-columns: repeat(auto-fill, 
+      0.5rem
+      2rem
+      16rem
+      1rem
+      0.5rem
+    );
+    grid-auto-rows: 
+    0.5rem
+    1rem
+    fit-content(1.2em)
+    minmax(0, max-content)
+    fit-content(4em)
+    fit-content(1.2em)
+    fit-content(3em)
+    fit-content(5em)
+    1rem
+    0.5rem;
+    justify-content: center;
+  }
+
+  .timeline-item {
+    display: grid;
+    grid-column: span 5;
+    grid-row: span 10;
+    position: relative;
+    overflow: hidden;
+
+
+
+    grid-template-columns: subgrid
+    [gap-start]
+      [card-start]
+      [title-start date-start image-start tags-start content-start links-start]
+      [title-end date-end image-end tags-end content-end links-end]
+      [card-end]
+      [gap-end];
+      grid-template-rows: subgrid
+      [gap-start]
+      [card-start]
+      [tags-start]
+      [tags-end image-start]
+      [image-end title-start]
+      [title-end date-start]
+      [date-end content-start]
+      [content-end links-start]
+      [links-end]
+      [card-end]
+      [gap-end];
+      
+
+    & > div {
+      display: grid;
+      grid-template-columns: subgrid;
+      grid-template-rows: subgrid;
+
+      grid-area: card;
+
+      h2 {
+        font-size: 1.1em;
+        grid-area: title;
+        position: relative;
+        z-index: 1;
+        text-align: center;
+        align-self: start;
+        justify-self: center;
+      }
+
+      h3 {
+        grid-area: date;
+        text-align: center;
+        font-size: 0.65em;
+      }
+
+      .tags {
+        grid-area: tags;
+        text-align: center;
+
+        li {
+          display: inline-block;
+          font-size: 0.6em;
+          margin: 0.1em;
+          padding: 0.25em;
+          border-radius: 0.5em;
+          height: 2em;
+        }
+      }
+
+      p {
+        grid-area: content;
+        font-size: 0.7em;
+      }
+
+      .links {
+        grid-area: links;
+        font-size: 0.7em;
+        display: flex;
+        flex-direction: row;
+        flex-wrap: wrap;
+        justify-content: space-between;
+        align-items: flex-start;
+      }
+
+      .image {
+        grid-area: image;
+        position: relative;
+        z-index: 0;
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+
+        img {
+          max-height: 100%;
+        }
+      }
+
+      .bg {
+        z-index: -1;
+        background-color: var(--color-panel-bg);
+        width: 100lvw;
+        height: 100lvh;
+      }
+    }
+  }
+
+
+  @media (max-width: 700px) {
+    .timeline {
+    grid-template-columns: 
+      0.5rem
+      2rem
+      fit-content(20em)
+      1rem
+      0.5rem;
+    }
+  }
   
 </style>
 

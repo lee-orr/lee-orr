@@ -1,4 +1,11 @@
 {
+  "link_types": {
+    "github": "icofont-github",
+    "youtube": "icofont-youtube",
+    "itch": "icofont-game-console",
+    "facebook": "icofont-facebook",
+    "linkedin": "icofont-linkedin"
+  },
   "computing": {
     "socials": [
       {

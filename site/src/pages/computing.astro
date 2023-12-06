@@ -4,10 +4,12 @@ import slugify from "slugify";
 import Shell from "../components/shell.astro";
 import Html from "../components/html.astro";
 
-import { computing } from "../data/site-nav-data.json";
+import { computing, link_types } from "../data/site-nav-data.json";
 const { socials, nav } = computing;
 import { generate_computing_filters } from "./generate_filters";
 import AnimatedBackdrop from "../components/animated-backdrop.astro";
+
+const link_icons: {[key: string]: string | undefined} = link_types;
 
 slugify.extend({ "/": "-", "\\": "-" });
 
@@ -70,20 +72,6 @@ tags_ordered.sort((a, b) => b.count - a.count);
 const tag_icons: { [key: string]: string } = {};
 const tag_colors: { [key: string]: string } = {};
 
-const months = [
-  "January",
-  "February",
-  "March",
-  "April",
-  "May",
-  "June",
-  "July",
-  "August",
-  "September",
-  "October",
-  "November",
-  "December",
-];
 ---
 
 <Html>
@@ -129,10 +117,18 @@ const months = [
                 data.tags.map((tag) => <li>{tag}</li>)
               }
             </ul>
-            <summary>{data.summary}</summary>
+            <p>{data.summary}</p>
             {
-              data.github ? (
-                <a href={data.github}><i class="icofont-github"/> {data.github}</a>
+              data.links ? (<ul class="links" aria-label="links">{
+                Object.keys(data.links).map((type) => {
+                  let target = data.links && data.links[type];
+                  if (!target) {
+                    return <></>
+                  }
+                  let icon = link_icons[type];
+                  let icon_element = icon ? <><i class={icon} /> &nbsp;</> : <></>;
+                  return <a href={target}>{icon_element}{target}</a>;
+                })}</ul>
               ) : <></>
             }
           </li>
@@ -237,15 +233,19 @@ const months = [
       }
     }
 
-    summary {
+    p {
       grid-area: content;
       font-size: 0.7em;
     }
 
-    & > a {
+    .links {
       grid-area: link;
       font-size: 0.6em;
       text-align: center;
+      display: flex;
+      flex-direction: column;
+      justify-content: flex-start;
+      align-items: center;
     }
   }
 </style>

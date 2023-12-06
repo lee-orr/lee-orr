@@ -10,8 +10,7 @@ const storytelling_timeline = defineCollection({
     dialogue_bg: z.string().optional(),
     date: z.date(),
     tags: z.string(),
-    itch: z.optional(z.string()),
-    youtube: z.optional(z.string()),
+    links: z.optional(z.record(z.string()))
   }),
 });
 
@@ -30,7 +29,7 @@ const computing_timeline = defineCollection({
     end_date: z.optional(z.date()),
     start_date: z.date(),
     tags: z.string(),
-    github: z.optional(z.string()),
+    links: z.optional(z.record(z.string()))
   }),
 });
 

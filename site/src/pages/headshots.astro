@@ -24,34 +24,46 @@ const images = [
 
 <Html>
   <Shell area="storytelling" socials={socials} nav={nav}>
+    <ul>
     {
       images.map((img) => {
         let shape = generate_shape();
         let style = `clip-path: ${shape}`;
 
-        let class_string = `flex-col m-[3%] p-5 flex gap-5 headshot`;
-
         return (
           <>
-            <div class={class_string} style={style}>
-              <div class="bg-panel-bg absolute w-screen h-screen top-0 left-0 right-0 bottom-0 z-[-10] pointer-events-none row-span-2" />
+            <a class="headshot" style={style} href={`headshots/${img}`}>
               <img src={`headshots/${img}`} />
-            </div>
+            </a>
           </>
         );
       })
     }
+    </ul>
   </Shell>
 
   <style>
-    body {
-      --content-template-columns: repeat(auto-fit, minmax(35rem, 1fr));
-      --content-template-gap: 4rem;
+
+    ul {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, 20rem);
+      justify-content: center;
+    }
+
+    @media (max-width: 700px) {
+      ul {
+        grid-template-columns: 1fr;
+      }
     }
 
     .headshot {
-      padding: 1rem;
       position: relative;
+      transition: scale 0.25s;
+    }
+
+    .headshot:hover {
+      scale: 1.05;
+      z-index: 2;
     }
   </style>
 </Html>

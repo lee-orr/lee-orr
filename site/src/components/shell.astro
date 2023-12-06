@@ -213,16 +213,16 @@ let navigation = process_nav(nav);
 
   @media (max-width: 700px) {
     body {
-      grid-template-rows: [page-start header-start socials-start nav-start] min-content
-      [socials-end title-start] min-content
-      [title-end links-start] min-content
+      grid-template-rows: [page-start header-start socials-start nav-start] 3em
+      [socials-end title-start] 3em
+      [title-end links-start] 2em
       [links-end nav-end header-end filter-start] min-content
       [filter-end content-start] auto
       [content-end page-end];
 
-      grid-template-columns: [page-start header-start] 1em
+      grid-template-columns: [page-start header-start] 0.5em
       [socials-start nav-start links-start title-start filter-start content-start] 1fr
-      [socials-end nav-end links-end title-end filter-end content-end] 1em [page-end header-end];
+      [socials-end nav-end links-end title-end filter-end content-end] 0.5em [page-end header-end];
     }
 
     nav span:nth-child(n) {

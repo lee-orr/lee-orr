@@ -1,7 +1,7 @@
-const OFFSETS = 0.03;
-const MIN = 0 - OFFSETS;
-const MAX = 1 + OFFSETS;
-const GAP = (MAX - MIN) * 0.5;
+const OFFSETS = 0.02;
+const MIN = 0 + OFFSETS;
+const MAX = 1 - OFFSETS;
+const GAP = (MAX - MIN) * 0.3;
 const H_GAP = GAP / 2;
 const MID = GAP + MIN;
 const POLYGON: [number, number][] = [
