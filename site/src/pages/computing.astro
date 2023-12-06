@@ -89,148 +89,63 @@ const months = [
 <Html>
 
   <Shell area="computing" socials={socials} nav={nav}>
+    <ol class="timeline">
     {
       timeline.map(({ slug, data, body, rendered }, index) => {
-        let class_string = `timeline-item bg-panel-bg flex-col overflow-y-auto p-5 h-[25vh] flex gap-3 timeline-item col-span-2 ${data.tags
+        let class_string = `timeline-item ${data.tags
           .map((v) => v.trim())
           .map((v) => `tag-${v}`)
           .join(" ")}`;
 
-        let title =
-          data.info.project || data.info.role + " at " + data.info.company;
+        let info : { role: string, company: string, is_contract?: boolean } | { project: string} = data.info;
+
+        let title = "project" in info ? info.project : info.role + " at " + info.company;
 
         let context =
-          data.info.project !== undefined
+          "project" in info
             ? "Project"
-            : data.info.is_contract
+            : info.is_contract
             ? "Contract"
             : "Job";
 
         const { Content } = rendered;
 
         return (
-          <>
-            <div class={class_string}>
-              <h3 class="text-xs text-main-txt text-center justify-between items-center gap-3 flex flex-row">
-                <span>
-                  {months[data.start_date.getMonth()]},{" "}
-                  {data.start_date.getFullYear()} -{" "}
-                  {data.end_date
-                    ? months[data.end_date.getMonth()] +
-                      ", " +
-                      data.end_date.getFullYear()
-                    : "present"}
-                </span>
-
-                {data.github ? (
-                  <a
-                    class="text-sm flex items-center flex-row justify-center hover:text-hover-txt"
-                    href={data.github}
-                    target="_blank"
-                  >
-                    <i class="icofont-github" />
-                  </a>
-                ) : (
-                  <span />
-                )}
-              </h3>
-              <h2 class="text-2xl text-main-txt font-bold flex flex-row justify-center items-center">
-                <button
-                  class="underline-offset-8 text-center hover:underline timeline-item-button hover:text-hover-txt"
-                  id={`item-${index}`}
-                >
-                  {title}
-                </button>
-              </h2>
-              <h3 class="text-xs text-off-text flex flex-row justify-center items-center">
-                {context}
-              </h3>
-
-              <span class="flex flex-row justify-center gap-1 items-center flex-wrap">
-                {data.tags.map((tag) => (
-                  <span
-                    class="text-[0.65rem] rounded-full flex flex-row justify-center items-center p-[0.05rem] pr-2 pl-2 text-main-txt"
-                    style={`background-color: ${
-                      tag_colors[tag] ?? "var(--color-accent)"
-                    };`}
-                  >
-                    {tag_icons[tag] ? <i class={tag_icons[tag]} /> : tag}
-                  </span>
-                ))}
-              </span>
-              <div class="text-sm text-center text-off-text">
-                {data.summary}
-              </div>
-
-              <dialog
-                class="timeline-item-dialog bg-panel-bg p-0"
-                id={`dialog-${index}`}
-              >
-                <div class="relative p-10 w-full h-full flex flex-col gap-2">
-                  <div class="flex flex-row justify-between items-center pb-2">
-                    <h1 class="text-2xl text-main-txt font-bold flex flex-row justify-start items-center">
-                      {title}
-                    </h1>
-                    <form class="flex justify-center items-center">
-                      <button
-                        formmethod="dialog"
-                        class="rounded-full flex justify-center items-center bg-accent  w-5 h-5 text-center text-main-txt hover:bg-accent-hover"
-                      >
-                        X
-                      </button>
-                    </form>
-                  </div>
-                  <h3 class="text-xs text-off-text text-center flex flex-row justify-between items-center gap-3">
-                    <span>
-                      {months[data.start_date.getMonth()]},{" "}
-                      {data.start_date.getFullYear()} -{" "}
-                      {data.end_date
-                        ? months[data.end_date.getMonth()] +
-                          ", " +
-                          data.end_date.getFullYear()
-                        : "present"}
-                    </span>
-                    {data.github ? (
-                      <a
-                        class="text-sm flex items-center flex-row gap-1 justify-center hover:text-hover-txt"
-                        href={data.github}
-                        target="_blank"
-                      >
-                        <span>{data.github}</span>
-                        <i class="icofont-github" />
-                      </a>
-                    ) : (
-                      ""
-                    )}
-                  </h3>
-                  <div class="prose prose-content text-main-txt">
-                    <Content />
-                  </div>
-                  <span class="flex flex-row justify-center gap-1 items-center flex-wrap">
-                    {data.tags.map((tag) => (
-                      <span
-                        class="text-[0.65rem] rounded-full flex flex-row justify-center items-center p-[0.05rem] pr-2 pl-2 text-main-txt"
-                        style={`background-color: ${
-                          tag_colors[tag] ?? "var(--color-accent)"
-                        };`}
-                      >
-                        {tag_icons[tag] ? <i class={tag_icons[tag]} /> : tag}
-                      </span>
-                    ))}
-                  </span>
-                </div>
-              </dialog>
-            </div>
-          </>
+          <li class={class_string}>
+            <h2><a href="#">{title}</a></h2>
+            <h3>{context}</h3>
+            <h4>
+              <time datetime={data.start_date.toDateString()} aria-label="from">{data.start_date.toLocaleDateString('default', { month: "short", year: 'numeric' })}</time>
+              {
+                data.end_date ? (
+                  <> to
+                  <time datetime={data.end_date.toDateString()}>{data.end_date.toLocaleDateString('default', { month: "short", year: 'numeric' })}</time>
+                  </>
+                ) : <></>
+              }
+            </h4>
+            <ul aria-label="technologies and skills">
+              {
+                data.tags.map((tag) => <li>{tag}</li>)
+              }
+            </ul>
+            <summary>{data.summary}</summary>
+            {
+              data.github ? (
+                <a href={data.github}><i class="icofont-github"/> {data.github}</a>
+              ) : <></>
+            }
+          </li>
         );
       })
     }
-    <div slot="filters" class="text-main-txt">
+    </ol>
+    <div slot="filters">
       {
         tags_ordered.map(({ tag }) => (
           <button
             id={"button-" + tag}
-            class={`p-2 rounded-full hover:underline tag-button tag-${tag} text-main-txt`}
+            class={`tag-button tag-${tag}`}
             style={`background-color: ${
               tag_colors[tag] ?? "var(--color-accent)"
             };`}
@@ -250,8 +165,96 @@ const months = [
 </Html>
 
 <style>
-  body {
-    --content-template-columns: repeat(auto-fit, minmax(10rem, 1fr));
-    --content-template-gap: 0.5rem;
+  .timeline {
+    display: grid;
+    gap: 0.3rem;
+    grid-template-columns: repeat(auto-fill, 
+      0.5rem
+      16rem
+       0.5rem
+    );
+    grid-auto-rows: 0.05rem fit-content(1.2em) fit-content(4em) fit-content(1.5em) fit-content(1.2em) fit-content(3em) fit-content(5em) 0.05rem;
+    justify-content: center;
+  }
+
+  .timeline-item {
+    display: grid;
+    grid-column: span 3;
+    grid-row: span 8;
+
+    grid-template-columns: subgrid [card-start] [date-start content-start tags-start title-start type-start link-start] [date-end content-end tags-end title-end type-end link-end] 
+      [card-end];
+    grid-template-rows: subgrid 
+    [card-start]
+    [date-start] 
+    [date-end title-start]
+    [title-end type-start]
+    [type-end link-start]
+    [link-end tags-start] 
+    [tags-end content-start]
+    [content-end]
+    [card-end];
+
+    background-color: var(--color-panel-bg);
+    border-radius: 1rem;
+
+    h2 {
+      font-size: 1.1em;
+      grid-area: title;
+      display: flex;
+      flex-direction: row;
+      justify-content: center;
+      align-items: flex-start;
+      text-align: center;
+    }
+
+    h3 {
+      grid-area: type;
+      font-size: 0.7em;
+      display: flex;
+      flex-direction: row;
+      justify-content: center;
+      align-items: flex-start;
+      text-align: center;
+    }
+
+    h4 {
+      grid-area: date;
+      font-size: 0.65em;
+    }
+
+    ul {
+      grid-area: tags;
+      text-align: center;
+
+      li {
+        display: inline-block;
+        font-size: 0.6em;
+        margin: 0.1em;
+        background-color: var(--color-accent);
+        padding: 0.25em;
+        border-radius: 0.5em;
+      }
+    }
+
+    summary {
+      grid-area: content;
+      font-size: 0.7em;
+    }
+
+    & > a {
+      grid-area: link;
+      font-size: 0.6em;
+      text-align: center;
+    }
   }
 </style>
+
+
+
+<script>
+  import setup_page from "../setup_page";
+  setup_page();
+
+  document.addEventListener('astro:after-swap', setup_page);
+</script>

@@ -1,8 +1,8 @@
 ---
 info:
-    company: Harvard
-    role: Contract Engineer
-    is_contract: true
+  company: Harvard
+  role: Contract Engineer
+  is_contract: true
 summary: Built a tool for to help researchers construct input data for earthquake cycle imaging.
 start_date: 2021-12-01
 end_date: 2022-05-01

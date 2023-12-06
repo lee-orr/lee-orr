@@ -25,27 +25,28 @@ let navigation = process_nav(nav);
 
 <body class={area}>
     <header class="">
-      <span><a class="" href={area}><h2>Lee-Orr</h2></a></span>
+      <span><a class="lg" href={area}><h1>Lee-Orr</h1></a></span>
     </header>
 
     <nav class="">
-      <span>
-      <a href="/">
-        <div class="logo">Return to home page</div>
+      <span aria-label="external links">
+      <a href="/" aria-label="Return to home page">
+        <div class="logo"></div>
       </a>
 
       {
-        socials.map(({ value, icon }) => (
+        socials.map(({ type, value, icon }) => (
           <a
             class=""
             target="_blank"
             href={value}
+            aria-label={type}
           >
             <i class={icon} />
           </a>
         ))
       }</span>
-    <span class="">
+    <span class="" aria-label="internal pages">
       {
         navigation.map(({ is_active, name, url, new_tab }) => (
           <a
@@ -180,10 +181,34 @@ let navigation = process_nav(nav);
       text-underline-offset: 0.5em;
       cursor: pointer;
     }
+
+    &>:global(div) {
+      padding-top: 1rem;
+      display: flex;
+      flex-wrap: wrap;
+      flex-direction: row;
+      justify-content: space-evenly;
+      align-items: center;
+      gap: 0.25em;
+
+      &>:global(button) {
+        padding: 0.25em;
+        border-radius: 0.5rem;
+        cursor: pointer;
+      }
+
+      &>:global(button:hover) {
+        filter: brightness(130%);
+      }
+    }
   }
 
   .content {
     grid-area: content;
+    display: flex;
+    flex-direction: column;
+    align-items: stretch;
+    justify-content: flex-start;
   }
 
   @media (max-width: 700px) {

@@ -1,6 +1,6 @@
 ---
 info:
-    project: The Just Two
+  project: The Just Two
 summary: Take on the role of Fate in the tale of two warriors of justice from opposing sides of a war in a probability bending RPG.
 start_date: 2023-07-14
 end_date: 2023-07-24

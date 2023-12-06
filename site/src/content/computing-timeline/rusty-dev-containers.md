@@ -1,6 +1,6 @@
 ---
 info:
-    project: Rusty Dev Containers
+  project: Rusty Dev Containers
 summary: A collection of useful dev container features, to make it easier to set them up for rust or wasm development.
 start_date: 2023-05-13
 tags: rust wasm dev-containers docker

@@ -4,17 +4,17 @@ import Html from "../components/html.astro";
 
 <Html>
   <body>
-      <div
-        class="title"
+      <hgroup
+        class="title xl"
       >
         <h1 class="storytelling">
           Lee
         </h1>
         <h1>-</h1>
         <h1 class="computing">Orr</h1>
-      </div>
+      </hgroup>
       <a
-        class="storytelling"
+        class="storytelling lg"
         style="clip-path: border-box;"
         href="/storytelling"
       >
@@ -28,7 +28,7 @@ import Html from "../components/html.astro";
         </h2>
       </a>
       <a
-        class="computing"
+        class="computing lg"
         style="clip-path: border-box;"
         href="/computing"
       >
@@ -80,8 +80,8 @@ a {
   }
 
   &:hover, &:focus, &:focus-within, &:active {
-    text-decoration: underline 0.3em solid;
-    text-underline-offset: 0.5em;
+    text-decoration: underline 0.2em solid;
+    text-underline-offset: 0.2em;
     flex-grow: 10;
     transition: flex-grow 1s;
     div {

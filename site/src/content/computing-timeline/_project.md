@@ -1,6 +1,6 @@
 ---
 info:
-    project: NAME
+  project: NAME
 summary: SUMMARY
 start_date: 2023-07-05
 end_date: 2023-07-05

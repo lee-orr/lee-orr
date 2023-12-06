@@ -1,8 +1,8 @@
 ---
 info:
-    company: Stealth
-    role: Contract Engineer
-    is_contract: true
+  company: Stealth
+  role: Contract Engineer
+  is_contract: true
 summary: Built a tool allowing the creation of interactive maps using Figma & Google Sheets.
 start_date: 2022-12-01
 end_date: 2023-05-01

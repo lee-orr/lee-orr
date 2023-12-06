@@ -1,47 +1,47 @@
 [
-    {
-        "type": "email",
-        "value": "lo@lee-orr.com",
-        "icon": "icofont-ui-email"
-    },
-    {
-        "type": "youtube",
-        "value": "youtube.com/@lee-orr",
-        "icon": "icofont-youtube"
-    },
-    {
-        "type": "facebook",
-        "value": "www.facebook.com/theleeorr",
-        "icon": "icofont-facebook"
-    },
-    {
-        "type": "website",
-        "value": "lee-orr.com",
-        "icon": "icofont-web"
-    },
-    {
-        "type": "eye-color",
-        "value": "Hazel",
-        "icon": "icofont-eye"
-    },
-    {
-        "type": "height",
-        "value": "6'1\"",
-        "icon": "icofont-ruler"
-    },
-    {
-        "type": "range",
-        "value": "6'1\"",
-        "icon": "icofont-ruler"
-    },
-    {
-        "type": "height",
-        "value": "F#2-Bb4 (heavy) - G5 (light)",
-        "icon": "icofont-music-note"
-    },
-    {
-        "type": "union",
-        "value": "Non-Union",
-        "icon": "icofont-ui-user-group"
-    }
+  {
+    "type": "email",
+    "value": "lo@lee-orr.com",
+    "icon": "icofont-ui-email"
+  },
+  {
+    "type": "youtube",
+    "value": "youtube.com/@lee-orr",
+    "icon": "icofont-youtube"
+  },
+  {
+    "type": "facebook",
+    "value": "www.facebook.com/theleeorr",
+    "icon": "icofont-facebook"
+  },
+  {
+    "type": "website",
+    "value": "lee-orr.com",
+    "icon": "icofont-web"
+  },
+  {
+    "type": "eye-color",
+    "value": "Hazel",
+    "icon": "icofont-eye"
+  },
+  {
+    "type": "height",
+    "value": "6'1\"",
+    "icon": "icofont-ruler"
+  },
+  {
+    "type": "range",
+    "value": "6'1\"",
+    "icon": "icofont-ruler"
+  },
+  {
+    "type": "height",
+    "value": "F#2-Bb4 (heavy) - G5 (light)",
+    "icon": "icofont-music-note"
+  },
+  {
+    "type": "union",
+    "value": "Non-Union",
+    "icon": "icofont-ui-user-group"
+  }
 ]

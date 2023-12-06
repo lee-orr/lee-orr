@@ -1,6 +1,6 @@
 ---
 info:
-    project: Terra and Caelus
+  project: Terra and Caelus
 summary: Play as a spirit of the land, encouraging plants to grow and answering the prayers of the people.
 start_date: 2023-05-27
 end_date: 2023-06-05

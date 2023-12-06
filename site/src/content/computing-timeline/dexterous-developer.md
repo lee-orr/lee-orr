@@ -1,6 +1,6 @@
 ---
 info:
-    project: Dexterous Developer
+  project: Dexterous Developer
 summary: An experimental hot reload system for the bevy game engine.
 start_date: 2022-08-17
 tags: rust bevy dev-containers tdd ci-cd

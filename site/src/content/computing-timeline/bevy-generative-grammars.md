@@ -1,6 +1,6 @@
 ---
 info:
-    project: Bevy Generative Grammars
+  project: Bevy Generative Grammars
 summary: A bevy plugin for replacement grammars, with built in support for Tracery.
 start_date: 2022-12-26
 tags: rust bevy procedural-generation dev-containers tdd ci-cd

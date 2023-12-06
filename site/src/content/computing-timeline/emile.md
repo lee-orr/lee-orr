@@ -1,8 +1,8 @@
 ---
 info:
-    company: Emile Technologies
-    role: Contract Engineer
-    is_contract: true
+  company: Emile Technologies
+  role: Contract Engineer
+  is_contract: true
 summary: Migrated a chatbot froma discontinued service to a self hosted fork of an open source library.
 start_date: 2021-09-01
 end_date: 2021-10-01

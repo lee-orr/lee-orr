@@ -76,6 +76,7 @@ const tag_colors: {[key: string]: string} = {
 
 <Html>
   <Shell area="storytelling" socials={socials} nav={nav}>
+    <ol class="timeline">
           {
             timeline.map(({ slug, data, rendered }, index) => {
               let [size, offset_x, offset_y] = get_next_random();
@@ -97,7 +98,7 @@ const tag_colors: {[key: string]: string} = {
               const { Content } = rendered;
 
               return (
-                <div class={container_class} >
+                <ul class={container_class} >
                 <div class={class_string} style={style}>
                   <div class="bg-panel-bg fixed w-screen h-screen top-0 left-0 right-0 bottom-0 z-[-10] pointer-events-none"></div>
                   <h2 class="text-2xl text-main-txt font-bold flex flex-row justify-between items-center"><span class="flex flex-row justify-center gap-2 items-center">{data.youtube ? (
@@ -195,13 +196,14 @@ const tag_colors: {[key: string]: string} = {
                         </div>
                       </div></div>
                     </dialog>
-                </div></div>
+                </div></ul>
               );
             })
           }
-    <div slot="filters" class="text-main-txt">
+          </ol>
+    <div slot="filters">
       {
-        tags_ordered.map(({ tag}) => (<button id={"button-" + tag} class={ `p-2 rounded-full hover:underline tag-button tag-${tag}` } style={`background-color: ${tag_colors[tag] ?? "#000"};`}>{tag_icons[tag] ? <i class={tag_icons[tag]}/> : ""} {tag}</button>))
+        tags_ordered.map(({ tag}) => (<button id={"button-" + tag} class={ `tag-button tag-${tag}` } style={`background-color: ${tag_colors[tag] ?? "#000"};`}>{tag_icons[tag] ? <i class={tag_icons[tag]}/> : ""} {tag}</button>))
       }
     </div>
     
@@ -209,13 +211,16 @@ const tag_colors: {[key: string]: string} = {
       generate_storytelling_filters(tags_ordered.map(({tag}) => tag))
     }/>
   </Shell>
-
-  <script src="../setup_page.ts"></script>
 </Html>
 
 <style>
-  .timeline-item {
-    padding: 1rem;
-    position: relative;
-  }
+  
 </style>
+
+
+<script>
+  import setup_page from "../setup_page";
+  setup_page();
+
+  document.addEventListener('astro:after-swap', setup_page);
+</script>

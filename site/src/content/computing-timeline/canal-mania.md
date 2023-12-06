@@ -1,6 +1,6 @@
 ---
 info:
-    project: Canal Mania!
+  project: Canal Mania!
 summary: Cash in on the crown's craze for canals in this canal building game! With levels inspired by real canals from England's Industrial Revolution, build the best transport of the century (...until rail arrives...) with as low a cost as you can!
 start_date: 2023-12-31
 end_date: 2023-01-08

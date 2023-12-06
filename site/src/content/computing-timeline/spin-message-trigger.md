@@ -1,6 +1,6 @@
 ---
 info:
-    project: Spin Message Trigger
+  project: Spin Message Trigger
 summary: A plugin for using message brokers with Fermyon Spin.
 start_date: 2023-05-13
 tags: rust wasm wasi nats redis messaging websocket mqtt fermyon-spin tdd architecture dev-containers back-end
