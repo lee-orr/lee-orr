@@ -97,7 +97,7 @@ const tag_colors: {[key: string]: string} = {
               const { Content } = rendered;
 
               return (
-                <li class={container_class} >
+                <li class={container_class} transition:name={`timeline-${slug}`}>
                   <div style={style}>
                     <div class="bg" />
                     <h2><a href="#">{data.title}</a></h2>
@@ -135,7 +135,7 @@ const tag_colors: {[key: string]: string} = {
             })
           }
           </ol>
-    <div slot="filters">
+    <div slot="filters"  transition:name={`filter-content`}>
       {
         tags_ordered.map(({ tag}) => (<button id={"button-" + tag} class={ `tag-button tag-${tag}` } style={`background-color: ${tag_colors[tag] ?? "#000"};`}>{tag_icons[tag] ? <i class={tag_icons[tag]}/> : ""} {tag}</button>))
       }

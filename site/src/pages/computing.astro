@@ -99,7 +99,7 @@ const tag_colors: { [key: string]: string } = {};
         const { Content } = rendered;
 
         return (
-          <li class={class_string}>
+          <li class={class_string} transition:name={`timeline-${slug}`}>
             <h2><a href="#">{title}</a></h2>
             <h3>{context}</h3>
             <h4>
@@ -136,7 +136,7 @@ const tag_colors: { [key: string]: string } = {};
       })
     }
     </ol>
-    <div slot="filters">
+    <div slot="filters" transition:name={`filter-content`}>
       {
         tags_ordered.map(({ tag }) => (
           <button

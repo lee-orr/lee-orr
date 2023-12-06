@@ -24,11 +24,11 @@ let navigation = process_nav(nav);
 ---
 
 <body class={area}>
-    <header class="">
-      <span><a class="lg" href={area}><h1>Lee-Orr</h1></a></span>
+    <header class="" transition:name="title" transition:animate="none">
+      <span><a class="lg" href="/"><h1>Lee-Orr</h1></a></span>
     </header>
 
-    <nav class="">
+    <nav class="" transition:name="nav" transition:animate="none">
       <span aria-label="external links">
       <a href="/" aria-label="Return to home page">
         <div class="logo"></div>
@@ -68,7 +68,7 @@ let navigation = process_nav(nav);
   
 {
   Astro.slots.has("filters") ? (
-  <details class="filters">
+  <details class="filters"  transition:name="filters" transition:animate="slide">
     <summary class="">
       Filters
     </summary>
@@ -77,7 +77,7 @@ let navigation = process_nav(nav);
   ) : <></>
 }
 
-  <div class="content">
+  <div class="content"  transition:name="content" transition:animate="slide">
     <slot />
   </div>
 </body>
@@ -93,10 +93,10 @@ let navigation = process_nav(nav);
     gap: 0.3em;
     grid-template-columns: [page-start header-start] 1em
       [content-start socials-start nav-start] 1fr 
-      [socials-end filter-start] repeat(2, 1fr)
-      [title-start] max-content  
-      [title-end]  repeat(2, 1fr)
-      [links-start filter-end] 1fr
+      [filter-start] repeat(2, 1fr)
+      [socials-end title-start] max-content  
+      [title-end links-start ]  repeat(2, 1fr)
+      [filter-end] 1fr
       [links-end content-end nav-end] 1em
       [page-end header-end];
     grid-template-rows: [page-start header-start] 1em
@@ -215,7 +215,7 @@ let navigation = process_nav(nav);
     body {
       grid-template-rows: [page-start header-start socials-start nav-start] 3em
       [socials-end title-start] 3em
-      [title-end links-start] 2em
+      [title-end links-start] fit-content(3em)
       [links-end nav-end header-end filter-start] min-content
       [filter-end content-start] auto
       [content-end page-end];
@@ -228,6 +228,7 @@ let navigation = process_nav(nav);
     nav span:nth-child(n) {
       justify-content: space-between;
       padding: 1rem;
+      text-align: center;
     }
   }
 </style>
