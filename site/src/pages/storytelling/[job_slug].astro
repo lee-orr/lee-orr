@@ -174,5 +174,39 @@ const tag_colors: {[key: string]: string} = {
             border-radius: 0.5em;
         }
     }
+
+
     
+    @media (max-width: 700px) {
+      article {
+            grid-template-columns: 
+            [page-start aside-start] 1rem
+            [title-start body-start] 1fr
+            [title-end body-end] 1rem
+            [aside-end page-end];
+            grid-template-rows: [page-start] 1rem
+            [title-start] min-content
+            [title-end aside-start] min-content
+            [aside-end] min-content 
+            [body-start] min-content
+            [body-end] 1rem
+            [page-end];
+        }
+
+        aside {
+          border-bottom-left-radius: 0;
+          align-items: center;
+          text-align: center;
+          grid-template-columns: [image-start] 1em [date-start tags-start links-start] 1fr [date-end tags-end links-end] 1em [image-end];
+
+          img {
+            justify-self: stretch;
+          }
+        }
+
+        .tags {
+          align-items: center;
+          justify-content: center;
+        }
+    }
 </style>

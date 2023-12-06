@@ -159,5 +159,36 @@ const { Content } = await entry.render();
             border-radius: 0.5em;
         }
     }
+
+
+    
+    @media (max-width: 700px) {
+      article {
+            grid-template-columns: 
+            [page-start aside-start] 1rem
+            [title-start context-start body-start] 1fr
+            [title-end context-end body-end] 1rem
+            [aside-end page-end];
+            grid-template-rows: [page-start] 1rem
+            [title-start] min-content
+            [title-end context-start] min-content
+            [context-end aside-start] min-content
+            [aside-end] min-content 
+            [body-start] min-content
+            [body-end] 1rem
+            [page-end];
+        }
+
+        aside {
+          border-bottom-left-radius: 0;
+          align-items: center;
+          text-align: center;
+        }
+
+        .tags {
+          align-items: center;
+          justify-content: center;
+        }
+    }
     
 </style>
