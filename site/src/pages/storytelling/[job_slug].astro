@@ -21,6 +21,7 @@ export const getStaticPaths = (async () => {
 }) satisfies GetStaticPaths;
 
 import { storytelling, link_types } from "../../data/site-nav-data.json";
+import { generate_shape } from '../generate_shape';
 
 const { socials, nav } = storytelling;
 
@@ -56,13 +57,20 @@ const tag_colors: {[key: string]: string} = {
   games: 'var(--category-6)',
   animation: 'var(--category-7)'
 };
+
+let article_shape = generate_shape();
+let article_style = `clip-path: ${article_shape};`;
+
+
+let aside_shape = generate_shape();
+let aside_style = `clip-path: ${aside_shape};`;
 ---
 
 <Html>
     <Shell area="storytelling" socials={socials} nav={nav}>
-        <article>
+        <article style={article_style}>
             <h1>{title}</h1>
-            <aside>
+            <aside style={aside_style}>
                 {
                     data.image && data.image_alt ? (<img src={data.image} alt={data.image_alt} />) :  (<></>)
                 }
@@ -95,19 +103,21 @@ const tag_colors: {[key: string]: string} = {
 
 <style>
     article {
+        position: relative;
         display: grid;
         grid-template-columns: 
-        [page-start] 1rem
+        [page-start] 2.5rem
         [title-start context-start body-start] 2fr 
         [title-end context-end body-end aside-start] fit-content(30%)
         [aside-end page-end];
-        grid-template-rows: [page-start aside-start] 1rem
+        grid-template-rows: [page-start aside-start] 2.5rem
         [title-start] 4em
         [title-end context-start] 2em 
         [context-end body-start] min-content
         [aside-end] min-content 
-        [body-end] 1rem
+        [body-end] 2.5rem
         [page-end];
+        overflow: hidden;
 
         border-radius: 1rem;
         background-color: var(--color-panel-bg);
@@ -126,20 +136,22 @@ const tag_colors: {[key: string]: string} = {
     }
 
     aside {
+        position: relative;
         display: grid;
         grid-area: aside;
-        grid-template-columns: [image-start] 1em [date-start tags-start links-start] min-content [date-end tags-end links-end] 1em [image-end];
-        grid-template-rows: [image-start] min-content [image-end date-start] min-content [date-end links-start] min-content [links-end tags-start] min-content [tags-end] 1em;
+        grid-template-columns: [image-start] 2.5em [date-start tags-start links-start] min-content [date-end tags-end links-end] 2.5em [image-end];
+        grid-template-rows: [image-start] min-content [image-end date-start] min-content [date-end links-start] min-content [links-end tags-start] min-content [tags-end] 1.5em;
         gap: 0.5rem;
         font-size: 0.7em;
         background-color: var(--color-accent);
         border-bottom-left-radius: 1rem;
         text-align: end;
+        overflow: hidden;
 
         img {
             align-self: stretch;
             grid-area: image;
-            min-width: 16rem;
+            min-width: 20rem;
         }
     }
 

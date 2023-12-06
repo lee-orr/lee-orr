@@ -48,19 +48,25 @@ const subdivide = (array: [number, number][]) => {
     [],
   );
 };
-export const generate_shape = () => {
+export const generate_shape = (limits?: {x: number, y: number}) => {
   let polygon = POLYGON;
   let subdivide_count = Math.random() * 2 + 1;
   for (let i = 0; i < subdivide_count; i++) {
     polygon = subdivide(polygon);
   }
+
+  const x_offset_size = limits ? limits.x : OFFSETS * 30;
+  const y_offset_size = limits ? limits.y : OFFSETS * 30;
+
   let points: string[] = polygon
     .map(([x, y]) => {
-      let x_offset = OFFSETS * Math.random();
-      let y_offset = OFFSETS * Math.random();
-      return { x: x + x_offset, y: y + y_offset };
+      let x_offset = x_offset_size * Math.random();
+      let y_offset = y_offset_size * Math.random();
+      return { x, x_offset, y, y_offset };
     })
-    .map(print_point);
+    .map(({x, x_offset, y, y_offset}) => {
+      return `calc(${Math.floor(x * 100)}% + ${x_offset}rem) calc(${Math.floor(y * 100)}% + ${y_offset}rem)`;
+    });
   let result = `polygon(${points.join(", ")})`;
   return result;
 };
