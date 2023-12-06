@@ -10,7 +10,7 @@ table, caption, tbody, tfoot, thead, tr, th, td,
 article, aside, canvas, details, embed, 
 figure, figcaption, footer, header, hgroup, 
 menu, nav, output, ruby, section, summary,
-time, mark, audio, video {
+time, mark, audio, video, button {
 	margin: 0;
 	padding: 0;
 	border: 0;
@@ -62,6 +62,9 @@ table {
   }
   input, button, textarea, select {
     font: inherit;
+    background-color: transparent;
+    color: inherit;
+    font-size: inherit;
   }
   p, h1, h2, h3, h4, h5, h6 {
     overflow-wrap: break-word;

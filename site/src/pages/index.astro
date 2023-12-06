@@ -5,14 +5,16 @@ import Html from "../components/html.astro";
 <Html>
   <body>
       <div
-        class=""
+        class="title"
       >
-        <h1 class="">
-          Lee-Orr
+        <h1 class="storytelling">
+          Lee
         </h1>
+        <h1>-</h1>
+        <h1 class="computing">Orr</h1>
       </div>
       <a
-        class=""
+        class="storytelling"
         style="clip-path: border-box;"
         href="/storytelling"
       >
@@ -26,7 +28,7 @@ import Html from "../components/html.astro";
         </h2>
       </a>
       <a
-        class=""
+        class="computing"
         style="clip-path: border-box;"
         href="/computing"
       >
@@ -89,12 +91,12 @@ a {
   }
 }
 
-h1 {
+.title {
   position: absolute;
   display: flex;
-  flex-direction: column;
-  justify-content: flex-end;
-  align-items: center;
+  flex-direction: row;
+  justify-content: center;
+  align-items: flex-end;
   width: 100dvw;
   height: 100dvh;
   z-index: 10;

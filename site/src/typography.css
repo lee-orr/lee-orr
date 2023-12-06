@@ -2,10 +2,30 @@
     color: var(--color-main-text);
     
     font-family: 'Fira Sans Condensed', sans-serif;
+    font-size: 1.3em;
+    --header-font:  'Fira Sans Condensed', sans-serif;
+    --header-weight: light;
+    --header-orientation: italic;
+}
+
+.storytelling {
+    --header-font: 'Merienda', cursive;
+    --header-weight: 200;
+
+    --header-orientation: normal;
+}
+
+.computing {
+    --header-font: 'IBM Plex Mono', monospace;
+    --header-weight: 500;
+    --header-orientation: normal;
 }
 
 h1, h2, h3, h4, h5, h6 {
-    font-family: 'Merienda', cursive;
+    font-family: var(--header-font);
+    font-weight: var(--header-weight);
+    font-style: var(--header-orientation);
+    filter: drop-shadow(-0.03em 0.04em black);
 }
 
 h1 {
@@ -14,6 +34,15 @@ h1 {
 
 h2 {
     font-size: 4em;
+}
+
+a {
+  color: var(--color-main-text);
+  text-decoration: none;
+  &:hover, &:focus, &:focus-within, &:active {
+    text-decoration: underline 0.3em solid;
+    text-underline-offset: 0.5em;
+  }
 }
 
 @media (max-width: 700px) {
