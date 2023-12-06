@@ -100,7 +100,7 @@ const tag_colors: {[key: string]: string} = {
                 <li class={container_class} transition:name={`timeline-${slug}`}>
                   <div style={style}>
                     <div class="bg" />
-                    <h2><a href="#">{data.title}</a></h2>
+                    <h2><a href={`/storytelling/${slug}`}>{data.title}</a></h2>
                     <h3>
                       <time datetime={data.date.toDateString()} aria-label="from">{data.date.toLocaleDateString('default', { month: "short", year: 'numeric' })}</time>
                     </h3>

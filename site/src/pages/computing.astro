@@ -28,15 +28,6 @@ const timeline = await Promise.all(
           .filter((v) => v.length > 0),
       },
     }))
-    .map((v) => {
-      const render = async () => {
-        return {
-          ...v,
-          rendered: await v.render(),
-        };
-      };
-      return render();
-    })
 );
 
 timeline.sort((a, b) => {
@@ -96,11 +87,9 @@ const tag_colors: { [key: string]: string } = {};
             ? "Contract"
             : "Job";
 
-        const { Content } = rendered;
-
         return (
           <li class={class_string} transition:name={`timeline-${slug}`}>
-            <h2><a href="#">{title}</a></h2>
+            <h2><a href={`/computing/${slug}`}>{title}</a></h2>
             <h3>{context}</h3>
             <h4>
               <time datetime={data.start_date.toDateString()} aria-label="from">{data.start_date.toLocaleDateString('default', { month: "short", year: 'numeric' })}</time>

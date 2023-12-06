@@ -1,0 +1,163 @@
+---
+import type { InferGetStaticParamsType, InferGetStaticPropsType, GetStaticPaths } from 'astro';
+import { getCollection } from "astro:content";
+import Shell from "../../components/shell.astro";
+import Html from "../../components/html.astro";
+import slugify from "slugify";
+
+export const getStaticPaths = (async () => {    
+ const entries = (await getCollection("computing-timeline")).map((v) => ({
+      ...v,
+      data: {
+        ...v.data,
+        tags: v.data.tags
+          .split(/(\s|",")+/g)
+          .map((v) => v.trim())
+          .map((v) => slugify(v, { lower: true, strict: true }))
+          .filter((v) => v.length > 0),
+      },
+    }));
+ return entries.map(entry => ({params: { job_slug: entry.slug as string }, props: { entry  }}))
+}) satisfies GetStaticPaths;
+
+import { computing, link_types } from "../../data/site-nav-data.json";
+
+const { socials, nav } = computing;
+
+const link_icons: {[key: string]: string | undefined} = link_types;
+
+slugify.extend({ "/": "-", "\\": "-" });
+
+type Params = InferGetStaticParamsType<typeof getStaticPaths>;
+type Props = InferGetStaticPropsType<typeof getStaticPaths>;
+
+const { entry } = Astro.props as Props;
+let data = entry.data;
+
+let info : { role: string, company: string, is_contract?: boolean } | { project: string} = data.info;
+
+let title = "project" in info ? info.project : info.role;
+
+let company = "company" in info ? info.company : false;
+
+let context =
+    "project" in info
+    ? "Project"
+    : info.is_contract
+    ? "Contract"
+    : "Job";
+
+const { Content } = await entry.render();
+---
+
+<Html>
+    <Shell area="computing" socials={socials} nav={nav}>
+        <article>
+            <h1>{title}</h1>
+            <h2>{context}{company ? ` for ${company}` : ""}</h2>
+            <aside>
+            <h3>
+                Started <time datetime={data.start_date.toDateString()}>{data.start_date.toLocaleDateString('default', { month: "short", year: 'numeric' })}</time>
+                {
+                  data.end_date ? (
+                    <> To
+                    <time datetime={data.end_date.toDateString()}>{data.end_date.toLocaleDateString('default', { month: "short", year: 'numeric' })}</time>
+                    </>
+                  ) : <></>
+                }
+            </h3>
+            {
+              data.links ? (<ul class="links" aria-label="links">{
+                Object.keys(data.links).map((type) => {
+                  let target = data.links && data.links[type];
+                  if (!target) {
+                    return <></>
+                  }
+                  let icon = link_icons[type];
+                  let icon_element = icon ? <> &nbsp;<i class={icon} /></> : <></>;
+                  return <a href={target}>{target}{icon_element}</a>;
+                })}</ul>
+              ) : <div class="links"></div>
+            }
+            <ul aria-label="technologies and skills" class="tags">
+              {
+                data.tags.map((tag) => <li>{tag}</li>)
+              }
+            </ul>
+            </aside>
+            <section><Content /></section>
+        </article>
+    </Shell>
+</Html>
+
+<style>
+    article {
+        display: grid;
+        grid-template-columns: 
+        [page-start] 1rem
+        [title-start context-start body-start] 2fr 
+        [title-end context-end body-end aside-start] fit-content(30%)
+        [aside-end page-end];
+        grid-template-rows: [page-start aside-start] 1rem
+        [title-start] min-content 
+        [title-end context-start] min-content 
+        [context-end body-start] min-content
+        [aside-end] auto 
+        [body-end] 1rem
+        [page-end];
+
+        border-radius: 1rem;
+        background-color: var(--color-panel-bg);
+        overflow-x: hidden;
+    }
+
+    h1 {
+        grid-area: title;
+        font-size: 2em;
+        text-align: center;
+    }
+
+    h2 {
+        grid-area: context;
+        text-align: center;
+        font-size: 1.2em;
+    }
+
+    aside {
+        display: flex;
+        grid-area: aside;
+        flex-direction: column;
+        justify-content: flex-start;
+        align-items: flex-end;
+        gap: 0.5rem;
+        padding: 1rem;
+        font-size: 0.7em;
+        background-color: var(--color-accent);
+        border-bottom-left-radius: 1rem;
+        text-align: end;
+    }
+
+    section {
+        grid-area: body;
+        font-size: 0.8em;
+
+
+        & :global(p) {
+            padding: 1rem;
+        }
+    }
+
+    .tags {
+        display: flex;
+        flex-direction: row-reverse;
+        flex-wrap: wrap;
+        gap: 0.5em;
+
+        li {
+            background-color: var(--color-panel-bg);
+            padding: 0.5em;
+            border-radius: 0.5em;
+        }
+    }
+    
+</style>
