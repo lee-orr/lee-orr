@@ -30,10 +30,6 @@ let navigation = process_nav(nav);
 
     <nav class="" transition:name="nav" transition:animate="none">
       <span aria-label="external links">
-      <a href="/" aria-label="Return to home page">
-        <div class="logo"></div>
-      </a>
-
       {
         socials.map(({ type, value, icon }) => (
           <a
@@ -99,10 +95,11 @@ let navigation = process_nav(nav);
       [filter-end] 1fr
       [links-end content-end nav-end] 1em
       [page-end header-end];
-    grid-template-rows: [page-start header-start] 1em
-      [nav-start socials-start links-start] 1rem
-      [nav-end socials-end links-end title-start] 5em
-      [title-end header-end filter-start] fit-content(3em)
+    grid-template-rows: [page-start header-start] 1rem
+      [title-start] 5em
+      [nav-start title-end socials-start links-start] 1.5rem
+      [nav-end socials-end links-end] 1rem
+      [header-end filter-start] fit-content(3em)
       [filter-end  content-start ] auto
       [content-end page-end];
   }
