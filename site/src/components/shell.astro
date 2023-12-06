@@ -25,13 +25,13 @@ let navigation = process_nav(nav);
 
 <body class={area}>
     <header class="">
-      <a class="" href={area}><h2>Lee-Orr</h2></a>
+      <span><a class="" href={area}><h2>Lee-Orr</h2></a></span>
     </header>
 
     <nav class="">
       <span>
       <a href="/">
-        <div class="logo"></div>
+        <div class="logo">Return to home page</div>
       </a>
 
       {
@@ -64,43 +64,57 @@ let navigation = process_nav(nav);
     </span>
 
   </nav>
-    <div class={"body " + (Astro.slots.has("filters") ? "nav" : "")}>
-      <!--AnimatedBackdrop area={area} /-->
-      <div class="">
-        <div class="c">
-          <slot />
-        </div>
-      </div>
-      <details class="">
-        <summary class="">
-          Filters
-        </summary>
-        <slot name="filters" />
-      </details>
-    </div>
+  
+{
+  Astro.slots.has("filters") ? (
+  <details class="filters">
+    <summary class="">
+      Filters
+    </summary>
+    <slot name="filters" />
+  </details>
+  ) : <></>
+}
+
+  <div class="content">
+    <slot />
+  </div>
 </body>
 
 <style>
   body {
     width: 100dvw;
     height: 100dvh;
+    max-height: 100dvh;
+    max-width: 100dvw;
     background-color: var(--color-main-bg);
     display: grid;
-    grid-template-columns: [page-start] 1em [content-start] repeat(auto-fill, minmax(10em, 1fr)) [content-end] 1em [page-end];
-    grid-template-rows: [page-start] 1em [nav-start] 2em [nav-end header-start] 5em [header-end content-start] repeat(auto-fill, minmax(10rem, 1fr)) [content-end page-end];
+    gap: 0.3em;
+    grid-template-columns: [page-start header-start] 1em
+      [content-start socials-start nav-start] 1fr 
+      [socials-end filter-start] repeat(2, 1fr)
+      [title-start] max-content  
+      [title-end]  repeat(2, 1fr)
+      [links-start filter-end] 1fr
+      [links-end content-end nav-end] 1em
+      [page-end header-end];
+    grid-template-rows: [page-start header-start] 1em
+      [nav-start socials-start links-start] 1rem
+      [nav-end socials-end links-end title-start] 5em
+      [title-end header-end filter-start] fit-content(3em)
+      [filter-end  content-start ] auto
+      [content-end page-end];
   }
 
   header {
     display: grid;
     grid-template-columns: subgrid;
     grid-template-rows: subgrid;
-    grid-row: header;
-    grid-column: page;
-
+    grid-area: header;
     background-color: var(--color-panel-bg);
 
-    a {
-      grid-column: content;
+    span {
+      grid-area: title;
       display: flex;
       flex-direction: column;
       justify-content: center;
@@ -112,40 +126,83 @@ let navigation = process_nav(nav);
     display: grid;
     grid-template-columns: subgrid;
     grid-template-rows: subgrid;
-    grid-row-start: page-start;
-    grid-row-end: nav-end;
-    grid-column: page;
+    grid-area: nav;
     background-color: var(--color-panel-bg);
 
     & span {
-      grid-row: nav;
       display: flex;
       flex-direction: row;
       align-items: center;
-      gap: 2rem;
-
-      & > a {
-        width: 1px;
-        flex-grow: 1;
-        flex-shrink: 0;
-      }
+      gap: 1rem;
+      padding: 1rem;
     }
     
     & span:first-of-type {
-      grid-column: 2;
+      grid-area: socials;
       justify-content: flex-start;
     }
 
     & span:last-of-type {
-      grid-column-end: -2;
+      grid-area: links;
       justify-content: flex-end;
     }
   }
 
   .logo {
     aspect-ratio: 1 / 1;
+    height: 2rem;
     background: url(website-logo.png); 
     background-size: contain;
-    background-position: center;  
+    background-position: center;
+    font-size: 0;
+  }
+
+  .filters {
+    background-color: var(--color-panel-bg);
+    border-radius: 1rem;
+    grid-area: filter;
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-start;
+    align-items: center;
+    padding: 1rem;
+
+    & > summary {
+      display: flex;
+      flex-direction: row;
+      justify-content: center;
+      align-items: center;
+      height: 1.5em;
+    }
+
+    & > summary:hover {
+      text-decoration: underline 0.3em solid;
+      text-underline-offset: 0.5em;
+      cursor: pointer;
+    }
+  }
+
+  .content {
+    grid-area: content;
+  }
+
+  @media (max-width: 700px) {
+    body {
+      grid-template-rows: [page-start header-start socials-start nav-start] min-content
+      [socials-end title-start] min-content
+      [title-end links-start] min-content
+      [links-end nav-end header-end filter-start] min-content
+      [filter-end content-start] auto
+      [content-end page-end];
+
+      grid-template-columns: [page-start header-start] 1em
+      [socials-start nav-start links-start title-start filter-start content-start] 1fr
+      [socials-end nav-end links-end title-end filter-end content-end] 1em [page-end header-end];
+    }
+
+    nav span:nth-child(n) {
+      justify-content: space-between;
+      padding: 1rem;
+    }
   }
 </style>
