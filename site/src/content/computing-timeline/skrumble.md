@@ -1,7 +1,7 @@
 ---
 info:
-    company: Skrumble
-    role: Full Stack Developer
+  company: Skrumble
+  role: Full Stack Developer
 summary: Managed over 200 deployed systems. Architected a scalable, cloud based version of our product. Developed a highly customizable phone IVR system. Migrated our SIP & Media servers from 2 physical Freeswitch servers to NodeJS & Kurento on the cloud.
 start_date: 2015-06-01
 end_date: 2018-12-01

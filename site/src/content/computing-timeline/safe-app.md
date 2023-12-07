@@ -1,8 +1,8 @@
 ---
 info:
-    company: SafeApp (getsafeapp.com)
-    role: Contract Engineer
-    is_contract: true
+  company: SafeApp (getsafeapp.com)
+  role: Contract Engineer
+  is_contract: true
 summary: Built a chrome extension for signing & encrypting emails.
 start_date: 2021-07-01
 end_date: 2022-06-01

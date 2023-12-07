@@ -4,70 +4,146 @@ const { area } = Astro.props as {
   area: "storytelling" | "computing";
 };
 
-let shape = "clip-path: fill-box;";
+let shape = "clip-path: boundary-box;";
 if (area === "storytelling") {
   shape = `clip-path: ${generate_shape()}`;
 }
 ---
 
-<div class="flex flex-col w-screen p-2 h-full items-stretch justify-start">
   <form
-    class="flex flex-col justify-center items-stretch gap-2 m-[5%] p-5"
     style={shape}
     name={"contact-" + area}
     netlify
   >
     <div
-      class="bg-primary fixed w-screen h-screen top-0 left-0 bottom-0 right-0 z-[-10]"
+      class="bg-panel"
     >
     </div>
-    <div class="p-2 w-full grid-cols-4 grid">
-      <label
-        class="col-start-1 col-span-1 font-bold text-text-200 text-xl self-start"
+    <div>
+      <label for="name"
         >Name</label
       >
       <input
-        class="col-start-2 col-span-3 rounded text-xl p-2 self-center"
         type="text"
         name="name"
+id="name"
       />
     </div>
-    <div class="p-2 w-full grid-cols-4 grid">
-      <label
-        class="col-start-1 col-span-1 font-bold text-text-200 text-xl self-start"
+    <div>
+      <label for="email"
         >Email</label
       >
       <input
-        class="col-start-2 col-span-3 rounded text-xl p-2 self-center"
         type="text"
         name="email"
+id="email"
       />
     </div>
-    <div class="p-2 w-full grid-cols-4 grid">
-      <label
-        class="col-start-1 col-span-1 font-bold text-text-200 text-xl self-start"
+    <div>
+      <label for="subject"
         >Subject</label
       >
       <input
-        class="col-start-2 col-span-3 rounded text-xl p-2 self-center"
         type="text"
         name="subject"
+id="subject"
       />
     </div>
-    <div class="p-2 w-full grid-cols-4 grid flex-grow">
-      <label
-        class="col-start-1 col-span-1 font-bold text-text-200 text-xl self-start"
+    <div>
+      <label for="content"
         >Content</label
       >
       <textarea
-        class="col-start-2 col-span-3 rounded text-xl p-2 self-center flex-grow min-h-[30vh]"
-        name="content"></textarea>
+        name="content"
+id="content"
+id="content"></textarea>
     </div>
-    <div class="p-2 self-end">
+    <div >
       <button
-        class="p-3 bg-secondary rounded text-text-100 font-bold hover:bg-secondary-600"
         type="submit">Send</button
       >
     </div>
   </form>
-</div>
+
+  <style>
+    form {
+      display: grid;
+      grid-template-columns: max-content 3fr;
+      grid-auto-rows: auto;
+
+      gap: 1rem;
+
+      min-width: 60%;
+
+      align-self: center;
+      justify-self: center;
+      position: relative;
+      padding: 2rem;
+      overflow:hidden;
+    }
+
+    @media (max-width: 700px) {
+      form {
+        grid-template-columns: 1fr;
+        min-width: unset;
+        flex-grow: 0;
+        flex-shrink: 0;
+      }
+
+      form > div {
+        grid-column: 1 / span 1;
+        grid-row: span 2;
+        grid-template-rows: subgrid [label-start] [label-end field-start] [field-end];
+        grid-template-columns: subgrid [label-start field-start] [label-end field-end];
+      }
+
+      form > div > label {
+        text-align: start;
+      }
+    }
+
+    div {
+      display: grid;
+      grid-column: 1 / span 2;
+      grid-template-columns: subgrid [label-start] [label-end field-start] [field-end];
+      grid-template-rows: subgrid [label-start field-start] [label-end field-end];
+    }
+
+    label {
+      grid-area: label;
+      text-align: end;
+    }
+
+    input, textarea, button {
+      grid-area: field;
+      border-radius: 0.25rem;
+      border: solid var(--color-main-text) 2px;
+    }
+
+    input, textarea {
+      background-color: var(--color-main-text);
+      color: var(--dark-text);
+    }
+
+    button {
+      background-color: var(--color-accent);
+    }
+
+    button:hover, button:active, button:focus {
+      background-color: var(--color-accent-hover);
+      cursor: pointer;
+    }
+
+    form > .bg-panel {
+      display: block;
+      grid-row: 1;
+      grid-column: 1 / span 2;
+      background: var(--color-panel-bg);
+      position: absolute;
+      top: -100%;
+      bottom: -100%;
+      left: -100%;
+      right: -100%;
+      z-index: -1;
+    }
+  </style>

@@ -1,5 +1,6 @@
 export const generate_storytelling_filters = (tags: string[]) => {
-  let classes = tags.map((tag) => `
+  let classes = tags.map(
+    (tag) => `
     .filtering.tag-${tag} .timeline-item.tag-${tag} {
       scale: 1;
       opacity: 1;
@@ -9,9 +10,11 @@ export const generate_storytelling_filters = (tags: string[]) => {
     }
 
     .filtering.tag-${tag} .tag-button.tag-${tag} {
+      scale: 1;
       filter: grayscale(0);
     }
-  `);
+  `,
+  );
 
   let style = `<style>
 
@@ -29,9 +32,14 @@ export const generate_storytelling_filters = (tags: string[]) => {
     opacity: 0.2;
   }
 
+  .tag-button {
+    scale: 1;
+    transition: scale 1s, opacity 1s;
+  }
+
   .filtering .tag-button {
     filter: grayscale(1);
-    transition: scale 1s, opacity 1s, filter 1s;
+    scale: 0.7;
   }
 
  
@@ -42,7 +50,8 @@ export const generate_storytelling_filters = (tags: string[]) => {
 };
 
 export const generate_computing_filters = (tags: string[]) => {
-  let classes = tags.map((tag) => `
+  let classes = tags.map(
+    (tag) => `
     .filtering.tag-${tag} .timeline-item.tag-${tag} {
       opacity: 1;
       filter: grayscale(0);
@@ -50,10 +59,18 @@ export const generate_computing_filters = (tags: string[]) => {
 
     .filtering.tag-${tag} .tag-button.tag-${tag} {
       filter: grayscale(0);
+      scale: 1;
     }
-  `);
+  `,
+  );
 
   let style = `<style>
+
+
+  .tag-button {
+    scale: 1;
+    transition: scale 1s, opacity 1s;
+  }
 
   .timeline-item {
     opacity: 1;
@@ -67,6 +84,8 @@ export const generate_computing_filters = (tags: string[]) => {
   }
 
   .filtering .tag-button {
+
+    scale: 0.7;
     filter: grayscale(1);
     transition: scale 1s, opacity 1s, max-height 1s, max-width 1s, filter 1s;
   }

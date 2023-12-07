@@ -1,0 +1,224 @@
+---
+import type { InferGetStaticParamsType, InferGetStaticPropsType, GetStaticPaths } from 'astro';
+import { getCollection } from "astro:content";
+import Shell from "../../components/shell.astro";
+import Html from "../../components/html.astro";
+import slugify from "slugify";
+
+export const getStaticPaths = (async () => {    
+ const entries = (await getCollection("storytelling-timeline")).map((v) => ({
+      ...v,
+      data: {
+        ...v.data,
+        tags: v.data.tags
+          .split(/(\s|",")+/g)
+          .map((v) => v.trim())
+          .map((v) => slugify(v, { lower: true, strict: true }))
+          .filter((v) => v.length > 0),
+      },
+    }));
+ return entries.map(entry => ({params: { job_slug: entry.slug as string }, props: { entry  }}))
+}) satisfies GetStaticPaths;
+
+import { storytelling, link_types } from "../../data/site-nav-data.json";
+import { generate_shape } from '../generate_shape';
+
+const { socials, nav } = storytelling;
+
+const link_icons: {[key: string]: string | undefined} = link_types;
+
+slugify.extend({ "/": "-", "\\": "-" });
+
+type Props = InferGetStaticPropsType<typeof getStaticPaths>;
+
+const { entry } = Astro.props as Props;
+let data = entry.data;
+
+let title = data.title;
+
+const { Content } = await entry.render();
+
+const tag_icons: {[key: string]: string} = {
+  acting: 'icofont-video',
+  singing: 'icofont-radio-mic',
+  "3d": 'icofont-cube',
+  writing: 'icofont-fountain-pen',
+  theatre: 'icofont-street-view',
+  games: 'icofont-game-pad',
+  animation: 'icofont-video-alt'
+};
+
+const tag_colors: {[key: string]: string} = {
+  acting: 'var(--category-1)',
+  singing: 'var(--category-2)',
+  "3d": 'var(--category-3)',
+  writing: 'var(--category-4)',
+  theatre: 'var(--category-5)',
+  games: 'var(--category-6)',
+  animation: 'var(--category-7)'
+};
+
+let article_shape = generate_shape();
+let article_style = `clip-path: ${article_shape};`;
+
+
+let aside_shape = generate_shape();
+let aside_style = `clip-path: ${aside_shape};`;
+---
+
+<Html>
+    <Shell area="storytelling" socials={socials} nav={nav}>
+        <article style={article_style}>
+            <h1>{title}</h1>
+            <aside style={aside_style}>
+                {
+                    data.image && data.image_alt ? (<img src={data.image} alt={data.image_alt} />) :  (<></>)
+                }
+            <h3>
+                <time datetime={data.date.toDateString()}>{data.date.toLocaleDateString('default', { month: "short", year: 'numeric' })}</time>
+            </h3>
+            {
+              data.links ? (<ul class="links" aria-label="links">{
+                Object.keys(data.links).map((type) => {
+                  let target = data.links && data.links[type];
+                  if (!target) {
+                    return <></>
+                  }
+                  let icon = link_icons[type];
+                  let icon_element = icon ? <> &nbsp;<i class={icon} /></> : <></>;
+                  return <a href={target}>{target}{icon_element}</a>;
+                })}</ul>
+              ) : <div class="links"></div>
+            }
+            <ul aria-label="technologies and skills" class="tags">
+                {
+                    data.tags.map((tag) => <li style={`background-color: ${tag_colors[tag] ?? "#000"};`}>{tag_icons[tag] ? <><i class={tag_icons[tag]}/>&nbsp;</> : ""}{tag}</li>)
+                  }
+            </ul>
+            </aside>
+            <section><Content /></section>
+        </article>
+    </Shell>
+</Html>
+
+<style>
+    article {
+        position: relative;
+        display: grid;
+        grid-template-columns: 
+        [page-start] 2.5rem
+        [title-start context-start body-start] 2fr 
+        [title-end context-end body-end aside-start] fit-content(30%)
+        [aside-end page-end];
+        grid-template-rows: [page-start aside-start] 2.5rem
+        [title-start] 4em
+        [title-end context-start] 2em 
+        [context-end body-start] min-content
+        [aside-end] min-content 
+        [body-end] 2.5rem
+        [page-end];
+        overflow: hidden;
+
+        border-radius: 1rem;
+        background-color: var(--color-panel-bg);
+    }
+
+    h1 {
+        grid-area: title;
+        font-size: 2em;
+        text-align: center;
+    }
+
+    h2 {
+        grid-area: context;
+        text-align: center;
+        font-size: 1.2em;
+    }
+
+    aside {
+        position: relative;
+        display: grid;
+        grid-area: aside;
+        grid-template-columns: [image-start] 2.5em [date-start tags-start links-start] min-content [date-end tags-end links-end] 2.5em [image-end];
+        grid-template-rows: [image-start] min-content [image-end date-start] min-content [date-end links-start] min-content [links-end tags-start] min-content [tags-end] 1.5em;
+        gap: 0.5rem;
+        font-size: 0.7em;
+        background-color: var(--color-accent);
+        border-bottom-left-radius: 1rem;
+        text-align: end;
+        overflow: hidden;
+
+        img {
+            align-self: stretch;
+            grid-area: image;
+            min-width: 20rem;
+        }
+    }
+
+    section {
+        grid-area: body;
+        font-size: 0.8em;
+
+
+        & :global(p) {
+            padding: 1rem;
+        }
+    }
+
+    h3 {
+        grid-area: date;
+    }
+
+    .links {
+        grid-area: links;
+    }
+
+    .tags {
+        grid-area: tags;
+        display: flex;
+        flex-direction: row-reverse;
+        flex-wrap: wrap;
+        gap: 0.5em;
+
+        li {
+            background-color: var(--color-panel-bg);
+            padding: 0.5em;
+            border-radius: 0.5em;
+        }
+    }
+
+
+    
+    @media (max-width: 700px) {
+      article {
+            grid-template-columns: 
+            [page-start aside-start] 1rem
+            [title-start body-start] 1fr
+            [title-end body-end] 1rem
+            [aside-end page-end];
+            grid-template-rows: [page-start] 1rem
+            [title-start] min-content
+            [title-end aside-start] min-content
+            [aside-end] min-content 
+            [body-start] min-content
+            [body-end] 1rem
+            [page-end];
+        }
+
+        aside {
+          border-bottom-left-radius: 0;
+          align-items: center;
+          text-align: center;
+          grid-template-columns: [image-start] 1em [date-start tags-start links-start] 1fr [date-end tags-end links-end] 1em [image-end];
+
+          img {
+            justify-self: stretch;
+          }
+        }
+
+        .tags {
+          align-items: center;
+          justify-content: center;
+        }
+    }
+</style>

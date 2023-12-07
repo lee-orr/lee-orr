@@ -1,7 +1,7 @@
 ---
 info:
-    company: Visual3D Ltd.
-    role: Web and Flash Programmer
+  company: Visual3D Ltd.
+  role: Web and Flash Programmer
 summary: Built simple Flash-based websites for clients.
 start_date: 2009-06-01
 end_date: 2010-01-01

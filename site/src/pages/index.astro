@@ -1,55 +1,203 @@
 ---
+import Html from "../components/html.astro";
+import { storytelling, computing } from "../data/site-nav-data.json";
 ---
 
-<html lang="en">
-  <head>
-    <meta charset="utf-8" />
-    <link rel="icon" type="image/png" href="/favicon.png" />
-    <meta name="viewport" content="width=device-width" />
-    <meta name="generator" content={Astro.generator} />
-    <link rel="stylesheet" href="/styles.css" />
-    <base href="/" />
-    <title>Lee-Orr</title>
-  </head>
-  <body>
-    <div
-      class="w-screen h-screen absolute flex flex-col gap-1 md:flex-row justify-stretch items-stretch bg-black"
-    >
-      <div
-        class="absolute w-full h-full flex flex-col justify-center md:justify-end md:pb-52 items-center md:pt-52 pointer-events-none z-10 md:bg-gradient-to-t from-black to-transparent to-20%"
+<Html>
+  <body transition:animate="slide">
+      <hgroup
+        class="title xl"
       >
-        <h1 class="font-bold text-9xl font-serif text-center text-white">
-          Lee-Orr
+        <h1 class="storytelling">
+          Lee
         </h1>
-      </div>
+        <h1>-</h1>
+        <h1 class="computing">Orr</h1>
+      </hgroup>
       <a
-        class="cursor-pointer flex flex-col justify-start items-center flex-grow hover:grow-[10] shrink transition-all duration-500 overflow-hidden storytelling text-white hover:text-secondary-200"
+        class="storytelling lg"
         style="clip-path: border-box;"
         href="/storytelling"
       >
         <div
           style="background-image: url(/wide-site-bg-test-creative.png);"
-          class="absolute left-0 bg-cover top-0 right-0 bottom-0 bg-center z-0 hover:filter-none grayscale-[50%] transition-all"
+          class=""
         >
         </div>
-        <h2 class="font-bold text-6xl font-sans z-10 p-10 pointer-events-none">
+        <h2 class="">
           Storytelling
         </h2>
       </a>
       <a
-        class="cursor-pointer flex flex-col justify-end md:justify-start items-center flex-grow hover:grow-[10] shrink transition-all duration-500 overflow-hidden computing text-white hover:text-secondary-200"
+        class="computing lg"
         style="clip-path: border-box;"
         href="/computing"
       >
         <div
           style="background-image: url(/wide-site-bg-test-computing.png);"
-          class="absolute bg-cover left-0 top-0 right-0 bottom-0 bg-center z-0 hover:filter-none grayscale-[50%] transition-all"
+          class=""
         >
         </div>
-        <h2 class="font-bold text-6xl font-mono z-10 p-10 pointer-events-none">
+        <h2 class="">
           Computing
         </h2>
       </a>
-    </div>
-  </body>
-</html>
+      <footer>
+        <span>
+          {
+            storytelling.socials.map(({type, value, icon}) => (<a href={value} target="_blank"><i class={icon}></i><span>{type}</span></a>))
+          }
+        </span>
+        <span>
+          {
+            computing.socials.map(({type, value, icon}) => (<a href={value} target="_blank"><i class={icon}></i><span>{type}</span></a>))
+          }
+        </span>
+      </footer>
+  </body></Html>
+
+<style>
+body {
+  width: 100dvw;
+  height: 100dvh;
+  display: flex;
+  flex-direction: row;
+  align-items: stretch;
+  justify-content: stretch;
+  position: relative;
+}
+
+a {
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-start;
+  align-items: center;
+  flex-grow: 1;
+  flex-shrink: 0;
+  color: var(--color-main-text);
+  padding: 2rem;
+  text-decoration: none;
+  transition: flex-grow 1s;
+
+  div {
+    filter: grayscale(0.4);
+    position: absolute;
+    top: 0;
+    left: 0;
+    bottom: 0;
+    right: 0;
+    z-index: -1;
+    transition: filter 1s;
+    background-size: cover;
+    background-position: center;
+  }
+
+  &:hover, &:focus, &:focus-within, &:active {
+    text-decoration: underline 0.2em solid;
+    text-underline-offset: 0.2em;
+    flex-grow: 10;
+    transition: flex-grow 1s;
+    div {
+      filter: grayscale(0);
+      transition: filter 1s;
+    }
+  }
+}
+
+.title {
+  position: absolute;
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  align-items: flex-end;
+  width: 100dvw;
+  height: 100dvh;
+  z-index: 10;
+  pointer-events: none;
+  padding: 2rem;
+}
+
+footer {
+  position: fixed;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-end;
+  pointer-events: none;
+
+  span {
+    pointer-events: all;
+    display: flex;
+    flex-direction: row;
+    a:hover {
+      text-decoration: none;
+      span {
+        text-decoration: underline 0.1em;
+        text-underline-offset: 0.5em;
+      }
+    }
+  }
+}
+
+@media (max-width: 700px) {
+  body {
+    flex-direction: column;
+  }
+
+  a {
+    padding: 2em;
+    text-decoration: underline 0.1em;
+    text-underline-offset: 0.5em;
+
+    &:last-of-type {
+      flex-direction: column-reverse;
+    }
+
+    div {
+      filter: grayscale(0);
+    }
+  }
+
+
+
+  footer {
+    position: fixed;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    top: 0;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    align-items: center;
+    font-size: 0.8em;
+
+    span {
+      display: flex;
+      flex-direction: row;
+      gap: 1em;
+      a {
+        padding: 0.2em;
+        text-decoration: none;
+        span {
+          display: none;
+        }
+      }
+      a:hover {
+        text-decoration: none;
+        span {
+          text-decoration: underline 0.1em;
+          text-underline-offset: 0.5em;
+        }
+      }
+    }
+  }
+
+  .title {
+    justify-content: center;
+    align-items: center;
+  }
+}
+</style>

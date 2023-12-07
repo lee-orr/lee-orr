@@ -2,11 +2,14 @@
 import { getCollection } from "astro:content";
 import slugify from "slugify";
 import Shell from "../components/shell.astro";
+import Html from "../components/html.astro";
 
-import { computing } from "../data/site-nav-data.json";
+import { computing, link_types } from "../data/site-nav-data.json";
 const { socials, nav } = computing;
 import { generate_computing_filters } from "./generate_filters";
 import AnimatedBackdrop from "../components/animated-backdrop.astro";
+
+const link_icons: {[key: string]: string | undefined} = link_types;
 
 slugify.extend({ "/": "-", "\\": "-" });
 
@@ -25,15 +28,6 @@ const timeline = await Promise.all(
           .filter((v) => v.length > 0),
       },
     }))
-    .map((v) => {
-      const render = async () => {
-        return {
-          ...v,
-          rendered: await v.render(),
-        };
-      };
-      return render();
-    })
 );
 
 timeline.sort((a, b) => {
@@ -69,179 +63,76 @@ tags_ordered.sort((a, b) => b.count - a.count);
 const tag_icons: { [key: string]: string } = {};
 const tag_colors: { [key: string]: string } = {};
 
-const months = [
-  "January",
-  "February",
-  "March",
-  "April",
-  "May",
-  "June",
-  "July",
-  "August",
-  "September",
-  "October",
-  "November",
-  "December",
-];
 ---
 
-<html lang="en">
-  <head>
-    <meta charset="utf-8" />
-    <link rel="icon" type="image/png" href="/favicon.png" />
-    <meta name="viewport" content="width=device-width" />
-    <meta name="generator" content={Astro.generator} />
-    <link rel="stylesheet" href="/styles.css" />
-    <link rel="stylesheet" href="/icofont.min.css" />
-    <base href="/" />
-    <title>Lee-Orr</title>
-  </head>
+<Html>
 
   <Shell area="computing" socials={socials} nav={nav}>
+    <ol class="timeline">
     {
       timeline.map(({ slug, data, body, rendered }, index) => {
-        let class_string = `timeline-item bg-primary-800 flex-col overflow-y-auto p-5 h-[25vh] flex gap-3 timeline-item col-span-2 ${data.tags
+        let class_string = `timeline-item ${data.tags
           .map((v) => v.trim())
           .map((v) => `tag-${v}`)
           .join(" ")}`;
 
-        let title =
-          data.info.project || data.info.role + " at " + data.info.company;
+        let info : { role: string, company: string, is_contract?: boolean } | { project: string} = data.info;
+
+        let title = "project" in info ? info.project : info.role + " at " + info.company;
 
         let context =
-          data.info.project !== undefined
+          "project" in info
             ? "Project"
-            : data.info.is_contract
+            : info.is_contract
             ? "Contract"
             : "Job";
 
-        const { Content } = rendered;
-
         return (
-          <>
-            <div class={class_string}>
-              <h3 class="text-xs text-text-400 text-center justify-between items-center gap-3 flex flex-row">
-                <span>
-                  {months[data.start_date.getMonth()]},{" "}
-                  {data.start_date.getFullYear()} -{" "}
-                  {data.end_date
-                    ? months[data.end_date.getMonth()] +
-                      ", " +
-                      data.end_date.getFullYear()
-                    : "present"}
-                </span>
-
-                {data.github ? (
-                  <a
-                    class="text-sm flex items-center flex-row justify-center hover:text-secondary-200"
-                    href={data.github}
-                    target="_blank"
-                  >
-                    <i class="icofont-github" />
-                  </a>
-                ) : (
-                  <span />
-                )}
-              </h3>
-              <h2 class="text-2xl text-text-200 font-bold flex flex-row justify-center items-center">
-                <button
-                  class="underline-offset-8 text-center hover:underline timeline-item-button hover:text-secondary-200"
-                  id={`item-${index}`}
-                >
-                  {title}
-                </button>
-              </h2>
-              <h3 class="text-xs text-text-400 flex flex-row justify-center items-center">
-                {context}
-              </h3>
-
-              <span class="flex flex-row justify-center gap-1 items-center flex-wrap">
-                {data.tags.map((tag) => (
-                  <span
-                    class="text-[0.65rem] rounded-full flex flex-row justify-center items-center p-[0.05rem] pr-2 pl-2 text-text-100"
-                    style={`background-color: ${
-                      tag_colors[tag] ?? "var(--color-secondary-700)"
-                    };`}
-                  >
-                    {tag_icons[tag] ? <i class={tag_icons[tag]} /> : tag}
-                  </span>
-                ))}
-              </span>
-              <div class="text-sm text-center text-text-200">
-                {data.summary}
-              </div>
-
-              <dialog
-                class="timeline-item-dialog bg-secondary-800 p-0"
-                id={`dialog-${index}`}
-              >
-                <div class="relative p-10 w-full h-full flex flex-col gap-2">
-                  <div class="flex flex-row justify-between items-center pb-2">
-                    <h1 class="text-2xl text-text-200 font-bold flex flex-row justify-start items-center">
-                      {title}
-                    </h1>
-                    <form class="flex justify-center items-center">
-                      <button
-                        formmethod="dialog"
-                        class="rounded-full flex justify-center items-center bg-category-1  w-5 h-5 text-center text-text hover:brightness-75 grayscale-[0.5] hover:grayscale-[0.2]"
-                      >
-                        X
-                      </button>
-                    </form>
-                  </div>
-                  <h3 class="text-xs text-text-500 text-center flex flex-row justify-between items-center gap-3">
-                    <span>
-                      {months[data.start_date.getMonth()]},{" "}
-                      {data.start_date.getFullYear()} -{" "}
-                      {data.end_date
-                        ? months[data.end_date.getMonth()] +
-                          ", " +
-                          data.end_date.getFullYear()
-                        : "present"}
-                    </span>
-                    {data.github ? (
-                      <a
-                        class="text-sm flex items-center flex-row gap-1 justify-center hover:text-secondary-200"
-                        href={data.github}
-                        target="_blank"
-                      >
-                        <span>{data.github}</span>
-                        <i class="icofont-github" />
-                      </a>
-                    ) : (
-                      ""
-                    )}
-                  </h3>
-                  <div class="prose prose-content">
-                    <Content />
-                  </div>
-                  <span class="flex flex-row justify-center gap-1 items-center flex-wrap">
-                    {data.tags.map((tag) => (
-                      <span
-                        class="text-[0.65rem] rounded-full flex flex-row justify-center items-center p-[0.05rem] pr-2 pl-2 text-text-100"
-                        style={`background-color: ${
-                          tag_colors[tag] ?? "var(--color-secondary-700)"
-                        };`}
-                      >
-                        {tag_icons[tag] ? <i class={tag_icons[tag]} /> : tag}
-                      </span>
-                    ))}
-                  </span>
-                </div>
-              </dialog>
-            </div>
-          </>
+          <li class={class_string} transition:name={`timeline-${slug}`}>
+            <h2><a href={`/computing/${slug}`}>{title}</a></h2>
+            <h3>{context}</h3>
+            <h4>
+              <time datetime={data.start_date.toDateString()} aria-label="from">{data.start_date.toLocaleDateString('default', { month: "short", year: 'numeric' })}</time>
+              {
+                data.end_date ? (
+                  <> to
+                  <time datetime={data.end_date.toDateString()}>{data.end_date.toLocaleDateString('default', { month: "short", year: 'numeric' })}</time>
+                  </>
+                ) : <></>
+              }
+            </h4>
+            <ul aria-label="technologies and skills">
+              {
+                data.tags.map((tag) => <li>{tag}</li>)
+              }
+            </ul>
+            <p>{data.summary}</p>
+            {
+              data.links ? (<ul class="links" aria-label="links">{
+                Object.keys(data.links).map((type) => {
+                  let target = data.links && data.links[type];
+                  if (!target) {
+                    return <></>
+                  }
+                  let icon = link_icons[type];
+                  let icon_element = icon ? <><i class={icon} /> &nbsp;</> : <></>;
+                  return <a href={target}>{icon_element}{target}</a>;
+                })}</ul>
+              ) : <></>
+            }
+          </li>
         );
       })
     }
-    <div slot="filters" class="text-text-100">
+    </ol>
+    <div slot="filters" transition:name={`filter-content`}>
       {
         tags_ordered.map(({ tag }) => (
           <button
             id={"button-" + tag}
-            class={`p-2 rounded-full hover:underline tag-button tag-${tag} text-text-100`}
+            class={`tag-button tag-${tag}`}
             style={`background-color: ${
-              tag_colors[tag] ?? "var(--color-secondary-700)"
+              tag_colors[tag] ?? "var(--color-accent)"
             };`}
           >
             {tag_icons[tag] ? <i class={tag_icons[tag]} /> : ""} {tag}
@@ -256,11 +147,103 @@ const months = [
   </Shell>
 
   <script src="../setup_page.ts"></script>
-</html>
+</Html>
 
 <style>
-  body {
-    --content-template-columns: repeat(auto-fit, minmax(10rem, 1fr));
-    --content-template-gap: 0.5rem;
+  .timeline {
+    display: grid;
+    gap: 0.3rem;
+    grid-template-columns: repeat(auto-fill, 
+      0.5rem
+      16rem
+       0.5rem
+    );
+    grid-auto-rows: 0.05rem fit-content(1.2em) fit-content(4em) fit-content(1.5em) fit-content(1.2em) fit-content(3em) fit-content(5em) 0.05rem;
+    justify-content: center;
+  }
+
+  .timeline-item {
+    display: grid;
+    grid-column: span 3;
+    grid-row: span 8;
+
+    grid-template-columns: subgrid [card-start] [date-start content-start tags-start title-start type-start link-start] [date-end content-end tags-end title-end type-end link-end] 
+      [card-end];
+    grid-template-rows: subgrid 
+    [card-start]
+    [date-start] 
+    [date-end title-start]
+    [title-end type-start]
+    [type-end link-start]
+    [link-end tags-start] 
+    [tags-end content-start]
+    [content-end]
+    [card-end];
+
+    background-color: var(--color-panel-bg);
+    border-radius: 1rem;
+
+    h2 {
+      font-size: 1.1em;
+      grid-area: title;
+      display: flex;
+      flex-direction: row;
+      justify-content: center;
+      align-items: flex-start;
+      text-align: center;
+    }
+
+    h3 {
+      grid-area: type;
+      font-size: 0.7em;
+      display: flex;
+      flex-direction: row;
+      justify-content: center;
+      align-items: flex-start;
+      text-align: center;
+    }
+
+    h4 {
+      grid-area: date;
+      font-size: 0.65em;
+    }
+
+    ul {
+      grid-area: tags;
+      text-align: center;
+
+      li {
+        display: inline-block;
+        font-size: 0.6em;
+        margin: 0.1em;
+        background-color: var(--color-accent);
+        padding: 0.25em;
+        border-radius: 0.5em;
+      }
+    }
+
+    p {
+      grid-area: content;
+      font-size: 0.7em;
+    }
+
+    .links {
+      grid-area: link;
+      font-size: 0.6em;
+      text-align: center;
+      display: flex;
+      flex-direction: column;
+      justify-content: flex-start;
+      align-items: center;
+    }
   }
 </style>
+
+
+
+<script>
+  import setup_page from "../setup_page";
+  setup_page();
+
+  document.addEventListener('astro:after-swap', setup_page);
+</script>

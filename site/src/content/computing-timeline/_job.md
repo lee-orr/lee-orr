@@ -1,7 +1,7 @@
 ---
 info:
-    company: COMPANY
-    role: ROLE
+  company: COMPANY
+  role: ROLE
 summary: SUMMARY
 start_date: 2023-07-05
 end_date: 2023-07-05

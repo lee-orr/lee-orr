@@ -1,22 +1,22 @@
 [
-    {
-        "type": "linkedin",
-        "value": "https://www.linkedin.com/in/lee-orr/",
-        "icon": "icofont-linkedin"
-    },
-    {
-        "type": "email",
-        "value": "leeorr@gmail.com",
-        "icon": "icofont-ui-email"
-    },
-    {
-        "type": "github",
-        "value": "github.com/lee-orr",
-        "icon": "icofont-github"
-    },
-    {
-        "type": "website",
-        "value": "lee-orr.com",
-        "icon": "icofont-web"
-    }
+  {
+    "type": "linkedin",
+    "value": "https://www.linkedin.com/in/lee-orr/",
+    "icon": "icofont-linkedin"
+  },
+  {
+    "type": "email",
+    "value": "leeorr@gmail.com",
+    "icon": "icofont-ui-email"
+  },
+  {
+    "type": "github",
+    "value": "github.com/lee-orr",
+    "icon": "icofont-github"
+  },
+  {
+    "type": "website",
+    "value": "lee-orr.com",
+    "icon": "icofont-web"
+  }
 ]

@@ -8,6 +8,8 @@
 		"vscode": {
 			"extensions": [
 				"astro-build.astro-vscode",
+		"ghcr.io/lee-orr/rusty-dev-containers/zellij:0": {},
+		"ghcr.io/lee-orr/rusty-dev-containers/helix:0": {},
 				"bradlc.vscode-tailwindcss"
 			]
 		}
@@ -18,6 +20,7 @@
 
 	// Use 'forwardPorts' to make a list of ports inside the container available locally.
 	// "forwardPorts": [],
+	"appPort": 3000,
 
 	// Use 'postCreateCommand' to run commands after the container is created.
 	// "postCreateCommand": "yarn install",

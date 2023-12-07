@@ -1,7 +1,7 @@
 ---
 info:
-    company: Ontario Institute for Studies in Education
-    role: Student Web Application Developer
+  company: Ontario Institute for Studies in Education
+  role: Student Web Application Developer
 summary: Built a prototype student portal.
 start_date: 2012-09-01
 end_date: 2013-01-01
