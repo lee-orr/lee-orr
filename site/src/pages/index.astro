@@ -1,5 +1,6 @@
 ---
 import Html from "../components/html.astro";
+import { storytelling, computing } from "../data/site-nav-data.json";
 ---
 
 <Html>
@@ -41,6 +42,18 @@ import Html from "../components/html.astro";
           Computing
         </h2>
       </a>
+      <footer>
+        <span>
+          {
+            storytelling.socials.map(({type, value, icon}) => (<a href={value} target="_blank"><i class={icon}></i><span>{type}</span></a>))
+          }
+        </span>
+        <span>
+          {
+            computing.socials.map(({type, value, icon}) => (<a href={value} target="_blank"><i class={icon}></i><span>{type}</span></a>))
+          }
+        </span>
+      </footer>
   </body></Html>
 
 <style>
@@ -104,27 +117,87 @@ a {
   padding: 2rem;
 }
 
+footer {
+  position: fixed;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-end;
+  pointer-events: none;
+
+  span {
+    pointer-events: all;
+    display: flex;
+    flex-direction: row;
+    a:hover {
+      text-decoration: none;
+      span {
+        text-decoration: underline 0.1em;
+        text-underline-offset: 0.5em;
+      }
+    }
+  }
+}
+
 @media (max-width: 700px) {
   body {
     flex-direction: column;
   }
 
-a {
-  text-decoration: underline 0.1em;
-  text-underline-offset: 0.5em;
+  a {
+    padding: 2em;
+    text-decoration: underline 0.1em;
+    text-underline-offset: 0.5em;
 
-  &:last-of-type {
-    flex-direction: column-reverse;
+    &:last-of-type {
+      flex-direction: column-reverse;
+    }
+
+    div {
+      filter: grayscale(0);
+    }
   }
 
-  div {
-    filter: grayscale(0);
-  }
-}
 
-.title {
-  justify-content: center;
-  align-items: center;
-}
+
+  footer {
+    position: fixed;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    top: 0;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    align-items: center;
+    font-size: 0.8em;
+
+    span {
+      display: flex;
+      flex-direction: row;
+      gap: 1em;
+      a {
+        padding: 0.2em;
+        text-decoration: none;
+        span {
+          display: none;
+        }
+      }
+      a:hover {
+        text-decoration: none;
+        span {
+          text-decoration: underline 0.1em;
+          text-underline-offset: 0.5em;
+        }
+      }
+    }
+  }
+
+  .title {
+    justify-content: center;
+    align-items: center;
+  }
 }
 </style>
