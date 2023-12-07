@@ -14,34 +14,34 @@ import { storytelling, computing } from "../data/site-nav-data.json";
         <h1>-</h1>
         <h1 class="computing">Orr</h1>
       </hgroup>
+
+
       <a
         class="storytelling lg"
-        style="clip-path: border-box;"
         href="/storytelling"
       >
-        <div
-          style="background-image: url(/wide-site-bg-test-creative.png);"
-          class=""
-        >
-        </div>
         <h2 class="">
           Storytelling
         </h2>
       </a>
       <a
         class="computing lg"
-        style="clip-path: border-box;"
         href="/computing"
       >
-        <div
-          style="background-image: url(/wide-site-bg-test-computing.png);"
-          class=""
-        >
-        </div>
         <h2 class="">
           Computing
         </h2>
       </a>
+
+      <div
+        class="bg-storytelling"
+      >
+    </div>
+      <div
+        class="bg-computing"
+      >
+      </div>
+
       <footer>
         <span>
           {
@@ -75,33 +75,65 @@ a {
   flex-grow: 1;
   flex-shrink: 0;
   color: var(--color-main-text);
-  padding: 2rem;
   text-decoration: none;
-  transition: flex-grow 1s;
+  margin: 2rem;
 
-  div {
+  &:hover, &:focus, &:focus-within, &:active {
+    text-decoration: underline 0.2em solid;
+    text-underline-offset: 0.2em;
+
+
+
+    &.storytelling {
+      ~ .bg-storytelling {
+        clip-path: polygon(0 0, 0 100%, 60% 100%, 60% 0);
+
+        filter: grayscale(0);
+      }
+      ~ .bg-computing{
+        clip-path: polygon(100% 0, 100% 100%, 60% 100%, 60% 0);
+        filter: grayscale(1);
+      }
+    }
+
+    &.computing {
+      ~ .bg-storytelling {
+        clip-path: polygon(0 0, 0 100%, 30% 100%, 30% 0);
+
+        filter: grayscale(1);
+      }
+      ~ .bg-computing{
+        clip-path: polygon(100% 0, 100% 100%, 30% 100%, 30% 0);
+
+        filter: grayscale(0);
+      }
+    }
+  }
+}
+
+.bg-storytelling, .bg-computing {
     filter: grayscale(0.4);
     position: absolute;
     top: 0;
     left: 0;
     bottom: 0;
     right: 0;
-    z-index: -1;
-    transition: filter 1s;
+    transition: filter 0.5s;
+    transition: clip-path 0.5s;
     background-size: cover;
     background-position: center;
-  }
+    pointer-events: none;
+    z-index: -1;
+}
 
-  &:hover, &:focus, &:focus-within, &:active {
-    text-decoration: underline 0.2em solid;
-    text-underline-offset: 0.2em;
-    flex-grow: 10;
-    transition: flex-grow 1s;
-    div {
-      filter: grayscale(0);
-      transition: filter 1s;
-    }
-  }
+.bg-storytelling {
+  background-image: url(/wide-site-bg-test-creative.png);
+  clip-path: polygon(0 0, 0 100%, 50% 100%, 50% 0);
+}
+
+.bg-computing {
+  background-image: url(/wide-site-bg-test-computing.png);
+  clip-path: polygon(100% 0, 100% 100%, 50% 100%, 50% 0);
 }
 
 .title {
