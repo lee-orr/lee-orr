@@ -25,6 +25,7 @@ const timeline = await Promise.all((await getCollection("storytelling-timeline")
       };
       return render();
     }));
+  
 timeline.sort((a,b) => b.data.date > a.data.date ? 1 : -1);
 
 

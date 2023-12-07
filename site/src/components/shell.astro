@@ -1,4 +1,5 @@
 ---
+import { generate_shape } from "../pages/generate_shape";
 import AnimatedBackdrop from "./animated-backdrop.astro";
 
 const { area, socials, nav } = Astro.props as {
@@ -20,6 +21,17 @@ function process_nav(
   });
 }
 
+
+let filters_shape = "clip-path: boundary-box;";
+if (area === "storytelling") {
+  filters_shape = `clip-path: ${generate_shape()}`;
+}
+
+let header_shape = "clip-path: boundary-box;";
+if (area === "storytelling") {
+  header_shape = `clip-path: ${generate_shape()}`;
+}
+
 let navigation = process_nav(nav);
 ---
 
@@ -27,6 +39,10 @@ let navigation = process_nav(nav);
     <header class="" transition:name="title" transition:animate="none">
       <span><a class="lg" href="/"><h1>Lee-Orr</h1></a></span>
     </header>
+
+    <div class="header-background" transition:name="title_bg" transition:animate="none">
+      <div style={header_shape} ></div>
+    </div>
 
     <nav class="" transition:name="nav" transition:animate="none">
       <span aria-label="external links">
@@ -64,7 +80,7 @@ let navigation = process_nav(nav);
   
 {
   Astro.slots.has("filters") ? (
-  <details class="filters"  transition:name="filters" transition:animate="slide">
+  <details class="filters" style={filters_shape}  transition:name="filters" transition:animate="slide">
     <summary class="">
       Filters
     </summary>
@@ -109,7 +125,6 @@ let navigation = process_nav(nav);
     grid-template-columns: subgrid;
     grid-template-rows: subgrid;
     grid-area: header;
-    background-color: var(--color-panel-bg);
 
     span {
       grid-area: title;
@@ -119,13 +134,31 @@ let navigation = process_nav(nav);
       align-items: center;
     }
   }
+  
+  .header-background {
+    position:relative;
+    overflow:hidden;
+    grid-area: header;
+    pointer-events: none;
+  }
+
+  .header-background > div {
+    background-color: var(--color-panel-bg);
+    position: absolute;
+
+    top: -20rem;
+    left: -20rem;
+    right: -20rem;
+    bottom: 0rem;
+
+    z-index: -1;
+  }
 
   nav {
     display: grid;
     grid-template-columns: subgrid;
     grid-template-rows: subgrid;
     grid-area: nav;
-    background-color: var(--color-panel-bg);
 
     & span {
       display: flex;
