@@ -98,12 +98,12 @@ a {
 
     &.computing {
       ~ .bg-storytelling {
-        clip-path: polygon(0 0, 0 100%, 30% 100%, 30% 0);
+        clip-path: polygon(0 0, 0 100%, 40% 100%, 40% 0);
 
         filter: grayscale(1);
       }
       ~ .bg-computing{
-        clip-path: polygon(100% 0, 100% 100%, 30% 100%, 30% 0);
+        clip-path: polygon(100% 0, 100% 100%, 40% 100%, 40% 0);
 
         filter: grayscale(0);
       }
@@ -112,7 +112,6 @@ a {
 }
 
 .bg-storytelling, .bg-computing {
-    filter: grayscale(0.4);
     position: absolute;
     top: 0;
     left: 0;
@@ -178,6 +177,19 @@ footer {
     flex-direction: column;
   }
 
+  
+  
+
+.bg-storytelling {
+  background-image: url(/wide-site-bg-test-creative.png);
+  clip-path: polygon(0 0, 100% 0%, 100% 50%, 0% 50%);
+}
+
+.bg-computing {
+  background-image: url(/wide-site-bg-test-computing.png);
+  clip-path: polygon(0 100%, 100% 100%, 100% 50%, 0% 50%);
+}
+
   a {
     padding: 2em;
     text-decoration: underline 0.1em;
@@ -187,9 +199,34 @@ footer {
       flex-direction: column-reverse;
     }
 
-    div {
-      filter: grayscale(0);
+    &:hover, &:focus, &:focus-within, &:active {
+      
+      &.storytelling {
+        ~ div.bg-storytelling {
+          clip-path: polygon(0 0, 100% 0%, 100% 60%, 0% 60%);
+
+          filter: grayscale(0);
+        }
+        ~ div.bg-computing{
+          clip-path: polygon(0 100%, 100% 100%, 100% 60%, 0% 60%);
+          filter: grayscale(1);
+        }
+      }
+
+      &.computing {
+        ~ .bg-storytelling {
+          clip-path: polygon(0 0, 100% 0%, 100% 40%, 0% 40%);
+
+          filter: grayscale(1);
+        }
+        ~ .bg-computing{
+          clip-path: polygon(0 100%, 100% 100%, 100% 40%, 0% 40%);
+
+          filter: grayscale(0);
+        }
+      }
     }
+
   }
 
 
