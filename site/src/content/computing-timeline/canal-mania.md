@@ -1,12 +1,21 @@
 ---
 info:
   project: Canal Mania!
-summary: Cash in on the crown's craze for canals in this canal building game! With levels inspired by real canals from England's Industrial Revolution, build the best transport of the century (...until rail arrives...) with as low a cost as you can!
+summary: A prototype of a puzzle game inspired by the rush to build canals in early 1800s great britain. Involved significant shader work, a robust rules engine, and a custom level editor.
 start_date: 2023-12-31
 end_date: 2023-01-08
-tags: games 3d rust bevy
+tags: games 3d rust bevy ci-cd wgsl
 links:
     "github": "https://github.com/lee-orr/CanalMania"
+    "itch": "https://lee-orr.itch.io/canal-mania"
 ---
 
-I originally built this game as part of the Historically Accurate Game Jam - based on the theme of "The Industrial Revolution". After some research, I wound up deciding to focus on a period in the UK where canals became extremely popular, before trains took over. This game is essentially a puzzle game where you need to construct canals to reach specific locations for the lowest cost possible, with many of the maps inspired by real-world canal projects from the time!
+I originally built this game as part of the Historically Accurate Game Jam - based on the theme of "The Industrial Revolution".
+
+The main technical challenges of the game fell into a few categories:
+
+- Presenting a clear and easy to parse map where height was of such importance, which required the creation of a custom shader that generated terrain contour lines akin to a physical map.
+
+- Processing the flow of water down stream as part of the logic puzzle, and in particular detecting when flow is cut off.
+
+- Creating an abstraction around the Bevy UI systems that would allow for easy UI manipulation and the creation of an in-game editor, despite it's lack of pre-existing features.

@@ -1,12 +1,21 @@
 ---
 info:
   project: Crossroad Blues
-summary: As a lowly deamon in hell, getting souls is the name of the game... But actually getting a deal is hard with all the forces of heaven in the way. Fortunately - if someone goes to a crossroad & summons a deamon, you might just be able to get to them...
+summary: A game prototype involving physics opimizations, procedural generation, and utility AI.
 start_date: 2023-09-08
 end_date: 2023-09-18
-tags: games rust bevy
+tags: games rust bevy ci-cd
 links:
     "github": "https://github.com/lee-orr/crossroad-blues/"
+    "itch": "https://lee-orr.itch.io/crossroad-blues"
 ---
 
 When [VimJam4](https://itch.io/jam/vimjam4) unveiled their theme, "Cross Paths", my mind immediately went to the legends around Robert Johnson's "Cross Road Blues". A classic story of a Faustian bargin, at a crossroad, in the dead of night. As I was playing with that concept, I realized it'd be fun to be a devil trying to gather souls with these deals, working their way up in the world. And so, the game "Crossroad Blues" was born.
+
+This game involved some significant technical challenges around a few key areas:
+
+- the generation of maps that followed a road but still had some amount of ability to define their expected pacing and shapes.
+
+- the handling of many objects with collisions and logic processing - each level would contain thousands of trees and hundreds of enemies, and we had to optimize their performance using approaches like oct-trees and distance-based culling to ensuire smooth gameplay.
+
+- this was my first foray into utility AI, and implementing it was complex even with the use of pre-existing libraries as a base.

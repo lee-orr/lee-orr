@@ -7,4 +7,6 @@ end_date: 2021-02-19
 tags: typescript webaudio vue css
 ---
 
-Written with Jackson Seib, and featuring the voice of Rob Russo as Teddy and myself as Drew, this was an experiment in writing an interactive musical. It's a choose-your-own-adventure song telling the story of a pivot point in a relationship. Is it the end or a new beginning? That depends on you.
+Written with Jackson Seib, and featuring the voice of Rob Russo as Teddy and myself as Drew, this was an experiment in writing an interactive musical.
+
+It involved significant technical challanges around syncronizing multiple audio clips, and mixing them, in real time using the webaudio API while presenting a clear user interface.
