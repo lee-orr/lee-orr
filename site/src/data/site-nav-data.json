@@ -22,8 +22,7 @@
     "nav": [
       {
         "name": "Resume",
-        "url": "developer",
-        "new_tab": true
+        "url": "developer"
       },
       {
         "name": "Contact",

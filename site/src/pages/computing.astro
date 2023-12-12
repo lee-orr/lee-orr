@@ -270,6 +270,11 @@ const personal = timeline.filter((a) => "project" in a.data.info && !("open_sour
     align-items: center;
     cursor: pointer;
 
+    h2::before {
+      content: "> ";
+      display: inline;
+    }
+
     &:hover,
   &:focus,
   &:focus-within,
@@ -280,6 +285,10 @@ const personal = timeline.filter((a) => "project" in a.data.info && !("open_sour
         text-underline-offset: 0.1em;
       }
     }
+  }
+
+  [open] > summary > h2::before {
+    display: none;
   }
 
   .timeline {

@@ -160,6 +160,7 @@ let navigation = process_nav(nav);
     grid-template-columns: subgrid;
     grid-template-rows: subgrid;
     grid-area: nav;
+    pointer-events: none;
 
     & span {
       display: flex;
@@ -167,6 +168,7 @@ let navigation = process_nav(nav);
       align-items: center;
       gap: 1rem;
       padding: 1rem;
+      pointer-events: all;
     }
     
     & span:first-of-type {
