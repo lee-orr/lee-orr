@@ -6,19 +6,21 @@ import Html from "../components/html.astro";
 import { storytelling, link_types } from "../data/site-nav-data.json";
 import { generate_shape } from "./generate_shape";
 import { generate_storytelling_filters } from "./generate_filters";
-import { Image } from "astro:assets";
+import { Image, getImage } from "astro:assets";
 const { socials, nav } = storytelling;
 
 const link_icons: {[key: string]: string | undefined} = link_types;
 
-const timeline = await Promise.all((await getCollection("storytelling-timeline")).map((v) => ({
+const timeline = await Promise.all((await getCollection("storytelling-timeline")).map(async (v) => ({
   ...v,
   data: {
     ...v.data,
-    tags: v.data.tags.split(/(\s|",")+/g).map((v) => v.trim()).filter((v) => v.length > 0)
+    tags: v.data.tags.split(/(\s|",")+/g).map((v) => v.trim()).filter((v) => v.length > 0),
+    image: v.data.image ? await getImage({ src: v.data.image, width: 640}): undefined
   }
-})).map((v) => {
+})).map((prev) => {
       const render = async () => {
+        let v = await prev;
         return {
           ...v,
           rendered: await v.render(),

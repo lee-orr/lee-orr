@@ -22,6 +22,7 @@ export const getStaticPaths = (async () => {
 
 import { storytelling, link_types } from "../../data/site-nav-data.json";
 import { generate_shape } from '../generate_shape';
+import { getImage } from 'astro:assets';
 
 const { socials, nav } = storytelling;
 
@@ -37,6 +38,8 @@ let data = entry.data;
 let title = data.title;
 
 const { Content } = await entry.render();
+
+const image = data.image ? await getImage({ src: data.image, width: 640}) : false;
 
 const tag_icons: {[key: string]: string} = {
   acting: 'icofont-video',
@@ -72,7 +75,7 @@ let aside_style = `clip-path: ${aside_shape};`;
             <h1>{title}</h1>
             <aside style={aside_style}>
                 {
-                    data.image && data.image_alt ? (<img src={data.image} alt={data.image_alt} />) :  (<></>)
+                    image && data.image_alt ? (<img src={image.src} alt={data.image_alt} />) :  (<></>)
                 }
             <h3>
                 <time datetime={data.date.toDateString()}>{data.date.toLocaleDateString('default', { month: "short", year: 'numeric' })}</time>
