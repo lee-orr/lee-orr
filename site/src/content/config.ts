@@ -2,10 +2,10 @@ import { z, defineCollection } from "astro:content";
 
 const storytelling_timeline = defineCollection({
   type: "content",
-  schema: z.object({
+  schema: ({image}) => z.object({
     title: z.string(),
     summary: z.string(),
-    image: z.string().optional(),
+    image: image().optional(),
     image_alt: z.string().optional(),
     dialogue_bg: z.string().optional(),
     date: z.date(),

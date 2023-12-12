@@ -6,6 +6,7 @@ import Html from "../components/html.astro";
 import { storytelling, link_types } from "../data/site-nav-data.json";
 import { generate_shape } from "./generate_shape";
 import { generate_storytelling_filters } from "./generate_filters";
+import { Image } from "astro:assets";
 const { socials, nav } = storytelling;
 
 const link_icons: {[key: string]: string | undefined} = link_types;
@@ -112,7 +113,7 @@ const tag_colors: {[key: string]: string} = {
                     </ul>
                     {
                       data.image ? 
-                      <div class="image"><img src={data.image} alt={data.image_alt}/></div>
+                      <div class="image"><img src={data.image.src} alt={data.image_alt ?? data.title}/></div>
                       : <></>
                     }
                     <p>{data.summary}</p>

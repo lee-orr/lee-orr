@@ -1,6 +1,8 @@
 ---
 import Html from "../components/html.astro";
 import { storytelling, computing } from "../data/site-nav-data.json";
+import CreativeBg from "../images/wide-site-bg-test-creative.png";
+import ComputingBg from "../images/wide-site-bg-test-computing.png";
 ---
 
 <Html>
@@ -126,12 +128,12 @@ a {
 }
 
 .bg-storytelling {
-  background-image: url(/wide-site-bg-test-creative.png);
+  background-image: url(../images/wide-site-bg-test-creative.png);
   clip-path: polygon(0 0, 0 100%, 50% 100%, 50% 0);
 }
 
 .bg-computing {
-  background-image: url(/wide-site-bg-test-computing.png);
+  background-image: url(../images/wide-site-bg-test-computing.png);
   clip-path: polygon(100% 0, 100% 100%, 50% 100%, 50% 0);
 }
 

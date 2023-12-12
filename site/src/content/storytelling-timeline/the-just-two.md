@@ -3,7 +3,7 @@ title: The Just Two
 summary: Take on the role of Fate in the tale of two warriors of justice from opposing sides of a war in a probability bending RPG.
 date: 2023-07-24
 tags: games 3d writing
-image: storytelling_images/the_just_two_image.png
+image: ../../images/storytelling_images/the_just_two_image.png
 image_alt: Screenshot from The Just Two
 links:
     "itch": "https://lee-orr.itch.io/the-just-two"
