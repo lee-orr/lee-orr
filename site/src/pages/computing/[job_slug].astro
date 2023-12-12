@@ -41,11 +41,9 @@ let title = "project" in info ? info.project : info.role;
 let company = "company" in info ? info.company : false;
 
 let context =
-    "project" in info
-    ? "Project"
-    : info.is_contract
-    ? "Contract"
-    : "Job";
+          "project" in info
+            ? "open_source_used" in info && info.open_source_used ? "Open Source Maintainer" : "Personal"
+            : info.is_contract ? "Contract" : "Job";
 
 const { Content } = await entry.render();
 ---

@@ -31,9 +31,13 @@ const timeline = await Promise.all(
 );
 
 timeline.sort((a, b) => {
-  let a_date = a.data.end_date ?? new Date();
-  let b_date = b.data.end_date ?? new Date();
-  return b_date > a_date ? 1 : -1;
+  if (a.data.end_date || b.data.end_date) {
+    let a_date = a.data.end_date ?? new Date();
+    let b_date = b.data.end_date ?? new Date();
+    return b_date > a_date ? 1 : -1;
+  } else {
+    return b.data.start_date > a.data.start_date ? 1 : -1;
+  }
 });
 
 const tags: { [key: string]: number } = {};
@@ -63,35 +67,36 @@ tags_ordered.sort((a, b) => b.count - a.count);
 const tag_icons: { [key: string]: string } = {};
 const tag_colors: { [key: string]: string } = {};
 
+const jobs = timeline.filter((a) => "company" in a.data.info);
+const open_source = timeline.filter((a) => "project" in a.data.info && "open_source_used" in a.data.info && a.data.info.open_source_used);
+const personal = timeline.filter((a) => "project" in a.data.info && !("open_source_used" in a.data.info && a.data.info.open_source_used));
+
 ---
 
 <Html>
 
   <Shell area="computing" socials={socials} nav={nav}>
+    <details open>
+      <summary><h2>Jobs</h2></summary>
     <ol class="timeline">
     {
-      timeline.map(({ slug, data, body, rendered }, index) => {
+      jobs.map(({ slug, data, body }, index) => {
         let class_string = `timeline-item ${data.tags
           .map((v) => v.trim())
           .map((v) => `tag-${v}`)
           .join(" ")}`;
 
-        let info : { role: string, company: string, is_contract?: boolean } | { project: string} = data.info;
+        let info = data.info as { role: string, company: string, is_contract?: boolean } ;
 
         let title = "project" in info ? info.project : info.role + " at " + info.company;
 
-        let context =
-          "project" in info
-            ? "Project"
-            : info.is_contract
-            ? "Contract"
-            : "Job";
+        let context = info.is_contract ? "Contract" : "Job";
 
         return (
           <li class={class_string} transition:name={`timeline-${slug}`}>
-            <h2><a href={`/computing/${slug}`}>{title}</a></h2>
-            <h3>{context}</h3>
-            <h4>
+            <h3><a href={`/computing/${slug}`}>{title}</a></h3>
+            <h4>{context}</h4>
+            <h5>
               <time datetime={data.start_date.toDateString()} aria-label="from">{data.start_date.toLocaleDateString('default', { month: "short", year: 'numeric' })}</time>
               {
                 data.end_date ? (
@@ -100,7 +105,7 @@ const tag_colors: { [key: string]: string } = {};
                   </>
                 ) : <></>
               }
-            </h4>
+            </h5>
             <ul aria-label="technologies and skills">
               {
                 data.tags.map((tag) => <li>{tag}</li>)
@@ -125,6 +130,111 @@ const tag_colors: { [key: string]: string } = {};
       })
     }
     </ol>
+  </details>
+  <details open>
+    <summary><h2>Open Source Projects</h2></summary>
+  <ol class="timeline">
+  {
+    open_source.map(({ slug, data, body }, index) => {
+      let class_string = `timeline-item ${data.tags
+        .map((v) => v.trim())
+        .map((v) => `tag-${v}`)
+        .join(" ")}`;
+
+      let info = data.info as { role: string, company: string, is_contract?: boolean } ;
+
+      let title = "project" in info ? info.project : info.role + " at " + info.company;
+
+      return (
+        <li class={class_string} transition:name={`timeline-${slug}`}>
+          <h3><a href={`/computing/${slug}`}>{title}</a></h3>
+          <h5>
+            <time datetime={data.start_date.toDateString()} aria-label="from">{data.start_date.toLocaleDateString('default', { month: "short", year: 'numeric' })}</time>
+            {
+              data.end_date ? (
+                <> to
+                <time datetime={data.end_date.toDateString()}>{data.end_date.toLocaleDateString('default', { month: "short", year: 'numeric' })}</time>
+                </>
+              ) : <></>
+            }
+          </h5>
+          <ul aria-label="technologies and skills">
+            {
+              data.tags.map((tag) => <li>{tag}</li>)
+            }
+          </ul>
+          <p>{data.summary}</p>
+          {
+            data.links ? (<ul class="links" aria-label="links">{
+              Object.keys(data.links).map((type) => {
+                let target = data.links && data.links[type];
+                if (!target) {
+                  return <></>
+                }
+                let icon = link_icons[type];
+                let icon_element = icon ? <><i class={icon} /> &nbsp;</> : <></>;
+                return <a href={target}>{icon_element}{target}</a>;
+              })}</ul>
+            ) : <></>
+          }
+        </li>
+      );
+    })
+  }
+  </ol>
+</details>
+<details open>
+  <summary><h2>Personal Projects</h2></summary>
+<ol class="timeline">
+{
+  personal.map(({ slug, data, body }, index) => {
+    let class_string = `timeline-item ${data.tags
+      .map((v) => v.trim())
+      .map((v) => `tag-${v}`)
+      .join(" ")}`;
+
+    let info = data.info as { role: string, company: string, is_contract?: boolean } ;
+
+    let title = "project" in info ? info.project : info.role + " at " + info.company;
+
+    return (
+      <li class={class_string} transition:name={`timeline-${slug}`}>
+        <h3><a href={`/computing/${slug}`}>{title}</a></h3>
+        <h5>
+          <time datetime={data.start_date.toDateString()} aria-label="from">{data.start_date.toLocaleDateString('default', { month: "short", year: 'numeric' })}</time>
+          {
+            data.end_date ? (
+              <> to
+              <time datetime={data.end_date.toDateString()}>{data.end_date.toLocaleDateString('default', { month: "short", year: 'numeric' })}</time>
+              </>
+            ) : <></>
+          }
+        </h5>
+        <ul aria-label="technologies and skills">
+          {
+            data.tags.map((tag) => <li>{tag}</li>)
+          }
+        </ul>
+        <p>{data.summary}</p>
+        {
+          data.links ? (<ul class="links" aria-label="links">{
+            Object.keys(data.links).map((type) => {
+              let target = data.links && data.links[type];
+              if (!target) {
+                return <></>
+              }
+              let icon = link_icons[type];
+              let icon_element = icon ? <><i class={icon} /> &nbsp;</> : <></>;
+              return <a href={target}>{icon_element}{target}</a>;
+            })}</ul>
+          ) : <></>
+        }
+      </li>
+    );
+  })
+}
+</ol>
+</details>
     <div slot="filters" transition:name={`filter-content`}>
       {
         tags_ordered.map(({ tag }) => (
@@ -150,6 +260,28 @@ const tag_colors: { [key: string]: string } = {};
 </Html>
 
 <style>
+  summary {
+    color: var(--color-accent);
+    margin-top: 2em;
+    margin-bottom: 0.5em;
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    align-items: center;
+    cursor: pointer;
+
+    &:hover,
+  &:focus,
+  &:focus-within,
+  &:active {
+      h2 {
+        text-decoration: underline solid;
+        text-decoration-thickness: 0.1em;
+        text-underline-offset: 0.1em;
+      }
+    }
+  }
+
   .timeline {
     display: grid;
     gap: 0.3rem;
@@ -161,12 +293,6 @@ const tag_colors: { [key: string]: string } = {};
     grid-auto-rows: 0.05rem fit-content(1.2em) fit-content(4em) fit-content(1.5em) fit-content(1.2em) fit-content(3em) fit-content(5em) 0.05rem;
     justify-content: center;
   }
-
-  /*
-
-      [date-start content-start tags-start title-start type-start link-start]
-      [date-end content-end tags-end title-end type-end link-end]
-      */
 
   .timeline-item {
     display: grid;
@@ -188,7 +314,7 @@ const tag_colors: { [key: string]: string } = {};
     background-color: var(--color-panel-bg);
     border-radius: 1rem;
 
-    h2 {
+    h3 {
       font-size: 1.1em;
       grid-area: title;
       display: flex;
@@ -198,7 +324,7 @@ const tag_colors: { [key: string]: string } = {};
       text-align: center;
     }
 
-    h3 {
+    h4 {
       grid-area: type;
       font-size: 0.7em;
       display: flex;
@@ -208,7 +334,7 @@ const tag_colors: { [key: string]: string } = {};
       text-align: center;
     }
 
-    h4 {
+    h5 {
       grid-area: date;
       font-size: 0.65em;
     }

@@ -23,7 +23,7 @@ const computing_timeline = defineCollection({
         role: z.string(),
         is_contract: z.boolean().optional(),
       }),
-      z.object({ project: z.string() }),
+      z.object({ project: z.string(), open_source_used: z.boolean().optional() }),
     ]),
     summary: z.string(),
     end_date: z.optional(z.date()),
