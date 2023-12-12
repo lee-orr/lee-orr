@@ -162,23 +162,28 @@ const tag_colors: { [key: string]: string } = {};
     justify-content: center;
   }
 
+  /*
+
+      [date-start content-start tags-start title-start type-start link-start]
+      [date-end content-end tags-end title-end type-end link-end]
+      */
+
   .timeline-item {
     display: grid;
     grid-column: span 3;
     grid-row: span 8;
 
-    grid-template-columns: subgrid [card-start] [date-start content-start tags-start title-start type-start link-start] [date-end content-end tags-end title-end type-end link-end] 
-      [card-end];
-    grid-template-rows: subgrid 
-    [card-start]
-    [date-start] 
-    [date-end title-start]
-    [title-end type-start]
-    [type-end link-start]
-    [link-end tags-start] 
-    [tags-end content-start]
-    [content-end]
-    [card-end];
+    grid-template-columns: subgrid;
+    grid-template-rows: subgrid;
+
+    grid-template-areas: ". . . "
+    ". date ."
+    " . title ."
+    ". type ."
+    ". link ."
+    ". tags ."
+    ". content ."
+    ". . . ";
 
     background-color: var(--color-panel-bg);
     border-radius: 1rem;
