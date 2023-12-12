@@ -1,6 +1,8 @@
 ---
 import Html from "../components/html.astro";
 import { storytelling, computing } from "../data/site-nav-data.json";
+import CreativeBg from "../images/wide-site-bg-test-creative.png";
+import ComputingBg from "../images/wide-site-bg-test-computing.png";
 ---
 
 <Html>
@@ -14,34 +16,34 @@ import { storytelling, computing } from "../data/site-nav-data.json";
         <h1>-</h1>
         <h1 class="computing">Orr</h1>
       </hgroup>
+
+
       <a
         class="storytelling lg"
-        style="clip-path: border-box;"
         href="/storytelling"
       >
-        <div
-          style="background-image: url(/wide-site-bg-test-creative.png);"
-          class=""
-        >
-        </div>
         <h2 class="">
           Storytelling
         </h2>
       </a>
       <a
         class="computing lg"
-        style="clip-path: border-box;"
         href="/computing"
       >
-        <div
-          style="background-image: url(/wide-site-bg-test-computing.png);"
-          class=""
-        >
-        </div>
         <h2 class="">
           Computing
         </h2>
       </a>
+
+      <div
+        class="bg-storytelling"
+      >
+    </div>
+      <div
+        class="bg-computing"
+      >
+      </div>
+
       <footer>
         <span>
           {
@@ -75,33 +77,64 @@ a {
   flex-grow: 1;
   flex-shrink: 0;
   color: var(--color-main-text);
-  padding: 2rem;
   text-decoration: none;
-  transition: flex-grow 1s;
+  margin: 2rem;
 
-  div {
-    filter: grayscale(0.4);
+  &:hover, &:focus, &:focus-within, &:active {
+    text-decoration: underline 0.2em solid;
+    text-underline-offset: 0.2em;
+
+
+
+    &.storytelling {
+      ~ .bg-storytelling {
+        clip-path: polygon(0 0, 0 100%, 60% 100%, 60% 0);
+
+        filter: grayscale(0);
+      }
+      ~ .bg-computing{
+        clip-path: polygon(100% 0, 100% 100%, 60% 100%, 60% 0);
+        filter: grayscale(1);
+      }
+    }
+
+    &.computing {
+      ~ .bg-storytelling {
+        clip-path: polygon(0 0, 0 100%, 40% 100%, 40% 0);
+
+        filter: grayscale(1);
+      }
+      ~ .bg-computing{
+        clip-path: polygon(100% 0, 100% 100%, 40% 100%, 40% 0);
+
+        filter: grayscale(0);
+      }
+    }
+  }
+}
+
+.bg-storytelling, .bg-computing {
     position: absolute;
     top: 0;
     left: 0;
     bottom: 0;
     right: 0;
-    z-index: -1;
-    transition: filter 1s;
+    transition: filter 0.5s;
+    transition: clip-path 0.5s;
     background-size: cover;
     background-position: center;
-  }
+    pointer-events: none;
+    z-index: -1;
+}
 
-  &:hover, &:focus, &:focus-within, &:active {
-    text-decoration: underline 0.2em solid;
-    text-underline-offset: 0.2em;
-    flex-grow: 10;
-    transition: flex-grow 1s;
-    div {
-      filter: grayscale(0);
-      transition: filter 1s;
-    }
-  }
+.bg-storytelling {
+  background-image: url(../images/wide-site-bg-test-creative.png);
+  clip-path: polygon(0 0, 0 100%, 50% 100%, 50% 0);
+}
+
+.bg-computing {
+  background-image: url(../images/wide-site-bg-test-computing.png);
+  clip-path: polygon(100% 0, 100% 100%, 50% 100%, 50% 0);
 }
 
 .title {
@@ -144,12 +177,8 @@ footer {
 @media (max-width: 700px) {
   body {
     flex-direction: column;
-  }
-
-<<<<<<< Updated upstream
-=======
-  
-  
+  }  
+   
 
   .bg-storytelling {
     clip-path: polygon(0 0, 100% 0%, 100% 50%, 0% 50%);
@@ -158,8 +187,6 @@ footer {
   .bg-computing {
     clip-path: polygon(0 100%, 100% 100%, 100% 50%, 0% 50%);
   }
-
->>>>>>> Stashed changes
   a {
     padding: 2em;
     text-decoration: underline 0.1em;
@@ -169,9 +196,34 @@ footer {
       flex-direction: column-reverse;
     }
 
-    div {
-      filter: grayscale(0);
+    &:hover, &:focus, &:focus-within, &:active {
+      
+      &.storytelling {
+        ~ div.bg-storytelling {
+          clip-path: polygon(0 0, 100% 0%, 100% 60%, 0% 60%);
+
+          filter: grayscale(0);
+        }
+        ~ div.bg-computing{
+          clip-path: polygon(0 100%, 100% 100%, 100% 60%, 0% 60%);
+          filter: grayscale(1);
+        }
+      }
+
+      &.computing {
+        ~ .bg-storytelling {
+          clip-path: polygon(0 0, 100% 0%, 100% 40%, 0% 40%);
+
+          filter: grayscale(1);
+        }
+        ~ .bg-computing{
+          clip-path: polygon(0 100%, 100% 100%, 100% 40%, 0% 40%);
+
+          filter: grayscale(0);
+        }
+      }
     }
+
   }
 
 
