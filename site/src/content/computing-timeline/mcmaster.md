@@ -8,4 +8,4 @@ start_date: 2023-10-01
 tags: Typescript Architecture DevOps CI/CD dev-containers back-end full-stack tdd writing
 ---
 
-
+This contract is in-progress, and as such details will be updated upon completion.

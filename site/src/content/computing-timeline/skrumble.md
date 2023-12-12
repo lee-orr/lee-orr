@@ -10,7 +10,7 @@ tags: Architecture Javascript Vue NodeJS Docker DevOps SQL MongoDB AWS Freeswitc
 
 My work at Skrumble started as a website developer - implementing PSD designs in HTML & CSS. During downtime, I built a custom version of the ProcessWire CMS that allowed the graphic designed to update the site directly - making my original job reudandant and saving ~50k a year on that position.
 
-At that point, I was asked to help our back end developer handle his workload - and primarily worked on migrating us from VMWare VMs to LXD containers, and contributing small features like mobile notifications. However, when the back end developer left the company I became the sole developer on the back end - and had to handle feature development and operations for our ~2-300 containers across 2 physical machines.
+At that point, I was asked to help our back end developer handle his workload - and primarily worked on migrating us from VMWare VMs to LXD containers, and contributing small features like mobile notifications. However, when the back end developer left the company I became the sole developer on the back end - and had to handle feature development and operations for hundreds of containers across multiple machines and data centers.
 
 This experience lead to my proposed re-architecture of our product - migrating from having individual containers running our entire stack for each client, to utilizing AWS Elastic Beanstalk with NodeJS for our HTTP & WebSocket APIs, including real-time chat functionality, and a single instance of our media server (Freeswitch) on each of the physical machines for handling calls.
 
