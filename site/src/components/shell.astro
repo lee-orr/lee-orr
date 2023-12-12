@@ -262,4 +262,19 @@ let navigation = process_nav(nav);
       text-align: center;
     }
   }
+
+  @media print {
+    body {
+      grid-template-rows: [content-start] auto [content-end];
+      grid-template-columns: [content-start] auto [content-end];
+    }
+
+    body > * {
+      display: none;
+    }
+
+    body > *.content {
+      display: flex;
+    }
+  }
 </style>

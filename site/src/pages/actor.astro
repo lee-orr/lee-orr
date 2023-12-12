@@ -6,6 +6,13 @@ import ActorSection from "../components/actor-section.astro";
 import { skills, education } from "../data/actor-details.json";
 import ActorSkills from "../components/actor-skills.astro";
 import ActorEducation from "../components/actor-education.astro";
+import { storytelling, link_types } from "../data/site-nav-data.json";
+import Html from "../components/html.astro";
+import Shell from "../components/shell.astro";
+const link_icons: {[key: string]: string | undefined} = link_types;
+import headshot from "../images/headshots/Headshot - Friendly.png";
+
+const { socials, nav } = storytelling;
 
 const sections = sections_in as Array<{
   title: string;
@@ -17,19 +24,11 @@ const sections = sections_in as Array<{
 }>;
 ---
 
-<html lang="en">
-  <head>
-    <meta charset="utf-8" />
-    <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
-    <meta name="viewport" content="width=device-width" />
-    <meta name="generator" content={Astro.generator} />
-    <link rel="stylesheet" href="/icofont.min.css" />
-    <base href="/" />
-    <title>Lee-Orr</title>
-  </head>
-  <body>
-    <img style="w-full h-full" src="./headshots/Headshot - Friendly.png" />
-    <div style="page-break-before:always" class="p-5">
+<Html>
+  <Shell area="storytelling" socials={socials} nav={nav}>
+    <img style="w-full h-full" src={headshot.src} />
+    <div class="gap"></div>
+    <div class="resume">
       <Name title="Actor, Writer, Composer" contacts={contacts} />
       {
         sections.map(({ title, subsections }) => (
@@ -39,5 +38,51 @@ const sections = sections_in as Array<{
       <ActorEducation education={education} />
       <ActorSkills skills={skills} />
     </div>
-  </body>
-</html>
+  </Shell>
+</Html>
+
+
+<style is:global>
+  .resume {
+    display: flex;
+    flex-direction: column;
+    justify-content: stretch;
+    align-items: stretch;
+    gap: 1em;
+  }
+
+  .gap {
+    page-break-after: always;
+  }
+
+  .resume > * {
+    background-color: var(--color-panel-bg);
+    padding: 1em;
+  }
+  
+  @media print {
+    @page {
+      size: letter;
+    }
+
+    body {
+      font-size: 10px;
+      color: black;
+      background: white;
+      padding: 2em;
+    }
+    
+    .resume {
+      gap: 0em;
+    }
+
+    body > div.content[data-astro-source-file] {
+      display: block;
+      background-color: orange;
+    }
+
+    .resume > * {
+      background-color: white !important;
+    }
+  }
+</style>

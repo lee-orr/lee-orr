@@ -3,16 +3,16 @@ const name = "Lee-Orr"
 const pronouns = "they/them"
 const { title, contacts } = Astro.props as { title: string, contacts: Array<{ type: string, value: string, icon?: string}>};
 ---
-<div class="name container mx-auto flex flex-col align-middle justify-start text-center">
-<h1 class="text-xl text-black font-bold">{name} <span class="pronouns text-gray-700 font-normal text-sm">({pronouns})</span></h1>
-<h2 class="text-sm text-black font-bold">{title}</h2>
-<span class="inline-flex flex-row gap-2 justify-center flex-wrap">{contacts.map(({type, value, icon}) => {
+<div class="name">
+<h1>{name} <span class="pronouns">({pronouns})</span></h1>
+<h2>{title}</h2>
+<aside>{contacts.map(({type, value, icon}) => {
     if (icon) {
-        return (<span class="contact inline-flex flex-row gap-1 text-xs align-middle"><i class={icon}/><span>{value}</span></span>)
+        return (<span class="contact"><i class={icon}/><span>{value}</span></span>)
     } else {
-        return (<span class="contact inline-flex flex-row gap-1"><h4 class="font-bold text-xs">{type}</h4><span class="text-gray-700 text-xs">{value}</span></span>)
+        return (<span class="contact"><h4 class="">{type}</h4><span class="xs">{value}</span></span>)
     }
-})}</span>
+})}</aside>
 </div>
 
 <style>
@@ -21,4 +21,40 @@ const { title, contacts } = Astro.props as { title: string, contacts: Array<{ ty
         flex-direction: column;
         justify-content: center;
     }
+    .name {
+        display: none;
+        flex-direction: column;
+        justify-content: flex-start;
+        align-items: center;
+        text-align: center;
+    }
+
+    @media print {
+        .name {
+            display: flex;
+        }
+    }
+
+    .pronouns {
+        font-size: 0.5em;
+        font-weight: 100;
+    }
+
+    h1 {
+        font-size: 3em;
+    }
+
+    h2 {
+        font-size: 1.3em;
+    }
+
+    aside {
+        display: flex;
+        flex-direction: row;
+        justify-content: center;
+        align-items: flex-start;
+        flex-wrap: wrap;
+        gap: 1em;
+    }
+
 </style>

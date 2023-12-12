@@ -5,6 +5,12 @@ import contacts from "../data/developer-contacts.json";
 import { description } from "../data/description.json";
 import sections_in from "../data/developer-main-sections.json";
 import LargeSection from "../components/large-section.astro";
+import { computing, link_types } from "../data/site-nav-data.json";
+import Html from "../components/html.astro";
+import Shell from "../components/shell.astro";
+const link_icons: {[key: string]: string | undefined} = link_types;
+
+const { socials, nav } = computing;
 
 const sections = sections_in as Array<{
   title: string;
@@ -19,17 +25,8 @@ const sections = sections_in as Array<{
 }>;
 ---
 
-<html lang="en">
-  <head>
-    <meta charset="utf-8" />
-    <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
-    <meta name="viewport" content="width=device-width" />
-    <meta name="generator" content={Astro.generator} />
-    <title>Astro</title>
-    <link rel="stylesheet" href="/icofont.min.css" />
-    <base href="/" />
-  </head>
-  <body>
+<Html>
+  <Shell area="computing" socials={socials} nav={nav}>
     <Name title="Software Developer" contacts={contacts} />
     <Descriptor content={description} />
     {
@@ -43,10 +40,19 @@ const sections = sections_in as Array<{
         />
       ))
     }
-  </body>
-</html>
+  </Shell>
+</Html>
 
 <style is:global>
+  .content {
+    gap: 1em;
+  }
+
+  .content > div {
+    background-color: var(--color-panel-bg);
+    padding: 1em;
+  }
+  
   @media print {
     @page {
       size: letter;
@@ -56,7 +62,15 @@ const sections = sections_in as Array<{
       font-size: 10px;
       color: black;
       background: white;
-      margin: 0;
+      padding: 2em;
+    }
+    
+    .content {
+      gap: 0em;
+    }
+
+    .content > div {
+      background-color: white !important;
     }
   }
 </style>
