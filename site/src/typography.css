@@ -33,6 +33,17 @@ h6 {
   filter: drop-shadow(-0.03em 0.04em black);
 }
 
+@media print {
+  h1,
+h2,
+h3,
+h4,
+h5,
+h6 {
+  filter: initial;
+}
+}
+
 .xl {
   font-size: 10em;
 }
