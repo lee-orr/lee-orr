@@ -129,7 +129,7 @@ const tag_colors: {[key: string]: string} = {
                   }
                   let icon = link_icons[type];
                   let icon_element = icon ? <><i class={icon} /> &nbsp;</> : <></>;
-                  return <a href={target}>{icon_element}{target}</a>;
+                  return <a href={target} target="_blank">{icon_element}{target}</a>;
                 })}</ul>
               ) : <></>
             }

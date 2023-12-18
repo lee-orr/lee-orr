@@ -1,7 +1,9 @@
 ---
-const name = "Lee-Orr"
 const pronouns = "they/them"
-const { title, contacts } = Astro.props as { title: string, contacts: Array<{ type: string, value: string, icon?: string}>};
+const { title, full_name, contacts } = Astro.props as { title: string, contacts: Array<{ type: string, value: string, icon?: string}>, full_name?: boolean};
+
+
+const name = full_name ? "Lee-Orr Orbach" : "Lee-Orr";
 ---
 <div class="name">
 <h1>{name} <span class="pronouns">({pronouns})</span></h1>
@@ -37,15 +39,17 @@ const { title, contacts } = Astro.props as { title: string, contacts: Array<{ ty
 
     .pronouns {
         font-size: 0.5em;
-        font-weight: 100;
+        font-weight: 500;
     }
 
     h1 {
         font-size: 3em;
+        font-weight: 900;
     }
 
     h2 {
         font-size: 1.3em;
+        font-weight: 900;
     }
 
     aside {
@@ -55,6 +59,7 @@ const { title, contacts } = Astro.props as { title: string, contacts: Array<{ ty
         align-items: flex-start;
         flex-wrap: wrap;
         gap: 1em;
+        font-weight: 100;
     }
 
 </style>

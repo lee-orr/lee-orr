@@ -89,7 +89,7 @@ let aside_style = `clip-path: ${aside_shape};`;
                   }
                   let icon = link_icons[type];
                   let icon_element = icon ? <> &nbsp;<i class={icon} /></> : <></>;
-                  return <a href={target}>{target}{icon_element}</a>;
+                  return <a href={target} target="_blank">{target}{icon_element}</a>;
                 })}</ul>
               ) : <div class="links"></div>
             }

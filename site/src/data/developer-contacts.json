@@ -18,5 +18,10 @@
     "type": "website",
     "value": "lee-orr.com",
     "icon": "icofont-web"
+  },
+  {
+    "type": "city",
+    "value": "Toronto, ON",
+    "icon": "icofont-google-map"
   }
 ]

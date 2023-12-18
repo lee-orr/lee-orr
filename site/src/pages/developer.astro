@@ -27,7 +27,7 @@ const sections = sections_in as Array<{
 
 <Html>
   <Shell area="computing" socials={socials} nav={nav}>
-    <Name title="Software Developer" contacts={contacts} />
+    <Name title="Software Developer / Architect" contacts={contacts} full_name={true}/>
     <Descriptor content={description} />
     {
       sections.map(({ title, timespan, company, is_compact, subsections }) => (
@@ -52,6 +52,10 @@ const sections = sections_in as Array<{
     background-color: var(--color-panel-bg);
     padding: 1em;
   }
+
+  .content {
+    font-size: 0.7em;
+  }
   
   @media print {
     @page {
@@ -59,14 +63,16 @@ const sections = sections_in as Array<{
     }
 
     body {
-      font-size: 10px;
+      font-size: 12px;
       color: black;
       background: white;
       padding: 1em;
+      font-weight: light;
     }
     
     .content {
       gap: 0em;
+      font-size: 1em;
     }
 
     .content > div {
