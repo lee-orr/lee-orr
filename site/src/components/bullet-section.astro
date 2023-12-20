@@ -4,21 +4,37 @@ const { title, timespan, description } = Astro.props as {
 };
 ---
 
-<div class="flex flex-row gap-2 items-start">
-    {title ? (<h5 class="font-bold text-left pl-11 flex flex-row gap-2 items-center"><span>{title}</span>{timespan ? (<span class="font-normal text-xs italic items-center">{timespan}</span>) : (<></>)}</h5>) : (<span class="pl-11">-</span>)}
-    <span>{description}</span>    
+<div class="bullets">
+    <h5 class="font-bold text-left pl-11 flex flex-row gap-2 items-center"><span>{title}</span>{timespan ? (<span class="timespan">{timespan}</span>) : (<></>)}</h5>
+    <span class="description">{description}</span>    
 </div>
 <style>
+
+    .bullets {
+        display: grid;
+        grid-template-rows: auto;
+        grid-template-columns: subgrid;
+        grid-column: 1 / span 2;
+    }
+    
     h5 {
         font-size: 1em;
         font-weight: 900;
-        display: flex;
-        flex-direction: row;
-        gap: 1em;
+        display: inline;
+        grid-column: 1 /span 1;
+        padding-right: 0.5em;
+    }
+
+    .timespan {
+        padding-left: 2em;
     }
 
     div {
         font-weight: 100;
         font-size: 1em;
+
+    }
+    .description {
+        grid-column: 2 / span 1;
     }
 </style>

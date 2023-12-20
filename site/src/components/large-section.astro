@@ -10,7 +10,7 @@ const { title, timespan, company, subsections, is_compact } = Astro.props as {
     subsections: Array<{ title?: string, timespan?: string, description: string}>
 };
 ---
-<div>
+<div class="large-section">
     <h3>{title}</h3>
 { is_compact ? (
     <>
@@ -29,10 +29,17 @@ const { title, timespan, company, subsections, is_compact } = Astro.props as {
 )}
 </div>
 
-<style>    
+<style>
+    .large-section {
+        display: grid;
+        grid-auto-rows: min-content;
+        grid-template-columns: auto 1fr;
+        gap: 0;
+    }
     h3 {
         font-weight: 900;
         font-size: 1.2em;
+        grid-column: 1 /span 2;
     }
     h4 {
         font-size: 1em;
@@ -40,9 +47,11 @@ const { title, timespan, company, subsections, is_compact } = Astro.props as {
         display: flex;
         flex-direction: row;
         gap: 1em;
+
+        grid-column: 1 /span 2;
     }
     div {
-
         font-size: 1em;
+        grid-column: 1 /span 2;
     }
 </style>

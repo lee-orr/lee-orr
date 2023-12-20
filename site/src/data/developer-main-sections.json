@@ -4,19 +4,23 @@
     "is_compact": true,
     "subsections": [
       {
-        "description": "At SafeApp - Designed a system for signing, verifying, encrypting & decrypting emails without storing decryption or signing keys on a central server."
+        "title": "SafeApp",
+        "description": "Designed a system for signing, verifying, encrypting & decrypting emails without storing decryption or signing keys on a central server."
       },
       {
-        "description": "At Imbellus - Implemented a live visual editor for 3d interactive scenarios in the browser, collaborating directly with designers to ensure it meets their needs and expands their capabilities."
+        "title": "Imbellus",
+        "description": "Implemented a live visual editor for 3d interactive scenarios in the browser, collaborating directly with designers to ensure it meets their needs and expands their capabilities."
       },
       {
-        "description": "At Imbellus - Architected and built a system allowing creation of individual tasks with independent dependencies in browser, and automatically generating the back end."
+        "title": "Imbellus",
+        "description": "Architected and built a system allowing creation of individual tasks with independent dependencies in browser, and automatically generating the back end."
       },
       {
-        "description": "At Skrumble - Build a proof-of-concept peer-to-peer video conferencing system supporting 18 simultaneous video clients without a media server - doubling the leading-at-the-time peer-to-peer system, and more than quadrupling the normal limit of 3-4 clients."
+        "title": "Skrumble",
+        "description": "Build a proof-of-concept peer-to-peer video conferencing system supporting 18 simultaneous video clients without a media server - doubling the leading-at-the-time peer-to-peer system, and more than quadrupling the normal limit of 3-4 clients."
       },
       {
-        "description": "At Skrumble - Architected a scalable, cloud-based back end with multi-tenancy - replacing the original VM-per-customer system."
+        "description": "Architected a scalable, cloud-based back end with multi-tenancy - replacing the original VM-per-customer system."
       }
     ]
   },
@@ -74,48 +78,46 @@
     "is_compact": true,
     "subsections": [
       {
-        "title": "Theatre Technician",
+        "title": "Theatre Technician at the George Ignatieff Theatre",
         "company": "George Ignatieff Theatre",
         "timespan": "Sept 2013 - Apr 2015"
       },
       {
-        "title": "Web Application Developer",
+        "title": "Web Application Developer at Ontario Institute for Studies in Education",
         "company": "Ontario Institute for Studies in Education",
         "timespan": "Sept 2012 - Jan 2013"
       },
       {
-        "title": "Web and Flash Programmer",
+        "title": "Web and Flash Programmer at Visual3d Ltd.",
         "company": "Visual3d Ltd.",
         "timespan": "Jun 2009 - Jan 2010"
       }
     ]
   },
   {
-    "title": "Skills",
-    "is_compact": true,
-    "subsections": [
-      {
-        "title": "Languages",
-        "description": "Typescript/Javascript, Rust, C#, HTML/CSS, Python, PHP, SQL,  Lua, Bash"
-      },
-      {
-        "title": "Select Libraries & Tools",
-        "description": "NodeJS, Docker, Git, Unity, React, Vue, Express, Github, Cypress, Mocha, Jest, MySQL, MongoDB"
-      },
-      {
-        "title": "Platforms",
-        "description": "Digital Ocean, AWS, Firebase, Cloudflare Workers, Netlify, WebAssembly, Spin, WasmCloud, Linux, Windows, Mac"
-      }
-    ]
-  },
-  {
-    "title": "Education",
     "is_compact": true,
     "subsections": [
       {
         "title": "B.Sc. Physics and Cognitive Science",
         "timespan": "2015",
         "description": "University of Toronto"
+      }
+    ]
+  },
+  {
+    "is_compact": true,
+    "subsections": [
+      {
+        "title": "Languages",
+        "description": "Rust, Typescript, Javascript, C#, HTML/CSS, SQL, Bash"
+      },
+      {
+        "title": "Libraries & Tools",
+        "description": "NodeJS, Docker, Git, Unity, React, Vue, Cypress, Mocha, Jest, MongoDB, Yew, Bevy, Leptos, Dioxus, Tailwind, Astro"
+      },
+      {
+        "title": "Platforms",
+        "description": "Digital Ocean, AWS, Firebase, Cloudflare, Netlify, WebAssembly, Spin, WasmCloud, Linux, Windows, Mac, GCP"
       }
     ]
   }

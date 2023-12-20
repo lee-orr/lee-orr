@@ -4,12 +4,16 @@ const { title, timespan, description } = Astro.props as {
 };
 ---
 
-<div>
+<div class="small">
     {title ? (<h5 class="title"><span>{title}</span> {timespan ? (<span class="font-normal italic">&nbsp;{timespan}</span>) : (<></>)}</h5>) : (<></>)}
     <span>{description}</span>    
 </div>
 
 <style>
+    .small {
+        grid-column: 1 /span 2;
+    }
+
     h5.title {
         font-size: 1em;
         font-weight: 900;
