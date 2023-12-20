@@ -12,7 +12,7 @@
         "description": "Created a browser-based, live visual editor for 3d interactive scenarios used in education and hiring skill assessments."
       },
       {
-        "description": "Architected a platform for isolating these scenarios, reducing the need to update old scenarios as our technology evolved."
+        "description": "Architected a platform for isolating these scenarios, reducing the need to update old scenarios as our technology evolved. Built a web-component based wrapper for running these scenarios in a configurable manner."
       },
       {
         "title": "Skrumble",
@@ -24,7 +24,7 @@
     ]
   },
   {
-    "title": "Senior Developer",
+    "title": "Senior Developer (Contract)",
     "subsections": [
       {
         "title": "Subject Matter Expert - McMaster Continuing Education",
@@ -34,12 +34,12 @@
       {
         "title": "Organization in Stealth Mode",
         "timespan": "Nov 2022 - Mar 2023, July 2023",
-        "description": "Built a tool for generating a complex, interactive site using a Figma design and CSV data directly from the browser - allowing the client to easily update content without developer input. Collaborated to add features easing their workflow and improving the end-user experience on the generated site."
+        "description": "Built a tool for generating a complex, interactive site using a Figma design and CSV data directly in the browser - allowing the client to easily update content without developer input. Collaborated to add features easing their workflow and improving the end-user experience on the generated site."
       },
       {
         "title": "SafeApp (getsafeapp.com)",
         "timespan": "Jul 2021 - Jun 2022",
-        "description": "Designed, architected and built a chrome extension for signing & encrypting Gmail emails, along with the back-end services on Firebase. Provided guidance and support to an additional developer who joined near the end of my contract, to allow them to take over the project."
+        "description": "Designed, architected and built a chrome extension for signing & encrypting Gmail emails, along with the back-end services on Firebase. Provided support and mentorship to enable future development by an internal team"
       },
       {
         "title": "Harvard Business School",
@@ -59,7 +59,7 @@
     "timespan": "Feb 2019 - Dec 2020 (Employee following contract)",
     "subsections": [
       {
-        "description": "Designed a server system that can be controlled by the visual editor - allowing for logic to run in-browser during editing, and on the server when deployed with no additional engineering. Improved communication between Javascript & Unity. Assisted in the implementation of legacy assessments. Build a web-component based wrapper for isolated, independently deployable tasks running through configurable pages with a single server connection."
+        "description": "Built a system that allowed designers to create logic in a browser-based editor and test it locally, and automatically separate the front-end and back-end during deployment. Improved communication between Javascript & Unity. Assisted in the implementation of legacy assessments."
       }
     ]
   },
