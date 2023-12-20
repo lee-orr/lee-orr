@@ -101,7 +101,12 @@
       {
         "title": "B.Sc. Physics and Cognitive Science at the University of Toronto",
         "timespan": "2015"
-      },
+      }
+    ]
+  },
+  {
+    "is_compact": true,
+    "subsections": [
       {
         "title": "Languages",
         "description": "Rust, Typescript, Javascript, C#, HTML/CSS, SQL, Bash"

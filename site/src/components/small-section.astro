@@ -5,22 +5,39 @@ const { title, timespan, description } = Astro.props as {
 ---
 
 <div class="small">
-    {title ? (<h5 class="title"><span>{title}</span> {timespan ? (<span class="font-normal italic">&nbsp;{timespan}</span>) : (<></>)}</h5>) : (<></>)}
+    {title ? (<h5 class="title"><span>{title}</span></h5>) : (<></>)}
+    {timespan ? (<h5 class="timespan">&nbsp;{timespan}</h5>) : (<></>)}
     <span class="description">{description}</span>    
 </div>
 
 <style>
     .small {
+        display: grid;
+        grid-auto-rows: auto;
+        grid-template-columns: subgrid;
         grid-column: 1 /span 2;
     }
 
-    h5.title {
+    h5 {
         font-size: 1em;
         font-weight: 900;
         display: flex;
-        flex-direction: row;
         gap: 1em;
     }
+
+    .title {
+        grid-column: 1 / span 1;
+        flex-direction: row;
+    }
+
+
+
+    .timespan {
+        grid-column: 2 / span 1;
+        display: flex;
+        flex-direction: row-reverse;
+    }
+
 
     div {
         font-weight: 100;
@@ -30,5 +47,6 @@ const { title, timespan, description } = Astro.props as {
     .description {
         display: block;
         padding-left: 1em;
+        grid-column: 1 / span 2;
     }
 </style>

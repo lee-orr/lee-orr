@@ -14,14 +14,16 @@ const { title, timespan, company, subsections, is_compact } = Astro.props as {
     <h3>{title}</h3>
 { is_compact ? (
     <>
-        <h4>{company ? (<span >{company}</span>) : (<></>)}{timespan ? (<span >{timespan}</span>) : (<></>)}</h4>
+        <h4>{company ? company : ""}</h4>
+        {timespan ? (<h4 class="timespan">{timespan}</h4>) : (<></>)}
         {
             subsections.map(({title, timespan, description}) => (<BulletSection title={title} timespan={timespan} description={description}/>))
         }
     </>
 ) : (
     <>
-        <h4>{company ? (<span >{company}</span>) : (<></>)}{timespan ? (<span>{timespan}</span>) : (<></>)}</h4>
+        <h4>{company ? company : ""}</h4>
+        {timespan ? (<h4 class="timespan">{timespan}</h4>) : (<></>)}
         {
             subsections.map(({title, timespan, description}) => (<SmallSection title={title} timespan={timespan} description={description}/>))
         }
@@ -49,7 +51,12 @@ const { title, timespan, company, subsections, is_compact } = Astro.props as {
         flex-direction: row;
         gap: 1em;
 
-        grid-column: 1 /span 2;
+        grid-column: 1;
+    }
+
+    h4.timespan {
+        grid-column: 2;
+        flex-direction: row-reverse;
     }
     div {
         font-size: 1em;
