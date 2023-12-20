@@ -60,28 +60,36 @@ const sections = sections_in as Array<{
   @media print {
     @page {
       size: letter;
+      margin: 1cm 1cm 1cm 1cm;
+    }
+
+    h1, h2, h3, h4, h5 {
+      page-break-after: avoid;
     }
 
     body {
       font-size: 12px;
       color: black;
       background: white;
-      padding: 1em;
       font-weight: light;
-    overflow: visible;
+      overflow:unset;
+      padding: 0;
+      margin: 0;
     }
     
     .content {
       gap: 0em;
       font-size: 1em;
-    overflow: visible;
+      overflow:unset;
+      padding: 0;
+      margin: 0;
     }
 
     .content > div {
       background-color: white !important;
       padding: 0.5em;
       padding-top: 0em;
-      overflow: visible;
+      overflow:unset;
     }
 
   }
