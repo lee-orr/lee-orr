@@ -66,7 +66,27 @@
     "timespan": "Jun 2015 - Mar 2017, Dev 2017 - Dec 2018",
     "subsections": [
       {
-        "description": "Saved the business ~50k by removing the need for a developer implementing PSD designs for our website by finding an opportunity to create a custom CMS allowing the graphic designer to update the site directly. Migrated our build tools from Grunt to Gulp. Assisted in migrating VMs to LXD containers, and created scripts to provision and update containers. Lead back-end feature development, deployment processes and crash recovery. Developed a graph-based phone IVR system. Migrated from a Freeswitch + Lua based Voip/Video Conferencing server to a containerized, scalable system based on Kurento & NodeJS."
+        "description": "Created a custom CMS during downtime, removing the need for a full-time developer maintaing our website. Assisted in transitioning from hand-maintained VMs to automated LXD containers. Lead back-end feature development and operations. Developed a graph-based phone IVR system. Designed and built a cloud-based, scalable VOIP/Video Conferencing system to replace our original stack of dedicated servers."
+      }
+    ]
+  },
+  {
+    "is_compact": true,
+    "subsections": [
+      {
+        "title": "Theatre Technician",
+        "company": "George Ignatieff Theatre",
+        "timespan": "Sept 2013 - Apr 2015"
+      },
+      {
+        "title": "Web Application Developer",
+        "company": "Ontario Institute for Studies in Education",
+        "timespan": "Sept 2012 - Jan 2013"
+      },
+      {
+        "title": "Web and Flash Programmer",
+        "company": "Visual3d Ltd.",
+        "timespan": "Jun 2009 - Jan 2010"
       }
     ]
   },
