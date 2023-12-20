@@ -4,19 +4,19 @@
     "is_compact": true,
     "subsections": [
       {
-        "description": "Designed a system for signing, verifying, encrypting & decrypting emails with customizable controls without storing decryption or signing keys on a central server."
+        "description": "Designed a system for signing, verifying, encrypting & decrypting emails without storing decryption or signing keys on a central server."
       },
       {
-        "description": "Implemented a live visual editor for game-like scenarios in the browser."
+        "description": "Implemented a live visual editor for 3d interactive scenarios in the browser."
       },
       {
-        "description": "Architected the structure, and built the front end, of a system allowing creation of individual tasks with their own front end and back end dependencies and versions, testing them without a server, and deploying them transparently to be used in data-driven combinations within online assessments."
+        "description": "Architected and built a system allowing creation of individual tasks with independent dependencies in browser, and automatically generating the back end."
       },
       {
-        "description": "Build a proof-of-concept peer-to-peer video conferencing system supporting 18 simultaneous video clients without requiring a central media server - doubling the leading-at-the-time peer-to-peer system which supported 9 clients, and more than quadrupling the normal limit of 3-4 clients."
+        "description": "Build a proof-of-concept peer-to-peer video conferencing system supporting 18 simultaneous video clients without a media server - doubling the leading-at-the-time peer-to-peer system, and more than quadrupling the normal limit of 3-4 clients."
       },
       {
-        "description": "Architected a scalable backend based on AWS Elastic Beanstalk VMs with SailsJS servers - replacing the original VM-per-customer backend with a shared service."
+        "description": "Architected a scalable, cloud-based back end with multi-tenancy - replacing the original VM-per-customer system."
       }
     ]
   },
@@ -31,22 +31,22 @@
       {
         "title": "Stealth Contract",
         "timespan": "Nov 2022 - Mar 2023, July 2023",
-        "description": "Built a tool for generating complex, interactive site out of a Figma design and CSV data, generating and deploys a static site directly from the browser - allowing them to easily update content without developer input."
+        "description": "Built a tool for generating a complex, interactive site using a Figma design and CSV data directly from the browser - allowing the client to easily update content without developer input. Collaborated to add features easing their workflow and improving the end-user experience on the generated site."
       },
       {
         "title": "SafeApp (getsafeapp.com)",
         "timespan": "Jul 2021 - Jun 2022",
-        "description": "Designed, architected and built a chrome extension for signing & encrypting Gmail emails, along withthe back-end services on Firebase. Establish CI/CD - including automated testing and deployment to a test environment, and a manual release trigger for production. Provided guidance and support to an additional developer who joined near the end of my contract, to allow them to take over the project."
+        "description": "Designed, architected and built a chrome extension for signing & encrypting Gmail emails, along with the back-end services on Firebase. Provided guidance and support to an additional developer who joined near the end of my contract, to allow them to take over the project."
       },
       {
-        "title": "Harvard",
+        "title": "Harvard Business School",
         "timespan": "Dec 2021 - May 2022",
-        "description": "Built a visual tool for generating input data used by the an earthquake cycle imaging system. Designed the system to a be easy to maintain and hard to break, to allow non-technical people to maintain the project long term. This involved choosing common tools like React & TypeScript, as well as rigorous automated testing and continuous deployment to production. This project also included parsing & processing custom data formats, and interaction with MapBox to provide an interactive interface for complex georgraphic data."
+        "description": "Built a visual tool for generating input data used by the an earthquake cycle imaging system. Collaborated with the researchers to create a tool that eases their workflow, and set up infurstructure and documentation to allow them to continue maintaining it reliably."
       },
       {
         "title": "Emile Technologies",
         "timespan": "Sept 2021 - Oct 2021",
-        "description": "Assisted & Guided the Emile founder with migrating their chatbot from a discontinued service to firebase, as well as replacing missing functionality on top of an open source library."
+        "description": "Migrated their chatbot from a discontinued service to Firebase, re-implementing many of it's features, while mentoring the client to allow them to continue maintenance independently."
       }
     ]
   },

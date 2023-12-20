@@ -1,6 +1,6 @@
 ---
 info:
-  company: Harvard
+  company: Harvard Business School
   role: Contract Engineer
   is_contract: true
 summary: Built a tool for to help researchers construct input data for earthquake cycle imaging.
