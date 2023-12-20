@@ -6,7 +6,7 @@ const { title, timespan, description } = Astro.props as {
 
 <div class="small">
     {title ? (<h5 class="title"><span>{title}</span> {timespan ? (<span class="font-normal italic">&nbsp;{timespan}</span>) : (<></>)}</h5>) : (<></>)}
-    <span>{description}</span>    
+    <span class="description">{description}</span>    
 </div>
 
 <style>
@@ -25,5 +25,10 @@ const { title, timespan, description } = Astro.props as {
     div {
         font-weight: 100;
         font-size: 1em;
+    }
+
+    .description {
+        display: block;
+        padding-left: 1em;
     }
 </style>

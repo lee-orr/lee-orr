@@ -12,27 +12,27 @@
         "description": "Created a browser-based, live visual editor for 3d interactive scenarios used in education and hiring skill assessments."
       },
       {
-        "description": "Architected a system allowing creation of individual tasks with independent dependencies in browser, and automatically generating the back end."
+        "description": "Architected a platform for isolating these scenarios, reducing the need to update old scenarios as our technology evolved."
       },
       {
         "title": "Skrumble",
-        "description": "Build a proof-of-concept peer-to-peer video conferencing system supporting 18 simultaneous video clients without a media server - doubling the leading-at-the-time peer-to-peer system, and more than quadrupling the normal limit of 3-4 clients."
+        "description": "Build a proof-of-concept peer-to-peer video conferencing system supporting 18 simultaneous video clients without a media server - more than quadrupling the then-current standard limit of 3-4 clients for peer-to-peer video."
       },
       {
-        "description": "Architected a scalable, cloud-based back end with multi-tenancy - replacing the original VM-per-customer system."
+        "description": "Architected a scalable, cloud-based back end with multi-tenancy - replacing the original on premise single tenant system. Lead back-end feature development and operations."
       }
     ]
   },
   {
-    "title": "Independent Contractor",
+    "title": "Senior Developer",
     "subsections": [
       {
         "title": "Subject Matter Expert - McMaster Continuing Education",
         "timespan": "Oct 2023 - Present",
-        "description": "Designing and writing a course on backend development for McMaster's Full-Stack Development program."
+        "description": "Designing and writing a course on backend development for McMaster's Full-Stack Development Program."
       },
       {
-        "title": "Stealth Contract",
+        "title": "Organization in Stealth Mode",
         "timespan": "Nov 2022 - Mar 2023, July 2023",
         "description": "Built a tool for generating a complex, interactive site using a Figma design and CSV data directly from the browser - allowing the client to easily update content without developer input. Collaborated to add features easing their workflow and improving the end-user experience on the generated site."
       },
@@ -56,7 +56,7 @@
   {
     "title": "Senior Engineer",
     "company": "Imbellus",
-    "timespan": "Feb 2019 - Feb 2020 (Contract), Mar 2020 - Dec 2020 (Employee)",
+    "timespan": "Feb 2019 - Dec 2020 (Employee following contract)",
     "subsections": [
       {
         "description": "Designed a server system that can be controlled by the visual editor - allowing for logic to run in-browser during editing, and on the server when deployed with no additional engineering. Improved communication between Javascript & Unity. Assisted in the implementation of legacy assessments. Build a web-component based wrapper for isolated, independently deployable tasks running through configurable pages with a single server connection."
@@ -66,7 +66,7 @@
   {
     "title": "Full Stack Developer",
     "company": "Skrumble",
-    "timespan": "Jun 2015 - Mar 2017, Dev 2017 - Dec 2018",
+    "timespan": "Jun 2015 - Mar 2017, Dec 2017 - Dec 2018",
     "subsections": [
       {
         "description": "Created a custom CMS during downtime, removing the need for a full-time developer maintaining our website. Assisted in transitioning from hand-maintained VMs to automated LXD containers. Lead back-end feature development and operations. Developed a graph-based phone IVR system. Designed and built a cloud-based, scalable VOIP/Video Conferencing system to replace our original stack of dedicated servers."
@@ -75,6 +75,7 @@
   },
   {
     "is_compact": true,
+    "title": "Previous Experience",
     "subsections": [
       {
         "title": "Theatre Technician at the George Ignatieff Theatre",
@@ -94,17 +95,13 @@
     ]
   },
   {
+    "title": "Education & Skills",
     "is_compact": true,
     "subsections": [
       {
         "title": "B.Sc. Physics and Cognitive Science at the University of Toronto",
         "timespan": "2015"
-      }
-    ]
-  },
-  {
-    "is_compact": true,
-    "subsections": [
+      },
       {
         "title": "Languages",
         "description": "Rust, Typescript, Javascript, C#, HTML/CSS, SQL, Bash"
