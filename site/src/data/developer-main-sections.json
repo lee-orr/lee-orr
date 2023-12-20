@@ -12,7 +12,6 @@
         "description": "Created a browser-based, live visual editor for 3d interactive scenarios used in education and hiring skill assessments."
       },
       {
-        "title": "Imbellus",
         "description": "Architected a system allowing creation of individual tasks with independent dependencies in browser, and automatically generating the back end."
       },
       {
@@ -20,7 +19,6 @@
         "description": "Build a proof-of-concept peer-to-peer video conferencing system supporting 18 simultaneous video clients without a media server - doubling the leading-at-the-time peer-to-peer system, and more than quadrupling the normal limit of 3-4 clients."
       },
       {
-        "title": "Skrumble",
         "description": "Architected a scalable, cloud-based back end with multi-tenancy - replacing the original VM-per-customer system."
       }
     ]
