@@ -5,21 +5,22 @@
     "subsections": [
       {
         "title": "SafeApp",
-        "description": "Designed a system for signing, verifying, encrypting & decrypting emails without storing decryption or signing keys on a central server."
+        "description": "Developed a system for signing, verifying, encrypting & decrypting emails without storing decryption or signing keys on a central server."
       },
       {
         "title": "Imbellus",
-        "description": "Implemented a live visual editor for 3d interactive scenarios in the browser, collaborating directly with designers to ensure it meets their needs and expands their capabilities."
+        "description": "Created a browser-based, live visual editor for 3d interactive scenarios used in education and hiring skill assessments."
       },
       {
         "title": "Imbellus",
-        "description": "Architected and built a system allowing creation of individual tasks with independent dependencies in browser, and automatically generating the back end."
+        "description": "Architected a system allowing creation of individual tasks with independent dependencies in browser, and automatically generating the back end."
       },
       {
         "title": "Skrumble",
         "description": "Build a proof-of-concept peer-to-peer video conferencing system supporting 18 simultaneous video clients without a media server - doubling the leading-at-the-time peer-to-peer system, and more than quadrupling the normal limit of 3-4 clients."
       },
       {
+        "title": "Skrumble",
         "description": "Architected a scalable, cloud-based back end with multi-tenancy - replacing the original VM-per-customer system."
       }
     ]
@@ -45,7 +46,7 @@
       {
         "title": "Harvard Business School",
         "timespan": "Dec 2021 - May 2022",
-        "description": "Built a visual tool for generating input data used by the an earthquake cycle imaging system. Collaborated with the researchers to create a tool that eases their workflow, and set up infurstructure and documentation to allow them to continue maintaining it reliably."
+        "description": "Built a visual tool for generating input data used by the an earthquake cycle imaging system. Collaborated with the researchers to create a tool that eases their workflow, and set up infrastructure and documentation to allow them to continue maintaining it reliably."
       },
       {
         "title": "Emile Technologies",
@@ -70,7 +71,7 @@
     "timespan": "Jun 2015 - Mar 2017, Dev 2017 - Dec 2018",
     "subsections": [
       {
-        "description": "Created a custom CMS during downtime, removing the need for a full-time developer maintaing our website. Assisted in transitioning from hand-maintained VMs to automated LXD containers. Lead back-end feature development and operations. Developed a graph-based phone IVR system. Designed and built a cloud-based, scalable VOIP/Video Conferencing system to replace our original stack of dedicated servers."
+        "description": "Created a custom CMS during downtime, removing the need for a full-time developer maintaining our website. Assisted in transitioning from hand-maintained VMs to automated LXD containers. Lead back-end feature development and operations. Developed a graph-based phone IVR system. Designed and built a cloud-based, scalable VOIP/Video Conferencing system to replace our original stack of dedicated servers."
       }
     ]
   },
