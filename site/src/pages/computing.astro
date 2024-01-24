@@ -90,7 +90,7 @@ const personal = timeline.filter((a) => "project" in a.data.info && !("open_sour
 
         let title = "project" in info ? info.project : info.role + " at " + info.company;
 
-        let context = info.is_contract ? "Contract" : "Job";
+        let context = info.is_contract ? "Contract" : "Employment";
 
         return (
           <li class={class_string} transition:name={`timeline-${slug}`}>
