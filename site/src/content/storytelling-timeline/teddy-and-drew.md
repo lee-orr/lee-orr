@@ -2,6 +2,8 @@
 title: Teddy & Drew - An Interactive Musical
 summary: An online choose-your-own-adventure song written, developed and produced by Jackson Seib & Lee-Orr
 date: 2021-02-19
+image: ../../images/storytelling_images/note.png
+image_alt: Musical Note
 tags: acting writing singing games
 ---
 
