@@ -75,7 +75,7 @@ const personal = timeline.filter((a) => "project" in a.data.info && !("open_sour
 
 <Html>
 
-  <Shell area="computing" socials={socials} nav={nav}>
+  <Shell area="computing" socials={socials} nav={nav} filter_title="Filter by Skills">
     <details open>
       <summary><h2>Jobs</h2></summary>
     <ol class="timeline">
@@ -108,7 +108,8 @@ const personal = timeline.filter((a) => "project" in a.data.info && !("open_sour
             </h5>
             <ul aria-label="technologies and skills">
               {
-                data.tags.map((tag) => <li>{tag}</li>)
+            data.tags.map((tag) => <li><button 
+            class={`tag-button tag-${tag}`} id={"button-" + tag}>{tag}</button></li>)
               }
             </ul>
             <p>{data.summary}</p>
@@ -160,7 +161,8 @@ const personal = timeline.filter((a) => "project" in a.data.info && !("open_sour
           </h5>
           <ul aria-label="technologies and skills">
             {
-              data.tags.map((tag) => <li>{tag}</li>)
+            data.tags.map((tag) => <li><button 
+            class={`tag-button tag-${tag}`} id={"button-" + tag}>{tag}</button></li>)
             }
           </ul>
           <p>{data.summary}</p>
@@ -212,7 +214,8 @@ const personal = timeline.filter((a) => "project" in a.data.info && !("open_sour
         </h5>
         <ul aria-label="technologies and skills">
           {
-            data.tags.map((tag) => <li>{tag}</li>)
+            data.tags.map((tag) => <li><button 
+            class={`tag-button tag-${tag}`} id={"button-" + tag}>{tag}</button></li>)
           }
         </ul>
         <p>{data.summary}</p>
@@ -356,9 +359,12 @@ const personal = timeline.filter((a) => "project" in a.data.info && !("open_sour
         display: inline-block;
         font-size: 0.6em;
         margin: 0.1em;
-        background-color: var(--color-accent);
-        padding: 0.25em;
-        border-radius: 0.5em;
+
+        button {
+          background-color: var(--color-accent);
+          padding: 0.25em;
+          border-radius: 0.5em;
+        }
       }
     }
 

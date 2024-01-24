@@ -81,7 +81,7 @@ const tag_colors: {[key: string]: string} = {
 
 
 <Html>
-  <Shell area="storytelling" socials={socials} nav={nav}>
+  <Shell area="storytelling" socials={socials} nav={nav} filter_title="Filter by Field">
     <ol class="timeline">
           {
             timeline.map(({ slug, data, rendered }, index) => {
@@ -92,13 +92,8 @@ const tag_colors: {[key: string]: string} = {
 
               let container_class = `timeline-item ${data.tags.map((v) => v.trim()).map((v) => `tag-${v}`).join(" ")}`;
 
-              let img = data.image ? (<div class="w-full h-[30vh] flex flex-row justify-center items-center"><div class="flex-shrink flex-grow max-w-full h-full aspect-square bg-center bg-cover" style={`background-image: url(${data.image});`}/></div>) : (<></>);
 
               let bg =data.dialogue_bg || data.image;
-
-              let imgbg = bg ? `background-image: url(${bg});` : ``;
-
-              const { Content } = rendered;
 
               return (
                 <li class={container_class} transition:name={`timeline-${slug}`}>
@@ -110,7 +105,7 @@ const tag_colors: {[key: string]: string} = {
                     </h3>
                     <ul aria-label="area" class="tags">
                       {
-                        data.tags.map((tag) => <li style={`background-color: ${tag_colors[tag] ?? "#000"};`}>{tag_icons[tag] ? <><i class={tag_icons[tag]}/>&nbsp;</> : ""}{tag}</li>)
+                        data.tags.map((tag) => <li><button id={"button-" + tag} class={ `tag-button tag-${tag}` } style={`background-color: ${tag_colors[tag] ?? "#000"};`}>{tag_icons[tag] ? <><i class={tag_icons[tag]}/>&nbsp;</> : ""}{tag}</button></li>)
                       }
                     </ul>
                     {
@@ -238,11 +233,13 @@ const tag_colors: {[key: string]: string} = {
 
         li {
           display: inline-block;
-          font-size: 0.6em;
+          font-size: 0.65em;
           margin: 0.1em;
-          padding: 0.25em;
-          border-radius: 0.5em;
-          height: 2em;
+          button {
+            padding: 0.25em;
+            border-radius: 0.5em;
+            height: 2em;
+          }
         }
       }
 

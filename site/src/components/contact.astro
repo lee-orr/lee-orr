@@ -1,7 +1,9 @@
 ---
 import { generate_shape } from "../pages/generate_shape";
-const { area } = Astro.props as {
+const { area, contact_method_title, contact_method_link } = Astro.props as {
   area: "storytelling" | "computing";
+  contact_method_title?: string;
+  contact_method_link?: string;
 };
 
 let shape = "clip-path: boundary-box;";
@@ -10,63 +12,21 @@ if (area === "storytelling") {
 }
 ---
 
-  <form
+  <div
+    class="page-root"
     style={shape}
-    name={"contact-" + area}
-    netlify
   >
     <div
       class="bg-panel"
     >
     </div>
-    <div>
-      <label for="name"
-        >Name</label
-      >
-      <input
-        type="text"
-        name="name"
-id="name"
-      />
-    </div>
-    <div>
-      <label for="email"
-        >Email</label
-      >
-      <input
-        type="text"
-        name="email"
-id="email"
-      />
-    </div>
-    <div>
-      <label for="subject"
-        >Subject</label
-      >
-      <input
-        type="text"
-        name="subject"
-id="subject"
-      />
-    </div>
-    <div>
-      <label for="content"
-        >Content</label
-      >
-      <textarea
-        name="content"
-id="content"
-id="content"></textarea>
-    </div>
-    <div >
-      <button
-        type="submit">Send</button
-      >
-    </div>
-  </form>
+    <h2>Contact Me</h2>
+
+    <p>The easiest way to reach out to me for the first time is through <a href={contact_method_link} target="_blank">{contact_method_title}</a>.</p>
+  </div>
 
   <style>
-    form {
+    .page-root {
       display: grid;
       grid-template-columns: max-content 3fr;
       grid-auto-rows: auto;
@@ -83,26 +43,26 @@ id="content"></textarea>
     }
 
     @media (max-width: 700px) {
-      form {
+      .page-root  {
         grid-template-columns: 1fr;
         min-width: unset;
         flex-grow: 0;
         flex-shrink: 0;
       }
 
-      form > div {
+      .page-root > div {
         grid-column: 1 / span 1;
         grid-row: span 2;
         grid-template-rows: subgrid [label-start] [label-end field-start] [field-end];
         grid-template-columns: subgrid [label-start field-start] [label-end field-end];
       }
 
-      form > div > label {
+      .page-root > div > label {
         text-align: start;
       }
     }
 
-    div {
+    .page-root  div {
       display: grid;
       grid-column: 1 / span 2;
       grid-template-columns: subgrid [label-start] [label-end field-start] [field-end];
@@ -134,7 +94,7 @@ id="content"></textarea>
       cursor: pointer;
     }
 
-    form > .bg-panel {
+    .page-root > .bg-panel {
       display: block;
       grid-row: 1;
       grid-column: 1 / span 2;

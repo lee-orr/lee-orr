@@ -17,13 +17,14 @@
         "type": "github",
         "value": "https://github.com/lee-orr",
         "icon": "icofont-github"
+      },
+      {
+        "type": "email",
+        "value": "mailto://leeorr@gmail.com",
+        "icon": "icofont-email"
       }
     ],
     "nav": [
-      {
-        "name": "Contact",
-        "url": "computing_contact"
-      },
       {
         "name": "Jobs & Projects",
         "url": "computing"
@@ -46,16 +47,17 @@
         "type": "itch",
         "value": "https://lee-orr.itch.io/",
         "icon": "icofont-game-console"
+      },
+      {
+        "type": "email",
+        "value": "mailto://leeorr@gmail.com",
+        "icon": "icofont-email"
       }
     ],
     "nav": [
       {
         "name": "Materials",
         "url": "materials"
-      },
-      {
-        "name": "Contact",
-        "url": "storytelling_contact"
       },
       {
         "name": "Works",

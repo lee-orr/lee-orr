@@ -2,9 +2,10 @@
 import { generate_shape } from "../pages/generate_shape";
 import AnimatedBackdrop from "./animated-backdrop.astro";
 
-const { area, socials, nav } = Astro.props as {
+const { area, socials, nav, filter_title } = Astro.props as {
   area: "storytelling" | "computing";
   socials: Array<{ type: string; value: string; icon: string }>;
+  filter_title?: string,
   nav: Array<{
     name: string;
     url: string;
@@ -21,6 +22,7 @@ function process_nav(
   });
 }
 
+let filters_text = filter_title ?? "Filters";
 
 let filters_shape = "clip-path: boundary-box;";
 if (area === "storytelling") {
@@ -82,7 +84,7 @@ let navigation = process_nav(nav);
   Astro.slots.has("filters") ? (
   <details class="filters" style={filters_shape}  transition:name="filters" transition:animate="slide">
     <summary class="">
-      Filters
+      {filters_text}
     </summary>
     <slot name="filters" />
   </details>
