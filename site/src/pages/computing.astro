@@ -372,6 +372,7 @@ const personal = timeline.filter((a) => "project" in a.data.info && !("open_sour
           background-color: var(--color-accent);
           padding: 0.25em;
           border-radius: 0.5em;
+          cursor: pointer;
         }
       }
     }
@@ -389,6 +390,13 @@ const personal = timeline.filter((a) => "project" in a.data.info && !("open_sour
       flex-direction: column;
       justify-content: flex-start;
       align-items: center;
+
+      a {
+        color: var(--off-text);
+        &:hover {
+          color: var(--color-accent);
+        }
+      }
     }
   }
 </style>

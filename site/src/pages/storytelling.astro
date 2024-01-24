@@ -85,10 +85,8 @@ const tag_colors: {[key: string]: string} = {
     <ol class="timeline">
           {
             timeline.map(({ slug, data, rendered }, index) => {
-              let [size, offset_x, offset_y] = get_next_random();
-
               let shape = generate_shape();
-              let style = `clip-path: ${shape}; position: relative; top: ${offset_y}rem; left: ${offset_x}rem;`;
+              let style = `clip-path: ${shape}; position: relative;`;
 
               let container_class = `timeline-item ${data.tags.map((v) => v.trim()).map((v) => `tag-${v}`).join(" ")}`;
 
@@ -233,12 +231,14 @@ const tag_colors: {[key: string]: string} = {
         text-align: center;
         align-self: start;
         justify-self: center;
+        padding-top: 0.5em;
       }
 
       h3 {
         grid-area: date;
         text-align: center;
         font-size: 0.65em;
+        padding-bottom: 0.5em;
       }
 
       .tags {
@@ -253,6 +253,7 @@ const tag_colors: {[key: string]: string} = {
             padding: 0.25em;
             border-radius: 0.5em;
             height: 2em;
+            cursor: pointer;
           }
         }
       }
@@ -263,13 +264,22 @@ const tag_colors: {[key: string]: string} = {
       }
 
       .links {
+        padding-top: 0.5em;
         grid-area: links;
-        font-size: 0.7em;
+        font-size: 0.65em;
         display: flex;
         flex-direction: row;
         flex-wrap: wrap;
         justify-content: space-between;
         align-items: flex-start;
+
+        a {
+          color: var(--color-main-bg);
+
+          &:hover {
+            color: var(--off-text);
+          }
+        }
       }
 
       .image {
