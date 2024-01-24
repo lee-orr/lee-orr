@@ -47,7 +47,7 @@ import ComputingBg from "../images/wide-site-bg-test-computing.png";
       <footer>
         <span>
           {
-            storytelling.socials.map(({type, value, icon}) => (<a href={value} target="_blank"><i class={icon}></i><span>{type}</span></a>))
+            storytelling.socials.filter(({type}) => type != "email").map(({type, value, icon}) => (<a href={value} target="_blank"><i class={icon}></i><span>{type}</span></a>))
           }
         </span>
         <span>
