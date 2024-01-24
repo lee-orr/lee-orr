@@ -99,6 +99,7 @@ const tag_colors: {[key: string]: string} = {
                 <li class={container_class} transition:name={`timeline-${slug}`}>
                   <div style={style}>
                     <div class="bg" />
+                    <div class="accent"/>
                     <h2><a href={`/storytelling/${slug}`}>{data.title}</a></h2>
                     <h3>
                       <time datetime={data.date.toDateString()} aria-label="from">{data.date.toLocaleDateString('default', { month: "short", year: 'numeric' })}</time>
@@ -162,7 +163,7 @@ const tag_colors: {[key: string]: string} = {
     0.5rem
     1rem
     fit-content(1.2em)
-    minmax(0, max-content)
+    minmax(0em, max-content)
     fit-content(4em)
     fit-content(1.2em)
     fit-content(3em)
@@ -210,6 +211,19 @@ const tag_colors: {[key: string]: string} = {
       ". . .";
 
       grid-area: card;
+
+      justify-content: stretch;
+
+      .accent {
+        grid-column: 1 / span 3;
+        grid-row: 4 / span 2;
+        z-index: 0;
+        background-color: var(--color-accent);
+        position: relative;
+        left: -1em;
+        right: -1em;
+        width: 110%;
+      }
 
       h2 {
         font-size: 1.1em;
@@ -267,8 +281,8 @@ const tag_colors: {[key: string]: string} = {
         justify-content: center;
         align-items: center;
         scale: 1.03;
-        margin-top: 0.2em;
-        margin-bottom: 0.2em;
+        margin-top: 0.5em;
+        margin-bottom: 0.5em;
 
         img {
           max-height: 100%;
