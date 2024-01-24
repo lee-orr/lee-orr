@@ -3,13 +3,13 @@
 {
 	"name": "Node.js & TypeScript",
 	// Or use a Dockerfile or Docker Compose file. More info: https://containers.dev/guide/dockerfile
-	"image": "mcr.microsoft.com/devcontainers/typescript-node:0-18",
+	"image": "node:21-bookworm",
 	"customizations": {
 		"vscode": {
 			"extensions": [
 				"astro-build.astro-vscode",
-		"ghcr.io/lee-orr/rusty-dev-containers/zellij:0": {},
-		"ghcr.io/lee-orr/rusty-dev-containers/helix:0": {},
+				"ghcr.io/lee-orr/rusty-dev-containers/zellij:0",
+				"ghcr.io/lee-orr/rusty-dev-containers/helix:0",
 				"bradlc.vscode-tailwindcss"
 			]
 		}

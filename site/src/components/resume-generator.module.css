@@ -1,0 +1,29 @@
+.generator {
+    display: flex;
+    flex-direction: row;
+    justify-content: stretch;
+    align-items: stretch;
+    width: 100%;
+    min-height: 70vh;
+    gap: 2em;
+
+    & > div {
+        flex-grow: 1;
+        background-color: var(--color-panel-bg);
+        padding: 1em;
+    }
+}
+
+.options {
+
+}
+
+.result {
+    display: flex;
+    justify-content: stretch;
+    align-items: stretch;
+
+    iframe {
+        flex-grow: 1;
+    }
+}

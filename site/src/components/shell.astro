@@ -121,6 +121,25 @@ let navigation = process_nav(nav);
       fit-content(3em)
       [filter-end] auto
       [content-end page-end];
+
+    &:not(:has(.filters)) {
+      
+    grid-template-columns: [page-start header-start] 1em
+      [socials-start nav-start content-start ] repeat(2, 1fr)
+      [socials-end title-start] max-content  
+      [title-end links-start ]  repeat(2, 1fr)
+      1fr
+      [links-end content-end nav-end] 1em
+      [page-end header-end];
+    grid-template-rows: [page-start header-start] 1rem
+      [title-start] 5em
+      [nav-start title-end socials-start links-start] 1.5rem
+      [nav-end socials-end links-end] 1rem
+      [header-end] 2em
+      [content-start ]
+      fit-content(3em)
+      [content-end page-end];
+    }
   }
 
   header {

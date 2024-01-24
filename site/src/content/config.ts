@@ -28,7 +28,10 @@ const computing_timeline = defineCollection({
     summary: z.string(),
     end_date: z.optional(z.date()),
     start_date: z.date(),
-    tags: z.string(),
+    tags: z.union([z.string(),z.record(z.union([z.object({
+      priority: z.optional(z.number()),
+      text: z.string()
+    }), z.string()]))]),
     links: z.optional(z.record(z.string()))
   }),
 });
