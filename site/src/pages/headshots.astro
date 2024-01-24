@@ -5,20 +5,10 @@ import Html from "../components/html.astro";
 
 import { storytelling } from "../data/site-nav-data.json";
 import { generate_shape } from "./generate_shape";
-const { socials, nav } = storytelling;
 
-const images = [
-  "DSC00084.JPG",
-  "DSC00087.JPG",
-  "DSC00091.JPG",
-  "DSC00105.JPG",
-  "DSC00159.JPG",
-  "DSC00189.JPG",
-  "DSC00197.JPG",
-  "DSC00227.JPG",
-  "DSC00241.JPG",
-  "DSC00247.JPG",
-];
+import {images} from "../images/headshots/headshots";
+
+const { socials, nav } = storytelling;
 ---
 
 
@@ -32,8 +22,8 @@ const images = [
 
         return (
           <>
-            <a class="headshot" style={style} href={`headshots/${img}`}>
-              <img src={`headshots/${img}`} />
+            <a class="headshot" style={style} href={img.src}}>
+              <img src={img.src}} />
             </a>
           </>
         );
