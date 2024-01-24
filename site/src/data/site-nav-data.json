@@ -21,10 +21,6 @@
     ],
     "nav": [
       {
-        "name": "Resume",
-        "url": "developer"
-      },
-      {
         "name": "Contact",
         "url": "computing_contact"
       },
