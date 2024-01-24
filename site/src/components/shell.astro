@@ -84,7 +84,7 @@ let navigation = process_nav(nav);
   Astro.slots.has("filters") ? (
   <details class="filters" style={filters_shape}  transition:name="filters" transition:animate="slide">
     <summary class="">
-      {filters_text}
+      <h2>{filters_text}</h2>
     </summary>
     <slot name="filters" />
   </details>
@@ -106,19 +106,20 @@ let navigation = process_nav(nav);
     display: grid;
     gap: 0.3em;
     grid-template-columns: [page-start header-start] 1em
-      [content-start socials-start nav-start] 1fr 
-      [filter-start] repeat(2, 1fr)
+      [socials-start nav-start filter-start] 1fr [filter-end content-start ] repeat(2, 1fr)
       [socials-end title-start] max-content  
       [title-end links-start ]  repeat(2, 1fr)
-      [filter-end] 1fr
+      1fr
       [links-end content-end nav-end] 1em
       [page-end header-end];
     grid-template-rows: [page-start header-start] 1rem
       [title-start] 5em
       [nav-start title-end socials-start links-start] 1.5rem
       [nav-end socials-end links-end] 1rem
-      [header-end filter-start] fit-content(3em)
-      [filter-end  content-start ] auto
+      [header-end] 2em
+      [filter-start content-start ]
+      fit-content(3em)
+      [filter-end] auto
       [content-end page-end];
   }
 
@@ -194,7 +195,7 @@ let navigation = process_nav(nav);
   }
 
   .filters {
-    background-color: var(--color-panel-bg);
+    /*background-color: var(--color-panel-bg);*/
     border-radius: 1rem;
     grid-area: filter;
     display: flex;
@@ -209,11 +210,30 @@ let navigation = process_nav(nav);
       justify-content: center;
       align-items: center;
       height: 1.5em;
+      color: var(--color-accent);
+
+      &::before {
+        content: "\01F782";
+        padding-right: 1em;
+        min-width: 2em;
+      }
+    }
+
+    &[open] > summary::before {
+      content: "\01F783";
+    }
+
+    &[open] > summary {
+      margin-bottom: 1em;
     }
 
     & > summary:hover {
+
+      h2 {
       text-decoration: underline 0.3em solid;
       text-underline-offset: 0.5em;
+      }
+      
       cursor: pointer;
     }
 
