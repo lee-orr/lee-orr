@@ -27,6 +27,11 @@
     "title": "Senior Developer (Contract)",
     "subsections": [
       {
+        "title": "Storyteller.ai",
+        "timespan": "Feb 2024",
+        "description": "Implementing a custom animation clip importer for the Bevy game engine."
+      },
+      {
         "title": "Subject Matter Expert - McMaster Continuing Education",
         "timespan": "Oct 2023 - Present",
         "description": "Designing and writing a course on backend development for McMaster's Full-Stack Development Program."

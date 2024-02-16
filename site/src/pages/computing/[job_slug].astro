@@ -10,11 +10,11 @@ export const getStaticPaths = (async () => {
       ...v,
       data: {
         ...v.data,
-        tags: v.data.tags
+        tags: typeof v.data.tags == "string" ? v.data.tags
           .split(/(\s|",")+/g)
           .map((v) => v.trim())
           .map((v) => slugify(v, { lower: true, strict: true }))
-          .filter((v) => v.length > 0),
+          .filter((v) => v.length > 0) : Object.keys(v.data.tags),
       },
     }));
  return entries.map(entry => ({params: { job_slug: entry.slug as string }, props: { entry  }}))
