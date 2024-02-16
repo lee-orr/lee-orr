@@ -34,7 +34,7 @@ This is an experimental bevy library for rendering to the tilt five. It is curre
 This is a game I build for the Historically Accurate Game Jam, where you try to build canals at as low a cost as possible. If you want to play, you can try it here: https://lee-orr.itch.io/canal-mania
 
 ### [Crossroad Blues](https://github.com/lee-orr/crossroad-blues)
-![Screenshot from Terra and Caelus](site/public/storytelling_images/crossroad_blues.png)
+![Screenshot from Crossroad Blues](site/src/images/storytelling_images/crossroad_blues.png)
 
 This is a game build for [VimJam4](https://itch.io/jam/vimjam4) - play as a devil rushing to the crossroads for a deal with a human. The jam version is available here: https://lee-orr.itch.io/crossroad-blues
 
