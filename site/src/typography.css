@@ -74,3 +74,44 @@ a {
     font-size: 2em;
   }
 }
+
+.content {
+  a {
+    font-weight: bold;
+    text-decoration: underline solid;
+
+    &::after {
+      content: '🔗';
+      font-size: 0.5em;
+      display: inline-block;
+      margin-left: 0.25em;
+    }
+
+    &:hover {
+      color: var(--color-accent-hover);
+    }
+  }
+
+  em {
+    font-style: italic;
+  }
+
+  b {
+    font-weight: bold;
+  }
+
+  h1 {
+    font-size: 1.5em;
+    font-weight: bold;    
+  }
+
+  h2 {
+    font-size: 1.2em;
+    font-weight: bold;
+  }
+
+  h3 {
+    font-size: 1em;
+    font-weight: bold;
+  }
+}
