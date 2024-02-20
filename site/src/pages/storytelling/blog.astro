@@ -3,15 +3,15 @@ import { getCollection } from "astro:content";
 import slugify from "slugify";
 import Shell from "../../components/shell.astro";
 import Html from "../../components/html.astro";
-import { computing, link_types } from "../../data/site-nav-data.json";
+import { storytelling, link_types } from "../../data/site-nav-data.json";
 import { generate_blog_filters,  generate_computing_filters } from "../generate_filters";
-const { socials, nav } = computing;
+const { socials, nav } = storytelling;
 const link_icons: { [key: string]: string | undefined } = link_types;
 slugify.extend({ "/": "-", "\\": "-" });
 
 const timeline = await Promise.all(
     ((await getCollection("blog")) ?? [])
-        .filter(({ data }) => data.type != "storytelling")
+        .filter(({ data }) => data.type != "computing")
         .map((v) => ({
             ...v,
             data: {
@@ -49,13 +49,30 @@ const tags_ordered = Object.keys(tags).map((v) => ({
 }));
 tags_ordered.sort((a, b) => b.count - a.count);
 
-const tag_icons: { [key: string]: string } = {};
-const tag_colors: { [key: string]: string } = {};
+const tag_icons: {[key: string]: string} = {
+  acting: 'icofont-video',
+  singing: 'icofont-radio-mic',
+  "3d": 'icofont-cube',
+  writing: 'icofont-fountain-pen',
+  theatre: 'icofont-street-view',
+  games: 'icofont-game-pad',
+  animation: 'icofont-video-alt'
+};
+
+const tag_colors: {[key: string]: string} = {
+  acting: 'var(--category-1)',
+  singing: 'var(--category-2)',
+  "3d": 'var(--category-3)',
+  writing: 'var(--category-4)',
+  theatre: 'var(--category-5)',
+  games: 'var(--category-6)',
+  animation: 'var(--category-7)'
+};
 ---
 
 <Html>
     <Shell
-        area="computing"
+        area="storytelling"
         socials={socials}
         nav={nav}
         filter_title="Filter by Tags"
@@ -75,10 +92,10 @@ const tag_colors: { [key: string]: string } = {};
 
                 return (
                     <li class={class_string}>
-                        <h3><a href={`/computing/blog/${slug}`}>{title}</a></h3>
+                        <h3><a href={`/storytelling/blog/${slug}`}>{title}</a></h3>
                         <h4><time datetime={date.toDateString()}>{date.toLocaleDateString()}</time></h4>
                         <ul>{
-                            tags.map((tag) =><li><button 
+                            tags.map((tag) => <li><button 
             class={`tag-button tag-${tag}`} id={"button-" + tag}>{tag}</button></li>)
                         }</ul>
                         <p>{summary}</p>

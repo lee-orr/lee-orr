@@ -96,3 +96,54 @@ export const generate_computing_filters = (tags: string[]) => {
 
   return style;
 };
+
+
+export const generate_blog_filters = (tags: string[]) => {
+  let classes = tags.map(
+    (tag) => `
+    .filtering.tag-${tag} .blog-item.tag-${tag} {
+      opacity: 1;
+      filter: grayscale(0);
+      display: grid;
+    }
+
+    .filtering.tag-${tag} .tag-button.tag-${tag} {
+      filter: grayscale(0);
+      scale: 1;
+    }
+  `,
+  );
+
+  let style = `<style>
+
+
+  .tag-button {
+    scale: 1;
+    transition: scale 1s, opacity 1s;
+  }
+
+  .blog-item {
+    opacity: 1;
+    filter: grayscale(0);
+    transition: scale 1s, opacity 1s, max-height 1s, max-width 1s, filter 1s;
+  }
+
+  .filtering .blog-item {
+    opacity: 0.0;
+    filter: grayscale(1);
+    display: none;
+  }
+
+  .filtering .tag-button {
+
+    scale: 0.7;
+    filter: grayscale(1);
+    transition: scale 1s, opacity 1s, max-height 1s, max-width 1s, filter 1s;
+  }
+
+ 
+  ${classes.join("\n")}
+  </style>`;
+
+  return style;
+};

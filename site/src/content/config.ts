@@ -36,7 +36,22 @@ const computing_timeline = defineCollection({
   }),
 });
 
+const blog = defineCollection({
+  type: "content",
+  schema: z.object({
+    title: z.string(),
+    tags:  z.union([z.string(),z.record(z.union([z.object({
+      priority: z.optional(z.number()),
+      text: z.string()
+    }), z.string()]))]),
+    date: z.date(),
+    summary: z.string(),
+    type: z.enum(["computing", "storytelling", "both"])
+  })
+})
+
 export const collections = {
   "storytelling-timeline": storytelling_timeline,
   "computing-timeline": computing_timeline,
+  "blog": blog
 };

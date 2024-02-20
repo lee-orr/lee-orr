@@ -21,11 +21,11 @@ const timeline = await Promise.all(
       ...v,
       data: {
         ...v.data,
-        tags: v.data.tags
-          .split(/(\s|",")+/g)
-          .map((v) => v.trim())
-          .map((v) => slugify(v, { lower: true, strict: true }))
-          .filter((v) => v.length > 0),
+        tags: typeof v.data.tags === "string" ? v.data.tags
+            .split(/(\s|",")+/g)
+            .map((v) => v.trim())
+            .map((v) => slugify(v, { lower: true, strict: true }))
+            .filter((v) => v.length > 0) : Object.keys(v.data.tags),
       },
     }))
 );
