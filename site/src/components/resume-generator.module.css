@@ -7,7 +7,7 @@
     min-height: 70vh;
     gap: 2em;
 
-    & > div {
+    &>div {
         flex-grow: 1;
         background-color: var(--color-panel-bg);
         padding: 1em;
@@ -15,15 +15,56 @@
 }
 
 .options {
+    display: flex;
+    flex-direction: column;
 
+    .jobs {
+        display: grid;
+
+        grid-template-columns: min-content min-content min-content auto;
+
+        justify-content: start;
+        align-items: center;
+        gap: 0.2em;
+        overflow-y: auto;
+
+        select {
+            color: black;
+            background-color: white;
+        }
+    }
+
+    .skills {
+        display: flex;
+        flex-direction: row;
+        flex-wrap: wrap;
+        gap: 0.2em;
+
+        .skill {
+            padding: 0.2em;
+            background-color: var(--color-accent);
+            &:hover {
+                background-color: var(--color-accent-hover);
+            }
+
+            &[x-selected=true] {
+                background-color: var(--oxx-text);
+            }
+        }
+    }
 }
 
 .result {
     display: flex;
     justify-content: stretch;
     align-items: stretch;
+    flex-direction: column;
 
     iframe {
         flex-grow: 1;
     }
+}
+
+.frame {
+    object-fit: scale-down;
 }

@@ -8,5 +8,8 @@ export default defineConfig({
   integrations: [Compress(), solidJs()],
   image: {
     service: passthroughImageService()
+  },
+  devToolbar: {
+    enabled: false
   }
 });

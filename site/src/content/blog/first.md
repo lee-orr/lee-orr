@@ -10,7 +10,7 @@ type: computing
 
 About 6 months ago, I started working on a hot-reload system for [Bevy](https://bevyengine.org) - an awesome rust-based game engine.
 
-I had just finished a game jam, and was frustrated by the cycle of needing to restart the game and navigate back to a given screen to see my changes - especially for styling in-game UI. Compared to my experience with front-end web development, where tools like Vite let you make sweeping changes on the fly and use hot module reload to update the code as you go. This was so much slower - and as a result, harder to progress or justify - especially a time sensitive context like a game jam.
+I had just finished a game jam, and was frustrated by the cycle of needing to restart the game and navigate back to a given screen to see my changes - especially for styling in-game UI. Compared to my experience with front-end web development, where tools like [Vite](vitejs.dev/) and [Webpack](https://webpack.js.org) let you make sweeping changes on the fly - replacing your running code almost immediately after saving without throwing out it's state. The Rusty cycle was much slower - and as a result, harder to progress or justify - especially a time sensitive context like a game jam.
 
 So I looked for options...
 
@@ -20,4 +20,10 @@ And then there was [Ridiculous Bevy Hot Reloading](https://github.com/DGriffin91
 
 Each of these tools is great - but none of them solved the problem I was having... so I decided to give implementing something myself a shot.
 
-# How it works (in short)
+# How It Works
+
+The current version (`0.2.0`), as well as earlier ones, rely on dynamic libraries to reload your code, and do so in a very bevy-centric way: you use a macro to indicate your main function, and another macro to indicate functions that set up the reloadable elements of your app.
+
+In the earliest versions, it compiled your entire app twice - first to generate the surrounding portion, and then to generate the loaded library - and would often have issues with finding the correct libraries, linking to system libraries, and the like.
+
+In addition, you would be able to end up with multiple mismatched implementations of certain types - 

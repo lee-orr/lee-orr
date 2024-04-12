@@ -32,7 +32,8 @@ const computing_timeline = defineCollection({
       priority: z.optional(z.number()),
       text: z.string()
     }), z.string()]))]),
-    links: z.optional(z.record(z.string()))
+    links: z.optional(z.record(z.string())),
+    resume_details: z.record(z.string()).optional()
   }),
 });
 

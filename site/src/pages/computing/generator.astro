@@ -1,0 +1,62 @@
+---
+import { getCollection } from "astro:content";
+import Shell from "../../components/shell.astro";
+import Html from "../../components/html.astro";
+import ResumeGenerator from "../../components/resume-generator";
+
+
+import contacts from "../../data/developer-contacts.json";
+
+import { computing } from "../../data/site-nav-data.json";
+
+const { socials, nav } = computing;
+
+
+import slugify from "slugify";
+import { data } from "autoprefixer";
+
+let content =  await Promise.all(
+  (
+    await getCollection("computing-timeline")
+  )
+    .map((v) => ({
+      ...v,
+      data: {
+        ...v.data,
+        tags: typeof v.data.tags === "string" ? v.data.tags
+            .split(/(\s|",")+/g)
+            .map((v) => v.trim())
+            .map((v) => slugify(v, { lower: true, strict: true }))
+            .filter((v) => v.length > 0) : Object.keys(v.data.tags),
+      },
+    }))
+);
+
+let jobs = content.map((v) => ({ id: v.slug, title: 'company' in v.data.info ? v.data.info.company + ' ' + v.data.info.role : v.data.info.project, resume_details: v.data.resume_details}))
+
+
+
+const tags: { [key: string]: number } = {};
+
+for (let item of content) {
+  for (let tag of item.data.tags) {
+    let t = tag.trim();
+    if (tags[t]) {
+      tags[t]++;
+    } else {
+      tags[t] = 1;
+    }
+  }
+}
+
+
+const tags_ordered = Object.keys(tags);
+---
+
+
+
+<Html>
+  <Shell area="computing" socials={socials} nav={nav}>
+    <ResumeGenerator client:load jobs={jobs} skills={tags_ordered}/>
+  </Shell>
+</Html>
