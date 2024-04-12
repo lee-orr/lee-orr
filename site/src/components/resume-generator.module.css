@@ -1,11 +1,10 @@
 .generator {
-    display: flex;
-    flex-direction: row;
-    justify-content: stretch;
-    align-items: stretch;
+    display: grid;
     width: 100%;
     min-height: 70vh;
     gap: 2em;
+
+    grid-template-columns: 1fr 1fr;
 
     &>div {
         flex-grow: 1;
