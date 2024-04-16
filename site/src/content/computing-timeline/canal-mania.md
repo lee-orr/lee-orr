@@ -8,6 +8,11 @@ tags: games 3d rust bevy ci-cd wgsl
 links:
     "github": "https://github.com/lee-orr/CanalMania"
     "itch": "https://lee-orr.itch.io/canal-mania"
+resume_details:
+  water-flow-simulation: Integrated a water simulation into the puzzle gameplay
+  ui-system: Built an abstraction around Bevy's UI to enable easier UI manipulation and the creation of an in-game editor
+  playtests: Ran regular play tests and utilized user feedback to improve the design
+  shader: Created a custom shader to display terrain contour lines and deform flat tiles to generate a height map
 ---
 
 I originally built this game as part of the Historically Accurate Game Jam - based on the theme of "The Industrial Revolution".

@@ -8,6 +8,10 @@ tags: games rust bevy ci-cd
 links:
     "github": "https://github.com/lee-orr/crossroad-blues/"
     "itch": "https://lee-orr.itch.io/crossroad-blues"
+resume_details:
+  map-generation: Procedurally generated maps with constraints to allow for level design
+  performance: Optimized collision detection and logic processing for hundreds of enemies and pickups
+  ai: Implemented enemy logic using Utility AI, allowing them to be modified in a modular manner
 ---
 
 When [VimJam4](https://itch.io/jam/vimjam4) unveiled their theme, "Cross Paths", my mind immediately went to the legends around Robert Johnson's "Cross Road Blues". A classic story of a Faustian bargin, at a crossroad, in the dead of night. As I was playing with that concept, I realized it'd be fun to be a devil trying to gather souls with these deals, working their way up in the world. And so, the game "Crossroad Blues" was born.

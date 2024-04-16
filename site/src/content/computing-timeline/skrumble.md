@@ -6,6 +6,12 @@ summary: Managed over 200 deployed systems. Architected a scalable, cloud based 
 start_date: 2015-06-01
 end_date: 2018-12-01
 tags: Architecture Javascript Vue NodeJS Docker DevOps SQL MongoDB AWS Freeswitch Lua Bash HTML WebRTC P2P PHP front-end back-end full-stack websocket redis
+resume_details:
+  ops: Managed and operated the company's infastructure - including handling of LXD containers, setup of servers, and more,
+  back-end: Maintained the original back end while leading a re-architecutre aimed at moving from discreet private servers to a cloud-based, scalable infrastructure
+  telephony: Built a system for creating complex call routing applications using a graph with logical nodes
+  void-servers: Migrated the last dedicated service we ran - 2 media servers running Freeswitch - to AWS Elastic Beanstalk services built with Kurento and NodeJS
+  prototype: Built a prototype peer-to-peer video conferencing application with support for large conferences - up to 18 concurrent video streams while other solutions handled at most 3-4 users
 ---
 
 My work at Skrumble started as a website developer - implementing PSD designs in HTML & CSS. During downtime, I built a custom version of the ProcessWire CMS that allowed the graphic designed to update the site directly - making my original job reudandant and saving ~50k a year on that position.

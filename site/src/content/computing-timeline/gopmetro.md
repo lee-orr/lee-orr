@@ -7,6 +7,8 @@ summary: Built a tool allowing the creation of interactive maps using Figma & Go
 start_date: 2022-12-01
 end_date: 2023-05-01
 tags: Typescript Rust Architecture DevOps Netlify CI/CD SVG HTML CSS Figma CSV dev-containers front-end full-stack yew tdd
+resume_details:
+  generate: Generate interactive subway-style maps from a provided SVG & CSV file
 ---
 
 This project involved the creation of an interactive transit-style map, with the ability to highlight lines, get information about stops, and see additional layers of connections between them.

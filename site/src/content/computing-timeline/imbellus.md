@@ -6,6 +6,11 @@ summary: Built an online, interactive, visual editor & runtime for 3d game-like 
 start_date: 2019-02-01
 end_date: 2020-12-01
 tags: Architecture Javascript Typescript Vue Unity 3D NodeJS Python Cypress TDD Mocha CI/CD front-end back-end HTML css websocket vuex
+resume_details:
+  unity-integration: Integrated Unity3D into a browser-based editor for game-like assessments
+  generate-back-end: Allowed for automatically separating the front-end and back-end components of an assessment when run in production, while emulating the back end in editor
+  visual-editor: Provided designers with muliple ways of defining logic, including a built-in Typescript editor and a node-based visual programming language
+  web-component-shell: Developed a web-component based shell, allowing tasks to be isolated from one another while maintaining a single, simple interface to the server
 ---
 
 My main job at imbellus was building an editor that allowed our task designers to construct tasks without needing regular engineering or graphic design support. Originally I was hired as a contractor to build out the initial version of the editor, but as the editor became a regular tool in our task creation process I was hired to continue developing and maintaining it. This role involved a lot of work directly with my users, adapting the tool to their needs as they evolved. In addition, I had to adapt some of the infrustructure on our main client app to support this.
