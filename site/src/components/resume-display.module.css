@@ -1,31 +1,22 @@
-h1 {
-    font-size: 18pt;
-    font-weight: bold;
-    font-style: normal;
-    display: flex;
-    justify-content: center;
+
+h1,h2,h3,h4,h5,h6 {
+    filter: none;
 }
 
-h2 {
-    font-size: 14pt;
-    font-weight: bold;
-    display: flex;
-    justify-content: center;
-}
-
+ 
 h3 {
     font-size: 12pt;
-    font-weight: normal;
+    font-weight: 100;
     display: flex;
     justify-content: center;
     flex-wrap: wrap;
     gap: 0.2em;
-    padding-bottom: 10pt;
 }
 
 h4 {
     font-size: 12pt;
     font-style: normal;
+    font-weight: bold;
 }
 h5 {
     font-size: 10pt;
@@ -45,9 +36,23 @@ li div {
 
 .jobs {
     gap: 4pt;
-    display: grid;
-    grid-template-columns: auto auto auto;
-    grid-auto-rows: min-content;
+    position: absolute;
+    display: flex;
+    top: 0;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    height: 100%;
+    flex-direction: column;
+    flex-wrap: wrap;
+    
+    > li {
+        width: 33%;
+    }
+}
+
+.jobs_container {
+    position: relative;
 }
 
 .skills {
@@ -63,8 +68,49 @@ li div {
     height: 11in;
     background-color: white;
     padding: 0.5cm;
+    gap: 5pt;
     display: grid;
-    grid-template-rows: min-content min-content min-content min-content min-content min-content;
+    grid-template-rows: min-content 1fr min-content;
+}
+
+.header {
+    display: grid;
+    grid-template-columns: max-content 1fr max-content;
+    grid-template-rows: min-content min-content;
+
+    h1 {
+        font-size: 18pt;
+        font-weight: bold;
+        font-style: normal;
+        display: flex;
+        justify-content: center;
+        grid-column: 1;
+        grid-row: 1;
+    }
+    
+    h2 {
+        font-size: 14pt;
+        font-weight: bold;
+        display: flex;
+        justify-content: center;
+        grid-column: 3;
+        grid-row: 1;
+    }
+    
+    h3 {
+        grid-column: 1 / span 3;
+        grid-row: 2;
+    }
+}
+
+.footer {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+
+    h3 {
+        font-weight: bold;
+    }
 }
 
 body {

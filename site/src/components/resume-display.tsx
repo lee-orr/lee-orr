@@ -3,8 +3,10 @@ import { createEffect, createSignal } from "solid-js";
 import qs from "qs";
 
 import styles from "./resume-display.module.css";
+import { style } from "solid-js/web";
+import { defineStyleVars } from "astro/compiler-runtime";
 
-interface BaseResumeInfo { title: string, name: string, contacts: Array<{ type: string, value: string, icon: string }>, resume_info: Array<{slug: string, title: string, type: string, summary: string, start_date: Date, end_date?: Date, resume_details?: Record<string, string>}>, tags: Record<string, number> }
+interface BaseResumeInfo { title: string, name: string, contacts: Array<{ type: string, value: string, icon: string }>, resume_info: Array<{slug: string, title: string, type: string, summary: string, start_date: Date, end_date?: Date, resume_details?: Record<string, string>}>, tags: Record<string, number>, education: Array<{ institution: string, certificate: string }> }
 
 export interface Details { jobs: Record<string, { full: boolean, details: string[]}>, skills: Record<string, boolean> }
 
@@ -47,27 +49,35 @@ export default function ResumeDisplay(base_info: BaseResumeInfo) {
 
 
     return <><div class={styles.wrapper}>
-        <h1>{base_info.name}</h1>
-        <h2>{base_info.title}</h2>
-        <h3>{
-            base_info.contacts.map(({ type, value, icon }) => {
-                return <span><i class={icon} /> {value}</span>
-            })
-        }</h3>
-        <ul class={styles.jobs}>
-            {jobs.map(({slug, title, type, summary, start_date, end_date, resume_details, full}) => {
-                return <li>
-                    <h4>{title}</h4>
-                    <h5>{type} - {start_date.getMonth() + 1}/{start_date.getFullYear()} { end_date ? ` to ${end_date.getMonth() + 1}/${end_date.getFullYear()}`: ''}</h5>
-                    { full ?
-                    <div>{summary}</div>
-                    : <></>}
-                    {resume_details.map(v => <div>{v}</div>)}
-                </li>
-            })}
-        </ul>
-        <h3>Skills</h3>
-        <ul class={styles.skills}>{Object.keys(base_info.tags).filter((v) => skill_filters[v]).map((v) => <li>{v}</li>)}</ul>
+        <div class={styles.header}>
+            <h1>{base_info.name}</h1>
+            <h2>{base_info.title}</h2>
+            <h3>{
+                base_info.contacts.map(({ type, value, icon }) => {
+                    return <span><i class={icon} /> {value}</span>
+                })
+            }</h3>
+        </div>
+        <div class={styles.jobs_container}>
+            <ul class={styles.jobs}>
+                {jobs.map(({slug, title, type, summary, start_date, end_date, resume_details, full}) => {
+                    return <li>
+                        <h4>{title}</h4>
+                        <h5>{type} - {start_date.getMonth() + 1}/{start_date.getFullYear()} { end_date ? ` to ${end_date.getMonth() + 1}/${end_date.getFullYear()}`: ''}</h5>
+                        { full ?
+                        <div>{summary}</div>
+                        : <></>}
+                        {resume_details.map(v => <div>{v}</div>)}
+                    </li>
+                })}
+                {base_info.education.map(({institution, certificate}) => <li><h4>{certificate}</h4><h5>{institution}</h5></li>)}
+            </ul>
+        </div>
+        <div class={styles.footer}>
+            <h3>Skills</h3>
+            <ul class={styles.skills}>{Object.keys(base_info.tags).filter((v) => skill_filters[v]).map((v) => <li>{v}</li>)}</ul>
+            
+        </div>
     </div>
     </>;
 }
