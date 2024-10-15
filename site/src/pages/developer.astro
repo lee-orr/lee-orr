@@ -1,0 +1,97 @@
+---
+import Descriptor from "../components/descriptor.astro";
+import Name from "../components/name.astro";
+import contacts from "../data/developer-contacts.json";
+import { description } from "../data/description.json";
+import sections_in from "../data/developer-main-sections.json";
+import LargeSection from "../components/large-section.astro";
+import { computing, link_types } from "../data/site-nav-data.json";
+import Html from "../components/html.astro";
+import Shell from "../components/shell.astro";
+const link_icons: {[key: string]: string | undefined} = link_types;
+
+const { socials, nav } = computing;
+
+const sections = sections_in as Array<{
+  title: string;
+  timespan?: string;
+  company?: string;
+  is_compact?: boolean;
+  subsections: Array<{
+    title?: string;
+    timespan?: string;
+    description: string;
+  }>;
+}>;
+---
+
+<Html>
+  <Shell area="computing" socials={socials} nav={nav}>
+    <Name title="Software Developer / Architect" contacts={contacts} full_name={true}/>
+    <Descriptor content={description} />
+    {
+      sections.map(({ title, timespan, company, is_compact, subsections }) => (
+        <LargeSection
+          title={title}
+          timespan={timespan}
+          company={company}
+          is_compact={is_compact}
+          subsections={subsections}
+        />
+      ))
+    }
+  </Shell>
+</Html>
+
+<style is:global>
+  .content {
+    gap: 1em;
+  }
+
+  .content > div {
+    background-color: var(--color-panel-bg);
+    padding: 1em;
+  }
+
+  .content {
+    font-size: 0.7em;
+  }
+  
+  @media print {
+    @page {
+      size: letter;
+      margin: 1cm 1cm 1cm 1cm;
+    }
+
+    h1, h2, h3, h4, h5 {
+      page-break-after: avoid;
+      font-family: "Fira Sans Condensed", sans-serif;
+    }
+
+    body {
+      font-size: 12px;
+      color: black;
+      background: white;
+      font-weight: light;
+      overflow:unset;
+      padding: 0;
+      margin: 0;
+    }
+    
+    .content {
+      gap: 0em;
+      font-size: 1em;
+      overflow:unset;
+      padding: 0;
+      margin: 0;
+    }
+
+    .content > div {
+      background-color: white !important;
+      padding: 0.5em;
+      padding-top: 0em;
+      overflow:unset;
+    }
+
+  }
+</style>

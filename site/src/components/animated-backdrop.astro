@@ -1,0 +1,142 @@
+---
+import { generate_splat } from "../pages/generate_shape";
+const { area } = Astro.props as {
+  area: "storytelling" | "computing";
+};
+
+const colors = [
+  "var(--color-main-text)",
+  "var(--color-hover-text)",
+  "var(--color-accent)",
+  "var(--color-accent-hover)",
+  "var(--off-text)",
+];
+
+const num_elements = area === "computing" ? 15 : 10;
+const duration = area === "computing" ? 1.5 : 3;
+
+const get_shape = area === "computing" ? () => "circle(45%);" : generate_splat;
+const get_size = area === "computing" ? () => 1 : () => Math.random() * 3 + 7;
+const get_colors = () => colors[Math.floor(Math.random() * colors.length)];
+
+let elements = [];
+for (let i = 0; i < num_elements; i++) {
+  let angle = (i * 360) / num_elements;
+  let delay = Math.random() * 5;
+  let shape = get_shape();
+  let size = get_size();
+  let color = get_colors();
+  elements.push({ angle, delay, shape, size, color });
+}
+---
+
+<div
+  class=`absolute top-0 left-0 right-0 bottom-0 overflow-hidden animate-${area}`
+>
+  {
+    elements.map(({ angle, delay, shape, size, color }) => {
+      return (
+        <div
+          class="absolute top-0 left-0 right-0 bottom-0 bg-spec overflow-visible"
+          style={`animation-delay: ${delay}s; animation-duration: ${duration}s;`}
+        >
+          <div
+            class="absolute top-0 left-[50%] bottom-0 overflow-visible"
+            style={`transform: rotate(${angle}deg);`}
+          >
+            <div
+              class="overflow-visible shape"
+              style={`background-color: ${color}; clip-path: ${shape}; width: ${size}rem; height: ${size}rem;`}
+            />
+          </div>
+        </div>
+      );
+    })
+  }
+  <div
+    class="absolute top-0 left-0 right-0 bottom-0 bg-gradient-radial from-main-bg via-transparent to-accent from-0% via-70% to-100% z-0"
+  >
+  </div>
+</div>
+<style>
+  @keyframes fly_out {
+    0% {
+      opacity: 0;
+      transform: rotate(0) scale(0);
+    }
+
+    5% {
+      opacity: 0.5;
+      transform: scale(0.2);
+    }
+
+    50% {
+      opacity: 1;
+      transform: rotate(var(--half-rotation)) scale(0.8);
+    }
+
+    80% {
+      opacity: 1;
+    }
+
+    100% {
+      opacity: 0;
+      transform: rotate(var(--full-rotation)) scale(1.5);
+    }
+  }
+
+  .animate-computing {
+    --half-rotation: 40deg;
+    --full-rotation: 90deg;
+    z-index: -1;
+
+    &::before {
+      content: " ";
+      display: block;
+      position: absolute;
+      top: 0;
+      left: 0;
+      bottom: 0;
+      right: 0;
+      background: linear-gradient(
+          rgba(18, 16, 16, 0) 66%,
+          rgba(0, 0, 0, 0.25) 33%
+        ),
+        linear-gradient(
+          90deg,
+          rgba(255, 0, 0, 0.06) 50%,
+          rgba(0, 255, 0, 0.02),
+          rgba(0, 0, 255, 0.06)
+        );
+      z-index: 1000;
+      background-size: 100% 15px, 12px 100%;
+      pointer-events: none;
+    }
+  }
+
+  .animate-storytelling.top-0.left-0 {
+    --half-rotation: 5deg;
+    --full-rotation: 0deg;
+
+    top: -10rem;
+    left: -10rem;
+    right: -10rem;
+
+    bottom: -10rem;
+
+    z-index: -1;
+    filter: drop-shadow(-3px -4px 0px rgba(244, 215, 215, 0.3))
+      drop-shadow(12px 21px 1px rgba(58, 34, 15, 0.8));
+  }
+
+  .bg-spec {
+    opacity: 0;
+    animation: fly_out linear infinite normal forwards;
+  }
+
+  @media (prefers-reduced-motion) {
+    .bg-spec {
+      animation: none;
+    }
+  }
+</style>

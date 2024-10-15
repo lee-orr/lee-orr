@@ -1,0 +1,411 @@
+---
+import { getCollection } from "astro:content";
+import slugify from "slugify";
+import Shell from "../components/shell.astro";
+import Html from "../components/html.astro";
+
+import { computing, link_types } from "../data/site-nav-data.json";
+const { socials, nav } = computing;
+import { generate_computing_filters } from "./generate_filters";
+import AnimatedBackdrop from "../components/animated-backdrop.astro";
+
+const link_icons: {[key: string]: string | undefined} = link_types;
+
+slugify.extend({ "/": "-", "\\": "-" });
+
+const timeline = await Promise.all(
+  (
+    await getCollection("computing-timeline")
+  )
+    .map((v) => ({
+      ...v,
+      data: {
+        ...v.data,
+        tags: typeof v.data.tags === "string" ? v.data.tags
+            .split(/(\s|",")+/g)
+            .map((v) => v.trim())
+            .map((v) => slugify(v, { lower: true, strict: true }))
+            .filter((v) => v.length > 0) : Object.keys(v.data.tags),
+      },
+    }))
+);
+
+timeline.sort((a, b) => {
+  if (a.data.end_date || b.data.end_date) {
+    let a_date = a.data.end_date ?? new Date();
+    let b_date = b.data.end_date ?? new Date();
+    return b_date > a_date ? 1 : -1;
+  } else {
+    return b.data.start_date > a.data.start_date ? 1 : -1;
+  }
+});
+
+const tags: { [key: string]: number } = {};
+
+for (let item of timeline) {
+  for (let tag of item.data.tags) {
+    let t = tag.trim();
+    if (tags[t]) {
+      tags[t]++;
+    } else {
+      tags[t] = 1;
+    }
+  }
+}
+let divided = timeline.length / 3;
+let gaps = [];
+for (let i = 1; i < divided; i += 2) {
+  gaps.push(i);
+}
+
+const tags_ordered = Object.keys(tags).map((v) => ({
+  tag: v,
+  count: tags[v] ?? 0,
+}));
+tags_ordered.sort((a, b) => b.count - a.count);
+
+const tag_icons: { [key: string]: string } = {};
+const tag_colors: { [key: string]: string } = {};
+
+const jobs = timeline.filter((a) => "company" in a.data.info);
+const open_source = timeline.filter((a) => "project" in a.data.info && "open_source_used" in a.data.info && a.data.info.open_source_used);
+const personal = timeline.filter((a) => "project" in a.data.info && !("open_source_used" in a.data.info && a.data.info.open_source_used));
+
+---
+
+<Html>
+
+  <Shell area="computing" socials={socials} nav={nav} filter_title="Filter by Skills">
+    <details open>
+      <summary><h2>Jobs</h2></summary>
+    <ol class="timeline">
+    {
+      jobs.map(({ slug, data, body }, index) => {
+        let class_string = `timeline-item ${data.tags
+          .map((v) => v.trim())
+          .map((v) => `tag-${v}`)
+          .join(" ")}`;
+
+        let info = data.info as { role: string, company: string, is_contract?: boolean } ;
+
+        let title = "project" in info ? info.project : info.role + " at " + info.company;
+
+        let context = info.is_contract ? "Contract" : "Employment";
+
+        return (
+          <li class={class_string}>
+            <h3><a href={`/computing/${slug}`}>{title}</a></h3>
+            <h4>{context}</h4>
+            <h5>
+              <time datetime={data.start_date.toDateString()} aria-label="from">{data.start_date.toLocaleDateString('default', { month: "short", year: 'numeric' })}</time>
+              {
+                data.end_date ? (
+                  <> to
+                  <time datetime={data.end_date.toDateString()}>{data.end_date.toLocaleDateString('default', { month: "short", year: 'numeric' })}</time>
+                  </>
+                ) : <></>
+              }
+            </h5>
+            <ul aria-label="technologies and skills">
+              {
+            data.tags.map((tag) => <li><button 
+            class={`tag-button tag-${tag}`} id={"button-" + tag}>{tag}</button></li>)
+              }
+            </ul>
+            <p>{data.summary}</p>
+            {
+              data.links ? (<ul class="links" aria-label="links">{
+                Object.keys(data.links).map((type) => {
+                  let target = data.links && data.links[type];
+                  if (!target) {
+                    return <></>
+                  }
+                  let icon = link_icons[type];
+                  let icon_element = icon ? <><i class={icon} /> &nbsp;</> : <></>;
+                  return <a href={target} target="_blank">{icon_element}{target}</a>;
+                })}</ul>
+              ) : <></>
+            }
+          </li>
+        );
+      })
+    }
+    </ol>
+  </details>
+  <details open>
+    <summary><h2>Open Source Projects</h2></summary>
+  <ol class="timeline">
+  {
+    open_source.map(({ slug, data, body }, index) => {
+      let class_string = `timeline-item ${data.tags
+        .map((v) => v.trim())
+        .map((v) => `tag-${v}`)
+        .join(" ")}`;
+
+      let info = data.info as { role: string, company: string, is_contract?: boolean } ;
+
+      let title = "project" in info ? info.project : info.role + " at " + info.company;
+
+      return (
+        <li class={class_string}>
+          <h3><a href={`/computing/${slug}`}>{title}</a></h3>
+          <h5>
+            <time datetime={data.start_date.toDateString()} aria-label="from">{data.start_date.toLocaleDateString('default', { month: "short", year: 'numeric' })}</time>
+            {
+              data.end_date ? (
+                <> to
+                <time datetime={data.end_date.toDateString()}>{data.end_date.toLocaleDateString('default', { month: "short", year: 'numeric' })}</time>
+                </>
+              ) : <></>
+            }
+          </h5>
+          <ul aria-label="technologies and skills">
+            {
+            data.tags.map((tag) => <li><button 
+            class={`tag-button tag-${tag}`} id={"button-" + tag}>{tag}</button></li>)
+            }
+          </ul>
+          <p>{data.summary}</p>
+          {
+            data.links ? (<ul class="links" aria-label="links">{
+              Object.keys(data.links).map((type) => {
+                let target = data.links && data.links[type];
+                if (!target) {
+                  return <></>
+                }
+                let icon = link_icons[type];
+                let icon_element = icon ? <><i class={icon} /> &nbsp;</> : <></>;
+                return <a href={target} target="_blank">{icon_element}{target}</a>;
+              })}</ul>
+            ) : <></>
+          }
+        </li>
+      );
+    })
+  }
+  </ol>
+</details>
+<details open>
+  <summary><h2>Personal Projects</h2></summary>
+<ol class="timeline">
+{
+  personal.map(({ slug, data, body }, index) => {
+    let class_string = `timeline-item ${data.tags
+      .map((v) => v.trim())
+      .map((v) => `tag-${v}`)
+      .join(" ")}`;
+
+    let info = data.info as { role: string, company: string, is_contract?: boolean } ;
+
+    let title = "project" in info ? info.project : info.role + " at " + info.company;
+
+    return (
+      <li class={class_string}>
+        <h3><a href={`/computing/${slug}`}>{title}</a></h3>
+        <h5>
+          <time datetime={data.start_date.toDateString()} aria-label="from">{data.start_date.toLocaleDateString('default', { month: "short", year: 'numeric' })}</time>
+          {
+            data.end_date ? (
+              <> to
+              <time datetime={data.end_date.toDateString()}>{data.end_date.toLocaleDateString('default', { month: "short", year: 'numeric' })}</time>
+              </>
+            ) : <></>
+          }
+        </h5>
+        <ul aria-label="technologies and skills">
+          {
+            data.tags.map((tag) => <li><button 
+            class={`tag-button tag-${tag}`} id={"button-" + tag}>{tag}</button></li>)
+          }
+        </ul>
+        <p>{data.summary}</p>
+        {
+          data.links ? (<ul class="links" aria-label="links">{
+            Object.keys(data.links).map((type) => {
+              let target = data.links && data.links[type];
+              if (!target) {
+                return <></>
+              }
+              let icon = link_icons[type];
+              let icon_element = icon ? <><i class={icon} /> &nbsp;</> : <></>;
+              return <a href={target} target="_blank">{icon_element}{target}</a>;
+            })}</ul>
+          ) : <></>
+        }
+      </li>
+    );
+  })
+}
+</ol>
+</details>
+    <div slot="filters">
+      {
+        tags_ordered.map(({ tag }) => (
+          <button
+            id={"button-" + tag}
+            class={`tag-button tag-${tag}`}
+            style={`background-color: ${
+              tag_colors[tag] ?? "var(--color-accent)"
+            };`}
+          >
+            {tag_icons[tag] ? <i class={tag_icons[tag]} /> : ""} {tag}
+          </button>
+        ))
+      }
+    </div>
+
+    <Fragment
+      set:html={generate_computing_filters(tags_ordered.map(({ tag }) => tag))}
+    />
+  </Shell>
+
+  <script src="../setup_page.ts"></script>
+</Html>
+
+<style>
+  summary {
+    color: var(--color-accent);
+    margin-top: 2em;
+    margin-bottom: 0.5em;
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    align-items: center;
+    cursor: pointer;
+
+    &::before {
+        content: "\01F782";
+        width: 0;
+        max-width: 0;
+        overflow: visible;
+        position: relative;
+        right: 2em;
+    }
+
+    &:hover,
+  &:focus,
+  &:focus-within,
+  &:active {
+      h2 {
+        text-decoration: underline solid;
+        text-decoration-thickness: 0.1em;
+        text-underline-offset: 0.1em;
+      }
+    }
+  }
+
+  [open] > summary::before {
+      content: "\01F783";
+  }
+
+  [open] > summary {
+    padding-bottom: 1em;
+  }
+
+  .timeline {
+    display: grid;
+    gap: 0.3rem;
+    grid-template-columns: repeat(auto-fill, 
+      0.5rem
+      16rem
+       0.5rem
+    );
+    grid-auto-rows: 0.05rem fit-content(1.2em) fit-content(4em) fit-content(1.5em) fit-content(1.2em) fit-content(3em) fit-content(5em) 0.05rem;
+    justify-content: center;
+  }
+
+  .timeline-item {
+    display: grid;
+    grid-column: span 3;
+    grid-row: span 8;
+
+    grid-template-columns: subgrid;
+    grid-template-rows: subgrid;
+
+    grid-template-areas: ". . . "
+    ". date ."
+    " . title ."
+    ". type ."
+    ". link ."
+    ". tags ."
+    ". content ."
+    ". . . ";
+
+    background-color: var(--color-panel-bg);
+    border-radius: 1rem;
+
+    h3 {
+      font-size: 1.1em;
+      grid-area: title;
+      display: flex;
+      flex-direction: row;
+      justify-content: center;
+      align-items: flex-start;
+      text-align: center;
+    }
+
+    h4 {
+      grid-area: type;
+      font-size: 0.7em;
+      display: flex;
+      flex-direction: row;
+      justify-content: center;
+      align-items: flex-start;
+      text-align: center;
+    }
+
+    h5 {
+      grid-area: date;
+      font-size: 0.65em;
+    }
+
+    ul {
+      grid-area: tags;
+      text-align: center;
+
+      li {
+        display: inline-block;
+        font-size: 0.6em;
+        margin: 0.1em;
+
+        button {
+          background-color: var(--color-accent);
+          padding: 0.25em;
+          border-radius: 0.5em;
+          cursor: pointer;
+        }
+      }
+    }
+
+    p {
+      grid-area: content;
+      font-size: 0.7em;
+    }
+
+    .links {
+      grid-area: link;
+      font-size: 0.6em;
+      text-align: center;
+      display: flex;
+      flex-direction: column;
+      justify-content: flex-start;
+      align-items: center;
+
+      a {
+        color: var(--off-text);
+        &:hover {
+          color: var(--color-accent);
+        }
+      }
+    }
+  }
+</style>
+
+
+
+<script>
+  import setup_page from "../setup_page";
+  setup_page();
+
+  document.addEventListener('astro:after-swap', setup_page);
+</script>

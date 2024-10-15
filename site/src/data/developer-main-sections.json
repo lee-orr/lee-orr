@@ -1,0 +1,129 @@
+[
+  {
+    "title": "Career Highlights",
+    "is_compact": true,
+    "subsections": [
+      {
+        "title": "SafeApp",
+        "description": "Developed a system for signing, verifying, encrypting & decrypting emails without storing decryption or signing keys on a central server."
+      },
+      {
+        "title": "Imbellus",
+        "description": "Created a browser-based, live visual editor for 3d interactive scenarios used in education and hiring skill assessments."
+      },
+      {
+        "description": "Architected a platform for isolating these scenarios, reducing the need to update old scenarios as our technology evolved. Built a web-component based wrapper for running these scenarios in a configurable manner."
+      },
+      {
+        "title": "Skrumble",
+        "description": "Build a proof-of-concept peer-to-peer video conferencing system supporting 18 simultaneous video clients without a media server - more than quadrupling the then-current standard limit of 3-4 clients for peer-to-peer video."
+      },
+      {
+        "description": "Architected a scalable, cloud-based back end with multi-tenancy - replacing the original on premise single tenant system. Lead back-end feature development and operations."
+      }
+    ]
+  },
+  {
+    "title": "Senior Developer (Contract)",
+    "subsections": [
+      {
+        "title": "Storyteller.ai",
+        "timespan": "Feb 2024",
+        "description": "Implementing a custom animation clip importer for the Bevy game engine."
+      },
+      {
+        "title": "Subject Matter Expert - McMaster Continuing Education",
+        "timespan": "Oct 2023 - Present",
+        "description": "Designing and writing a course on backend development for McMaster's Full-Stack Development Program."
+      },
+      {
+        "title": "Organization in Stealth Mode",
+        "timespan": "Nov 2022 - Mar 2023, July 2023",
+        "description": "Built a tool for generating a complex, interactive site using a Figma design and CSV data directly in the browser - allowing the client to easily update content without developer input. Collaborated to add features easing their workflow and improving the end-user experience on the generated site."
+      },
+      {
+        "title": "SafeApp (getsafeapp.com)",
+        "timespan": "Jul 2021 - Jun 2022",
+        "description": "Designed, architected and built a chrome extension for signing & encrypting Gmail emails, along with the back-end services on Firebase. Provided support and mentorship to enable future development by an internal team"
+      },
+      {
+        "title": "Harvard Business School",
+        "timespan": "Dec 2021 - May 2022",
+        "description": "Built a visual tool for generating input data used by the an earthquake cycle imaging system. Collaborated with the researchers to create a tool that eases their workflow, and set up infrastructure and documentation to allow them to continue maintaining it reliably."
+      },
+      {
+        "title": "Emile Technologies",
+        "timespan": "Sept 2021 - Oct 2021",
+        "description": "Migrated their chatbot from a discontinued service to Firebase, re-implementing many of it's features, while mentoring the client to allow them to continue maintenance independently."
+      }
+    ]
+  },
+  {
+    "title": "Senior Engineer",
+    "company": "Imbellus",
+    "timespan": "Feb 2019 - Dec 2020 (Employee following contract)",
+    "subsections": [
+      {
+        "description": "Built a system that allowed designers to create logic in a browser-based editor and test it locally, and automatically separate the front-end and back-end during deployment. Improved communication between Javascript & Unity. Assisted in the implementation of legacy assessments."
+      }
+    ]
+  },
+  {
+    "title": "Full Stack Developer",
+    "company": "Skrumble",
+    "timespan": "Jun 2015 - Mar 2017, Dec 2017 - Dec 2018",
+    "subsections": [
+      {
+        "description": "Created a custom CMS during downtime, removing the need for a full-time developer maintaining our website. Assisted in transitioning from hand-maintained VMs to automated LXD containers. Lead back-end feature development and operations. Developed a graph-based phone IVR system. Designed and built a cloud-based, scalable VOIP/Video Conferencing system to replace our original stack of dedicated servers."
+      }
+    ]
+  },
+  {
+    "is_compact": true,
+    "title": "Previous Experience",
+    "subsections": [
+      {
+        "title": "Theatre Technician at the George Ignatieff Theatre",
+        "company": "George Ignatieff Theatre",
+        "timespan": "Sept 2013 - Apr 2015"
+      },
+      {
+        "title": "Web Application Developer at Ontario Institute for Studies in Education",
+        "company": "Ontario Institute for Studies in Education",
+        "timespan": "Sept 2012 - Jan 2013"
+      },
+      {
+        "title": "Web and Flash Programmer at Visual3d Ltd.",
+        "company": "Visual3d Ltd.",
+        "timespan": "Jun 2009 - Jan 2010"
+      }
+    ]
+  },
+  {
+    "title": "Education & Skills",
+    "is_compact": true,
+    "subsections": [
+      {
+        "title": "B.Sc. Physics and Cognitive Science at the University of Toronto",
+        "timespan": "2015"
+      }
+    ]
+  },
+  {
+    "is_compact": true,
+    "subsections": [
+      {
+        "title": "Languages",
+        "description": "Rust, Typescript, Javascript, C#, HTML/CSS, SQL, Bash"
+      },
+      {
+        "title": "Libraries & Tools",
+        "description": "NodeJS, Docker, Git, Unity, React, Vue, Cypress, Mocha, Jest, MongoDB, Yew, Bevy, Leptos, Dioxus, Tailwind, Astro"
+      },
+      {
+        "title": "Platforms",
+        "description": "Digital Ocean, AWS, Firebase, Cloudflare, Netlify, WebAssembly, Spin, WasmCloud, Linux, Windows, Mac, GCP"
+      }
+    ]
+  }
+]

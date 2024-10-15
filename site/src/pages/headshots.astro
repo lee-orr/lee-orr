@@ -1,0 +1,59 @@
+---
+import { getCollection } from "astro:content";
+import Shell from "../components/shell.astro";
+import Html from "../components/html.astro";
+
+import { storytelling } from "../data/site-nav-data.json";
+import { generate_shape } from "./generate_shape";
+
+import {images} from "../images/headshots/headshots";
+
+const { socials, nav } = storytelling;
+---
+
+
+<Html>
+  <Shell area="storytelling" socials={socials} nav={nav}>
+    <ul>
+    {
+      images.map((img) => {
+        let shape = generate_shape();
+        let style = `clip-path: ${shape}`;
+
+        return (
+          <>
+            <a class="headshot" style={style} href={img.src}}>
+              <img src={img.src}} />
+            </a>
+          </>
+        );
+      })
+    }
+    </ul>
+  </Shell>
+
+  <style>
+
+    ul {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, 20rem);
+      justify-content: center;
+    }
+
+    @media (max-width: 700px) {
+      ul {
+        grid-template-columns: 1fr;
+      }
+    }
+
+    .headshot {
+      position: relative;
+      transition: scale 0.25s;
+    }
+
+    .headshot:hover {
+      scale: 1.05;
+      z-index: 2;
+    }
+  </style>
+</Html>

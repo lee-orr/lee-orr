@@ -1,0 +1,20 @@
+---
+const { skills } = Astro.props as {
+    skills: string[];
+};
+---
+
+<h3 class="font-bold">Special Skills</h3>
+<div class="text-xs">
+    {skills.join(", ")}
+</div>
+
+<style>
+    h3 {
+        font-size: 1.1em;
+    }
+
+.text-xs {
+    font-size: 0.9em;
+}
+</style>

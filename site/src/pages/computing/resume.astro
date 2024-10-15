@@ -1,0 +1,87 @@
+---
+import { getCollection } from "astro:content";
+import Shell from "../../components/shell.astro";
+import Html from "../../components/html.astro";
+import ResumeDisplay from "../../components/resume-display";
+
+
+import contacts from "../../data/developer-contacts.json";
+import slugify from "slugify";
+
+let content =  await Promise.all(
+  (
+    await getCollection("computing-timeline")
+  )
+    .map((v) => ({
+      ...v,
+      data: {
+        ...v.data,
+        tags: typeof v.data.tags === "string" ? v.data.tags
+            .split(/(\s|",")+/g)
+            .map((v) => v.trim())
+            .map((v) => slugify(v, { lower: true, strict: true }))
+            .filter((v) => v.length > 0) : Object.keys(v.data.tags),
+      },
+    }))
+);
+
+let resume_info = content.map(({ slug, data: {info, summary, end_date, start_date, resume_details}}) => {
+  return {
+    slug,
+    title: 'company' in info ? `${info.role} at ${info.company}` : info.project,
+    type: 'company' in info ? (info.is_contract ? 'Contract' : 'Employment') : 'Project',
+    summary,
+    start_date,
+    end_date,
+    resume_details
+  } 
+})
+
+
+resume_info.sort((a,b) => {
+  if (a.type === 'Project' && b.type !== 'Project') {
+    return 1;
+  }
+  if (b.type === 'Project' && a.type !== 'Project') {
+    return -1;
+  }
+  let a_date = a.end_date || a.start_date;
+  let b_date = b.end_date || b.start_date;
+  if (!a.end_date && b.end_date) { return -1; }
+  if (!b.end_date && a.end_date) { return 1; }
+  return a_date > b_date ? -1 : 1;
+} 
+)
+
+const tags: { [key: string]: number } = {};
+
+for (let item of content) {
+  for (let tag of item.data.tags) {
+    let t = tag.trim();
+    if (tags[t]) {
+      tags[t]++;
+    } else {
+      tags[t] = 1;
+    }
+  }
+}
+
+
+const tags_ordered = Object.keys(tags).map((v) => ({
+  tag: v,
+  count: tags[v] ?? 0,
+}));
+tags_ordered.sort((a, b) => b.count - a.count);
+
+---
+
+<Html>
+  <ResumeDisplay client:only contacts={contacts} resume_info={resume_info} title="Software Developer / Architect" name="Lee-Orr Orbach" tags={tags} education={[{institution: "University of Toronto", certificate: "BSc. Physics and Cognitive Science"}]}/>
+</Html>
+
+<style>
+  :root, body {
+    --color-main-text: black;
+
+  }
+</style>

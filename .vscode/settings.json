@@ -1,0 +1,9 @@
+{
+  "rust-analyzer.cargo.extraArgs": [
+    " -Zscript"
+  ],
+  "rust-analyzer.linkedProjects": [
+    "scripts/alias-files.rs",
+    "scripts/legendkeeper-to-md.rs"
+  ]
+}

@@ -1,0 +1,39 @@
+:root {
+  --light-blue: #4f8bad;
+  --light-pink: #fccbcb;
+  --light-green: #dee3e2;
+  --dark-green: #4f7969;
+  --dark-pink: #9c4141;
+  --dark-blue: #243640;
+  --main-text: white;
+  --dark-text: black;
+
+  --category-1: var(--light-blue);
+  --category-2: color-mix(in lch, var(--dark-pink) 90%, var(--dark-blue));
+  --category-3: color-mix(in lch, var(--light-green) 80%, black);
+  --category-4: var(--dark-green);
+  --category-5: color-mix(in lch, var(--light-blue) 30%, var(--dark-pink));
+  --category-6: color-mix(in lch, var(--light-green) 20%, var(--dark-pink));
+  --category-7: color-mix(in lch, var(--light-blue) 70%, var(--dark-blue));
+}
+
+.storytelling,
+:root {
+  --color-main-bg: var(--light-pink);
+  --color-main-text: var(--main-text);
+  --color-panel-bg: var(--dark-pink);
+  --color-hover-text: var(--light-pink);
+  --color-accent: var(--light-blue);
+  --color-accent-hover: var(--dark-green);
+  --off-text: var(--light-green);
+}
+
+.computing {
+  --color-main-bg: var(--light-green);
+  --color-main-text: var(--main-text);
+  --color-panel-bg: var(--dark-blue);
+  --color-hover-text: var(--light-blue);
+  --color-accent: var(--dark-green);
+  --color-accent-hover: var(--dark-pink);
+  --off-text: var(--light-blue);
+}

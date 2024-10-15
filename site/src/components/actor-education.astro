@@ -1,0 +1,58 @@
+---
+const { education } = Astro.props as {
+    education: Array<{
+        institution?: string;
+        classes: [
+            {
+                teachers: string[];
+                course: string;
+            }
+        ];
+    }>;
+};
+---
+
+<h3 class="font-bold  ">Education</h3>
+<div class="table flex flex-col gap-1  text-xs">
+    <div
+            class="col-span-1  header col-start-2"
+        >
+            Subject
+        </div><div class="col-span-1 header col-start-3">Teachers</div>
+    {
+        education.map(({ institution, classes }) => (
+            <>
+                {institution ? 
+                <div class="institution">{institution}</div>
+                : <></> }
+                {classes.map(({teachers, course}) => (
+                <div class="col-span-1 col-start-2 flex flex-col">{course}</div>
+                <div class="col-span-3 col-start-3">{teachers.join(", ")}</div>
+                ))}
+            </>
+        ))
+    }
+</div>
+
+<style>
+    h3 {
+        font-size: 1.1em;
+    }
+
+ .table {
+    display: grid;
+    grid-template-columns: 1fr 3fr;
+    grid-auto-rows: auto;
+
+    .header {
+        font-weight: 900;
+    }
+
+    .institution {
+        padding-top: 0.2em;
+        grid-column: span 2;
+        font-weight: 900;
+        border-bottom: 1px rgba(0,0,0,0.2) solid;
+    }
+ }
+</style>

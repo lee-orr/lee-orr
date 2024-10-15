@@ -1,0 +1,197 @@
+---
+import { getCollection } from "astro:content";
+import slugify from "slugify";
+import Shell from "../../components/shell.astro";
+import Html from "../../components/html.astro";
+import { computing, link_types } from "../../data/site-nav-data.json";
+import { generate_blog_filters,  generate_computing_filters } from "../generate_filters";
+const { socials, nav } = computing;
+const link_icons: { [key: string]: string | undefined } = link_types;
+slugify.extend({ "/": "-", "\\": "-" });
+
+const timeline = await Promise.all(
+    ((await getCollection("blog")) ?? [])
+        .filter(({ data }) => data.type != "storytelling")
+        .map((v) => ({
+            ...v,
+            data: {
+                ...v.data,
+                tags: typeof v.data.tags === "string" ? v.data.tags
+                    .split(/(\s|",")+/g)
+                    .map((v) => v.trim())
+                    .map((v) => slugify(v, { lower: true, strict: true }))
+                    .filter((v) => v.length > 0) : Object.keys(v.data.tags),
+            },
+        })),
+);
+
+timeline.sort((a, b) => {
+    return b.data.date > a.data.date ? 1 : -1;
+});
+
+const tags: { [key: string]: number } = {};
+
+for (let item of timeline) {
+  for (let tag of item.data.tags) {
+    let t = tag.trim();
+    if (tags[t]) {
+      tags[t]++;
+    } else {
+      tags[t] = 1;
+    }
+  }
+}
+
+
+const tags_ordered = Object.keys(tags).map((v) => ({
+  tag: v,
+  count: tags[v] ?? 0,
+}));
+tags_ordered.sort((a, b) => b.count - a.count);
+
+const tag_icons: { [key: string]: string } = {};
+const tag_colors: { [key: string]: string } = {};
+---
+
+<Html>
+    <Shell
+        area="computing"
+        socials={socials}
+        nav={nav}
+        filter_title="Filter by Tags"
+    >
+        <ol class="blog-list">
+        {
+            timeline.map(({slug, data}) => {
+                let class_string = `blog-item ${data.tags
+                    .map((v) => v.trim())
+                    .map((v) => `tag-${v}`)
+                    .join(" ")}`;
+                
+                let title = data.title;
+                let summary = data.summary;
+                let tags = data.tags;
+                let date = data.date;
+
+                return (
+                    <li class={class_string}>
+                        <h3><a href={`/computing/blog/${slug}`}>{title}</a></h3>
+                        <h4><time datetime={date.toDateString()}>{date.toLocaleDateString()}</time></h4>
+                        <ul>{
+                            tags.map((tag) =><li><button 
+            class={`tag-button tag-${tag}`} id={"button-" + tag}>{tag}</button></li>)
+                        }</ul>
+                        <p>{summary}</p>
+                    </li>
+                )
+            })
+        }
+        </ol>
+        <div slot="filters">
+          {
+            tags_ordered.map(({ tag }) => (
+              <button
+                id={"button-" + tag}
+                class={`tag-button tag-${tag}`}
+                style={`background-color: ${
+                  tag_colors[tag] ?? "var(--color-accent)"
+                };`}
+              >
+                {tag_icons[tag] ? <i class={tag_icons[tag]} /> : ""} {tag}
+              </button>
+            ))
+          }
+        </div>
+    
+        <Fragment
+          set:html={generate_blog_filters(tags_ordered.map(({ tag }) => tag))}
+        />
+    </Shell>
+    <script src="../../setup_page.ts"></script>
+</Html>
+
+<style>
+    
+  .blog-list {
+    display: grid;
+    gap: 0.3rem;
+    grid-template-columns: repeat(auto-fill, 
+      0.5rem
+      16rem
+       0.5rem
+    );
+    grid-auto-rows: 0.05rem fit-content(1.2em) fit-content(4em) fit-content(3em) fit-content(5em) 0.05rem;
+    justify-content: center;
+  }
+
+  .blog-item {
+    display: grid;
+    grid-column: span 3;
+    grid-row: span 6;
+
+    background-color: var(--color-panel-bg);
+    border-radius: 1rem;
+    
+
+    grid-template-columns: subgrid;
+    grid-template-rows: subgrid;
+
+    
+    grid-template-areas: ". . . "
+    ". date ."
+    " . title ."
+    ". tags ."
+    ". content ."
+    ". . . ";
+    
+    h3 {
+      font-size: 1.1em;
+      grid-area: title;
+      display: flex;
+      flex-direction: row;
+      justify-content: center;
+      align-items: flex-start;
+      text-align: center;
+    }
+
+    h4 {
+      grid-area: date;
+      font-size: 0.65em;
+    }
+
+    ul {
+      grid-area: tags;
+      text-align: center;
+
+      li {
+        display: inline-block;
+        font-size: 0.6em;
+        margin: 0.1em;
+
+        button {
+          background-color: var(--color-accent);
+          padding: 0.25em;
+          border-radius: 0.5em;
+          cursor: pointer;
+        }
+      }
+    }
+
+    
+
+    p {
+      grid-area: content;
+      font-size: 0.7em;
+    }
+  }
+
+</style>
+
+
+
+<script>
+    import setup_page from "../../setup_page";
+    setup_page();
+  
+    document.addEventListener('astro:after-swap', setup_page);
+  </script>

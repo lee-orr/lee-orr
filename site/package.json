@@ -1,0 +1,36 @@
+{
+  "name": "resumes",
+  "type": "module",
+  "version": "0.0.1",
+  "scripts": {
+    "dev": "astro dev --host 0.0.0.0",
+    "start": "astro dev",
+    "build": "astro build",
+    "preview": "astro preview",
+    "astro": "astro",
+    "fmt": "prettier --write ."
+  },
+  "dependencies": {
+    "@astrojs/check": "^0.5.10",
+    "@astrojs/solid-js": "^4",
+    "@astrojs/ts-plugin": "^1",
+    "astro": "4",
+    "astro-compress": "2",
+    "astro-google-fonts-optimizer": "^0.2.2",
+    "autoprefixer": "10",
+    "cssnano": "6",
+    "pdf-lib": "^1",
+    "playwright": "1",
+    "postcss": "8",
+    "postcss-nested": "6",
+    "prettier": "3",
+    "prettier-plugin-astro": "0.12",
+    "qs": "^6.12.0",
+    "slugify": "1",
+    "solid-js": "^1",
+    "typescript": "^5.4.5"
+  },
+  "devDependencies": {
+    "@types/qs": "^6.9.14"
+  }
+}

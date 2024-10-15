@@ -1,0 +1,190 @@
+---
+import { getCollection } from "astro:content";
+import Shell from "../components/shell.astro";
+
+import Html from "../components/html.astro";
+import { storytelling } from "../data/site-nav-data.json";
+import { generate_shape } from "./generate_shape";
+const { socials, nav } = storytelling;
+
+const demos: {
+  title: string;
+  audio?: string;
+  icon: string;
+  color: string;
+  shape: string;
+  links?: { [key: string]: string };
+}[] = [
+  {
+    title: "Animation Voice Demo",
+    audio: "demo_files/Lee-Orr Animation Demo.mp3",
+    icon: "icofont-video-alt",
+    color: "var(--category-7)",
+    shape: generate_shape(),
+  },
+  {
+    title: "Acting Resume",
+    links: {
+      actor: "Resume With Headshot",
+      actor_without_headshot: "Resume Without Headshot",
+    },
+    icon: "icofont-video",
+    color: "var(--category-5)",
+    shape: generate_shape(),
+  },
+  {
+    title: "Commercial Voice Demo",
+    audio: "demo_files/Lee-Orr Commercial Demo.mp3",
+    icon: "icofont-radio-mic",
+    color: "var(--category-1)",
+    shape: generate_shape(),
+  },
+  {
+    title: "Headshots",
+    links: {
+      headshots: "my Headshots",
+    },
+    icon: "icofont-photo",
+    color: "rgb(160, 5, 108)",
+    shape: generate_shape(),
+  },
+];
+---
+
+
+<Html>
+  <Shell area="storytelling" socials={socials} nav={nav}>
+    <ul>
+    {
+      demos.map(({ title, audio, icon, color, shape, links }) => {
+        let style = `clip-path: ${shape};`;
+        return (
+          <li style={style}>
+            <div
+              class="bg-overlay"
+            />
+            <h2>{title}</ht>
+            <i class={icon} />
+            <div class="content">
+              {audio ? (
+                <audio
+                  controls
+                >
+                  <source src={audio} type="audio/mpeg" />
+                </audio>
+              ) : (
+                ""
+              )}
+              {links
+                ? Object.keys(links).map((link) => (
+                    <a
+                      class="fake-audio"
+                      target="_blank"
+                      href={link}
+                    >
+                      <span class="fake-audio-padding">
+                      View {links[link]}
+                      </span>
+                    </a>
+                  ))
+                : ""}
+            </div>
+          </li>
+        );
+      })
+    }
+    </ul>
+  </Shell>
+</Html>
+
+
+<style>
+  ul {
+    display: grid;
+    justify-content: center;
+    grid-template-columns: repeat(auto-fit, [card-start] 0.5rem  [title-start content-start] 20rem  [title-end icon-start] 2rem [icon-end content-end] 0.5rem [card-end]);
+    grid-auto-rows:  [card-start] 0.5rem  [title-start icon-start] 2rem  [title-end icon-end content-start] 3rem  [content-end]0.5rem  [card-end];
+    gap: 2rem;
+  }
+
+  @media (max-width: 700px) {
+    ul {
+    grid-auto-rows:  [card-start] 0.5rem  [title-start icon-start]  fit-content(1rem) [title-end icon-end content-start] fit-content(2rem) [content-end] 0.5rem [card-end];
+    grid-template-columns: [card-start] 0.5rem [title-start content-start] 1fr [title-end icon-start]  2rem  [icon-end content-end] 0.5rem [card-end];
+    }
+  }
+
+
+
+  li {
+    display: grid;
+    grid-template-columns: subgrid;
+    grid-template-rows: subgrid;
+    grid-row: span 4;
+    grid-column: span 4;
+    position: relative;
+    overflow: hidden;
+  }
+
+  
+  .bg-overlay {
+    position: absolute;
+    left: -100%;
+    right: -100%;
+    top: -100%;
+    bottom: -100%;
+    background-color: var(--color-panel-bg);
+  }
+
+  h2 {
+    grid-column: 2 / span 1;
+    grid-row: 2 /span 1;
+    font-size: 1.1em;
+  }
+
+  .content {
+    grid-column: 2 / span 2;
+    grid-row: 3 / span 1;
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-start;
+    align-items: stretch;
+    gap: 0.5rem;
+  }
+
+  i {
+    grid-column: 3 / span 1;
+    grid-row: 2 / span 1;
+    position:relative;
+  }
+
+
+  .fake-audio {
+    position: relative;
+    background-color: #17313A;
+    min-height: 2rem;
+    flex-grow: 0;
+    flex-shrink: 0;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    border: 1px solid black;
+  }
+
+  audio {
+    min-height: 2rem;
+    flex-grow: 0;
+    flex-shrink: 0;
+    width: 100%;
+  }
+
+  .fake-audio-padding {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+  }
+  
+</style>

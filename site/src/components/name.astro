@@ -1,0 +1,71 @@
+---
+const pronouns = "they/them"
+const { title, full_name, contacts } = Astro.props as { title: string, contacts: Array<{ type: string, value: string, icon?: string}>, full_name?: boolean};
+
+
+const name = full_name ? "Lee-Orr Orbach" : "Lee-Orr";
+---
+<div class="name">
+<h1>{name} <span class="pronouns">({pronouns})</span></h1>
+<h2>{title}</h2>
+<aside>{contacts.map(({type, value, icon}) => {
+    if (icon) {
+        return (<span class="contact"><i class={icon}/><span>{value}</span></span>)
+    } else {
+        return (<span class="contact"><h4 class="">{type}</h4><span class="xs">{value}</span></span>)
+    }
+})}</aside>
+</div>
+
+<style>
+
+    .contact {
+        display: flex;
+        flex-direction: row;
+        gap: 0.2em;
+    }
+    i {
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+    }
+    .name {
+        display: none;
+        flex-direction: column;
+        justify-content: flex-start;
+        align-items: center;
+        text-align: center;
+    }
+
+    @media print {
+        .name {
+            display: flex;
+        }
+    }
+
+    .pronouns {
+        font-size: 0.5em;
+        font-weight: 500;
+    }
+
+    h1 {
+        font-size: 1.5em;
+        font-weight: 900;
+    }
+
+    h2 {
+        font-size: 1.2em;
+        font-weight: 900;
+    }
+
+    aside {
+        display: flex;
+        flex-direction: row;
+        justify-content: center;
+        align-items: flex-start;
+        flex-wrap: wrap;
+        gap: 1.5em;
+        font-weight: 100;
+    }
+
+</style>

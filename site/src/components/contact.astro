@@ -1,0 +1,109 @@
+---
+import { generate_shape } from "../pages/generate_shape";
+const { area, contact_method_title, contact_method_link } = Astro.props as {
+  area: "storytelling" | "computing";
+  contact_method_title?: string;
+  contact_method_link?: string;
+};
+
+let shape = "clip-path: boundary-box;";
+if (area === "storytelling") {
+  shape = `clip-path: ${generate_shape()}`;
+}
+---
+
+  <div
+    class="page-root"
+    style={shape}
+  >
+    <div
+      class="bg-panel"
+    >
+    </div>
+    <h2>Contact Me</h2>
+
+    <p>The easiest way to reach out to me for the first time is through <a href={contact_method_link} target="_blank">{contact_method_title}</a>.</p>
+  </div>
+
+  <style>
+    .page-root {
+      display: grid;
+      grid-template-columns: max-content 3fr;
+      grid-auto-rows: auto;
+
+      gap: 1rem;
+
+      min-width: 60%;
+
+      align-self: center;
+      justify-self: center;
+      position: relative;
+      padding: 2rem;
+      overflow:hidden;
+    }
+
+    @media (max-width: 700px) {
+      .page-root  {
+        grid-template-columns: 1fr;
+        min-width: unset;
+        flex-grow: 0;
+        flex-shrink: 0;
+      }
+
+      .page-root > div {
+        grid-column: 1 / span 1;
+        grid-row: span 2;
+        grid-template-rows: subgrid [label-start] [label-end field-start] [field-end];
+        grid-template-columns: subgrid [label-start field-start] [label-end field-end];
+      }
+
+      .page-root > div > label {
+        text-align: start;
+      }
+    }
+
+    .page-root  div {
+      display: grid;
+      grid-column: 1 / span 2;
+      grid-template-columns: subgrid [label-start] [label-end field-start] [field-end];
+      grid-template-rows: subgrid [label-start field-start] [label-end field-end];
+    }
+
+    label {
+      grid-area: label;
+      text-align: end;
+    }
+
+    input, textarea, button {
+      grid-area: field;
+      border-radius: 0.25rem;
+      border: solid var(--color-main-text) 2px;
+    }
+
+    input, textarea {
+      background-color: var(--color-main-text);
+      color: var(--dark-text);
+    }
+
+    button {
+      background-color: var(--color-accent);
+    }
+
+    button:hover, button:active, button:focus {
+      background-color: var(--color-accent-hover);
+      cursor: pointer;
+    }
+
+    .page-root > .bg-panel {
+      display: block;
+      grid-row: 1;
+      grid-column: 1 / span 2;
+      background: var(--color-panel-bg);
+      position: absolute;
+      top: -100%;
+      bottom: -100%;
+      left: -100%;
+      right: -100%;
+      z-index: -1;
+    }
+  </style>

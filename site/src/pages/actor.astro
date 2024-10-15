@@ -1,0 +1,88 @@
+---
+import Name from "../components/name.astro";
+import contacts from "../data/actor-contacts.json";
+import sections_in from "../data/actor-main-sections.json";
+import ActorSection from "../components/actor-section.astro";
+import { skills, education } from "../data/actor-details.json";
+import ActorSkills from "../components/actor-skills.astro";
+import ActorEducation from "../components/actor-education.astro";
+import { storytelling, link_types } from "../data/site-nav-data.json";
+import Html from "../components/html.astro";
+import Shell from "../components/shell.astro";
+const link_icons: {[key: string]: string | undefined} = link_types;
+import headshot from "../images/headshots/Headshot - Friendly.png";
+
+const { socials, nav } = storytelling;
+
+const sections = sections_in as Array<{
+  title: string;
+  subsections: Array<{
+    title: string;
+    company_info: string;
+    role: string;
+  }>;
+}>;
+---
+
+<Html>
+  <Shell area="storytelling" socials={socials} nav={nav}>
+    <img style="w-full h-full" src={headshot.src} />
+    <div class="gap"></div>
+    <div class="resume">
+      <Name title="Actor, Writer, Composer" contacts={contacts} />
+      {
+        sections.map(({ title, subsections }) => (
+          <ActorSection title={title} subsections={subsections} />
+        ))
+      }
+      <ActorEducation education={education} />
+      <ActorSkills skills={skills} />
+    </div>
+  </Shell>
+</Html>
+
+
+<style is:global>
+  .resume {
+    display: flex;
+    flex-direction: column;
+    justify-content: stretch;
+    align-items: stretch;
+    gap: 1em;
+  }
+
+  .gap {
+    page-break-after: always;
+  }
+
+  .resume > * {
+    background-color: var(--color-panel-bg);
+    padding: 1em;
+  }
+  
+  @media print {
+    @page {
+      size: letter;
+    }
+
+    body {
+      font-size: 12px;
+      color: black;
+      background: white;
+      padding: 2em;
+    }
+    
+    .resume {
+      gap: 0em;
+    }
+
+    body > div.content[data-astro-source-file] {
+      display: block;
+      background-color: orange;
+    }
+
+    .resume > * {
+      background-color: white !important;
+    }
+  }
+</style>

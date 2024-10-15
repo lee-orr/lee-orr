@@ -1,0 +1,3 @@
+[workspace]
+
+members = ["scripts/legendkeeper-to-md.rs", "scripts/alias-files.rs"]

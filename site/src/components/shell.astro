@@ -1,0 +1,323 @@
+---
+import { generate_shape } from "../pages/generate_shape";
+import AnimatedBackdrop from "./animated-backdrop.astro";
+
+const { area, socials, nav, filter_title } = Astro.props as {
+  area: "storytelling" | "computing";
+  socials: Array<{ type: string; value: string; icon: string }>;
+  filter_title?: string,
+  nav: Array<{
+    name: string;
+    url: string;
+    new_tab?: boolean;
+  }>;
+};
+
+function process_nav(
+  input: { name: string; url: string; new_tab?: boolean }[]
+): { name: string; url: string; new_tab?: boolean; is_active: boolean }[] {
+  let path = Astro.url.pathname.substring(1);
+  return input.map((v) => {
+    return { ...v, is_active: path == v.url };
+  });
+}
+
+let filters_text = filter_title ?? "Filters";
+
+let filters_shape = "clip-path: boundary-box;";
+if (area === "storytelling") {
+  filters_shape = `clip-path: ${generate_shape()}`;
+}
+
+let header_shape = "clip-path: boundary-box;";
+if (area === "storytelling") {
+  header_shape = `clip-path: ${generate_shape()}`;
+}
+
+let navigation = process_nav(nav);
+---
+
+<body class={area}>
+    <header class="">
+      <span><a class="lg" href="/"><h1>Lee-Orr</h1></a></span>
+    </header>
+
+    <div class="header-background">
+      <div style={header_shape} ></div>
+    </div>
+
+    <nav class="">
+      <span aria-label="external links">
+      {
+        socials.map(({ type, value, icon }) => (
+          <a
+            class=""
+            target="_blank"
+            href={value}
+            aria-label={type}
+          >
+            <i class={icon} />
+          </a>
+        ))
+      }</span>
+    <span class="" aria-label="internal pages">
+      {
+        navigation.map(({ is_active, name, url, new_tab }) => (
+          <a
+            class={
+              (is_active
+                ? ""
+                : "") + ""
+            }
+            target={new_tab ? "_blank" : ""}
+            href={url}
+          >
+            {name}
+          </a>
+        ))
+      }
+    </span>
+
+  </nav>
+  
+{
+  Astro.slots.has("filters") ? (
+  <details class="filters">
+    <summary class="">
+      <h2>{filters_text}</h2>
+    </summary>
+    <slot name="filters" />
+  </details>
+  ) : <></>
+}
+
+  <div class="content">
+    <slot />
+  </div>
+</body>
+
+<style>
+  body {
+    width: 100dvw;
+    height: 100dvh;
+    max-height: 100dvh;
+    max-width: 100dvw;
+    background-color: var(--color-main-bg);
+    display: grid;
+    gap: 0.3em;
+    grid-template-columns: [page-start header-start] 1em
+      [socials-start nav-start filter-start] 1fr [filter-end content-start ] repeat(2, 1fr)
+      [socials-end title-start] max-content  
+      [title-end links-start ]  repeat(2, 1fr)
+      1fr
+      [links-end content-end nav-end] 1em
+      [page-end header-end];
+    grid-template-rows: [page-start header-start] 1rem
+      [title-start] 5em
+      [nav-start title-end socials-start links-start] 1.5rem
+      [nav-end socials-end links-end] 1rem
+      [header-end] 2em
+      [filter-start content-start ]
+      fit-content(3em)
+      [filter-end] auto
+      [content-end page-end];
+
+    &:not(:has(.filters)) {
+      
+    grid-template-columns: [page-start header-start] 1em
+      [socials-start nav-start content-start ] repeat(2, 1fr)
+      [socials-end title-start] max-content  
+      [title-end links-start ]  repeat(2, 1fr)
+      1fr
+      [links-end content-end nav-end] 1em
+      [page-end header-end];
+    grid-template-rows: [page-start header-start] 1rem
+      [title-start] 5em
+      [nav-start title-end socials-start links-start] 1.5rem
+      [nav-end socials-end links-end] 1rem
+      [header-end] 2em
+      [content-start ]
+      fit-content(3em)
+      [content-end page-end];
+    }
+  }
+
+  header {
+    display: grid;
+    grid-template-columns: subgrid;
+    grid-template-rows: subgrid;
+    grid-area: header;
+
+    span {
+      grid-area: title;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      align-items: center;
+    }
+  }
+  
+  .header-background {
+    position:relative;
+    overflow:hidden;
+    grid-area: header;
+    pointer-events: none;
+    z-index: -10;
+  }
+
+  .header-background > div {
+    background-color: var(--color-panel-bg);
+    position: absolute;
+
+    top: -20rem;
+    left: -20rem;
+    right: -20rem;
+    bottom: 0rem;
+
+    z-index: -1;
+  }
+
+  nav {
+    display: grid;
+    grid-template-columns: subgrid;
+    grid-template-rows: subgrid;
+    grid-area: nav;
+    pointer-events: none;
+
+    & span {
+      display: flex;
+      flex-direction: row;
+      align-items: center;
+      gap: 1rem;
+      padding: 1rem;
+      pointer-events: all;
+    }
+    
+    & span:first-of-type {
+      grid-area: socials;
+      justify-content: flex-start;
+    }
+
+    & span:last-of-type {
+      grid-area: links;
+      justify-content: flex-end;
+    }
+  }
+
+  .logo {
+    aspect-ratio: 1 / 1;
+    height: 2rem;
+    background: url(website-logo.png); 
+    background-size: contain;
+    background-position: center;
+    font-size: 0;
+  }
+
+  .filters {
+    /*background-color: var(--color-panel-bg);*/
+    border-radius: 1rem;
+    grid-area: filter;
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-start;
+    align-items: center;
+    padding: 1rem;
+
+    & > summary {
+      display: flex;
+      flex-direction: row;
+      justify-content: center;
+      align-items: center;
+      height: 1.5em;
+      color: var(--color-accent);
+
+      &::before {
+        content: "\01F782";
+        padding-right: 1em;
+        min-width: 2em;
+      }
+    }
+
+    &[open] > summary::before {
+      content: "\01F783";
+    }
+
+    &[open] > summary {
+      margin-bottom: 1em;
+    }
+
+    & > summary:hover {
+
+      h2 {
+      text-decoration: underline 0.3em solid;
+      text-underline-offset: 0.5em;
+      }
+      
+      cursor: pointer;
+    }
+
+    &>:global(div) {
+      padding-top: 1rem;
+      display: flex;
+      flex-wrap: wrap;
+      flex-direction: row;
+      justify-content: space-evenly;
+      align-items: center;
+      gap: 0.25em;
+
+      &>:global(button) {
+        padding: 0.25em;
+        border-radius: 0.5rem;
+        cursor: pointer;
+      }
+
+      &>:global(button:hover) {
+        filter: brightness(130%);
+      }
+    }
+  }
+
+  .content {
+    grid-area: content;
+    display: flex;
+    flex-direction: column;
+    align-items: stretch;
+    justify-content: flex-start;
+  }
+
+  @media (max-width: 700px) {
+    body {
+      grid-template-rows: [page-start header-start socials-start nav-start] 3em
+      [socials-end title-start] 3em
+      [title-end links-start] fit-content(3em)
+      [links-end nav-end header-end filter-start] min-content
+      [filter-end content-start] auto
+      [content-end page-end];
+
+      grid-template-columns: [page-start header-start] 0.5em
+      [socials-start nav-start links-start title-start filter-start content-start] 1fr
+      [socials-end nav-end links-end title-end filter-end content-end] 0.5em [page-end header-end];
+    }
+
+    nav span:nth-child(n) {
+      justify-content: space-between;
+      padding: 1rem;
+      text-align: center;
+    }
+  }
+
+  @media print {
+    body {
+      grid-template-rows: [content-start] auto [content-end];
+      grid-template-columns: [content-start] auto [content-end];
+    }
+
+    body > * {
+      display: none;
+    }
+
+    body > *.content {
+      display: flex;
+    }
+  }
+</style>

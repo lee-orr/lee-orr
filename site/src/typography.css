@@ -1,0 +1,118 @@
+:root {
+  color: var(--color-main-text);
+
+  font-family: "Fira Sans Condensed", sans-serif;
+  font-size: 1.3em;
+  
+  --header-font: "Fira Sans Condensed", sans-serif;
+  --header-weight: light;
+  --header-orientation: italic;
+}
+
+.storytelling {
+  --header-font: "Merienda", cursive;
+  --header-weight: 200;
+
+  --header-orientation: normal;
+}
+
+.computing {
+  --header-font: "IBM Plex Mono", monospace;
+  --header-weight: 500;
+  --header-orientation: normal;
+}
+
+h1,
+h2,
+h3,
+h4,
+h5,
+h6 {
+  font-family: var(--header-font);
+  font-weight: var(--header-weight);
+  font-style: var(--header-orientation);
+  filter: drop-shadow(-0.03em 0.04em black);
+}
+
+@media print {
+  h1,
+h2,
+h3,
+h4,
+h5,
+h6 {
+  filter: initial;
+}
+}
+
+.xl {
+  font-size: 10em;
+}
+
+.lg {
+  font-size: 4em;
+}
+
+a {
+  color: var(--color-main-text);
+  text-decoration: none;
+  &:hover,
+  &:focus,
+  &:focus-within,
+  &:active {
+    text-decoration: underline solid;
+    text-decoration-thickness: 0.1em;
+    text-underline-offset: 0.1em;
+  }
+}
+
+@media (max-width: 700px) {
+  .xl {
+    font-size: 4em;
+  }
+
+  .lg {
+    font-size: 2em;
+  }
+}
+
+.content {
+  a {
+    font-weight: bold;
+    text-decoration: underline solid;
+
+    &::after {
+      content: '🔗';
+      font-size: 0.5em;
+      display: inline-block;
+      margin-left: 0.25em;
+    }
+
+    &:hover {
+      color: var(--color-accent-hover);
+    }
+  }
+
+  em {
+    font-style: italic;
+  }
+
+  b {
+    font-weight: bold;
+  }
+
+  h1 {
+    font-size: 1.5em;
+    font-weight: bold;    
+  }
+
+  h2 {
+    font-size: 1.2em;
+    font-weight: bold;
+  }
+
+  h3 {
+    font-size: 1em;
+    font-weight: bold;
+  }
+}

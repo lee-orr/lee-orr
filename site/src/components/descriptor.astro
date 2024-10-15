@@ -1,0 +1,14 @@
+---
+const { content } = Astro.props as { 
+    content: string
+};
+---
+<div class="descriptor">
+    {content}
+</div>
+
+<style>
+    div.descriptor {
+        padding-top: 0em;
+    }
+</style>

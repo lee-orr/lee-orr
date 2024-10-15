@@ -1,0 +1,4 @@
+FROM node:21-bookworm
+
+EXPOSE 4321
+EXPOSE 3000

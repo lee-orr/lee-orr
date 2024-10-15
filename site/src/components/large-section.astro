@@ -1,0 +1,65 @@
+---
+import BulletSection from "./bullet-section.astro";
+import SmallSection from "./small-section.astro";
+
+const { title, timespan, company, subsections, is_compact } = Astro.props as { 
+    title: string,
+    timespan?: string,
+    company?: string,
+    is_compact?: boolean,
+    subsections: Array<{ title?: string, timespan?: string, description: string}>
+};
+---
+<div class="large-section">
+    <h3>{title}</h3>
+{ is_compact ? (
+    <>
+        <h4>{company ? company : ""}</h4>
+        {timespan ? (<h4 class="timespan">{timespan}</h4>) : (<></>)}
+        {
+            subsections.map(({title, timespan, description}) => (<BulletSection title={title} timespan={timespan} description={description}/>))
+        }
+    </>
+) : (
+    <>
+        <h4>{company ? company : ""}</h4>
+        {timespan ? (<h4 class="timespan">{timespan}</h4>) : (<></>)}
+        {
+            subsections.map(({title, timespan, description}) => (<SmallSection title={title} timespan={timespan} description={description}/>))
+        }
+    </>
+)}
+</div>
+
+<style>
+    .large-section {
+        display: grid;
+        grid-auto-rows: min-content;
+        grid-template-columns: auto 1fr;
+        gap: 0;
+    }
+    h3 {
+        font-weight: 900;
+        text-decoration: underline;
+        font-size: 1em;
+        grid-column: 1 /span 2;
+    }
+    h4 {
+        font-size: 1em;
+        font-weight: 900;
+        display: flex;
+        flex-direction: row;
+        gap: 1em;
+
+        grid-column: 1;
+    }
+
+    h4.timespan {
+        grid-column: 2;
+        flex-direction: row-reverse;
+    }
+    div {
+        font-size: 1em;
+        grid-column: 1 /span 2;
+    }
+</style>
