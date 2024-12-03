@@ -274,7 +274,7 @@ const personal = timeline.filter((a) => "project" in a.data.info && !("open_sour
     cursor: pointer;
 
     &::before {
-        content: "\01F782";
+        content: ">";
         width: 0;
         max-width: 0;
         overflow: visible;
@@ -295,7 +295,7 @@ const personal = timeline.filter((a) => "project" in a.data.info && !("open_sour
   }
 
   [open] > summary::before {
-      content: "\01F783";
+      content: "<";
   }
 
   [open] > summary {

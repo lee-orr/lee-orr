@@ -232,14 +232,14 @@ let navigation = process_nav(nav);
       color: var(--color-accent);
 
       &::before {
-        content: "\01F782";
+        content: ">";
         padding-right: 1em;
         min-width: 2em;
       }
     }
 
     &[open] > summary::before {
-      content: "\01F783";
+      content: "<";
     }
 
     &[open] > summary {
