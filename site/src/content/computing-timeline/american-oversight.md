@@ -1,11 +1,11 @@
 ---
 info:
-  company: Stealth (3)
+  company: American Oversight
   role: Contract Engineer
   is_contract: true
 summary: Build an interactive map for filtering & visualizing a collection of profiles 
 start_date: 2024-08-01
-end_date: 2024-11-15
+end_date: 2024-12-03
 tags: Typescript DevOps Wordpress React CI/CD HTML CSS dev-containers front-end Airtable d3 GeoJSON SVG
 resume_details:
   airtable: Set up an Airtable database and a workflow for deploying the data into a static site
@@ -26,4 +26,4 @@ Once that was complete, the work centered around a few elements:
 
 **The search and filter system**: The map includes tools for filtering & searching through both people & locatons. It required the capacity to adjust the order and grouping of results based on the current selection in the map, hadling of fuzzy search results separately from exact search results, and the ability for the client to define a variety of filters in a hierarchy.
 
-**Design**: the client did not have access to a UI or UX designer for this project, so it was my responsibility to design the map to fit in with the rest of their website.
+**Design**: the client did not have access to a UI or UX designer for this project, so it was my responsibility to design the map to fit in with the rest of their website. The design was responsive, scaling smoothly from desktop down to mobile devices.

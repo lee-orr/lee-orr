@@ -13,7 +13,7 @@ resume_details: {}
 This project involved the creation of a site containing two distinct sections:
 
 - A set of pages with complex layout requirements that need to be easily editable by the client
-- A collection of profiles, that can be filtered by a set of tags, that have a standardized header alongside a potentially complex body
+- A collection of articles, that can be filtered by a set of tags, that have a standardized header alongside a potentially complex body
 
 The project was built on top of Astro, using the FrontMatter CMS extension to enable easy editing of the content as markdown files. This allowed the client to use GitHub Codespaces to edit the content, and removed the need for a custom CMS.
 
