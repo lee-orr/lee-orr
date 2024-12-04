@@ -116,3 +116,45 @@ li div {
 body {
     background-color: lightcoral;
 }
+
+.aiTarget {
+    width: 8.5in;
+    background-color: white;
+    padding: 0.5cm;
+    gap: 2em;
+    display: flex;
+    flex-direction: column;
+
+    .header {
+        display: flex;
+        flex-direction: column;
+        gap: 0.5em;
+        strong {
+            font-weight: bold;
+        }
+        h1 {
+            font-size: 1.5em;
+        }
+        h2 {
+            font-size: 1.2em;
+        }
+    }
+    
+    h3 {
+        font-weight: bold;
+        font-size: 1.1em;
+    }
+
+    .jobs {
+        gap: 4pt;
+        display: flex;
+        height: 100%;
+        flex-direction: column;
+        position: relative;
+        height: auto;
+        
+        > li {
+            width: auto;
+        }
+    }
+}

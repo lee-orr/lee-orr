@@ -20,9 +20,10 @@ export default function ResumeGenerator(base_info: ResumeInfo) {
     const [jobs, set_jobs] = createSignal<Record<string, { full: boolean, details: string[] }>>(initial_jobs);
     const [skills, set_skills] = createSignal<Record<string, boolean>>(initial_skills);
     const [url, set_url] = createSignal<string>("");
+    const [targetAi, set_target_ai] = createSignal<boolean>(true);
 
     createEffect(() => {
-        let result = qs.stringify({ jobs: jobs(), skills: skills() });
+        let result = qs.stringify({ jobs: jobs(), skills: skills(), targetAI: targetAi() });
         console.log(result);
         set_url('/computing/resume?' + result)
     })
@@ -44,6 +45,9 @@ export default function ResumeGenerator(base_info: ResumeInfo) {
 
     return <div class={styles.generator}>
         <div class={styles.options}>
+            <div class={''}>
+                <label><input type="checkbox" checked={targetAi()} onChange={(e) => {set_target_ai(!targetAi())}}></input> Target AI</label>
+            </div>
             <div class={styles.jobs}>
                 <span>Hidden</span>
                 <span>Full</span>

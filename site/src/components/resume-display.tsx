@@ -8,7 +8,7 @@ import { defineStyleVars } from "astro/compiler-runtime";
 
 interface BaseResumeInfo { title: string, name: string, contacts: Array<{ type: string, value: string, icon: string }>, resume_info: Array<{slug: string, title: string, type: string, summary: string, start_date: Date, end_date?: Date, resume_details?: Record<string, string>}>, tags: Record<string, number>, education: Array<{ institution: string, certificate: string }> }
 
-export interface Details { jobs: Record<string, { full: boolean, details: string[]}>, skills: Record<string, boolean> }
+export interface Details { targetAI?: boolean, jobs: Record<string, { full: boolean, details: string[]}>, skills: Record<string, boolean> }
 
 export default function ResumeDisplay(base_info: BaseResumeInfo) {
     let details = qs.parse(window.location.search.replace('?', ''), {  });
@@ -46,6 +46,45 @@ export default function ResumeDisplay(base_info: BaseResumeInfo) {
         }
         return {...v, full: listing.full, resume_details }
     });
+
+    if (details.targetAI === 'true') {
+        return <>
+            <div class={styles.aiTarget}>
+                <div class={styles.header}>
+                    <h1>{base_info.name}</h1>
+                    <h2>{base_info.title}</h2>
+                    <h3>Contact Info</h3>
+                    <div>{
+                        base_info.contacts.map(({ type, value, icon }) => {
+                            return <p><strong>{type}:</strong> {value}</p>
+                        })
+                    }
+                    </div>
+                </div>
+                <h3>Jobs</h3>
+                <ul class={styles.jobs}>
+                    {jobs.map(({slug, title, type, summary, start_date, end_date, resume_details, full}) => {
+                        return <li>
+                            <h4>{title}</h4>
+                            <h5>{start_date.getMonth() + 1}/{start_date.getFullYear()} { end_date ? ` to ${end_date.getMonth() + 1}/${end_date.getFullYear()}`: ''}</h5>
+                            { full ?
+                            <div>{summary}</div>
+                            : <></>}
+                            {resume_details.map(v => <div>{v}</div>)}
+                        </li>
+                    })}
+                </ul>
+                <h3>Education</h3>
+                <ul class={styles.jobs}>
+                    {base_info.education.map(({institution, certificate}) => <li><h4>{certificate}</h4><h5>{institution}</h5></li>)}
+                </ul>
+                <h3>Skills</h3>
+                <div class={styles.footer}>
+                    <ul class={styles.skills}>{Object.keys(base_info.tags).filter((v) => skill_filters[v]).map((v) => <li>{v}</li>)}</ul>
+                </div>
+            </div>
+        </>
+    }
 
 
     return <><div class={styles.wrapper}>
