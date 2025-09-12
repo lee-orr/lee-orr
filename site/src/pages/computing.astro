@@ -108,7 +108,7 @@ const personal = timeline.filter((a) => "project" in a.data.info && !("open_sour
             </h5>
             <ul aria-label="technologies and skills">
               {
-            data.tags.map((tag) => <li><button 
+            data.tags.map((tag) => <li><button
             class={`tag-button tag-${tag}`} id={"button-" + tag}>{tag}</button></li>)
               }
             </ul>
@@ -161,7 +161,7 @@ const personal = timeline.filter((a) => "project" in a.data.info && !("open_sour
           </h5>
           <ul aria-label="technologies and skills">
             {
-            data.tags.map((tag) => <li><button 
+            data.tags.map((tag) => <li><button
             class={`tag-button tag-${tag}`} id={"button-" + tag}>{tag}</button></li>)
             }
           </ul>
@@ -214,7 +214,7 @@ const personal = timeline.filter((a) => "project" in a.data.info && !("open_sour
         </h5>
         <ul aria-label="technologies and skills">
           {
-            data.tags.map((tag) => <li><button 
+            data.tags.map((tag) => <li><button
             class={`tag-button tag-${tag}`} id={"button-" + tag}>{tag}</button></li>)
           }
         </ul>
@@ -237,6 +237,17 @@ const personal = timeline.filter((a) => "project" in a.data.info && !("open_sour
   })
 }
 </ol>
+</details>
+<details open>
+    <summary><h2>Standard Rates & Logistical Information</h2></summary>
+    <div class="logistical">
+    While each contract is unique, the following elements serve as a starting point in negotiations:
+    <ul>
+        <li>I bill either by the hour, or by the week with an average hours-per-week agreed upon in advance.</li>
+    <li>My standard rate for corporate clients is 125 USD/hour. Not for profits tend to get a lower rate, based on their budget - often between 110 USD/hour and 75 USD/hour.</li>
+    <li>Contracts and invoices for Canadian clients will be in CAD, while all others will be in USD.</li>
+    </ul>
+    </div>
 </details>
     <div slot="filters">
       {
@@ -305,7 +316,7 @@ const personal = timeline.filter((a) => "project" in a.data.info && !("open_sour
   .timeline {
     display: grid;
     gap: 0.3rem;
-    grid-template-columns: repeat(auto-fill, 
+    grid-template-columns: repeat(auto-fill,
       0.5rem
       16rem
        0.5rem
@@ -398,6 +409,24 @@ const personal = timeline.filter((a) => "project" in a.data.info && !("open_sour
         }
       }
     }
+  }
+
+  .logistical {
+      background-color: var(--color-panel-bg);
+      border-radius: 1rem;
+      padding: 1em;
+      margin-bottom: 1rem;
+
+      ul {
+          padding-left: 1em;
+          padding-top: 1em;
+          display: flex;
+          flex-direction: column;
+          gap: 0.25em;
+          li {
+              list-style-type: disc;
+          }
+      }
   }
 </style>
 
