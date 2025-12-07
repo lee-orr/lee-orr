@@ -1,0 +1,88 @@
+[
+  {
+    "title": "Online",
+    "simplified": true,
+    "subsections": [
+      {
+        "title": "Everything I Did To You",
+        "role": "Composer, Singer, Writer, Animator"
+      },
+      {
+        "title": "The Train",
+        "role": "Composer, Singer, Writer, Animator"
+      },
+      {
+        "title": "My Life Won't Be In Vain",
+        "role": "Composer, Singer, Writer, Animator"
+      },
+      {
+        "title": "Among the Stars",
+        "role": "Composer, Singer, Writer, Animator"
+      },
+      {
+        "title": "Teddy & Drew - An Interactive Musical",
+        "role": "Co-composer & the voice of Drew"
+      },
+      {
+        "title": "Crossroad Blues",
+        "role": "Composer & Developer"
+      },
+      {
+        "title": "Middle of the Summer",
+        "role": "Composer, Singer, Writer, Animator"
+      }
+    ]
+  },
+  {
+    "title": "Live Performance",
+    "subsections": [
+      {
+        "title": "Almost Ever After",
+        "company_info": "Chaos & Light",
+        "director": "Andrew Seok",
+        "role": "Ensemble / Bagel Vendor"
+      },
+      {
+        "title": "The Man with the Golden Heart",
+        "company_info": "Chaos & Light",
+        "director": "Andrew Seok",
+        "role": "Ensemble / Foreman"
+      },
+      {
+        "title": "Unravelled - A New Musical",
+        "company_info": "Andrew Seok",
+        "role": "Ensemble"
+      },
+      {
+        "title": "9 to 5",
+        "company_info": "Randolph College",
+        "director": "Rob Kempson",
+        "role": "Dwayne, Tinsworthy"
+      },
+      {
+        "title": "The 25th Annual Putnam County Spelling Bee",
+        "company_info": "Trinity College Dramatic Society",
+        "director": "Karthy Chin",
+        "role": "Dan Dad, Ensemble"
+      }
+    ]
+  },
+  {
+    "title": "Major Unreleased Projects",
+    "simplified": true,
+    "subsections": [
+      {
+        "title": "The Love We Know",
+        "role": "10 Minute Musical - Composer & Writer. Book and lyrics co-written by Julian Lam."
+      },
+      {
+        "title": "Script?",
+        "role": "10 Minute Musical - Composer & Writer. Book and Lyrics co-written by Angelica Bolognesi Bonacini at Randolph's Musical Theatre Lab."
+      },
+      {
+        "title": "Doctor Faustus Lights the Lights",
+        "role": "A choral composition setting the first few pages of Gertrude Stein's libretto. Written for a class at Randolph."
+      }
+    ]
+  }
+]

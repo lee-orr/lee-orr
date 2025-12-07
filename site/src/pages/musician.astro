@@ -1,0 +1,74 @@
+---
+import Name from "../components/name.astro";
+import contacts from "../data/music-contacts.json";
+import sections_in from "../data/music-main-sections.json";
+import ActorSection from "../components/actor-section.astro";
+import SimplifiedSection from "../components/simplified-section.astro";
+import { skills, education } from "../data/music-details.json";
+import ActorSkills from "../components/actor-skills.astro";
+import ActorEducation from "../components/actor-education.astro";
+import { storytelling, link_types } from "../data/site-nav-data.json";
+import Html from "../components/html.astro";
+import Shell from "../components/shell.astro";
+const link_icons: { [key: string]: string | undefined } = link_types;
+
+const { socials, nav } = storytelling;
+
+const sections = sections_in as Array<{
+  title: string;
+  simplified?: boolean;
+  subsections: Array<{
+    title: string;
+    company_info: string;
+    role: string;
+  }>;
+}>;
+---
+
+<Html>
+  <Shell area="storytelling" socials={socials} nav={nav}>
+    <Name title="Composer, Singer" contacts={contacts} />
+    {
+      sections.map(({ title, subsections, simplified }) =>
+        simplified ? (
+          <SimplifiedSection title={title} subsections={subsections} />
+        ) : (
+          <ActorSection title={title} subsections={subsections} />
+        ),
+      )
+    }
+    <ActorEducation education={education} />
+  </Shell>
+</Html>
+
+<style is:global>
+  .content {
+    gap: 1em;
+  }
+
+  .content > * {
+    background-color: var(--color-panel-bg);
+    padding: 1em;
+  }
+
+  @media print {
+    @page {
+      size: letter;
+    }
+
+    body {
+      font-size: 12px;
+      color: black;
+      background: white;
+      padding: 2em;
+    }
+
+    .content {
+      gap: 0em;
+    }
+
+    .content > * {
+      background-color: white !important;
+    }
+  }
+</style>

@@ -1,0 +1,17 @@
+[
+  {
+    "type": "email",
+    "value": "lo@lee-orr.com",
+    "icon": "icofont-ui-email"
+  },
+  {
+    "type": "youtube",
+    "value": "youtube.com/@lee-orr",
+    "icon": "icofont-youtube"
+  },
+  {
+    "type": "website",
+    "value": "lee-orr.com",
+    "icon": "icofont-web"
+  }
+]

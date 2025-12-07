@@ -1,0 +1,69 @@
+{
+  "skills": [
+    "Composition, Singing, Arranging, Piano/Keyboard, Guitar, Songwriting"
+  ],
+  "education": [
+    {
+      "institution": "Randolph College for the Performing Arts",
+      "classes": [
+        {
+          "teachers": [
+            "Adam White",
+            "Donavon LeNabat",
+            "Jacqueline Sadler",
+            "Robert Longo",
+            "Allison Grant",
+            "Bruce Harvey",
+            "Guistin MacLean",
+            "John Hughes",
+            "Lisa Atkinson",
+            "Louisa Burgess-Corbett",
+            "Mark Wilson",
+            "Jeannie Wyse"
+          ],
+          "course": "Singing"
+        }
+      ]
+    },
+    {
+      "institution": "",
+      "classes": [
+        {
+          "teachers": ["Deborah Joy"],
+          "course": "Voice"
+        }
+      ]
+    },
+    {
+      "institution": "",
+      "classes": [
+        {
+          "teachers": ["Louisa Burgess-Corbett"],
+          "course": "Voice"
+        }
+      ]
+    },
+    {
+      "institution": "Complete Vocal Institute",
+      "classes": [
+        {
+          "teachers": [""],
+          "course": "Complete Vocal Academy"
+        }
+      ]
+    },
+    {
+      "institution": "Berklee (online)",
+      "classes": [
+        {
+          "teachers": [""],
+          "course": "Film Scoring 101"
+        },
+        {
+          "teachers": [""],
+          "course": "Arranging Contemporary Music"
+        }
+      ]
+    }
+  ]
+}

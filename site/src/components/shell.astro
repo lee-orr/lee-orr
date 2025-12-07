@@ -79,7 +79,7 @@ let navigation = process_nav(nav);
     </span>
 
   </nav>
-  
+
 {
   Astro.slots.has("filters") ? (
   <details class="filters">
@@ -107,7 +107,7 @@ let navigation = process_nav(nav);
     gap: 0.3em;
     grid-template-columns: [page-start header-start] 1em
       [socials-start nav-start filter-start] 1fr [filter-end content-start ] repeat(2, 1fr)
-      [socials-end title-start] max-content  
+      [socials-end title-start] max-content
       [title-end links-start ]  repeat(2, 1fr)
       1fr
       [links-end content-end nav-end] 1em
@@ -123,10 +123,10 @@ let navigation = process_nav(nav);
       [content-end page-end];
 
     &:not(:has(.filters)) {
-      
+
     grid-template-columns: [page-start header-start] 1em
       [socials-start nav-start content-start ] repeat(2, 1fr)
-      [socials-end title-start] max-content  
+      [socials-end title-start] max-content
       [title-end links-start ]  repeat(2, 1fr)
       1fr
       [links-end content-end nav-end] 1em
@@ -156,7 +156,7 @@ let navigation = process_nav(nav);
       align-items: center;
     }
   }
-  
+
   .header-background {
     position:relative;
     overflow:hidden;
@@ -192,7 +192,7 @@ let navigation = process_nav(nav);
       padding: 1rem;
       pointer-events: all;
     }
-    
+
     & span:first-of-type {
       grid-area: socials;
       justify-content: flex-start;
@@ -207,7 +207,7 @@ let navigation = process_nav(nav);
   .logo {
     aspect-ratio: 1 / 1;
     height: 2rem;
-    background: url(website-logo.png); 
+    background: url(website-logo.png);
     background-size: contain;
     background-position: center;
     font-size: 0;
@@ -252,7 +252,7 @@ let navigation = process_nav(nav);
       text-decoration: underline 0.3em solid;
       text-underline-offset: 0.5em;
       }
-      
+
       cursor: pointer;
     }
 
@@ -310,11 +310,16 @@ let navigation = process_nav(nav);
     body {
       grid-template-rows: [content-start] auto [content-end];
       grid-template-columns: [content-start] auto [content-end];
+      background-color: transparent;
+      display: flex;
+      flex-direction: column;
+      background-color: purple;
     }
 
     body > * {
       display: none;
     }
+
 
     body > *.content {
       display: flex;
