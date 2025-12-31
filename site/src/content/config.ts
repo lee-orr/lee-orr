@@ -79,9 +79,35 @@ const printed = defineCollection({
   }),
 });
 
+const interactiveAudio = defineCollection({
+  type: "content",
+  schema: z.object({
+    directory: z.string(),
+    bpm: z.number(),
+    timeSignature: z.string(),
+    startSection: z.string(),
+    variables: z.array(z.string()),
+    sections: z.map(z.string(), z.object({
+      label: z.string().optional(),
+      filePrefix: z.string(),
+      enterOn: z.enum(["bar", "beat"]),
+      after: z.discriminatedUnion("type", [
+        z.object({type: z.literal("loop")}),
+        z.object({type: z.literal("next"), next: z.array(z.string())})
+      ]),
+      tracks: z.map(z.string(), z.object({
+        label: z.string().optional(),
+        volume: z.union([z.number(), z.object({variable: z.string(), volumes: z.array(z.object({value: z.number(), volume: z.number()}))})]),
+        clips: z.union([z.string(), z.object({variable: z.string(), clips: z.array(z.object({value: z.number(), clip: z.string()}))})])
+      }))
+    }))
+  })
+})
+
 export const collections = {
   "storytelling-timeline": storytelling_timeline,
   "computing-timeline": computing_timeline,
   blog: blog,
   printed: printed,
+  "interactive-audio": interactiveAudio
 };
