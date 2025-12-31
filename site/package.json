@@ -11,26 +11,27 @@
     "fmt": "prettier --write ."
   },
   "dependencies": {
-    "@astrojs/check": "^0.5.10",
-    "@astrojs/solid-js": "^4",
+    "@astrojs/check": "^0.9",
+    "@astrojs/mdx": "^4.3.12",
+    "@astrojs/solid-js": "^5",
     "@astrojs/ts-plugin": "^1",
-    "astro": "4",
+    "astro": "5",
     "astro-compress": "2",
     "astro-google-fonts-optimizer": "^0.2.2",
     "autoprefixer": "10",
-    "cssnano": "6",
-    "pdf-lib": "^1",
+    "cssnano": "7",
+    "pdf-lib": "1",
     "playwright": "1",
     "postcss": "8",
-    "postcss-nested": "6",
+    "postcss-nested": "7",
     "prettier": "3",
-    "prettier-plugin-astro": "0.12",
-    "qs": "^6.12.0",
+    "prettier-plugin-astro": "0.14",
+    "qs": "6.14.0",
     "slugify": "1",
     "solid-js": "^1",
-    "typescript": "^5.4.5"
+    "typescript": "5"
   },
   "devDependencies": {
-    "@types/qs": "^6.9.14"
+    "@types/qs": "6.14.0"
   }
 }

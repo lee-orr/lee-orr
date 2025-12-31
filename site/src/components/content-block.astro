@@ -1,0 +1,31 @@
+---
+const {} = Astro.props as { columns?: number };
+---
+
+<div class="content-block-container">
+  <div class="content-block"><slot /></div>
+</div>
+
+<style>
+  .content-block-container {
+    padding-top: 0.5rem;
+    padding-bottom: 0.5rem;
+    break-inside: avoid;
+  }
+  .content-block {
+    padding: 1rem;
+    background-color: var(--color-panel-bg);
+    border-radius: 1em;
+    display: flex;
+    flex-direction: column;
+  }
+
+  :global(h3) {
+    padding-top: 0.5rem;
+  }
+
+  :global(ul) {
+    list-style: disc;
+    padding-left: 1rem;
+  }
+</style>

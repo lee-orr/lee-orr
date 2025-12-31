@@ -1,0 +1,92 @@
+---
+import { generate_shape } from "../pages/generate_shape";
+import AnimatedBackdrop from "./animated-backdrop.astro";
+
+const { area, socials, subtitle } = Astro.props as {
+  area: "storytelling" | "computing";
+  socials: Array<{ type: string; value: string; icon: string }>;
+  subtitle: string;
+};
+
+let header_shape = "clip-path: boundary-box;";
+if (area === "storytelling") {
+  header_shape = `clip-path: ${generate_shape()}`;
+}
+---
+
+<body class={area}>
+  <header class="">
+    <span class="titles">
+      <h1>Lee-Orr</h1>
+      <h2>{subtitle}</h2>
+    </span>
+    <nav class="">
+      {
+        socials.map(({ type, value, icon }) => (
+          <a class="" target="_blank" href={value} aria-label={type}>
+            <i class={icon} />{" "}
+            {value.replace("https://", "").replace("mailto://", "")}
+          </a>
+        ))
+      }
+    </nav>
+  </header>
+
+  <div class="content">
+    <slot />
+  </div>
+</body>
+
+<style>
+  body {
+    width: 100dvw;
+    min-height: 100dvh;
+    background-color: var(--color-main-bg);
+
+    font-size: 11pt;
+  }
+
+  header {
+    width: 100dvw;
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: stretch;
+    padding: 1rem 1rem;
+    background-color: var(--color-panel-bg);
+    position: relative;
+
+    h1 {
+      text-align: center;
+      font-size: 2rem;
+      font-weight: bold;
+    }
+
+    nav {
+      display: flex;
+      flex-direction: row;
+      justify-content: flex-end;
+      align-items: end;
+      gap: 1em;
+    }
+  }
+
+  .content {
+    padding: 1rem 1rem;
+    & > :global(div) {
+      display: flex;
+      flex-direction: column;
+      align-items: stretch;
+      justify-content: flex-start;
+    }
+
+    :global(h2) {
+      font-size: 1rem;
+    }
+
+    :global(h3) {
+      font-size: 0.7rem;
+      font-style: italic;
+    }
+  }
+</style>

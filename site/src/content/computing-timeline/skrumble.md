@@ -7,7 +7,7 @@ start_date: 2015-06-01
 end_date: 2018-12-01
 tags: Architecture Javascript Vue NodeJS Docker DevOps SQL MongoDB AWS Freeswitch Lua Bash HTML WebRTC P2P PHP front-end back-end full-stack websocket redis
 resume_details:
-  ops: Managed and operated the company's infastructure - including handling of LXD containers, setup of servers, and more,
+  ops: Managed and operated the company's infastructure - including handling of LXD containers, setup of servers, and more
   back-end: Maintained the original back end while leading a re-architecutre aimed at moving from discreet private servers to a cloud-based, scalable infrastructure
   telephony: Built a system for creating complex call routing applications using a graph with logical nodes
   void-servers: Migrated the last dedicated service we ran - 2 media servers running Freeswitch - to AWS Elastic Beanstalk services built with Kurento and NodeJS

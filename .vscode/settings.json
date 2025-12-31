@@ -5,5 +5,12 @@
   "rust-analyzer.linkedProjects": [
     "scripts/alias-files.rs",
     "scripts/legendkeeper-to-md.rs"
-  ]
+  ],
+  "terminal.integrated.profiles.osx": {
+    "devboxCompatibleShell": {
+      "path": "/bin/zsh",
+      "args": []
+    }
+  },
+  "terminal.integrated.defaultProfile.osx": "devboxCompatibleShell"
 }
