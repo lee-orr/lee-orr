@@ -1,5 +1,5 @@
 # Lee-Orr
-They/Them - [Linked In](https://www.linkedin.com/in/lee-orr-orbach-403863119) - [Website](https://lee-orr.com)
+She/Her or They/Them - [Linked In](https://www.linkedin.com/in/lee-orr-orbach-403863119) - [Website](https://lee-orr.com)
 
 Hello!
 Welcome to my Github page.
